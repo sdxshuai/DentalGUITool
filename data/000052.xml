@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<labels>
+<label>
+<text>叩痛(-)</text>
+<property>percussion</property>
+<value_type>list_int</value_type>
+<value>0</value>
+<start_offset>93</start_offset>
+<end_offset>98</end_offset>
+</label>
+<label>
+<text>无松动</text>
+<property>mobility</property>
+<value_type>list_int</value_type>
+<value>0</value>
+<start_offset>99</start_offset>
+<end_offset>102</end_offset>
+</label>
+<label>
+<text>牙龈无红肿</text>
+<property>gingival_swollen</property>
+<value_type>boolean</value_type>
+<value>0</value>
+<start_offset>103</start_offset>
+<end_offset>108</end_offset>
+</label>
+<label>
+<text>牙龈未见明显退缩 </text>
+<property>gingival_recession</property>
+<value_type>list_int</value_type>
+<value>0</value>
+<start_offset>109</start_offset>
+<end_offset>118</end_offset>
+</label>
+</labels>
