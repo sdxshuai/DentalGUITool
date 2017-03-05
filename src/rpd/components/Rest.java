@@ -3,6 +3,8 @@ package rpd.components;
 import rpd.conceptions.Position;
 import rpd.oral.Tooth;
 
+import java.util.ArrayList;
+
 public abstract class Rest implements Component {
 
 	protected Position type;
@@ -15,8 +17,11 @@ public abstract class Rest implements Component {
 		return type;
 	}
 	
-	public Tooth getToothPos() {
-		return tooth_pos;
+	public ArrayList<Tooth> getToothPos() {
+
+		ArrayList<Tooth> tooth_pos_list = new ArrayList<Tooth>();
+		tooth_pos_list.add(this.tooth_pos);
+		return tooth_pos_list;
 	}
 	
 	@Override

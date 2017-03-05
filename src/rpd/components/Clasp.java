@@ -2,17 +2,25 @@ package rpd.components;
 
 import rpd.oral.Tooth;
 
+import java.util.ArrayList;
+
 public abstract class Clasp implements Component {
 
-	protected Tooth tooth_pos = null;
+	protected ArrayList<Tooth> tooth_pos = null;
 	
 	protected String rule_explanation = null;
 	
-	public Clasp(Tooth tooth_pos) {
+	public Clasp(ArrayList<Tooth> tooth_pos) {
 		this.tooth_pos = tooth_pos;
 	}
+
+	public Clasp(Tooth tooth_pos) {
+
+		this.tooth_pos = new ArrayList<Tooth>();
+		this.tooth_pos.add(tooth_pos);
+	}
 	
-	public Tooth getToothPos() {
+	public ArrayList<Tooth> getToothPos() {
 		return this.tooth_pos;
 	}
 	

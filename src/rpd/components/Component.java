@@ -4,11 +4,13 @@ import exceptions.rpd.ComponentException;
 import rpd.RPDPlan;
 import rpd.oral.Tooth;
 
+import java.util.ArrayList;
+
 public interface Component {
 
 	public void addToPlan(RPDPlan rpd_plan);
 	
-	public Tooth getToothPos();
+	public ArrayList<Tooth> getToothPos();
 	
 	public String print() throws ComponentException;
 	

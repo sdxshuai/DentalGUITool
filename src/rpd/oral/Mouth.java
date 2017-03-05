@@ -26,8 +26,9 @@ public class Mouth {
 	public Mouth(OntModel dental_ont) throws IOException, RuleException, ToothPosException {
 		this.dental_ont = dental_ont;
 		this.mandibular = new Mandibular(dental_ont);
+		this.maxillary = new Maxillary(dental_ont);
 	}
-	
+
 	public Tooth getTooth(int zone, int num) {
 		
 		if(zone == 1 || zone == 2)

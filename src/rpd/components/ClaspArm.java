@@ -5,6 +5,8 @@ import rpd.conceptions.ClaspMaterial;
 import rpd.conceptions.Position;
 import rpd.oral.Tooth;
 
+import java.util.ArrayList;
+
 public class ClaspArm implements Component {
 
 	public static void main(String[] args) {
@@ -16,7 +18,7 @@ public class ClaspArm implements Component {
 		System.out.println(clasp_arm1.equals(clasp_arm2));
 	}
 	
-	private Tooth tooth_pos = null;
+	private ArrayList<Tooth> tooth_pos = null;
 	private Position tip_direction = null;
 	private Position buccal_or_lingual = null;
 	private ClaspMaterial material = null;
@@ -24,7 +26,7 @@ public class ClaspArm implements Component {
 	public ClaspArm(Tooth tooth_pos, Position tip_direction, 
 			Position buccal_or_lingual, ClaspMaterial material) {
 		
-		this.tooth_pos = tooth_pos;
+		this.tooth_pos.add(tooth_pos);
 		this.tip_direction = tip_direction;
 		this.buccal_or_lingual = buccal_or_lingual;
 		this.material = material;
@@ -75,7 +77,7 @@ public class ClaspArm implements Component {
 	}
 	
 	@Override
-	public Tooth getToothPos() {
+	public ArrayList<Tooth> getToothPos() {
 		return this.tooth_pos;
 	}
 
