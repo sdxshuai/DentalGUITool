@@ -4,15 +4,24 @@ import rpd.RPDPlan;
 import rpd.conceptions.Position;
 import rpd.oral.Tooth;
 
+import java.util.ArrayList;
+
 public class GuidingPlate implements Component {
 
-	private Tooth tooth_pos = null;
+	private ArrayList<Tooth> tooth_pos = null;
 	private Position mesial_or_distal = null;
 	
 	private String rule_explanation = null;
 	
-	public GuidingPlate(Tooth tooth_pos, Position mesial_or_distal) {
+	public GuidingPlate(ArrayList<Tooth> tooth_pos, Position mesial_or_distal) {
 		this.tooth_pos = tooth_pos;
+		this.mesial_or_distal = mesial_or_distal;
+	}
+
+	public GuidingPlate(Tooth tooth_pos, Position mesial_or_distal) {
+		ArrayList<Tooth> tooth_list = new ArrayList<Tooth>();
+		tooth_list.add(tooth_pos);
+		this.tooth_pos = tooth_list;
 		this.mesial_or_distal = mesial_or_distal;
 	}
 	
@@ -35,7 +44,7 @@ public class GuidingPlate implements Component {
 			return false;
 	}
 	
-	public Tooth getToothPos() {
+	public ArrayList<Tooth> getToothPos() {
 		return this.tooth_pos;
 	}
 	

@@ -1,62 +1,99 @@
 package rpd.components;
 
 import rpd.RPDPlan;
+import rpd.conceptions.ClaspMaterial;
 import rpd.conceptions.Position;
 import rpd.oral.Tooth;
 
 public class RingClasp extends Clasp {
 
-	private Position tip_position = null;
-	
-	public RingClasp(Tooth tooth_pos, Position tip_position) {
+	private ClaspArm buccal_arm = null;
+	private ClaspArm lingual_arm = null;
+	private OcclusalRest mesial_rest = null;
+	private OcclusalRest distal_rest = null;
+
+
+	public RingClasp(Tooth tooth_pos, ClaspMaterial material) {
+
 		super(tooth_pos);
-		this.tip_position = tip_position;
+		Position tip_direction = null;
+		if (tooth_pos.getZone() == 1 || tooth_pos.getZone() == 2) {
+			tip_direction = Position.Buccal;
+		}
+		else if (tooth_pos.getZone() == 3 || tooth_pos.getZone() == 4) {
+			tip_direction = Position.Lingual;
+		}
+		else {
+			System.out.println("No zone for tooth");
+		}
+
+		this.buccal_arm = new ClaspArm(tooth_pos, tip_direction, Position.Buccal, material);
+		this.lingual_arm = new ClaspArm(tooth_pos, tip_direction, Position.Lingual, material);
+
+		if (material.equals(ClaspMaterial.Cast)) {
+			this.mesial_rest = new OcclusalRest(tooth_pos, Position.Mesial);
+			this.distal_rest = new OcclusalRest(tooth_pos, Position.Distal);
+		}
+		else if (material.equals(ClaspMaterial.WW)) {
+			this.mesial_rest = new OcclusalRest(tooth_pos, Position.Mesial);
+			this.distal_rest = null;
+		}
 	}
 
-	public int hashCode() {
-		return this.tooth_pos.hashCode() + this.tip_position.hashCode();
+	public RingClasp(Tooth tooth_pos) {
+
+		super(tooth_pos);
+		Position tip_direction = null;
+		if (tooth_pos.getZone() == 1 || tooth_pos.getZone() == 2) {
+			tip_direction = Position.Buccal;
+		}
+		else if (tooth_pos.getZone() == 3 || tooth_pos.getZone() == 4) {
+			tip_direction = Position.Lingual;
+		}
+		else {
+			System.out.println("No zone for tooth");
+		}
+
+		this.buccal_arm = new ClaspArm(tooth_pos, tip_direction, Position.Buccal, ClaspMaterial.Cast);
+		this.lingual_arm = new ClaspArm(tooth_pos, tip_direction, Position.Lingual, ClaspMaterial.Cast);
+		this.mesial_rest = new OcclusalRest(tooth_pos, Position.Mesial);
+		this.distal_rest = new OcclusalRest(tooth_pos, Position.Distal);
 	}
-	
-	public boolean equals(Object obj) {
-		
-		if(obj == null)
-			return false;
-		if(!obj.getClass().equals(this.getClass()))
-			return false;
-		
-		RingClasp ring_clasp = (RingClasp)obj;
-		if(this.tooth_pos == ring_clasp.tooth_pos &&
-			this.tip_position == ring_clasp.tip_position)
-			return true;
-		else
-			return false;
-	}
-	
-	public Position getTipPosition() {
-		return this.tip_position;
-	}
-	
+
+
 	@Override
 	public void addToPlan(RPDPlan rpd_plan) {
 		rpd_plan.addComponent(this);
 	}
 
-	@Override
+	public Position getTipDirection() {
+
+		if (this.buccal_arm != null) {
+			return this.buccal_arm.getTipDirection();
+		}
+		else if (this.lingual_arm != null) {
+			return this.lingual_arm.getTipDirection();
+		}
+		else {
+			System.out.println("There is no clasp arm!");
+			return null;
+		}
+	}
+
 	public String print() {
 
 		StringBuilder s = new StringBuilder();
 		s.append(this.tooth_pos.toString() + ":");
-		s.append("圈形卡环，");
-		if(tip_position.equals(Position.Buccal))
-			s.append("卡环臂尖位于颊侧");
-		else if(tip_position.equals(Position.Lingual))
-			s.append("卡环臂尖位于舌侧");
+		s.append("圈形（Ring）卡环，");
+		if(this.getTipDirection().equals(Position.Mesial))
+			s.append("卡环臂尖朝向近中");
+		else if(this.getTipDirection().equals(Position.Distal))
+			s.append("卡环臂尖朝向远中");
 		else {}
-			//throw new ComponentException("illegal clasp tip position: " + tip_position.name());
 		return s.toString();
 	}
-	
-	public String toString() {
+
+	public String toString()  {
 		return this.print();
 	}
 }

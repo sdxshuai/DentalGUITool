@@ -13,11 +13,23 @@ public class CanineClasp extends Clasp {
 
     private IncisalRest rest = null;
 
-    public CanineClasp(Tooth tooth_pos, ClaspMaterial material) throws ComponentException {
+    public CanineClasp(Tooth tooth_pos, ClaspMaterial material) {
 
         super(tooth_pos);
-        this.arm = new ClaspArm(tooth_pos, Position.Distal, Position.Lingual, material);
+        this.arm = new ClaspArm(tooth_pos, Position.Distal, Position.Buccal, material);
         this.rest = new IncisalRest(tooth_pos, Position.Mesial);
+    }
+
+    public CanineClasp(Tooth tooth_pos) {
+
+        super(tooth_pos);
+        this.arm = new ClaspArm(tooth_pos, Position.Distal, Position.Buccal, ClaspMaterial.Cast);
+        this.rest = new IncisalRest(tooth_pos, Position.Mesial);
+    }
+
+    public Position getTipDirection() {
+
+        return Position.Distal;
     }
 
     @Override
@@ -29,7 +41,7 @@ public class CanineClasp extends Clasp {
 
         StringBuilder s = new StringBuilder();
         s.append(this.tooth_pos.toString() + ":");
-        s.append("尖牙卡环，");
+        s.append("尖牙(Canine)卡环");
 
         return s.toString();
     }

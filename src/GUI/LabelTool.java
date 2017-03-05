@@ -86,15 +86,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Enumeration;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.Stack;
-import java.util.Vector;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.awt.FlowLayout;
@@ -780,12 +772,17 @@ public class LabelTool {
 		JTree rpd_plan_tree = new JTree(top_node);
 		rpd_plan_tree.setEnabled(true);
 		rpd_plan_tree.setFont(new Font("微软雅黑", Font.PLAIN, 18));
+
+		Map<ArrayList<Tooth>, Set<rpd.components.Component>> tooth_components = rpd_plan.getToothComponents();
+		ArrayList<ArrayList<Tooth>> plan_teeth = new ArrayList<>(tooth_components.keySet());
+
+		Collections.sort(plan_teeth, new Comparator<ArrayList<Tooth>>() {
+			public int compare(ArrayList<Tooth> left, ArrayList<Tooth> right) {
+				return left.get(0).compareTo(right.get(0));
+			}
+		});
 		
-		Map<Tooth, Set<rpd.components.Component>> tooth_components = rpd_plan.getToothComponents();
-		Tooth[] plan_teeth = tooth_components.keySet().toArray(new Tooth[0]);
-		Arrays.sort(plan_teeth);
-		
-		for(Tooth tooth :plan_teeth) {	
+		for(ArrayList<Tooth> tooth :plan_teeth) {
 			Set<rpd.components.Component> components = tooth_components.get(tooth);
 			DefaultMutableTreeNode tooth_node = new DefaultMutableTreeNode(tooth);
 			top_node.add(tooth_node);

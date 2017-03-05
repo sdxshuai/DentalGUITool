@@ -49,9 +49,9 @@ public static List<RemovingRule> removing_rules = null;
 			
 			public RPDPlan apply(RPDPlan rpd_plan) throws RuleException {
 				
-				Set<Tooth> abutment_teeth = rpd_plan.getAbutmentTeeth();
+				Set<ArrayList<Tooth>> abutment_teeth = rpd_plan.getAbutmentTeeth();
 				List<Component> lingual_arms_to_remove = new ArrayList<Component>();
-				for(Tooth tooth : abutment_teeth) {
+				for(ArrayList<Tooth> tooth : abutment_teeth) {
 					
 					Set<Component> tooth_components = rpd_plan.getComponents(tooth);
 					List<Component> lingual_arms = new ArrayList<Component>();

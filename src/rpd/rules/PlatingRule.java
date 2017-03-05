@@ -74,11 +74,11 @@ public static List<PlatingRule> plating_rules = null;
 					if(position.equals(Position.Mandibular)) {
 						
 						RPDPlan new_plan = new RPDPlan(rpd_plan);
-						List<Tooth> plating_teeth = new ArrayList<Tooth>();
+						ArrayList<Tooth> plating_teeth = new ArrayList<Tooth>();
 						for(Component component : rpd_plan.getComponents()) {
-							Tooth tooth = component.getToothPos();
+							ArrayList<Tooth> tooth = component.getToothPos();
 							if(component.isPlating())
-								plating_teeth.add(tooth);
+								plating_teeth.addAll(tooth);
 						}
 						
 						Tooth tooth_31 = mouth.getTooth(3, 1);

@@ -8,13 +8,12 @@ import rpd.oral.Tooth;
 
 public class AkerClasp extends Clasp {
 
-
 	private ClaspArm buccal_arm = null;
 	private ClaspArm lingual_arm = null;
 	private OcclusalRest occlusal_rest = null;
 	
 	public AkerClasp(Tooth tooth_pos, Position tip_direction, ClaspMaterial buccal_material,
-					 ClaspMaterial lingual_material) throws ComponentException {
+					 ClaspMaterial lingual_material) {
 
 		super(tooth_pos);
 		this.buccal_arm = new ClaspArm(tooth_pos, tip_direction, Position.Buccal, buccal_material);
@@ -27,7 +26,7 @@ public class AkerClasp extends Clasp {
 		}
 	}
 
-	public AkerClasp(Tooth tooth_pos, Position tip_direction, ClaspMaterial material) throws ComponentException {
+	public AkerClasp(Tooth tooth_pos, Position tip_direction, ClaspMaterial material) {
 
 		super(tooth_pos);
 		this.buccal_arm = new ClaspArm(tooth_pos, tip_direction, Position.Buccal, material);
@@ -40,7 +39,7 @@ public class AkerClasp extends Clasp {
 		}
 	}
 
-	public AkerClasp(Tooth tooth_pos, Position tip_direction) throws ComponentException {
+	public AkerClasp(Tooth tooth_pos, Position tip_direction) {
 
 		super(tooth_pos);
 		this.buccal_arm = new ClaspArm(tooth_pos, tip_direction, Position.Buccal, ClaspMaterial.Cast);

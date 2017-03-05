@@ -84,9 +84,9 @@ public class AddtionalAssemblyRule {
 			
 			if(!component.isClasp())
 				continue;
-			Tooth tooth = component.getToothPos();
-			int zone = tooth.getZone();
-			int num = tooth.getNum();
+			ArrayList<Tooth> tooth = component.getToothPos();
+			int zone = tooth.get(0).getZone();
+			int num = tooth.get(0).getNum();
 			if((zone == 4 || zone == 1) && num >= 4)
 				left_posterior_has_clasp = true;
 			else if((zone == 2 || zone == 3) && num >= 4)

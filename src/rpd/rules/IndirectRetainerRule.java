@@ -57,8 +57,8 @@ public class IndirectRetainerRule {
 			
 			if(!component.isIndirectRetainer())
 				continue;
-			int zone = component.getToothPos().getZone();
-			int num = component.getToothPos().getNum();
+			int zone = component.getToothPos().get(0).getZone();
+			int num = component.getToothPos().get(0).getNum();
 			if(zone == 4 || zone == 1) {
 				if(num < left_min_num) {
 					left_min_num = num;
@@ -91,8 +91,8 @@ public class IndirectRetainerRule {
 			
 			if(!component.isIndirectRetainer())
 				continue;
-			int zone = component.getToothPos().getZone();
-			int num = component.getToothPos().getNum();
+			int zone = component.getToothPos().get(0).getZone();
+			int num = component.getToothPos().get(0).getNum();
 			if(zone == 4 || zone == 1) {
 				if(num > left_max_num) {
 					left_max_num = num;

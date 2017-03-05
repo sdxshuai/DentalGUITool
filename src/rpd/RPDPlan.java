@@ -15,19 +15,22 @@ public class RPDPlan {
 	
 	private Map<ArrayList<Tooth>, Set<Component>> tooth_components = new HashMap<ArrayList<Tooth>, Set<Component>>();
 
+	private Set<Component> components = new HashSet<Component>();
+
 	public RPDPlan(Mouth mouth, Position mandibular_or_maxillary) {
 		this.mouth = mouth;
 		this.mandibular_or_maxillary = mandibular_or_maxillary;
 	}
 	
 	public RPDPlan(RPDPlan raw_plan) {
+		this.components.addAll(raw_plan.components);
 		this.mandibular_or_maxillary = raw_plan.mandibular_or_maxillary;
 		this.tooth_components.putAll(raw_plan.tooth_components);
 		this.mouth = raw_plan.mouth;
 	}
 	
 	public boolean isEmptyPlan() {
-		return this.tooth_components.size() == 0;
+		return this.components.size() == 0;
 	}
 	
 	public Mouth getMouth() {
@@ -38,20 +41,42 @@ public class RPDPlan {
 		return this.mandibular_or_maxillary;
 	}
 	
-	public void addTooth(ArrayList<Tooth> tooth) {
+	public void addTooth(ArrayList<Tooth> tooth_list) {
+		if(this.tooth_components.containsKey(tooth_list))
+			return;
+		this.tooth_components.put(tooth_list, new HashSet<Component>());
+	}
+
+	public void addTooth(Tooth tooth) {
+		ArrayList<Tooth> tooth_list = new ArrayList<Tooth>();
+		tooth_list.add(tooth);
 		if(this.tooth_components.containsKey(tooth))
 			return;
-		this.tooth_components.put(tooth, new HashSet<Component>());
+		this.tooth_components.put(tooth_list, new HashSet<Component>());
 	}
 	
-	public void removeTooth(ArrayList<Tooth> tooth) {
-		if(!this.tooth_components.containsKey(tooth))
+	public void removeTooth(Tooth tooth) {
+		ArrayList<Tooth> tooth_list = new ArrayList<Tooth>();
+		tooth_list.add(tooth);
+		if(!this.tooth_components.containsKey(tooth_list))
 			return;
-		Set<Component> components = this.tooth_components.get(tooth);
-		this.tooth_components.remove(tooth);
+		Set<Component> components = this.tooth_components.get(tooth_list);
+		for(Component component : components)
+			this.components.remove(component);
+		this.tooth_components.remove(tooth_list);
+	}
+
+	public void removeTooth(ArrayList<Tooth> tooth_list) {
+		if(!this.tooth_components.containsKey(tooth_list))
+			return;
+		Set<Component> components = this.tooth_components.get(tooth_list);
+		for(Component component : components)
+			this.components.remove(component);
+		this.tooth_components.remove(tooth_list);
 	}
 	
 	public void addComponent(Component component) {
+		this.components.add(component);
 		ArrayList<Tooth> tooth_pos = component.getToothPos();
 		if(!this.tooth_components.containsKey(tooth_pos))
 			this.tooth_components.put(tooth_pos, new HashSet<Component>());
@@ -62,22 +87,20 @@ public class RPDPlan {
 		return this.tooth_components.keySet();
 	}
 	
-	public Map<ArrayList<Tooth>, Set<Component>> getComponents() {
+	public Set<Component> getComponents() {
+		return this.components;
+	}
+	
+	public Set<Component> getComponents(ArrayList<Tooth> tooth) {
+		return this.tooth_components.get(tooth);
+	}
+
+	public Map<ArrayList<Tooth>, Set<Component>> getToothComponents() {
 		return this.tooth_components;
 	}
 	
-	public Set<Component> getComponents(Tooth tooth) {
-		ArrayList<Tooth> tooth_list = new ArrayList<Tooth>();
-		tooth_list.add(tooth);
-		return this.tooth_components.get(tooth_list);
-	}
-
-	public Set<Component> getComponents(ArrayList<Tooth> tooth_list) {
-		return this.tooth_components.get(tooth_list);
-	}
-
-	
 	public void removeComponent(Component component) {
+		this.components.remove(component);
 		ArrayList<Tooth> tooth_pos = component.getToothPos();
 		Set<Component> tooth_components = this.tooth_components.get(tooth_pos);
 		tooth_components.remove(component);

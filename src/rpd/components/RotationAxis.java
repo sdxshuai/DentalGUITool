@@ -35,8 +35,8 @@ public class RotationAxis {
 		EdentulousType edentulous_type = edentulous_space.getEdentulousType();
 		if(edentulous_type.equals(EdentulousType.PosteriorExtension)) {
 			
-			int left_num = left_indirect_retainer.getToothPos().getNum();
-			int right_num = right_indirect_retainer.getToothPos().getNum();
+			int left_num = left_indirect_retainer.getToothPos().get(0).getNum();
+			int right_num = right_indirect_retainer.getToothPos().get(0).getNum();
 			if(left_num < right_num) {
 				if(mandibular_or_maxillary.equals(Position.Mandibular)) {
 					zone = 3;
@@ -99,11 +99,11 @@ public class RotationAxis {
 	
 	public boolean canBePosteriorIndirectRetainer(Component component) {
 		
-		int axis_left_num = left_indirect_retainer.getToothPos().getNum();
-		int axis_right_num = right_indirect_retainer.getToothPos().getNum();
+		int axis_left_num = left_indirect_retainer.getToothPos().get(0).getNum();
+		int axis_right_num = right_indirect_retainer.getToothPos().get(0).getNum();
 		
-		int component_zone = component.getToothPos().getZone();
-		int component_num = component.getToothPos().getNum();
+		int component_zone = component.getToothPos().get(0).getZone();
+		int component_num = component.getToothPos().get(0).getNum();
 		
 		if(axis_left_num == axis_right_num)
 			if(component_num < axis_left_num)
@@ -124,11 +124,11 @@ public class RotationAxis {
 	
 	public boolean canBeAnteriorIndirectRetainer(Component component) {
 		
-		int axis_left_num = left_indirect_retainer.getToothPos().getNum();
-		int axis_right_num = right_indirect_retainer.getToothPos().getNum();
+		int axis_left_num = left_indirect_retainer.getToothPos().get(0).getNum();
+		int axis_right_num = right_indirect_retainer.getToothPos().get(0).getNum();
 		
-		int component_zone = component.getToothPos().getZone();
-		int component_num = component.getToothPos().getNum();
+		int component_zone = component.getToothPos().get(0).getZone();
+		int component_num = component.getToothPos().get(0).getNum();
 		
 		if(component_zone == 4 || component_zone == 1)
 			if(component_num > axis_left_num)

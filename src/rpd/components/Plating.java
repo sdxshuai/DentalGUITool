@@ -3,17 +3,26 @@ package rpd.components;
 import rpd.RPDPlan;
 import rpd.oral.Tooth;
 
+import java.util.ArrayList;
+
 public class Plating implements Component {
 
-	private Tooth tooth_pos = null;
+	private ArrayList<Tooth> tooth_pos = null;
 	
 	private String rule_explanation = null;
 	
-	public Plating(Tooth tooth_pos) {
+	public Plating(ArrayList<Tooth> tooth_pos) {
 		this.tooth_pos = tooth_pos;
 	}
+
+	public Plating(Tooth tooth_pos) {
+
+		ArrayList<Tooth> tooth_list = new ArrayList<Tooth>();
+		tooth_list.add(tooth_pos);
+		this.tooth_pos = tooth_list;
+	}
 	
-	public Tooth getToothPos() {
+	public ArrayList<Tooth> getToothPos() {
 		return this.tooth_pos;
 	}
 
