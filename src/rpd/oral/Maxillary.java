@@ -52,4 +52,17 @@ public class Maxillary {
 	private void initEdentulousSpaces() {
 		this.edentulous_spaces = new ArrayList<EdentulousSpace>();
 	}
+
+	public List<Tooth> getExistingTeeth() {
+		List<Tooth> res = new ArrayList<Tooth>();
+		for (Tooth tooth:zone1) {
+			if (!tooth.isMissing()) res.add(tooth);
+		}
+		for (Tooth tooth:zone2) {
+			if (!tooth.isMissing()) res.add(tooth);
+		}
+		return res;
+	}
 }
+
+

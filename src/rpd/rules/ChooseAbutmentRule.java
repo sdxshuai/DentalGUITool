@@ -1,7 +1,9 @@
 package rpd.rules;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import exceptions.rpd.ClaspAssemblyException;
 import exceptions.rpd.RuleException;
@@ -27,7 +29,7 @@ public class ChooseAbutmentRule {
 
     private static Mouth mouth = null;
 
-    public RPDPlan apply(RPDPlan rpd_plan) throws RuleException, ClaspAssemblyException, ToothPosException {
+    public List<RPDPlan> apply(List<RPDPlan> rpd_plans) throws RuleException, ClaspAssemblyException, ToothPosException {
         throw new RuleException("call from abstract class");
     }
 
@@ -58,25 +60,75 @@ public class ChooseAbutmentRule {
                 return 1;
             }
 
-            public RPDPlan apply(RPDPlan rpd_plan) throws RuleException {
-                if (rpd_plan.getPosition() == Position.Mandibular) {
-                    RPDPlan new_plan = new RPDPlan(rpd_plan);
-                    return new_plan;
+            public void getCrossCombination(List<Tooth> existing_teeth, int start, int end, int length,
+                                            HashSet<Tooth> hashSet, ArrayList<ArrayList<Tooth>> res_list) {
+
+                if(length ==0){
+                    ArrayList<Tooth> res = new ArrayList<Tooth>();
+                    res.addAll(hashSet);
+                    res_list.add(res);
+                    return;
                 }
-                else if (rpd_plan.getPosition() == Position.Maxillary) {
-                    RPDPlan new_plan = new RPDPlan(rpd_plan);
-                    return new_plan;
+
+                for(int i=start;i<=end-length;i++){
+
+                    hashSet.add(existing_teeth.get(i));
+                    getCrossCombination(existing_teeth, i+1, end, length-1, hashSet, res_list);
+                    hashSet.remove((existing_teeth.get(i)));
                 }
-                else {
-                    throw new RuleException("Plan has no position");
+            }
+
+            public List<RPDPlan> apply(List<RPDPlan> rpd_plans) throws RuleException {
+
+                List<RPDPlan> res = new ArrayList<>();
+                List<RPDPlan> res_buffer = new ArrayList<>();
+                for (RPDPlan plan:rpd_plans) {
+                    if (plan.getPosition() == Position.Mandibular) {
+                        List<Tooth> existing_teeth = new ArrayList<Tooth>(plan.getMouth().getMandibular().getExistingTeeth());
+                        int list_size = existing_teeth.size();
+                        HashSet<Tooth> hashSet = new HashSet<Tooth>();
+                        ArrayList<ArrayList<Tooth>> abutment_teeth_list = new ArrayList<ArrayList<Tooth>>();
+                        getCrossCombination(existing_teeth, 0, list_size, 2, hashSet, abutment_teeth_list);
+                        getCrossCombination(existing_teeth, 0, list_size, 3, hashSet, abutment_teeth_list);
+                        getCrossCombination(existing_teeth, 0, list_size, 4, hashSet, abutment_teeth_list);
+
+                        for (ArrayList<Tooth> abutment_teeth:abutment_teeth_list) {
+                            RPDPlan new_plan = new RPDPlan(plan);
+                            new_plan.addAbutmentTeeth(abutment_teeth);
+                            res.add(new_plan);
+//                            res_buffer.add(new_plan);
+//                            res.addAll(res_buffer);
+//                            res_buffer.clear();
+                        }
+                    }
+                    else if (plan.getPosition() == Position.Maxillary) {
+                        List<Tooth> existing_teeth = new ArrayList<Tooth>(plan.getAbutmentTeeth());
+                        int list_size = existing_teeth.size();
+                        HashSet<Tooth> hashSet = new HashSet<Tooth>();
+                        ArrayList<ArrayList<Tooth>> abutment_teeth_list = new ArrayList<ArrayList<Tooth>>();
+                        getCrossCombination(existing_teeth, 0, list_size, 2, hashSet, abutment_teeth_list);
+                        getCrossCombination(existing_teeth, 0, list_size, 3, hashSet, abutment_teeth_list);
+                        getCrossCombination(existing_teeth, 0, list_size, 4, hashSet, abutment_teeth_list);
+
+                        for (ArrayList<Tooth> abutment_teeth:abutment_teeth_list) {
+                            RPDPlan new_plan = new RPDPlan(plan);
+                            new_plan.addAbutmentTeeth(abutment_teeth);
+                            res.add(new_plan);
+                        }
+                    }
+                    else {
+                        throw new RuleException("rpd has no position");
+                    }
                 }
+
+                return res;
             }
         });
 
         choose_abutment_rules.add(new ChooseAbutmentRule() {
 
             public String getExplaination() {
-                return "";
+                return "占位符";
             }
 
             public String toString() {
@@ -87,18 +139,10 @@ public class ChooseAbutmentRule {
                 return 2;
             }
 
-            public RPDPlan apply(RPDPlan rpd_plan) throws RuleException {
-                if (rpd_plan.getPosition() == Position.Mandibular) {
-                    RPDPlan new_plan = new RPDPlan(rpd_plan);
-                    return new_plan;
-                }
-                else if (rpd_plan.getPosition() == Position.Maxillary) {
-                    RPDPlan new_plan = new RPDPlan(rpd_plan);
-                    return new_plan;
-                }
-                else {
-                    throw new RuleException("Plan has no position");
-                }
+            public List<RPDPlan> apply(List<RPDPlan> rpd_plans) throws RuleException {
+                List<RPDPlan> res = new ArrayList<>();
+                res.addAll(rpd_plans);
+                return res;
             }
         });
     }

@@ -29,7 +29,7 @@ public class RPDPlan {
 		this.mandibular_or_maxillary = raw_plan.mandibular_or_maxillary;
 		this.tooth_components.putAll(raw_plan.tooth_components);
 		this.mouth = raw_plan.mouth;
-		this.abutment_teeth = raw_plan.abutment_teeth;
+		this.abutment_teeth.addAll(raw_plan.abutment_teeth);
 	}
 	
 	public boolean isEmptyPlan() {
@@ -94,9 +94,9 @@ public class RPDPlan {
 		return this.tooth_components.keySet();
 	}
 
-	public void addAbutmentTeeth(Tooth tooth_pos) {
+	public void addAbutmentTeeth(ArrayList<Tooth> tooth) {
 
-		this.abutment_teeth.add(tooth_pos);
+		this.abutment_teeth.addAll(tooth);
 	}
 	
 	public Set<Component> getComponents() {

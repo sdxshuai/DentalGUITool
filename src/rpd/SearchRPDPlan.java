@@ -51,53 +51,35 @@ public class SearchRPDPlan {
 //        RemovingRule.initRules(mouth);
 
         ChooseAbutmentRule.initRules(mouth);
+        ClaspRule.initRules(mouth);
+        RestRule.initRules(mouth);
 
         List<RPDPlan> res = new ArrayList<RPDPlan>();
         RPDPlan empty_plan = new RPDPlan(mouth, Position.Mandibular);
 
         List<RPDPlan> abutment_teeth_plans = new ArrayList<RPDPlan>();
-        List<RPDPlan> abutment_teeth_plans_buffer = new ArrayList<RPDPlan>();
         abutment_teeth_plans.add(empty_plan);
-        boolean all_space_restored = true;
-
-        for(RPDPlan old_plan : abutment_teeth_plans) {
-            boolean plan_changed = false;
-            for(ChooseAbutmentRule rule: ChooseAbutmentRule.choose_abutment_rules) {
-                RPDPlan plan = rule.apply(old_plan);
-
-                if(plan != null) {
-                    abutment_teeth_plans_buffer.add(plan);
-                    plan_changed = true;
-                    //System.out.println(plan.toString());
-                }
-            }
-            if(!plan_changed) {
-                abutment_teeth_plans_buffer.add(old_plan);
-                all_space_restored = false;
-            }
-        }
-        abutment_teeth_plans.clear();
-        abutment_teeth_plans.addAll(abutment_teeth_plans_buffer);
-        abutment_teeth_plans_buffer.clear();
-        if(!all_space_restored) {
+        for(ChooseAbutmentRule rule: ChooseAbutmentRule.choose_abutment_rules) {
+            List<RPDPlan> plans = rule.apply(abutment_teeth_plans);
             abutment_teeth_plans.clear();
-            return abutment_teeth_plans;
+            abutment_teeth_plans.addAll(plans);
         }
 
-//        List<RPDPlan> addtional_assembly_plans = new ArrayList<RPDPlan>();
-//        for(RPDPlan old_plan : abutment_teeth_plans) {
-//
-//            boolean plan_changed = false;
-//            for(AddtionalAssemblyRule rule : AddtionalAssemblyRule.addtional_assembly_rules) {
-//                RPDPlan plan = rule.apply(old_plan);
-//                if(plan != null) {
-//                    addtional_assembly_plans.add(plan);
-//                    plan_changed = true;
-//                }
-//            }
-//            if(!plan_changed)
-//                addtional_assembly_plans.add(old_plan);
-//        }
+        List<RPDPlan> clasp_plans = new ArrayList<RPDPlan>();
+        clasp_plans.addAll(abutment_teeth_plans);
+        for(ClaspRule rule: ClaspRule.clasp_rules) {
+            List<RPDPlan> plans = rule.apply(clasp_plans);
+            clasp_plans.clear();
+            clasp_plans.addAll(plans);
+        }
+
+        List<RPDPlan> rest_plans = new ArrayList<RPDPlan>();
+        rest_plans.addAll(clasp_plans);
+        for(RestRule rule: RestRule.rest_rules) {
+            List<RPDPlan> plans = rule.apply(rest_plans);
+            rest_plans.clear();
+            rest_plans.addAll(plans);
+        }
 
 
         res.addAll(abutment_teeth_plans);
