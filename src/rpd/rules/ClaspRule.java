@@ -1,20 +1,13 @@
 package rpd.rules;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 import exceptions.rpd.ClaspAssemblyException;
 import exceptions.rpd.RuleException;
 import exceptions.rpd.ToothPosException;
 import rpd.RPDPlan;
-import rpd.components.CircumferencialClaspAssembly;
-import rpd.components.ClaspAssembly;
-import rpd.components.RPAAssembly;
-import rpd.components.RPIAssembly;
-import rpd.components.RingClaspAssembly;
-import rpd.components.WWClaspAssembly;
-import rpd.conceptions.EdentulousType;
-import rpd.conceptions.Position;
+import rpd.components.*;
+import rpd.conceptions.*;
 import rpd.oral.EdentulousSpace;
 import rpd.oral.Mandibular;
 import rpd.oral.Mouth;
@@ -58,9 +51,80 @@ public class ClaspRule {
                 return 1;
             }
 
+            public void getPlansFromWithMultiList(ArrayList<ArrayList<Tooth>> continuous_tooth_list,
+                                                  ArrayList<Tooth> abutment_teeth,
+                                                  List<RPDPlan> plans) {
+
+                for (ArrayList<Tooth> tooth_list:continuous_tooth_list) {
+                    ArrayList<ArrayList<Tooth>> with_multi_list = new ArrayList<ArrayList<Tooth>>();;
+                    Set<Tooth> differ_set = new HashSet<>();
+                    differ_set.addAll(abutment_teeth);
+                    differ_set.removeAll(tooth_list);
+                    with_multi_list.add(tooth_list);
+                    for (Tooth differ_tooth:differ_set) {
+                        ArrayList<Tooth> current_list = new ArrayList<Tooth>();
+                        current_list.add(differ_tooth);
+                        with_multi_list.add(current_list);
+                    }
+                    getPlans(with_multi_list, plans);
+                }
+            }
+
+            public void getPlans(ArrayList<ArrayList<Tooth>> with_multi_list, List<RPDPlan> plans) {
+
+            }
+
+            public void getPlans(List<Tooth> no_multi_list, List<RPDPlan> plans) {
+
+            }
+
             public List<RPDPlan> apply(List<RPDPlan> rpd_plans) throws RuleException {
                 List<RPDPlan> res = new ArrayList<>();
-                res.addAll(rpd_plans);
+                for (RPDPlan plan:rpd_plans) {
+                    ArrayList<Tooth> abutment_teeth = new ArrayList<>();
+                    abutment_teeth.addAll(plan.getAbutmentTeeth());
+                    Collections.sort(abutment_teeth);
+                    List<Tooth> no_multi_list = new ArrayList<>(abutment_teeth);
+                    ArrayList<ArrayList<Tooth>> continuous_tooth_list = new ArrayList<ArrayList<Tooth>>();
+                    Set<Tooth> continuous_tooth_set = new HashSet<>();
+
+                    int last_num = 0;
+                    Tooth last_tooth = null;
+                    for (Tooth tooth:abutment_teeth) {
+                        int tooth_num = Integer.parseInt(tooth.toString().substring(5));
+                        if (tooth_num - last_num == 1 || last_num - tooth_num == 1) {
+                            ArrayList<Tooth> current_tooth = new ArrayList<Tooth>();
+                            current_tooth.add(last_tooth);
+                            current_tooth.add(tooth);
+                            continuous_tooth_list.add(current_tooth);
+                            continuous_tooth_set.addAll(current_tooth);
+                        }
+                        last_num = tooth_num;
+                        last_tooth = tooth;
+                    }
+
+
+                    if (continuous_tooth_set.size() == 4) {
+                        for (int i=1;i<=2;i++) {
+                            if (i == 1) {
+                                getPlansFromWithMultiList(continuous_tooth_list, abutment_teeth, res);
+                            }
+                            else {
+                                ArrayList<ArrayList<Tooth>> with_multi_list = new ArrayList<ArrayList<Tooth>>();
+                                with_multi_list.add(continuous_tooth_list.get(0));
+                                with_multi_list.add(continuous_tooth_list.get(continuous_tooth_list.size()-1));
+                                getPlans(with_multi_list, res);
+                            }
+                        }
+
+                    }
+                    else {
+                        getPlansFromWithMultiList(continuous_tooth_list, abutment_teeth, res);
+                    }
+
+                    getPlans(no_multi_list, res);
+
+                }
                 return res;
             }
         });
