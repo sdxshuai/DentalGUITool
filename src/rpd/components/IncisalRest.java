@@ -54,7 +54,7 @@ public class IncisalRest extends Rest {
         else if(mesial_or_distal.equals(Position.Distal))
             s.append("远中");
         else {}
-        s.append("合支托");
+        s.append("切支托");
         return s.toString();
     }
 

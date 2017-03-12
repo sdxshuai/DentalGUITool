@@ -17,6 +17,8 @@ public class RPDPlan {
 
 	private Set<Component> components = new HashSet<Component>();
 
+	private Set<Tooth> abutment_teeth = new HashSet<Tooth>();
+
 	public RPDPlan(Mouth mouth, Position mandibular_or_maxillary) {
 		this.mouth = mouth;
 		this.mandibular_or_maxillary = mandibular_or_maxillary;
@@ -27,6 +29,7 @@ public class RPDPlan {
 		this.mandibular_or_maxillary = raw_plan.mandibular_or_maxillary;
 		this.tooth_components.putAll(raw_plan.tooth_components);
 		this.mouth = raw_plan.mouth;
+		this.abutment_teeth = raw_plan.abutment_teeth;
 	}
 	
 	public boolean isEmptyPlan() {
@@ -83,8 +86,17 @@ public class RPDPlan {
 		this.tooth_components.get(tooth_pos).add(component);
 	}
 	
-	public Set<ArrayList<Tooth>> getAbutmentTeeth() {
+	public Set<Tooth> getAbutmentTeeth() {
+		return this.abutment_teeth;
+	}
+
+	public Set<ArrayList<Tooth>> getKeysToothComponents() {
 		return this.tooth_components.keySet();
+	}
+
+	public void addAbutmentTeeth(Tooth tooth_pos) {
+
+		this.abutment_teeth.add(tooth_pos);
 	}
 	
 	public Set<Component> getComponents() {

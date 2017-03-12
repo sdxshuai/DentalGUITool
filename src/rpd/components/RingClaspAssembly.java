@@ -11,7 +11,7 @@ public class RingClaspAssembly implements ClaspAssembly {
 	//private OcclusalRest distal_rest = null;
 	
 	public RingClaspAssembly(Tooth tooth_pos, Position tip_position) {
-		this.clasp = new RingClasp(tooth_pos, tip_position);
+		this.clasp = new RingClasp(tooth_pos);
 		this.mesial_rest = new OcclusalRest(tooth_pos, Position.Mesial);
 	}
 	

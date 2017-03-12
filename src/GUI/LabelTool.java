@@ -72,6 +72,7 @@ import ontologies.PropertyValue;
 import ontologies.StringPropertyValue;
 import rpd.BeamSearch;
 import rpd.RPDPlan;
+import rpd.SearchRPDPlan;
 import rpd.oral.Instantialize;
 import rpd.oral.Mouth;
 import rpd.oral.Tooth;
@@ -179,7 +180,7 @@ public class LabelTool {
 	public static void main(String[] args) throws IOException, PropertyValueException {
 		
 //		File owl_file = new File("res//CDSSinRPD_ontology_161209.owl");
-		File owl_file = new File("res//sample.owl");
+		File owl_file = new File("res//CDSSinRPD_ontology_170312.owl");
 		File modifier_file = new File("res//label_modifier_description.txt");
 		
 		EventQueue.invokeLater(new Runnable() {
@@ -554,7 +555,8 @@ public class LabelTool {
 					mouth_ont.read("file:" + owl_file.getCanonicalPath());
 					Instantialize.convertXmlToOnt(mouth_ont, label_xml_file);
 					mouth = new Mouth(mouth_ont);
-					rpd_plans = BeamSearch.searchMandibular(mouth);
+					//rpd_plans = BeamSearch.searchMandibular(mouth);
+					rpd_plans = SearchRPDPlan.searchMandibular(mouth);
 					@SuppressWarnings("unused")
 					List<RPDPlan> plans_buffer = rpd_plans;
 					showRPDPlans();

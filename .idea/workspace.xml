@@ -2,10 +2,48 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9efcce7d-9cdf-4ffc-a888-c6d36f3be804" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/rpd/conceptions/AssembleClasp.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/rpd/conceptions/BasicClasp.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/rpd/conceptions/MultiToothClasp.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/rpd/SearchRPDPlan.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/rpd/components/IncisorAkerClaspWithIncisalRest.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/rpd/components/IncisorAkerClaspWithLingualRest.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/rpd/rules/ChooseAbutmentRule.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$1.class" afterPath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$1.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$10.class" afterPath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$10.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$11.class" afterPath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$11.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$12.class" afterPath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$12.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$13.class" afterPath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$13.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$14.class" afterPath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$14.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$15.class" afterPath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$15.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$16.class" afterPath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$16.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$17.class" afterPath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$17.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$18.class" afterPath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$18.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$19.class" afterPath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$19.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$2.class" afterPath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$2.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$20.class" afterPath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$20.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$21.class" afterPath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$21.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$22.class" afterPath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$22.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$23.class" afterPath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$23.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$24.class" afterPath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$24.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$3.class" afterPath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$3.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$4.class" afterPath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$4.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$5.class" afterPath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$5.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$6.class" afterPath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$6.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$7.class" afterPath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$7.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$8.class" afterPath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$8.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$9.class" afterPath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$9.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool.class" afterPath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/DentalGUITool/rpd/RPDPlan.class" afterPath="$PROJECT_DIR$/out/production/DentalGUITool/rpd/RPDPlan.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/DentalGUITool/rpd/components/AkerClasp.class" afterPath="$PROJECT_DIR$/out/production/DentalGUITool/rpd/components/AkerClasp.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/DentalGUITool/rpd/components/RingClasp.class" afterPath="$PROJECT_DIR$/out/production/DentalGUITool/rpd/components/RingClasp.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/DentalGUITool/rpd/components/RingClaspAssembly.class" afterPath="$PROJECT_DIR$/out/production/DentalGUITool/rpd/components/RingClaspAssembly.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/DentalGUITool/rpd/rules/RemovingRule$1.class" afterPath="$PROJECT_DIR$/out/production/DentalGUITool/rpd/rules/RemovingRule$1.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/GUI/LabelTool.java" afterPath="$PROJECT_DIR$/src/GUI/LabelTool.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rpd/BeamSearch.java" afterPath="$PROJECT_DIR$/src/rpd/BeamSearch.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rpd/RPDPlan.java" afterPath="$PROJECT_DIR$/src/rpd/RPDPlan.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rpd/components/IncisalRest.java" afterPath="$PROJECT_DIR$/src/rpd/components/IncisalRest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rpd/components/RingClaspAssembly.java" afterPath="$PROJECT_DIR$/src/rpd/components/RingClaspAssembly.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rpd/rules/RemovingRule.java" afterPath="$PROJECT_DIR$/src/rpd/rules/RemovingRule.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -21,31 +59,111 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="BasicClasp.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/rpd/conceptions/BasicClasp.java">
+      <file leaf-file-name="SearchRPDPlan.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/rpd/SearchRPDPlan.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="15" column="1" lean-forward="true" selection-start-line="15" selection-start-column="1" selection-end-line="15" selection-end-column="1" />
+            <state relative-caret-position="425">
+              <caret line="102" column="39" lean-forward="false" selection-start-line="102" selection-start-column="39" selection-end-line="102" selection-end-column="39" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MultiToothClasp.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/rpd/conceptions/MultiToothClasp.java">
+      <file leaf-file-name="ChooseAbutmentRule.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/rpd/rules/ChooseAbutmentRule.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="187">
-              <caret line="11" column="1" lean-forward="true" selection-start-line="11" selection-start-column="1" selection-end-line="11" selection-end-column="1" />
+            <state relative-caret-position="-13">
+              <caret line="41" column="51" lean-forward="true" selection-start-line="41" selection-start-column="51" selection-end-line="41" selection-end-column="51" />
+              <folding>
+                <element signature="e#1469#1470#0" expanded="true" />
+                <element signature="e#1527#1528#0" expanded="true" />
+                <element signature="e#1567#1568#0" expanded="true" />
+                <element signature="e#1628#1629#0" expanded="true" />
+                <element signature="e#1667#1668#0" expanded="true" />
+                <element signature="e#1707#1708#0" expanded="true" />
+                <element signature="e#2403#2404#0" expanded="true" />
+                <element signature="e#2444#2445#0" expanded="true" />
+                <element signature="e#2484#2485#0" expanded="true" />
+                <element signature="e#2545#2546#0" expanded="true" />
+                <element signature="e#2584#2585#0" expanded="true" />
+                <element signature="e#2624#2625#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="RPDPlan.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/rpd/RPDPlan.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="342">
+              <caret line="92" column="55" lean-forward="false" selection-start-line="92" selection-start-column="33" selection-end-line="92" selection-end-column="55" />
+              <folding>
+                <element signature="e#419#430#0" expanded="true" />
+                <element signature="e#483#490#0" expanded="true" />
+                <element signature="e#2631#2632#0" expanded="true" />
+                <element signature="e#2664#2665#0" expanded="true" />
+                <element signature="e#2722#2723#0" expanded="true" />
+                <element signature="e#2766#2767#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Clasp.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/rpd/components/Clasp.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="102">
+              <caret line="8" column="30" lean-forward="false" selection-start-line="8" selection-start-column="14" selection-end-line="8" selection-end-column="30" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AssembleClasp.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/rpd/conceptions/AssembleClasp.java">
+      <file leaf-file-name="Mandibular.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/rpd/oral/Mandibular.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="136">
-              <caret line="8" column="13" lean-forward="false" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
+            <state relative-caret-position="-1444">
+              <caret line="19" column="13" lean-forward="false" selection-start-line="19" selection-start-column="13" selection-end-line="19" selection-end-column="13" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="LabelTool.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/GUI/LabelTool.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="215">
+              <caret line="559" column="47" lean-forward="true" selection-start-line="559" selection-start-column="47" selection-end-line="559" selection-end-column="47" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="RemovingRule.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/rpd/rules/RemovingRule.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="293">
+              <caret line="57" column="52" lean-forward="true" selection-start-line="57" selection-start-column="52" selection-end-line="57" selection-end-column="52" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="RingClaspAssembly.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/rpd/components/RingClaspAssembly.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="204">
+              <caret line="14" column="72" lean-forward="false" selection-start-line="14" selection-start-column="72" selection-end-line="14" selection-end-column="72" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="RingClasp.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/rpd/components/RingClasp.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="871">
+              <caret line="86" column="26" lean-forward="false" selection-start-line="86" selection-start-column="26" selection-end-line="86" selection-end-column="26" />
               <folding />
             </state>
           </provider>
@@ -56,8 +174,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="Enum" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -72,8 +190,13 @@
       <find>BackAction</find>
       <find>RPA</find>
       <find>Combined</find>
-      <find>Aker</find>
       <find>Continuous</find>
+      <find>IncisorAkerClaspWithIncisalRest</find>
+      <find>Aker</find>
+      <find>BeamSearch</find>
+      <find>edentulous_type_rules</find>
+      <find>assembly_rules</find>
+      <find>Beam</find>
     </findStrings>
     <replaceStrings>
       <replace>Canine</replace>
@@ -92,6 +215,11 @@
       <replace>Continuous</replace>
       <replace>Combined</replace>
       <replace>Multiple</replace>
+      <replace>IncisiorAker</replace>
+      <replace>IncisorAkerClaspWithIncisalRest</replace>
+      <replace>SearchRPDPlan</replace>
+      <replace>choose_abutment_rules</replace>
+      <replace>IncisorAkerClaspWithLingualRest</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -102,11 +230,12 @@
       <projects_view />
     </option>
   </component>
+  <component name="HierarchyBrowserManager">
+    <option name="IS_AUTOSCROLL_TO_SOURCE" value="true" />
+  </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/misc/ToothMap.java" />
-        <option value="$PROJECT_DIR$/src/misc/ToothPosition.java" />
         <option value="$PROJECT_DIR$/src/ontologies/BooleanPropertyValue.java" />
         <option value="$PROJECT_DIR$/src/ontologies/Descriptions.java" />
         <option value="$PROJECT_DIR$/src/ontologies/OntFunc.java" />
@@ -114,14 +243,12 @@
         <option value="$PROJECT_DIR$/src/rpd/components/WWClasp.java" />
         <option value="$PROJECT_DIR$/src/rpd/oral/EdentulousSpace.java" />
         <option value="$PROJECT_DIR$/src/rpd/oral/Instantialize.java" />
-        <option value="$PROJECT_DIR$/src/rpd/BeamSearch.java" />
         <option value="$PROJECT_DIR$/src/rpd/rules/AssemblyRule.java" />
         <option value="$PROJECT_DIR$/src/rpd/rules/EdentulousTypeRule.java" />
         <option value="$PROJECT_DIR$/src/rpd/oral/Mouth.java" />
         <option value="$PROJECT_DIR$/src/rpd/components/AkerClaspAssembly.java" />
         <option value="$PROJECT_DIR$/src/rpd/components/Component.java" />
         <option value="$PROJECT_DIR$/src/rpd/components/Clasp.java" />
-        <option value="$PROJECT_DIR$/src/rpd/components/IncisalRest.java" />
         <option value="$PROJECT_DIR$/src/rpd/rules/PlatingRule.java" />
         <option value="$PROJECT_DIR$/src/rpd/components/GuidingPlate.java" />
         <option value="$PROJECT_DIR$/src/rpd/components/Plating.java" />
@@ -129,10 +256,7 @@
         <option value="$PROJECT_DIR$/src/rpd/components/RotationAxis.java" />
         <option value="$PROJECT_DIR$/src/rpd/rules/AddtionalAssemblyRule.java" />
         <option value="$PROJECT_DIR$/src/rpd/rules/IndirectRetainerRule.java" />
-        <option value="$PROJECT_DIR$/src/rpd/rules/RemovingRule.java" />
-        <option value="$PROJECT_DIR$/src/rpd/RPDPlan.java" />
         <option value="$PROJECT_DIR$/src/rpd/components/ClaspArm.java" />
-        <option value="$PROJECT_DIR$/src/GUI/LabelTool.java" />
         <option value="$PROJECT_DIR$/src/rpd/components/AkerClasp.java" />
         <option value="$PROJECT_DIR$/src/rpd/components/CanineClasp.java" />
         <option value="$PROJECT_DIR$/src/rpd/components/ExtensionClasp.java" />
@@ -151,6 +275,18 @@
         <option value="$PROJECT_DIR$/src/rpd/conceptions/BasicClasp.java" />
         <option value="$PROJECT_DIR$/src/rpd/conceptions/AssembleClasp.java" />
         <option value="$PROJECT_DIR$/src/rpd/conceptions/MultiToothClasp.java" />
+        <option value="$PROJECT_DIR$/src/rpd/components/IncisiorAkerWithIncisalRest.java" />
+        <option value="$PROJECT_DIR$/src/rpd/components/IncisalRest.java" />
+        <option value="$PROJECT_DIR$/src/rpd/components/IncisorAkerClaspWithIncisalRest.java" />
+        <option value="$PROJECT_DIR$/src/rpd/components/IncisorAkerClaspWithLingualRest.java" />
+        <option value="$PROJECT_DIR$/src/rpd/test/SearchRPDPlan.java" />
+        <option value="$PROJECT_DIR$/src/rpd/BeamSearch.java" />
+        <option value="$PROJECT_DIR$/src/rpd/rules/ChooseAbutmentRule.java" />
+        <option value="$PROJECT_DIR$/src/GUI/LabelTool.java" />
+        <option value="$PROJECT_DIR$/src/rpd/RPDPlan.java" />
+        <option value="$PROJECT_DIR$/src/rpd/rules/RemovingRule.java" />
+        <option value="$PROJECT_DIR$/src/rpd/components/RingClaspAssembly.java" />
+        <option value="$PROJECT_DIR$/src/rpd/SearchRPDPlan.java" />
       </list>
     </option>
   </component>
@@ -183,8 +319,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
-      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -287,28 +421,6 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="conceptions" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="DentalGUITool" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="DentalGUITool" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="rpd" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
               <option name="myItemId" value="components" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -324,6 +436,28 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ontologies" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="DentalGUITool" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="DentalGUITool" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="misc" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -345,9 +479,25 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="DentalGUITool" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="DentalGUITool" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
+      <pane id="Scratches" />
       <pane id="Scope" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -360,6 +510,11 @@
     <property name="nodejs_interpreter_path" value="C:/Program Files (x86)/nodejs/node" />
     <property name="js.eslint.eslintPackage" value="" />
     <property name="js-jscs-nodeInterpreter" value="C:\Program Files (x86)\nodejs\node.exe" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="rpd" />
+    </key>
   </component>
   <component name="RunManager" selected="Application.LabelTool">
     <configuration default="false" name="LabelTool" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
@@ -866,7 +1021,9 @@
       <workItem from="1488263899013" duration="1343000" />
       <workItem from="1488269362778" duration="588000" />
       <workItem from="1488349619016" duration="5941000" />
-      <workItem from="1488678445485" duration="25551000" />
+      <workItem from="1488678445485" duration="25639000" />
+      <workItem from="1489284198550" duration="32000" />
+      <workItem from="1489284269662" duration="9699000" />
     </task>
     <task id="LOCAL-00001" summary="Build the ontology">
       <created>1488690342848</created>
@@ -882,15 +1039,22 @@
       <option name="project" value="LOCAL" />
       <updated>1488706969724</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Classify the kinds of clasp">
+      <created>1488710341664</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1488710341664</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="44175000" />
+    <option name="totallyTimeSpent" value="53994000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="0" width="1924" height="1047" extended-state="0" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -901,14 +1065,14 @@
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32905984" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.30876067" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2809829" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.30876067" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2148847" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21960168" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1692872" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -932,20 +1096,15 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Build the ontology" />
     <MESSAGE value="Complete the ontology of clasp" />
-    <option name="LAST_COMMIT_MESSAGE" value="Complete the ontology of clasp" />
+    <MESSAGE value="Classify the kinds of clasp" />
+    <option name="LAST_COMMIT_MESSAGE" value="Classify the kinds of clasp" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/GUI/LabelTool.java</url>
-          <line>433</line>
-          <properties />
-          <option name="timeStamp" value="7" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/GUI/LabelTool.java</url>
-          <line>207</line>
+          <line>208</line>
           <properties />
           <option name="timeStamp" value="9" />
         </line-breakpoint>
@@ -966,127 +1125,10 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/exceptions/rpd/ComponentException.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="13" lean-forward="false" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/rpd/components/CircumferencialClaspAssembly.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="16" column="25" lean-forward="true" selection-start-line="16" selection-start-column="12" selection-end-line="16" selection-end-column="25" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/rpd/components/LingualRest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="9" column="13" lean-forward="false" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/rpd/components/OcclusalRest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="459">
-          <caret line="31" column="12" lean-forward="true" selection-start-line="31" selection-start-column="12" selection-end-line="31" selection-end-column="12" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/rpd/components/IncisalRest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="352">
-          <caret line="55" column="8" lean-forward="false" selection-start-line="55" selection-start-column="8" selection-end-line="55" selection-end-column="8" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/rpd/rules/PlatingRule.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="318">
-          <caret line="81" column="25" lean-forward="true" selection-start-line="81" selection-start-column="25" selection-end-line="81" selection-end-column="25" />
-          <folding>
-            <element signature="e#2371#2378#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/rpd/components/GuidingPlate.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="26" column="4" lean-forward="true" selection-start-line="26" selection-start-column="4" selection-end-line="26" selection-end-column="4" />
-          <folding>
-            <element signature="e#581#588#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/rpd/oral/Mouth.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="31" column="46" lean-forward="true" selection-start-line="31" selection-start-column="46" selection-end-line="31" selection-end-column="46" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/rpd/components/RotationAxis.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1035">
-          <caret line="130" column="57" lean-forward="false" selection-start-line="130" selection-start-column="57" selection-end-line="130" selection-end-column="57" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/rpd/components/Rest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="21" column="24" lean-forward="false" selection-start-line="21" selection-start-column="8" selection-end-line="21" selection-end-column="24" />
-          <folding>
-            <element signature="e#441#448#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/rpd/rules/AddtionalAssemblyRule.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="412">
-          <caret line="87" column="12" lean-forward="false" selection-start-line="87" selection-start-column="12" selection-end-line="88" selection-end-column="44" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/rpd/rules/RemovingRule.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="53" column="62" lean-forward="true" selection-start-line="53" selection-start-column="62" selection-end-line="53" selection-end-column="62" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/rpd/components/CircumferentialClasp.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="850">
-          <caret line="54" column="66" lean-forward="true" selection-start-line="54" selection-start-column="8" selection-end-line="54" selection-end-column="66" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/rpd/components/Component.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="204">
           <caret line="12" column="42" lean-forward="true" selection-start-line="12" selection-start-column="42" selection-end-line="12" selection-end-column="42" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1094,10 +1136,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="749">
           <caret line="84" column="5" lean-forward="true" selection-start-line="84" selection-start-column="5" selection-end-line="84" selection-end-column="5" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#2098#2105#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1105,32 +1143,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="206">
           <caret line="195" column="0" lean-forward="false" selection-start-line="195" selection-start-column="0" selection-end-line="195" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/rpd/RPDPlan.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="782">
-          <caret line="92" column="4" lean-forward="true" selection-start-line="92" selection-start-column="4" selection-end-line="92" selection-end-column="4" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#332#366#0" expanded="false" />
-            <element signature="e#419#430#0" expanded="false" />
-            <element signature="e#1304#1311#0" expanded="false" />
-            <element signature="e#1555#1562#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/GUI/LabelTool.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="282">
-          <caret line="778" column="26" lean-forward="false" selection-start-line="778" selection-start-column="26" selection-end-line="778" selection-end-column="26" />
-          <folding>
-            <element signature="e#25855#25856#0" expanded="true" />
-            <element signature="e#25908#25909#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1138,13 +1150,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="337">
           <caret line="55" column="26" lean-forward="false" selection-start-line="55" selection-start-column="26" selection-end-line="55" selection-end-column="26" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#1581#1582#0" expanded="false" />
-            <element signature="e#1624#1625#0" expanded="false" />
-            <element signature="e#1940#1941#0" expanded="false" />
-            <element signature="e#1975#1976#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1152,13 +1157,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="337">
           <caret line="54" column="37" lean-forward="false" selection-start-line="54" selection-start-column="37" selection-end-line="54" selection-end-column="37" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#1909#1910#0" expanded="false" />
-            <element signature="e#1952#1953#0" expanded="false" />
-            <element signature="e#2190#2191#0" expanded="false" />
-            <element signature="e#2225#2226#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1166,13 +1164,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="244">
           <caret line="81" column="30" lean-forward="false" selection-start-line="81" selection-start-column="30" selection-end-line="81" selection-end-column="30" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#2667#2668#0" expanded="false" />
-            <element signature="e#2710#2711#0" expanded="false" />
-            <element signature="e#3152#3153#0" expanded="false" />
-            <element signature="e#3187#3188#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1180,21 +1171,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="425">
           <caret line="55" column="35" lean-forward="false" selection-start-line="55" selection-start-column="35" selection-end-line="55" selection-end-column="35" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#1609#1610#0" expanded="false" />
-            <element signature="e#1652#1653#0" expanded="false" />
-            <element signature="e#1977#1978#0" expanded="false" />
-            <element signature="e#2012#2013#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/rpd/rules/AssemblyRule.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2057">
-          <caret line="22" column="13" lean-forward="false" selection-start-line="22" selection-start-column="13" selection-end-line="22" selection-end-column="13" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1218,21 +1194,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="697">
           <caret line="43" column="30" lean-forward="false" selection-start-line="43" selection-start-column="30" selection-end-line="43" selection-end-column="30" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/rpd/components/RingClasp.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1462">
-          <caret line="86" column="26" lean-forward="false" selection-start-line="86" selection-start-column="26" selection-end-line="86" selection-end-column="26" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#1984#1985#0" expanded="false" />
-            <element signature="e#2018#2019#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1240,13 +1201,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-708">
           <caret line="26" column="78" lean-forward="true" selection-start-line="20" selection-start-column="13" selection-end-line="26" selection-end-column="78" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#2308#2309#0" expanded="false" />
-            <element signature="e#2351#2352#0" expanded="false" />
-            <element signature="e#3163#3164#0" expanded="false" />
-            <element signature="e#3198#3199#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1254,7 +1208,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="255">
           <caret line="44" column="0" lean-forward="false" selection-start-line="44" selection-start-column="0" selection-end-line="58" selection-end-column="5" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1262,7 +1215,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="340">
           <caret line="23" column="40" lean-forward="false" selection-start-line="23" selection-start-column="40" selection-end-line="23" selection-end-column="40" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1270,13 +1222,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="524">
           <caret line="42" column="5" lean-forward="true" selection-start-line="11" selection-start-column="4" selection-end-line="42" selection-end-column="5" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#441#442#0" expanded="false" />
-            <element signature="e#484#485#0" expanded="false" />
-            <element signature="e#818#819#0" expanded="false" />
-            <element signature="e#853#854#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1284,13 +1229,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="595">
           <caret line="35" column="27" lean-forward="true" selection-start-line="35" selection-start-column="27" selection-end-line="35" selection-end-column="27" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#441#442#0" expanded="false" />
-            <element signature="e#484#485#0" expanded="false" />
-            <element signature="e#818#819#0" expanded="false" />
-            <element signature="e#853#854#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1298,7 +1236,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-34">
           <caret line="7" column="13" lean-forward="false" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1306,7 +1243,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="51">
           <caret line="16" column="28" lean-forward="false" selection-start-line="16" selection-start-column="28" selection-end-line="16" selection-end-column="28" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1314,13 +1250,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="272">
           <caret line="52" column="49" lean-forward="true" selection-start-line="52" selection-start-column="49" selection-end-line="52" selection-end-column="49" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#1016#1017#0" expanded="false" />
-            <element signature="e#1059#1060#0" expanded="false" />
-            <element signature="e#1881#1882#0" expanded="false" />
-            <element signature="e#1916#1917#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1328,27 +1257,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="68">
           <caret line="4" column="17" lean-forward="false" selection-start-line="4" selection-start-column="17" selection-end-line="4" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/rpd/components/AkerClasp.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="456">
-          <caret line="89" column="5" lean-forward="true" selection-start-line="10" selection-start-column="4" selection-end-line="89" selection-end-column="5" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/rpd/components/Clasp.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" column="30" lean-forward="false" selection-start-line="8" selection-start-column="14" selection-end-line="8" selection-end-column="30" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1356,13 +1264,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="380">
           <caret line="67" column="75" lean-forward="false" selection-start-line="67" selection-start-column="75" selection-end-line="67" selection-end-column="75" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#3174#3175#0" expanded="true" />
-            <element signature="e#3217#3218#0" expanded="true" />
-            <element signature="e#3452#3453#0" expanded="true" />
-            <element signature="e#3487#3488#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1370,13 +1271,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="422">
           <caret line="35" column="75" lean-forward="false" selection-start-line="35" selection-start-column="75" selection-end-line="35" selection-end-column="75" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1458#1459#0" expanded="true" />
-            <element signature="e#1501#1502#0" expanded="true" />
-            <element signature="e#1737#1738#0" expanded="true" />
-            <element signature="e#1772#1773#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1384,13 +1278,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="524">
           <caret line="87" column="5" lean-forward="true" selection-start-line="15" selection-start-column="4" selection-end-line="87" selection-end-column="5" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#3182#3183#0" expanded="true" />
-            <element signature="e#3225#3226#0" expanded="true" />
-            <element signature="e#3462#3463#0" expanded="true" />
-            <element signature="e#3497#3498#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1398,13 +1285,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="439">
           <caret line="82" column="28" lean-forward="true" selection-start-line="82" selection-start-column="28" selection-end-line="82" selection-end-column="28" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#2795#2796#0" expanded="true" />
-            <element signature="e#2838#2839#0" expanded="true" />
-            <element signature="e#3073#3074#0" expanded="true" />
-            <element signature="e#3108#3109#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1412,7 +1292,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="510">
           <caret line="56" column="25" lean-forward="true" selection-start-line="56" selection-start-column="25" selection-end-line="56" selection-end-column="25" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1428,7 +1307,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="170">
           <caret line="10" column="12" lean-forward="true" selection-start-line="10" selection-start-column="12" selection-end-line="10" selection-end-column="12" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1456,14 +1334,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/rpd/conceptions/BasicClasp.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="15" column="1" lean-forward="true" selection-start-line="15" selection-start-column="1" selection-end-line="15" selection-end-column="1" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/rpd/conceptions/AssembleClasp.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="136">
@@ -1474,8 +1344,205 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/rpd/conceptions/MultiToothClasp.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="11" column="1" lean-forward="true" selection-start-line="11" selection-start-column="1" selection-end-line="11" selection-end-column="1" />
+        <state relative-caret-position="204">
+          <caret line="12" column="0" lean-forward="false" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/rpd/conceptions/BasicClasp.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="15" column="1" lean-forward="false" selection-start-line="15" selection-start-column="1" selection-end-line="15" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/rpd/components/IncisiorAkerWithIncisalRest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="213">
+          <caret line="16" column="23" lean-forward="false" selection-start-line="16" selection-start-column="11" selection-end-line="16" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/rpd/components/IncisorAkerClaspWithLingualRest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="374">
+          <caret line="22" column="61" lean-forward="true" selection-start-line="22" selection-start-column="61" selection-end-line="22" selection-end-column="61" />
+          <folding>
+            <element signature="imports" expanded="false" />
+            <element signature="e#920#921#0" expanded="false" />
+            <element signature="e#963#964#0" expanded="false" />
+            <element signature="e#1306#1307#0" expanded="false" />
+            <element signature="e#1341#1342#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/rpd/components/LingualRest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="595">
+          <caret line="42" column="24" lean-forward="true" selection-start-line="42" selection-start-column="24" selection-end-line="42" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/rpd/components/IncisalRest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="867">
+          <caret line="57" column="28" lean-forward="true" selection-start-line="57" selection-start-column="28" selection-end-line="57" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/rpd/components/IncisorAkerClaspWithIncisalRest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="123">
+          <caret line="46" column="5" lean-forward="true" selection-start-line="46" selection-start-column="5" selection-end-line="46" selection-end-column="5" />
+          <folding>
+            <element signature="imports" expanded="false" />
+            <element signature="e#1660#1661#0" expanded="false" />
+            <element signature="e#1703#1704#0" expanded="false" />
+            <element signature="e#2046#2047#0" expanded="false" />
+            <element signature="e#2081#2082#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/rpd/components/AkerClasp.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="10" column="0" lean-forward="false" selection-start-line="10" selection-start-column="0" selection-end-line="89" selection-end-column="5" />
+          <folding>
+            <element signature="e#2741#2742#0" expanded="false" />
+            <element signature="e#2767#2768#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/rpd/BeamSearch.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="663">
+          <caret line="55" column="38" lean-forward="true" selection-start-line="55" selection-start-column="38" selection-end-line="55" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/rpd/oral/Mandibular.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1444">
+          <caret line="19" column="13" lean-forward="false" selection-start-line="19" selection-start-column="13" selection-end-line="19" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/rpd/oral/EdentulousSpace.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-153">
+          <caret line="21" column="65" lean-forward="false" selection-start-line="21" selection-start-column="65" selection-end-line="21" selection-end-column="65" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/rpd/rules/EdentulousTypeRule.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="42" column="18" lean-forward="false" selection-start-line="42" selection-start-column="18" selection-end-line="42" selection-end-column="18" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/rpd/components/Clasp.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="8" column="30" lean-forward="false" selection-start-line="8" selection-start-column="14" selection-end-line="8" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/rpd/rules/AssemblyRule.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-187">
+          <caret line="100" column="53" lean-forward="false" selection-start-line="100" selection-start-column="53" selection-end-line="100" selection-end-column="53" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/rpd/rules/ChooseAbutmentRule.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-13">
+          <caret line="41" column="51" lean-forward="true" selection-start-line="41" selection-start-column="51" selection-end-line="41" selection-end-column="51" />
+          <folding>
+            <element signature="e#1469#1470#0" expanded="true" />
+            <element signature="e#1527#1528#0" expanded="true" />
+            <element signature="e#1567#1568#0" expanded="true" />
+            <element signature="e#1628#1629#0" expanded="true" />
+            <element signature="e#1667#1668#0" expanded="true" />
+            <element signature="e#1707#1708#0" expanded="true" />
+            <element signature="e#2403#2404#0" expanded="true" />
+            <element signature="e#2444#2445#0" expanded="true" />
+            <element signature="e#2484#2485#0" expanded="true" />
+            <element signature="e#2545#2546#0" expanded="true" />
+            <element signature="e#2584#2585#0" expanded="true" />
+            <element signature="e#2624#2625#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/rpd/RPDPlan.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="342">
+          <caret line="92" column="55" lean-forward="false" selection-start-line="92" selection-start-column="33" selection-end-line="92" selection-end-column="55" />
+          <folding>
+            <element signature="e#419#430#0" expanded="true" />
+            <element signature="e#483#490#0" expanded="true" />
+            <element signature="e#2631#2632#0" expanded="true" />
+            <element signature="e#2664#2665#0" expanded="true" />
+            <element signature="e#2722#2723#0" expanded="true" />
+            <element signature="e#2766#2767#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/rpd/rules/RemovingRule.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="293">
+          <caret line="57" column="52" lean-forward="true" selection-start-line="57" selection-start-column="52" selection-end-line="57" selection-end-column="52" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/rpd/components/RingClasp.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="871">
+          <caret line="86" column="26" lean-forward="false" selection-start-line="86" selection-start-column="26" selection-end-line="86" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/rpd/components/RingClaspAssembly.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="14" column="72" lean-forward="false" selection-start-line="14" selection-start-column="72" selection-end-line="14" selection-end-column="72" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/rpd/SearchRPDPlan.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="425">
+          <caret line="102" column="39" lean-forward="false" selection-start-line="102" selection-start-column="39" selection-end-line="102" selection-end-column="39" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/GUI/LabelTool.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="215">
+          <caret line="559" column="47" lean-forward="true" selection-start-line="559" selection-start-column="47" selection-end-line="559" selection-end-column="47" />
           <folding />
         </state>
       </provider>

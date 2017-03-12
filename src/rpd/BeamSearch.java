@@ -47,17 +47,17 @@ public class BeamSearch {
 		
 		if(noMissing(mandibular))
 			return null;
-		
+
 		EdentulousTypeRule.initRules();
 		AssemblyRule.initRules(mouth);
 		AddtionalAssemblyRule.initRules(mouth);
 		IndirectRetainerRule.initRules(mouth);
 		PlatingRule.initRules(mouth);
 		RemovingRule.initRules(mouth);
-		
+
 		List<RPDPlan> res = new ArrayList<RPDPlan>();
 		RPDPlan empty_plan = new RPDPlan(mouth, Position.Mandibular);
-		
+
 		List<RPDPlan> assembly_plans = new ArrayList<RPDPlan>();
 		List<RPDPlan> assembly_plans_buffer = new ArrayList<RPDPlan>();
 		assembly_plans.add(empty_plan);
