@@ -63,6 +63,32 @@ public class Maxillary {
 		}
 		return res;
 	}
+
+	public boolean isZone1AllMissing() {
+		boolean flag = true;
+		for (Tooth tooth:zone1) {
+			if (tooth!=null) {
+				if (!tooth.isMissing()) {
+					flag = false;
+					break;
+				}
+			}
+		}
+		return flag;
+	}
+	public boolean isZone2AllMissing() {
+		boolean flag = true;
+		for (Tooth tooth:zone2) {
+			if (tooth!=null) {
+				if (!tooth.isMissing()) {
+					flag = false;
+					break;
+				}
+			}
+		}
+		return flag;
+	}
+
 }
 
 

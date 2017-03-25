@@ -2,8 +2,10 @@ package rpd;
 
 import java.util.*;
 
+import exceptions.rpd.RuleException;
 import rpd.components.Component;
 import rpd.conceptions.Position;
+import rpd.oral.EdentulousSpace;
 import rpd.oral.Mouth;
 import rpd.oral.Tooth;
 
@@ -118,6 +120,32 @@ public class RPDPlan {
 		tooth_components.remove(component);
 		if(tooth_components.size() == 0)
 			this.tooth_components.remove(tooth_pos);
+	}
+
+	public List<EdentulousSpace> getEdentulousSpaces() throws RuleException {
+		if (this.mandibular_or_maxillary == Position.Mandibular) {
+			return this.mouth.getMandibular().getEdentulousSpaces();
+		}
+		else if (this.mandibular_or_maxillary == Position.Maxillary) {
+			return this.mouth.getMaxillary().getEdentulousSpaces();
+		}
+		else {
+			throw new RuleException("rpd has no position");
+		}
+
+	}
+
+	public List<Tooth> getExistingTeeth() throws RuleException {
+		if (this.mandibular_or_maxillary == Position.Mandibular) {
+			return this.mouth.getMandibular().getExistingTeeth();
+		}
+		else if (this.mandibular_or_maxillary == Position.Maxillary) {
+			return this.mouth.getMaxillary().getExistingTeeth();
+		}
+		else {
+			throw new RuleException("rpd has no position");
+		}
+
 	}
 	
 	public String toString() {

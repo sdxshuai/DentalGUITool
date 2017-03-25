@@ -51,16 +51,17 @@ public class ClaspRule {
                 return 1;
             }
 
+            //遍历只有一个continuous_tooth的情况，生成with_multi_list
             public void getPlansFromWithMultiList(ArrayList<ArrayList<Tooth>> continuous_tooth_list,
                                                   ArrayList<Tooth> abutment_teeth,
                                                   List<RPDPlan> plans) {
 
-                for (ArrayList<Tooth> tooth_list:continuous_tooth_list) {
+                for (ArrayList<Tooth> continuous_tooth:continuous_tooth_list) {
                     ArrayList<ArrayList<Tooth>> with_multi_list = new ArrayList<ArrayList<Tooth>>();;
                     Set<Tooth> differ_set = new HashSet<>();
                     differ_set.addAll(abutment_teeth);
-                    differ_set.removeAll(tooth_list);
-                    with_multi_list.add(tooth_list);
+                    differ_set.removeAll(continuous_tooth);
+                    with_multi_list.add(continuous_tooth);
                     for (Tooth differ_tooth:differ_set) {
                         ArrayList<Tooth> current_list = new ArrayList<Tooth>();
                         current_list.add(differ_tooth);
@@ -85,8 +86,8 @@ public class ClaspRule {
                     abutment_teeth.addAll(plan.getAbutmentTeeth());
                     Collections.sort(abutment_teeth);
                     List<Tooth> no_multi_list = new ArrayList<>(abutment_teeth);
-                    ArrayList<ArrayList<Tooth>> continuous_tooth_list = new ArrayList<ArrayList<Tooth>>();
-                    Set<Tooth> continuous_tooth_set = new HashSet<>();
+                    ArrayList<ArrayList<Tooth>> continuous_tooth_list = new ArrayList<ArrayList<Tooth>>(); //连续牙位列表
+                    Set<Tooth> continuous_tooth_set = new HashSet<>(); //连续牙位位置集合
 
                     int last_num = 0;
                     Tooth last_tooth = null;
@@ -107,9 +108,11 @@ public class ClaspRule {
                     if (continuous_tooth_set.size() == 4) {
                         for (int i=1;i<=2;i++) {
                             if (i == 1) {
+                                //只有一个连续牙位
                                 getPlansFromWithMultiList(continuous_tooth_list, abutment_teeth, res);
                             }
                             else {
+                                //有两个连续牙位
                                 ArrayList<ArrayList<Tooth>> with_multi_list = new ArrayList<ArrayList<Tooth>>();
                                 with_multi_list.add(continuous_tooth_list.get(0));
                                 with_multi_list.add(continuous_tooth_list.get(continuous_tooth_list.size()-1));
@@ -132,7 +135,7 @@ public class ClaspRule {
         clasp_rules.add(new ClaspRule() {
 
             public String getExplaination() {
-                return "";
+                return "占位符";
             }
 
             public String toString() {

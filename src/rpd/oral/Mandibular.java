@@ -127,6 +127,32 @@ public class Mandibular {
 			zone4.add(tooth_obj);
 		}
 	}
+
+	public boolean isZone3AllMissing() {
+		boolean flag = true;
+		for (Tooth tooth:zone3) {
+			if (tooth!=null) {
+				if (!tooth.isMissing()) {
+					flag = false;
+					break;
+				}
+			}
+		}
+		return flag;
+	}
+
+	public boolean isZone4AllMissing() {
+		boolean flag = true;
+		for (Tooth tooth:zone4) {
+			if (tooth!=null) {
+				if (!tooth.isMissing()) {
+					flag = false;
+					break;
+				}
+			}
+		}
+		return flag;
+	}
 	
 	public static boolean[] getTeethMissingFlags(List<Tooth> zone3, List<Tooth> zone4) {
 		

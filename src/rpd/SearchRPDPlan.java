@@ -50,6 +50,7 @@ public class SearchRPDPlan {
 //        PlatingRule.initRules(mouth);
 //        RemovingRule.initRules(mouth);
 
+        EdentulousTypeRule.initRules();
         ChooseAbutmentRule.initRules(mouth);
         ClaspRule.initRules(mouth);
         RestRule.initRules(mouth);
