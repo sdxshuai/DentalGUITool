@@ -93,5 +93,61 @@ public class SearchRPDPlan {
 
         return res;
     }
+    public static List<RPDPlan> searchMaxillary(Mouth mouth) throws RuleException, ClaspAssemblyException, ToothPosException, EdentulousTypeException {
 
+        Maxillary maxillary = mouth.getMaxillary();
+
+        if(noMissing(maxillary))
+            return null;
+
+//        EdentulousTypeRule.initRules();
+//        AssemblyRule.initRules(mouth);
+//        AddtionalAssemblyRule.initRules(mouth);
+//        IndirectRetainerRule.initRules(mouth);
+//        PlatingRule.initRules(mouth);
+//        RemovingRule.initRules(mouth);
+
+        EdentulousTypeRule.initRules();
+        ChooseAbutmentRule.initRules(mouth);
+        ClaspRule.initRules(mouth);
+        RestRule.initRules(mouth);
+
+        List<RPDPlan> res = new ArrayList<RPDPlan>();
+        RPDPlan empty_plan = new RPDPlan(mouth, Position.Mandibular);
+
+        List<RPDPlan> abutment_teeth_plans = new ArrayList<RPDPlan>();
+        abutment_teeth_plans.add(empty_plan);
+        for(ChooseAbutmentRule rule: ChooseAbutmentRule.choose_abutment_rules) {
+            List<RPDPlan> plans = rule.apply(abutment_teeth_plans);
+            abutment_teeth_plans.clear();
+            abutment_teeth_plans.addAll(plans);
+        }
+
+        List<RPDPlan> clasp_plans = new ArrayList<RPDPlan>();
+        clasp_plans.addAll(abutment_teeth_plans);
+        for(ClaspRule rule: ClaspRule.clasp_rules) {
+            List<RPDPlan> plans = rule.apply(clasp_plans);
+            clasp_plans.clear();
+            clasp_plans.addAll(plans);
+        }
+
+        List<RPDPlan> rest_plans = new ArrayList<RPDPlan>();
+        rest_plans.addAll(clasp_plans);
+        for(RestRule rule: RestRule.rest_rules) {
+            List<RPDPlan> plans = rule.apply(rest_plans);
+            rest_plans.clear();
+            rest_plans.addAll(plans);
+        }
+
+
+        res.addAll(abutment_teeth_plans);
+
+        if(res.size() == 1) {
+            RPDPlan plan = res.get(0);
+            if(plan.isEmptyPlan())
+                res.remove(0);
+        }
+
+        return res;
+    }
 }

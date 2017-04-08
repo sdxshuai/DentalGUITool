@@ -2,7 +2,7 @@ package rpd.conceptions;
 
 public enum ToothType {
 
-	Incisal,
+	Incisor,
 	Canine,
 	Premolar,
 	Molar,

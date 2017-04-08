@@ -1,13 +1,11 @@
 package rpd.rules;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 import exceptions.rpd.ClaspAssemblyException;
 import exceptions.rpd.RuleException;
 import exceptions.rpd.ToothPosException;
+import org.apache.jena.rdf.model.RDFNode;
 import rpd.RPDPlan;
 import rpd.components.CircumferencialClaspAssembly;
 import rpd.components.ClaspAssembly;
@@ -17,6 +15,7 @@ import rpd.components.RingClaspAssembly;
 import rpd.components.WWClaspAssembly;
 import rpd.conceptions.EdentulousType;
 import rpd.conceptions.Position;
+import rpd.conceptions.ToothType;
 import rpd.oral.EdentulousSpace;
 import rpd.oral.Mandibular;
 import rpd.oral.Mouth;
@@ -159,10 +158,31 @@ public class ChooseAbutmentRule {
         return res;
     }
 
-    public boolean isDistanceAllGreaterThanThres(RPDPlan plan, List<EdentulousSpace> edentulousSpaceList) {
+    public int getMaxSuccessiveAbutmentNum(RPDPlan plan){
+        List<Tooth> abutment_teeth = new ArrayList<>(plan.getAbutmentTeeth());
+        Collections.sort(abutment_teeth);
+        int maxSuc = 1;
+        int tempSuc = 1;
+
+        for (int i = 1;i < abutment_teeth.size();i++) {
+            if (abutment_teeth.get(i).getZone() == abutment_teeth.get(i-1).getZone()
+                    && abutment_teeth.get(i).getNum() - 1 == abutment_teeth.get(i-1).getNum()) {
+                tempSuc++;
+            }
+            else {
+                if (tempSuc > maxSuc) {
+                    maxSuc = tempSuc;
+                }
+                tempSuc = 1;
+            }
+        }
+        return maxSuc;
+    }
+
+    public boolean isDistanceGreaterThanThres(RPDPlan plan, List<EdentulousSpace> edentulousSpaceList) {
         int distance = 0;
         int cur_distance = 0;
-        boolean flag = true;
+        boolean flag = false;
         //true = 所有基牙距离缺失区超过3个牙位
         for (Tooth tooth:plan.getAbutmentTeeth()) {
             distance = 0;
@@ -172,8 +192,8 @@ public class ChooseAbutmentRule {
                     distance = cur_distance;
                 }
             }
-            if (distance <= 3) {
-                flag = false;
+            if (distance >= 4) {
+                flag = true;
                 break;
             }
         }
@@ -214,8 +234,17 @@ public class ChooseAbutmentRule {
             public List<RPDPlan> apply(List<RPDPlan> rpd_plans) throws RuleException {
 
                 List<RPDPlan> res = new ArrayList<>();
+                List<Tooth> existing_teeth = new ArrayList<Tooth>();
+                existing_teeth.addAll(rpd_plans.get(0).getExistingTeeth());
+                Iterator<Tooth> tooth_iterator = existing_teeth.iterator();
+                while (tooth_iterator.hasNext()) {
+                    Tooth tooth = tooth_iterator.next();
+                    if (tooth.getToothType().equals(ToothType.Incisor)) {
+                        tooth_iterator.remove();
+                    }
+                }
+
                 for (RPDPlan plan:rpd_plans) {
-                    List<Tooth> existing_teeth = new ArrayList<Tooth>(plan.getExistingTeeth());
                     int list_size = existing_teeth.size();
                     HashSet<Tooth> hashSet = new HashSet<Tooth>();
                     ArrayList<ArrayList<Tooth>> abutment_teeth_list = new ArrayList<ArrayList<Tooth>>();
@@ -268,7 +297,7 @@ public class ChooseAbutmentRule {
         choose_abutment_rules.add(new ChooseAbutmentRule() {
 
             public String getExplaination() {
-                return "缺失距离检测，不能所有基牙距离缺失区超过3个牙位";
+                return "缺失距离检测，基牙距离缺失区不能大于3个牙位";
             }
 
             public String toString() {
@@ -282,7 +311,7 @@ public class ChooseAbutmentRule {
             public List<RPDPlan> apply(List<RPDPlan> rpd_plans) throws RuleException {
                 List<RPDPlan> res = new ArrayList<>();
                 for (RPDPlan plan:rpd_plans) {
-                    if (!isDistanceAllGreaterThanThres(plan, plan.getEdentulousSpaces())) {
+                    if (!isDistanceGreaterThanThres(plan, plan.getEdentulousSpaces())) {
                         res.add(plan);
                     }
                 }
@@ -293,7 +322,7 @@ public class ChooseAbutmentRule {
         choose_abutment_rules.add(new ChooseAbutmentRule() {
 
             public String getExplaination() {
-                return "如果游离缺失，不能所有基牙同为磨牙、前磨牙、尖牙、切牙";
+                return "最多两个连续牙位作为基牙";
             }
 
             public String toString() {
@@ -306,15 +335,9 @@ public class ChooseAbutmentRule {
 
             public List<RPDPlan> apply(List<RPDPlan> rpd_plans) throws RuleException {
                 List<RPDPlan> res = new ArrayList<>();
-                if (!isDisociate(rpd_plans.get(0).getEdentulousSpaces())) {
-                    res.addAll(rpd_plans);
-                }
-                else {
-                    for (RPDPlan plan:rpd_plans) {
-                        if (!isAllDistomolar(plan.getAbutmentTeeth())&&!isAllPremolar(plan.getAbutmentTeeth())
-                                &&!isAllCanine(plan.getAbutmentTeeth())&&!isAllIncisor(plan.getAbutmentTeeth())) {
-                            res.add(plan);
-                        }
+                for (RPDPlan plan:rpd_plans) {
+                    if (getMaxSuccessiveAbutmentNum(plan) <= 2) {
+                        res.add(plan);
                     }
                 }
                 return res;

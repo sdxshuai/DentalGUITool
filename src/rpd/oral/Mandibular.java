@@ -12,10 +12,7 @@ import org.apache.jena.rdf.model.RDFNode;
 import exceptions.rpd.RuleException;
 import exceptions.rpd.ToothPosException;
 import ontologies.OntFunc;
-import rpd.conceptions.AlveolarAbsorption;
-import rpd.conceptions.GingivalRecession;
-import rpd.conceptions.Position;
-import rpd.conceptions.ToothMobility;
+import rpd.conceptions.*;
 
 public class Mandibular {
 
@@ -333,54 +330,124 @@ public class Mandibular {
 	private void readToothInfo(Tooth tooth_obj, OntModel dental_ont, Individual tooth_ind) {
 		
 		DatatypeProperty missing_dp = dental_ont.getDatatypeProperty(OntFunc.prefix + "is_missing");
-		DatatypeProperty mobility_dp = dental_ont.getDatatypeProperty(OntFunc.prefix + "mobility");
-		DatatypeProperty mesial_tight_bite_dp = dental_ont.getDatatypeProperty(OntFunc.prefix + "mesial_tight_bite");
-		DatatypeProperty distal_tight_bite_dp = dental_ont.getDatatypeProperty(OntFunc.prefix + "distal_tight_bite");
-		DatatypeProperty gingival_recession_dp = dental_ont.getDatatypeProperty(OntFunc.prefix + "gingival_recession");
-		DatatypeProperty teeth_related_imaging_dp = dental_ont.getDatatypeProperty(OntFunc.prefix + "teeth_related_imaging");
-	
 		RDFNode missing_value = tooth_ind.getPropertyValue(missing_dp);
 		if(missing_value != null) {
 			boolean missing_value_boolean = missing_value.asLiteral().getBoolean();
 			tooth_obj.setMissing(missing_value_boolean);
 		}
-		
+
+		DatatypeProperty bone_undercut_dp = dental_ont.getDatatypeProperty(OntFunc.prefix + "bone_undercut");
+		RDFNode bone_undercut_value = tooth_ind.getPropertyValue(bone_undercut_dp);
+		if(bone_undercut_value != null) {
+			boolean bone_undercut_value_boolean = bone_undercut_value.asLiteral().getBoolean();
+			tooth_obj.setBoneUndercut(bone_undercut_value_boolean);
+		}
+
+		DatatypeProperty buccal_surface_slope_dp = dental_ont.getDatatypeProperty(OntFunc.prefix + "buccal_surface_slope");
+		RDFNode buccal_surface_slope_value = tooth_ind.getPropertyValue(buccal_surface_slope_dp);
+		if(buccal_surface_slope_value != null) {
+			boolean buccal_surface_slope_value_boolean = buccal_surface_slope_value.asLiteral().getBoolean();
+			tooth_obj.setBuccalSurfaceSlope(buccal_surface_slope_value_boolean);
+		}
+
+		DatatypeProperty lingual_surface_slope_dp = dental_ont.getDatatypeProperty(OntFunc.prefix + "lingual_surface_slope");
+		RDFNode lingual_surface_slope_value = tooth_ind.getPropertyValue(lingual_surface_slope_dp);
+		if(lingual_surface_slope_value != null) {
+			boolean lingual_surface_slope_value_boolean = lingual_surface_slope_value.asLiteral().getBoolean();
+			tooth_obj.setLingualSurfaceSlope(lingual_surface_slope_value_boolean);
+		}
+
+		DatatypeProperty cingulum_dp = dental_ont.getDatatypeProperty(OntFunc.prefix + "cingulum");
+		RDFNode cingulum_value = tooth_ind.getPropertyValue(cingulum_dp);
+		if (cingulum_value != null) {
+			boolean cingulum_value_boolean = cingulum_value.asLiteral().getBoolean();
+			tooth_obj.setCingulum(cingulum_value_boolean);
+		}
+
+		DatatypeProperty torus_dp = dental_ont.getDatatypeProperty(OntFunc.prefix + "torus");
+		RDFNode torus_value = tooth_ind.getPropertyValue(torus_dp);
+		if (torus_value != null) {
+			boolean torus_value_boolean = torus_value.asLiteral().getBoolean();
+			tooth_obj.setTorus(torus_value_boolean);
+		}
+
+		DatatypeProperty mobility_dp = dental_ont.getDatatypeProperty(OntFunc.prefix + "mobility");
 		RDFNode mobility_value = tooth_ind.getPropertyValue(mobility_dp);
 		if(mobility_value != null) {
 			int mobility_value_int = mobility_value.asLiteral().getInt();
 			ToothMobility[] mobility_values = ToothMobility.values();
 			tooth_obj.setMobility(mobility_values[mobility_value_int]);
 		}
-		
-		RDFNode mesial_tight_bite_value = tooth_ind.getPropertyValue(mesial_tight_bite_dp);
-		if(mesial_tight_bite_value != null) {
-			boolean mesial_tight_bite_boolean = mesial_tight_bite_value.asLiteral().getBoolean();
-			tooth_obj.setMesialTightBite(mesial_tight_bite_boolean);
-		}
-		
-		RDFNode distal_tight_bite_value = tooth_ind.getPropertyValue(distal_tight_bite_dp);
-		if(distal_tight_bite_value != null) {
-			boolean distal_tight_bite_boolean = distal_tight_bite_value.asLiteral().getBoolean();
-			tooth_obj.setDistalTightBite(distal_tight_bite_boolean);
-		}
-		
-		RDFNode gingival_recession_value = tooth_ind.getPropertyValue(gingival_recession_dp);
-		if(gingival_recession_value != null) {
-			
-			String datatype_uri = gingival_recession_value.asLiteral().getDatatypeURI();
+
+		DatatypeProperty crown_root_ratio_dp = dental_ont.getDatatypeProperty(OntFunc.prefix + "crown_root_ratio");
+		RDFNode crown_root_ratio_value = tooth_ind.getPropertyValue(crown_root_ratio_dp);
+		if(crown_root_ratio_value != null) {
+			String datatype_uri = crown_root_ratio_value.asLiteral().getDatatypeURI();
 			if(datatype_uri.equals("http://www.w3.org/2001/XMLSchema#int")) {
-				int gingival_recession_int = gingival_recession_value.asLiteral().getInt();
-				GingivalRecession[] gingival_recession_values = GingivalRecession.values();
-				tooth_obj.setGingivalRecession(gingival_recession_values[gingival_recession_int]);
+				int crown_root_ratio_int = crown_root_ratio_value.asLiteral().getInt();
+				CrownRootRatio[] crown_root_ratio_values = CrownRootRatio.values();
+				tooth_obj.setCrownRootRatio(crown_root_ratio_values[crown_root_ratio_int]);
+			}
+			else if (datatype_uri.equals("http://www.w3.org/2001/XMLSchema#double")) {
+				double crown_root_ratio_double = crown_root_ratio_value.asLiteral().getDouble();
+				if (crown_root_ratio_double > 0) {
+					tooth_obj.setCrownRootRatio(CrownRootRatio.LONG);
+				}
+				else if (crown_root_ratio_double < 0) {
+					tooth_obj.setCrownRootRatio(CrownRootRatio.SHORT);
+				}
 			}
 		}
-		
+
+		DatatypeProperty furcation_involvement_dp = dental_ont.getDatatypeProperty(OntFunc.prefix + "furcation_involvement");
+		RDFNode furcation_involvement_value = tooth_ind.getPropertyValue(furcation_involvement_dp);
+		if(furcation_involvement_value != null) {
+			String datatype_uri = furcation_involvement_value.asLiteral().getDatatypeURI();
+			if(datatype_uri.equals("http://www.w3.org/2001/XMLSchema#int")) {
+				int furcation_involvement_int = furcation_involvement_value.asLiteral().getInt();
+				FurcationInvolvement[] furcation_involvement_values = FurcationInvolvement.values();
+				tooth_obj.setFurcationInvolvement(furcation_involvement_values[furcation_involvement_int]);
+			}
+		}
+
+		DatatypeProperty teeth_related_imaging_dp = dental_ont.getDatatypeProperty(OntFunc.prefix + "teeth_related_imaging");
 		RDFNode teeth_related_imaging_value = tooth_ind.getPropertyValue(teeth_related_imaging_dp);
 		if(teeth_related_imaging_value != null) {
 			int teeth_related_imaging_int = teeth_related_imaging_value.asLiteral().getInt();
 			AlveolarAbsorption[] alveolar_absorption_values = AlveolarAbsorption.values();
 			tooth_obj.setAlveolarAbsorption(alveolar_absorption_values[teeth_related_imaging_int]);
 		}
-		
+
+		DatatypeProperty classification_of_survey_line_on_buccal_surface_dp
+				= dental_ont.getDatatypeProperty(OntFunc.prefix + "classification_of_survey_line_on_buccal_surface");
+		RDFNode classification_of_survey_line_on_buccal_surface_value
+				= tooth_ind.getPropertyValue(classification_of_survey_line_on_buccal_surface_dp);
+		if(classification_of_survey_line_on_buccal_surface_value != null) {
+			int classification_of_survey_line_on_buccal_surface_int
+					= classification_of_survey_line_on_buccal_surface_value.asLiteral().getInt();
+			ClassificationOfSurveyLineOnBuccalSurface[] classification_of_survey_line_on_buccal_surface_values
+					= ClassificationOfSurveyLineOnBuccalSurface.values();
+			tooth_obj.setClassificationOfSurveyLineOnBuccalSurface(
+					classification_of_survey_line_on_buccal_surface_values[classification_of_survey_line_on_buccal_surface_int]);
+		}
+
+		DatatypeProperty space_below_gingival_margins_dp = dental_ont.getDatatypeProperty(OntFunc.prefix + "space_below_gingival_margins");
+		RDFNode space_below_gingival_margins_value = tooth_ind.getPropertyValue(space_below_gingival_margins_dp);
+		if(space_below_gingival_margins_value != null) {
+			String datatype_uri = space_below_gingival_margins_value.asLiteral().getDatatypeURI();
+			if(datatype_uri.equals("http://www.w3.org/2001/XMLSchema#boolean")) {
+				boolean space_below_gingival_margins_boolean = space_below_gingival_margins_value.asLiteral().getBoolean();
+				tooth_obj.setSpaceBelowGingivalMargins(space_below_gingival_margins_boolean);
+			}
+			else if (datatype_uri.equals("http://www.w3.org/2001/XMLSchema#double")) {
+				double space_below_gingival_margins_double = space_below_gingival_margins_value.asLiteral().getDouble();
+				if (space_below_gingival_margins_double > 7) {
+					tooth_obj.setSpaceBelowGingivalMargins(false);
+				}
+				else if (space_below_gingival_margins_double < 7) {
+					tooth_obj.setSpaceBelowGingivalMargins(true);
+				}
+			}
+		}
 	}
 }

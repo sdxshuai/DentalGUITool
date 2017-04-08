@@ -120,7 +120,8 @@ public class LabelTool {
 	
 	private OntModel mouth_ont = null;
 	private Mouth mouth = null;
-	private List<RPDPlan> rpd_plans = null;
+	private List<RPDPlan> mandibular_rpd_plans = null;
+	private List<RPDPlan> maxillary_rpd_plans = null;
 	
 	private Descriptions des =  null;
 	
@@ -421,7 +422,8 @@ public class LabelTool {
 						
 						label_list.clear();
 						mouth_ont = null;
-						rpd_plans = null;
+						mandibular_rpd_plans = null;
+						maxillary_rpd_plans = null;
 						current_rpd_plan = null;
 						is_missing_str = null;
 						
@@ -556,9 +558,10 @@ public class LabelTool {
 					Instantialize.convertXmlToOnt(mouth_ont, label_xml_file);
 					mouth = new Mouth(mouth_ont);
 					//rpd_plans = BeamSearch.searchMandibular(mouth);
-					rpd_plans = SearchRPDPlan.searchMandibular(mouth);
+					mandibular_rpd_plans = SearchRPDPlan.searchMandibular(mouth);
+					maxillary_rpd_plans = SearchRPDPlan.searchMaxillary(mouth);
 					@SuppressWarnings("unused")
-					List<RPDPlan> plans_buffer = rpd_plans;
+					List<RPDPlan> plans_buffer = mandibular_rpd_plans;
 					showRPDPlans();
 				} 
 				catch (ParserConfigurationException | SAXException | IOException | ToothMapException
@@ -698,7 +701,7 @@ public class LabelTool {
 	
 	private void showRPDPlans() throws IOException {
 		
-		if(rpd_plans == null || rpd_plans.size() == 0)
+		if(mandibular_rpd_plans == null || mandibular_rpd_plans.size() == 0)
 			return;
 		
 		JDialog design_dialog = new JDialog(this.frame, "设计图");
@@ -737,7 +740,7 @@ public class LabelTool {
 		rpd_plan_tree.setFont(new Font("微软雅黑", Font.PLAIN, 18));
 		
 		Vector<Integer> plan_index = new Vector<Integer>();
-		for(int i = 0; i < rpd_plans.size(); i++)
+		for(int i = 0; i < mandibular_rpd_plans.size(); i++)
 			plan_index.addElement(i);
 		plan_choice = new JComboBox<Integer>(plan_index);
 		rpd_plan_panel.add(plan_choice, BorderLayout.NORTH);
@@ -748,7 +751,7 @@ public class LabelTool {
 			public void actionPerformed(ActionEvent arg0) {
 				 if(plan_choice.getSelectedItem() != null) {
 					 int plan_index = (Integer)(plan_choice.getSelectedItem());
-					 RPDPlan rpd_plan = rpd_plans.get(plan_index);
+					 RPDPlan rpd_plan = mandibular_rpd_plans.get(plan_index);
 					 current_rpd_plan = rpd_plan;
 					 JTree new_rpd_plan_tree = buildRPDPlanTree(rpd_plan, plan_index);
 					 if(new_rpd_plan_tree != null) {
