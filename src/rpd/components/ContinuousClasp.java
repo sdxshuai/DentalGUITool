@@ -52,7 +52,7 @@ public class ContinuousClasp extends Clasp {
         this.mesial_rest = new OcclusalRest(mesial_tooth, Position.Mesial);
     }
 
-    public ContinuousClasp(ArrayList<Tooth> tooth_pos, ClaspMaterial buccal_material, ClaspMaterial mesial_material) {
+    public ContinuousClasp(ArrayList<Tooth> tooth_pos, ClaspMaterial buccal_material, ClaspMaterial lingual_material) {
 
         super(tooth_pos);
         Collections.sort(tooth_pos);
@@ -61,8 +61,8 @@ public class ContinuousClasp extends Clasp {
 
         this.buccal_distal_arm = new ClaspArm(distal_tooth, Position.Mesial, Position.Buccal, buccal_material);
         this.buccal_mesial_arm = new ClaspArm(mesial_tooth, Position.Distal, Position.Buccal, buccal_material);
-        this.lingual_distal_arm = new ClaspArm(distal_tooth, Position.Mesial, Position.Lingual, mesial_material);
-        this.lingual_mesial_arm = new ClaspArm(mesial_tooth, Position.Distal, Position.Lingual, mesial_material);
+        this.lingual_distal_arm = new ClaspArm(distal_tooth, Position.Mesial, Position.Lingual, lingual_material);
+        this.lingual_mesial_arm = new ClaspArm(mesial_tooth, Position.Distal, Position.Lingual, lingual_material);
 
         this.distal_rest = new OcclusalRest(distal_tooth, Position.Distal);
         this.mesial_rest = new OcclusalRest(mesial_tooth, Position.Mesial);

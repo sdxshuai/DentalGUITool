@@ -14,30 +14,30 @@ public class HalfHalfClasp extends Clasp {
     private OcclusalRest distal_rest = null;
     private OcclusalRest mesial_rest = null;
 
-    public HalfHalfClasp(Tooth tooth_pos, Position tip_direction, ClaspMaterial buccal_material,
+    public HalfHalfClasp(Tooth tooth_pos, ClaspMaterial buccal_material,
                      ClaspMaterial lingual_material) {
 
         super(tooth_pos);
-        this.buccal_arm = new ClaspArm(tooth_pos, tip_direction, Position.Buccal, buccal_material);
-        this.lingual_arm = new ClaspArm(tooth_pos, tip_direction, Position.Lingual, lingual_material);
+        this.buccal_arm = new ClaspArm(tooth_pos, Position.Mesial, Position.Buccal, buccal_material);
+        this.lingual_arm = new ClaspArm(tooth_pos, Position.Distal, Position.Lingual, lingual_material);
         this.distal_rest = new OcclusalRest(tooth_pos, Position.Distal);
         this.mesial_rest = new OcclusalRest(tooth_pos, Position.Mesial);
     }
 
-    public HalfHalfClasp(Tooth tooth_pos, Position tip_direction, ClaspMaterial material) {
+    public HalfHalfClasp(Tooth tooth_pos,  ClaspMaterial material) {
 
         super(tooth_pos);
-        this.buccal_arm = new ClaspArm(tooth_pos, tip_direction, Position.Buccal, material);
-        this.lingual_arm = new ClaspArm(tooth_pos, tip_direction, Position.Lingual, material);
+        this.buccal_arm = new ClaspArm(tooth_pos, Position.Mesial, Position.Buccal, material);
+        this.lingual_arm = new ClaspArm(tooth_pos, Position.Distal, Position.Lingual, material);
         this.distal_rest = new OcclusalRest(tooth_pos, Position.Distal);
         this.mesial_rest = new OcclusalRest(tooth_pos, Position.Mesial);
     }
 
-    public HalfHalfClasp(Tooth tooth_pos, Position tip_direction) {
+    public HalfHalfClasp(Tooth tooth_pos) {
 
         super(tooth_pos);
-        this.buccal_arm = new ClaspArm(tooth_pos, tip_direction, Position.Buccal, ClaspMaterial.Cast);
-        this.lingual_arm = new ClaspArm(tooth_pos, tip_direction, Position.Lingual, ClaspMaterial.Cast);
+        this.buccal_arm = new ClaspArm(tooth_pos, Position.Mesial, Position.Buccal, ClaspMaterial.Cast);
+        this.lingual_arm = new ClaspArm(tooth_pos, Position.Distal, Position.Lingual, ClaspMaterial.Cast);
         this.distal_rest = new OcclusalRest(tooth_pos, Position.Distal);
         this.mesial_rest = new OcclusalRest(tooth_pos, Position.Mesial);
     }

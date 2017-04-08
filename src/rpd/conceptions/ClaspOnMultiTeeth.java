@@ -3,10 +3,9 @@ package rpd.conceptions;
 /**
  * Created by sdxshuai on 2017/3/5.
  */
-public enum MultiToothClasp {
+public enum ClaspOnMultiTeeth {
 
-    CombinedClasp,
     EmbrasureClasp,
+    CombinedClasp,
     ContinuousClasp,
-    MultipleClasp,
 }

@@ -13,19 +13,17 @@ public class Tooth implements Comparable<Tooth> {
 	
 	private boolean mesial_tight_bite = false;
 	private boolean distal_tight_bite = false;
-	
 	private boolean mesial_tiling = false;
 	private boolean distal_tiling = false;
-	
 	private boolean distal_buccal_undercut = false;
 	private boolean distal_lingual_undercut = false;
 	private boolean mesial_buccal_undercut = false;
 	private boolean mesial_lingual_undercut = false;
-	
 	private boolean bone_undercut = false;
 	private boolean buccal_surface_slope = false;
 	private boolean lingual_surface_slope = false;
 	private boolean cingulum = false;
+	private boolean torus = false;
 
 	private ToothMobility mobility = ToothMobility.No;
 	private GingivalRecession gingival_recession = GingivalRecession.No;
@@ -35,9 +33,10 @@ public class Tooth implements Comparable<Tooth> {
 	private TeethRelatedImaging teeth_related_imaging = TeethRelatedImaging.NO;
 	private ClassificationOfSurveyLineOnBuccalSurface classification_of_survey_line_on_buccal_surface
 			= ClassificationOfSurveyLineOnBuccalSurface.NO;
+	private SpaceBelowGingivalMargins space_below_gingival_margins = SpaceBelowGingivalMargins.No;
 
 	//	private float gingival_recession = 0;
-	private float space_below_gingival_margins = 0;
+//	private float space_below_gingival_margins = 0;
 
 	public boolean getBuccalSurfaceSlope() {
 		return buccal_surface_slope;
@@ -63,6 +62,13 @@ public class Tooth implements Comparable<Tooth> {
 		this.cingulum = cingulum;
 	}
 
+	public boolean isTorus() {
+		return torus;
+	}
+
+	public void setTorus(boolean torus) {
+		this.torus = torus;
+	}
 
 	public FurcationInvolvement getFurcationInvolvement() {
 		return furcation_involvement;
@@ -90,11 +96,11 @@ public class Tooth implements Comparable<Tooth> {
 
 
 
-	public float getSpaceBelowGingivalMargins() {
+	public SpaceBelowGingivalMargins getSpaceBelowGingivalMargins() {
 		return space_below_gingival_margins;
 	}
 
-	public void setSpaceBelowGingivalMargins(float space_below_gingival_margins) {
+	public void setSpaceBelowGingivalMargins(SpaceBelowGingivalMargins space_below_gingival_margins) {
 		this.space_below_gingival_margins = space_below_gingival_margins;
 	}
 

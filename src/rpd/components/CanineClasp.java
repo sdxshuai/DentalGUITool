@@ -23,7 +23,7 @@ public class CanineClasp extends Clasp {
     public CanineClasp(Tooth tooth_pos) {
 
         super(tooth_pos);
-        this.arm = new ClaspArm(tooth_pos, Position.Distal, Position.Buccal, ClaspMaterial.Cast);
+        this.arm = new ClaspArm(tooth_pos, Position.Distal, Position.Buccal, ClaspMaterial.WW);
         this.rest = new IncisalRest(tooth_pos, Position.Mesial);
     }
 
