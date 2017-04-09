@@ -11,7 +11,25 @@ public class AkerClasp extends Clasp {
 	private ClaspArm buccal_arm = null;
 	private ClaspArm lingual_arm = null;
 	private OcclusalRest occlusal_rest = null;
-	
+	private boolean enable_buccal = true;
+	private boolean enable_lingual = true;
+
+	public boolean isEnableBuccal() {
+		return enable_buccal;
+	}
+
+	public void setEnableBuccal(boolean enable_buccal) {
+		this.enable_buccal = enable_buccal;
+	}
+
+	public boolean isEnableLingual() {
+		return enable_lingual;
+	}
+
+	public void setEnableLingual(boolean enable_lingual) {
+		this.enable_lingual = enable_lingual;
+	}
+
 	public AkerClasp(Tooth tooth_pos, Position tip_direction, ClaspMaterial buccal_material,
 					 ClaspMaterial lingual_material) {
 

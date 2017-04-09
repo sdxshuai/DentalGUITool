@@ -65,14 +65,6 @@ public class RotationAxis {
 				return new OcclusalRest(mouth.getTooth(zone, 4), Position.Mesial);
 			else if(!mouth.getTooth(zone, 3).isMissing())
 				return new LingualRest(mouth.getTooth(zone, 3));
-			else if(!mouth.getTooth(zone, 2).isMissing())
-				return new Plating(mouth.getTooth(zone, 2));
-			else if(!mouth.getTooth(zone, 1).isMissing())
-				return new Plating(mouth.getTooth(zone, 1));
-			else if(!mouth.getTooth(oppisite_zone, 1).isMissing())
-				return new Plating(mouth.getTooth(oppisite_zone, 1));
-			else if(!mouth.getTooth(oppisite_zone, 2).isMissing())
-				return new Plating(mouth.getTooth(oppisite_zone, 2));
 			else if(!mouth.getTooth(oppisite_zone, 3).isMissing())
 				return new LingualRest(mouth.getTooth(oppisite_zone, 3));
 			else if(!mouth.getTooth(oppisite_zone, 4).isMissing())

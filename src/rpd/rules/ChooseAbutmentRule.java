@@ -13,9 +13,7 @@ import rpd.components.RPAAssembly;
 import rpd.components.RPIAssembly;
 import rpd.components.RingClaspAssembly;
 import rpd.components.WWClaspAssembly;
-import rpd.conceptions.EdentulousType;
-import rpd.conceptions.Position;
-import rpd.conceptions.ToothType;
+import rpd.conceptions.*;
 import rpd.oral.EdentulousSpace;
 import rpd.oral.Mandibular;
 import rpd.oral.Mouth;
@@ -179,19 +177,14 @@ public class ChooseAbutmentRule {
         return maxSuc;
     }
 
-    public boolean isDistanceGreaterThanThres(RPDPlan plan, List<EdentulousSpace> edentulousSpaceList) {
+    public boolean isDistanceGreaterThanThres(RPDPlan plan) throws RuleException {
+
         int distance = 0;
-        int cur_distance = 0;
         boolean flag = false;
         //true = 所有基牙距离缺失区超过3个牙位
         for (Tooth tooth:plan.getAbutmentTeeth()) {
-            distance = 0;
-            for (EdentulousSpace edentulous_space : edentulousSpaceList) {
-                cur_distance = getDistanceBetweenAbutmentEdentulous(tooth, edentulous_space);
-                if (cur_distance < distance || distance == 0) {
-                    distance = cur_distance;
-                }
-            }
+            Map<String,Object> info = plan.getNearestEdentulous(tooth);
+            distance = (Integer)info.get("distance");
             if (distance >= 4) {
                 flag = true;
                 break;
@@ -210,6 +203,52 @@ public class ChooseAbutmentRule {
             }
         }
         return flag;
+    }
+
+    public boolean isExtremeBadAbutment(Tooth tooth) {
+        if (tooth.getMobility() == ToothMobility.III) {
+            return true;
+        }
+        if (tooth.getFurcationInvolvement() == FurcationInvolvement.V
+                || tooth.getFurcationInvolvement() == FurcationInvolvement.IV) {
+            return true;
+        }
+        if (tooth.getAlveolarAbsorption() == AlveolarAbsorption.III) {
+            return true;
+        }
+        return false;
+    }
+
+    public boolean isPlanWithExtremeBadAbutment(RPDPlan plan) {
+        boolean flag = false;
+        for (Tooth tooth:plan.getAbutmentTeeth()){
+            if (isExtremeBadAbutment(tooth)) {
+                flag = true;
+                break;
+            }
+        }
+        return flag;
+    }
+
+    public double scorePlan(RPDPlan plan) throws RuleException {
+        double canine_weight = 0.7;
+        double premolar_weight = 0.9;
+        double distomolar_weight = 1.0;
+        double score = 0.0;
+        for (Tooth tooth:plan.getAbutmentTeeth()){
+            Map<String, Object> info = plan.getNearestEdentulous(tooth);
+            int distance = (Integer)info.get("distance");
+            if (tooth.getToothType() == ToothType.Canine) {
+                score += distance*canine_weight;
+            }
+            else if (tooth.getToothType() == ToothType.Premolar) {
+                score += distance*premolar_weight;
+            }
+            else {
+                score += distance;
+            }
+        }
+        return score;
     }
 
     public static void initRules(Mouth mouth_obj) {
@@ -258,7 +297,30 @@ public class ChooseAbutmentRule {
                         res.add(new_plan);
                     }
                 }
+                return res;
+            }
+        });
+        choose_abutment_rules.add(new ChooseAbutmentRule() {
 
+            public String getExplaination() {
+                return "基牙情况极差不能做基牙";
+            }
+
+            public String toString() {
+                return this.getExplaination();
+            }
+
+            public int getRuleNum() {
+                return 2;
+            }
+
+            public List<RPDPlan> apply(List<RPDPlan> rpd_plans) throws RuleException {
+                List<RPDPlan> res = new ArrayList<>();
+                for (RPDPlan plan:rpd_plans) {
+                    if (!isPlanWithExtremeBadAbutment(plan)) {
+                        res.add(plan);
+                    }
+                }
                 return res;
             }
         });
@@ -279,7 +341,7 @@ public class ChooseAbutmentRule {
 
             public List<RPDPlan> apply(List<RPDPlan> rpd_plans) throws RuleException {
                 List<RPDPlan> res = new ArrayList<>();
-                if (isOneSideAllMissing(mouth_obj, rpd_plans.get(0).getPosition())) {
+                if (isOneSideAllMissing(mouth, rpd_plans.get(0).getPosition())) {
                     res.addAll(rpd_plans);
                 }
                 else {
@@ -289,7 +351,6 @@ public class ChooseAbutmentRule {
                         }
                     }
                 }
-
                 return res;
             }
         });
@@ -311,7 +372,7 @@ public class ChooseAbutmentRule {
             public List<RPDPlan> apply(List<RPDPlan> rpd_plans) throws RuleException {
                 List<RPDPlan> res = new ArrayList<>();
                 for (RPDPlan plan:rpd_plans) {
-                    if (!isDistanceGreaterThanThres(plan, plan.getEdentulousSpaces())) {
+                    if (!isDistanceGreaterThanThres(plan)) {
                         res.add(plan);
                     }
                 }
@@ -338,6 +399,62 @@ public class ChooseAbutmentRule {
                 for (RPDPlan plan:rpd_plans) {
                     if (getMaxSuccessiveAbutmentNum(plan) <= 2) {
                         res.add(plan);
+                    }
+                }
+                return res;
+            }
+        });
+        choose_abutment_rules.add(new ChooseAbutmentRule() {
+
+            public String getExplaination() {
+                return "排序剪枝，每种数量的基牙选择3种";
+            }
+
+            public String toString() {
+                return this.getExplaination();
+            }
+
+            public int getRuleNum() {
+                return 2;
+            }
+
+            public List<RPDPlan> apply(List<RPDPlan> rpd_plans) throws RuleException {
+                List<RPDPlan> res = new ArrayList<>();
+                Map<RPDPlan, Double> score_map = new HashMap<RPDPlan, Double>();
+                for (RPDPlan plan:rpd_plans) {
+                    double score = scorePlan(plan);
+                    score_map.put(plan, score);
+                }
+                List<Map.Entry<RPDPlan, Double>> list = new ArrayList<Map.Entry<RPDPlan, Double>>(score_map.entrySet());
+                // 通过比较器实现比较排序
+                Collections.sort(list, new Comparator<Map.Entry<RPDPlan, Double>>() {
+                    public int compare(Map.Entry<RPDPlan, Double> mapping1, Map.Entry<RPDPlan, Double> mapping2) {
+                        return mapping1.getValue().compareTo(mapping2.getValue());
+                    }
+                });
+
+                int total_count = 5;
+                int count_2 = 0;
+                int count_3 = 0;
+                int count_4 = 0;
+                for (Map.Entry<RPDPlan, Double> cur_map:list) {
+                    if (cur_map.getKey().getAbutmentTeeth().size() == 2) {
+                        if (count_2 <= total_count) {
+                            res.add(cur_map.getKey());
+                            count_2++;
+                        }
+                    }
+                    if (cur_map.getKey().getAbutmentTeeth().size() == 3) {
+                        if (count_3 <= total_count) {
+                            res.add(cur_map.getKey());
+                            count_3++;
+                        }
+                    }
+                    if (cur_map.getKey().getAbutmentTeeth().size() == 4) {
+                        if (count_4 <= total_count) {
+                            res.add(cur_map.getKey());
+                            count_4++;
+                        }
                     }
                 }
                 return res;

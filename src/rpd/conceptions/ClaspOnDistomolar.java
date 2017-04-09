@@ -1,14 +1,12 @@
-package rpd.components;
+package rpd.conceptions;
 
 /**
  * Created by sdxshuai on 2017/4/8.
  */
 public enum ClaspOnDistomolar {
 
-    RPAClasp,
     CombinationClasp,
-    BackActionClasp,
-    ReverseBackActionClasp,
+    RPAClasp,
     RingClasp,
     WroughtWireClasp,
     AkerClasp,

@@ -25,7 +25,13 @@ public class CombinationClasp extends Clasp {
             this.occlusal_rest = new OcclusalRest(tooth_pos, Position.Distal);
         }
     }
+    public CombinationClasp(Tooth tooth_pos) {
 
+        super(tooth_pos);
+        this.buccal_arm = new ClaspArm(tooth_pos, Position.Mesial, Position.Buccal, ClaspMaterial.WW);
+        this.lingual_arm = new ClaspArm(tooth_pos, Position.Mesial, Position.Lingual, ClaspMaterial.Cast);
+        this.occlusal_rest = new OcclusalRest(tooth_pos, Position.Distal);
+    }
 
     @Override
     public void addToPlan(RPDPlan rpd_plan) {

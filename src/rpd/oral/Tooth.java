@@ -22,7 +22,16 @@ public class Tooth implements Comparable<Tooth> {
 	private FurcationInvolvement furcation_involvement = FurcationInvolvement.NO;
 	private AlveolarAbsorption alveolar_absorption = AlveolarAbsorption.No;
 	private ClassificationOfSurveyLineOnBuccalSurface classification_of_survey_line_on_buccal_surface
-			= ClassificationOfSurveyLineOnBuccalSurface.NO;
+			= ClassificationOfSurveyLineOnBuccalSurface.UnknownDegree;
+	private rpd.conceptions.ToothPosition tooth_position = rpd.conceptions.ToothPosition.No;
+
+	public ToothPosition getToothPosition() {
+		return tooth_position;
+	}
+
+	public void setToothPosition(ToothPosition tooth_position) {
+		this.tooth_position = tooth_position;
+	}
 
 	public AlveolarAbsorption getAlveolarAbsorption() {
 		return alveolar_absorption;

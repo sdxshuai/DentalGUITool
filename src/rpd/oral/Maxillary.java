@@ -405,6 +405,13 @@ public class Maxillary {
 				}
 			}
 		}
+		DatatypeProperty tooth_position_dp = dental_ont.getDatatypeProperty(OntFunc.prefix + "tooth_position");
+		RDFNode tooth_position_value = tooth_ind.getPropertyValue(tooth_position_dp);
+		if(tooth_position_value != null) {
+			int tooth_position_value_int = tooth_position_value.asLiteral().getInt();
+			ToothPosition[] tooth_position_values = ToothPosition.values();
+			tooth_obj.setToothPosition(tooth_position_values[tooth_position_value_int]);
+		}
 	}
 }
 

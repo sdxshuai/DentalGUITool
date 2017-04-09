@@ -1,6 +1,7 @@
 package rpd.components;
 
 import rpd.RPDPlan;
+import rpd.conceptions.ClaspMaterial;
 import rpd.conceptions.Position;
 import rpd.oral.Tooth;
 
@@ -10,12 +11,20 @@ import rpd.oral.Tooth;
 public class RPAClasp extends Clasp {
 
     private OcclusalRest occlusal_rest = null;
+    private ClaspArm buccal_arm = null;
 
     public RPAClasp(Tooth tooth_pos) {
 
         super(tooth_pos);
         this.occlusal_rest = new OcclusalRest(tooth_pos, Position.Mesial);
+        this.buccal_arm = new ClaspArm(tooth_pos, Position.Distal, Position.Buccal, ClaspMaterial.Cast);
+    }
 
+    public RPAClasp(Tooth tooth_pos, ClaspMaterial material) {
+
+        super(tooth_pos);
+        this.occlusal_rest = new OcclusalRest(tooth_pos, Position.Mesial);
+        this.buccal_arm = new ClaspArm(tooth_pos, Position.Distal, Position.Buccal, material);
     }
 
 

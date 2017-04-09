@@ -53,7 +53,7 @@ public class SearchRPDPlan {
         EdentulousTypeRule.initRules();
         ChooseAbutmentRule.initRules(mouth);
         ClaspRule.initRules(mouth);
-        RestRule.initRules(mouth);
+        IndirectRetainerRule.initRules(mouth);
 
         List<RPDPlan> res = new ArrayList<RPDPlan>();
         RPDPlan empty_plan = new RPDPlan(mouth, Position.Mandibular);
@@ -74,17 +74,28 @@ public class SearchRPDPlan {
             clasp_plans.addAll(plans);
         }
 
-        List<RPDPlan> rest_plans = new ArrayList<RPDPlan>();
-        rest_plans.addAll(clasp_plans);
-        for(RestRule rule: RestRule.rest_rules) {
-            List<RPDPlan> plans = rule.apply(rest_plans);
-            rest_plans.clear();
-            rest_plans.addAll(plans);
-        }
+        List<RPDPlan> indirect_retainer_plans = new ArrayList<RPDPlan>();
+		List<RPDPlan> indirect_retainer_plans_buffer = new ArrayList<RPDPlan>();
+		indirect_retainer_plans.addAll(clasp_plans);
+		for(EdentulousSpace edentulous_space : mandibular.getEdentulousSpaces()) {
+			for(RPDPlan old_plan : indirect_retainer_plans) {
+				boolean plan_changed = false;
+				for(IndirectRetainerRule rule: IndirectRetainerRule.indirect_retainer_rules) {
+					RPDPlan plan = rule.apply(edentulous_space, old_plan);
+					if(plan != null) {
+						indirect_retainer_plans_buffer.add(plan);
+						plan_changed = true;
+					}
+				}
+				if(!plan_changed)
+					indirect_retainer_plans_buffer.add(old_plan);
+			}
+			indirect_retainer_plans.clear();
+			indirect_retainer_plans.addAll(indirect_retainer_plans_buffer);
+			indirect_retainer_plans_buffer.clear();
+		}
 
-
-        res.addAll(abutment_teeth_plans);
-
+        res.addAll(indirect_retainer_plans);
         if(res.size() == 1) {
             RPDPlan plan = res.get(0);
             if(plan.isEmptyPlan())

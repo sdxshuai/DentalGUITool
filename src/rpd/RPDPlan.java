@@ -147,6 +147,95 @@ public class RPDPlan {
 		}
 
 	}
+
+	private int getDistanceBetweenToothAndEdentulous(Tooth tooth, EdentulousSpace edentulous_space) {
+        //return 牙位与缺失区域之间牙的个数
+        int res = 0;
+        int left_dis = 20;
+        int right_dis = 20;
+        Tooth left_tooth = edentulous_space.getLeftNeighbor();
+        if (left_tooth != null) {
+            left_dis = tooth.getToothDistance(left_tooth);
+        }
+        Tooth right_tooth = edentulous_space.getRightNeighbor();
+        if (right_tooth != null) {
+            right_dis = tooth.getToothDistance(right_tooth);
+        }
+
+        res = left_dis > right_dis ? right_dis : left_dis;
+
+        return res;
+    }
+
+    //return 牙齿相对于缺失区的位置
+    public Position getDirectionToothToEdentulous(Tooth tooth, EdentulousSpace edentulousSpace) {
+		if (tooth.getZone() == 1 || tooth.getZone() == 4) {
+			Tooth left_tooth = edentulousSpace.getLeftNeighbor();
+			if (left_tooth != null && left_tooth.getZone() == tooth.getZone()) {
+				if (left_tooth.getNum() <= tooth.getNum()) {
+					return Position.Distal;
+				}
+				else {
+					return Position.Mesial;
+				}
+			}
+			else if (left_tooth != null && left_tooth.getZone() != tooth.getZone()) {
+				return Position.Distal;
+			}
+			else if (left_tooth == null) {
+				return Position.Mesial;
+			}
+			else {
+				System.out.println("Error: wrong left tooth!");
+				return null;
+			}
+		}
+		else if (tooth.getZone() == 2 || tooth.getZone() == 3) {
+			Tooth right_tooth = edentulousSpace.getRightNeighbor();
+			if (right_tooth != null && right_tooth.getZone() == tooth.getZone()){
+				if (right_tooth.getNum() <= tooth.getNum()) {
+					return Position.Distal;
+				}
+				else {
+					return Position.Mesial;
+				}
+			}
+			else if (right_tooth != null && right_tooth.getZone() != tooth.getZone()) {
+				return Position.Distal;
+			}
+			else if (right_tooth == null) {
+				return Position.Mesial;
+			}
+			else {
+				System.out.println("Error: wrong right tooth!");
+				return null;
+			}
+		}
+		else {
+			System.out.println("Error: Tooth has no proper zone!");
+			return null;
+		}
+
+	}
+
+    public Map<String, Object> getNearestEdentulous(Tooth tooth) throws RuleException {
+		Map<String, Object> res = new HashMap<String, Object>();
+		Position res_direction = null; //间隔牙数
+		int res_distance = 20;
+		EdentulousSpace res_edentulousSpace = null;
+		for (EdentulousSpace edentulousSpace:this.getEdentulousSpaces()) {
+			int cur_distance = getDistanceBetweenToothAndEdentulous(tooth,edentulousSpace);
+			if (cur_distance < res_distance) {
+				res_distance = cur_distance;
+				res_edentulousSpace = edentulousSpace;
+			}
+		}
+		res_direction = getDirectionToothToEdentulous(tooth, res_edentulousSpace);
+		res.put("direction", res_direction);
+		res.put("distance", res_distance);
+		res.put("edentulous", res_edentulousSpace);
+		return res;
+	}
 	
 	public String toString() {
 		

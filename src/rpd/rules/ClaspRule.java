@@ -51,32 +51,261 @@ public class ClaspRule {
                 return 1;
             }
 
-            //遍历只有一个continuous_tooth的情况，生成with_multi_list
-            public void getPlansFromWithMultiList(ArrayList<ArrayList<Tooth>> continuous_tooth_list,
-                                                  ArrayList<Tooth> abutment_teeth,
-                                                  List<RPDPlan> plans) {
-
-                for (ArrayList<Tooth> continuous_tooth:continuous_tooth_list) {
-                    ArrayList<ArrayList<Tooth>> with_multi_list = new ArrayList<ArrayList<Tooth>>();;
-                    Set<Tooth> differ_set = new HashSet<>();
-                    differ_set.addAll(abutment_teeth);
-                    differ_set.removeAll(continuous_tooth);
-                    with_multi_list.add(continuous_tooth);
-                    for (Tooth differ_tooth:differ_set) {
-                        ArrayList<Tooth> current_list = new ArrayList<Tooth>();
-                        current_list.add(differ_tooth);
-                        with_multi_list.add(current_list);
+            public boolean isDislocate(Tooth tooth) {
+                boolean flag = true;
+                if (tooth.getNum() == 7) {
+                    return false;
+                }
+                int cur_zone = tooth.getZone();
+                int cur_num = tooth.getNum();
+                for (int num = cur_num+1; num <= 8; num++) {
+                    if (mouth.getTooth(cur_zone, num).isMissing() != true) {
+                        flag = false;
+                        break;
                     }
-                    getPlans(with_multi_list, plans);
+                }
+                return flag;
+            }
+
+            public boolean isIsolate(Tooth tooth) {
+                int cur_num = tooth.getNum();
+                int cur_zone = tooth.getZone();
+                if (mouth.getTooth(cur_zone, cur_num+1).isMissing() == true
+                        && mouth.getTooth(cur_zone, cur_num-1).isMissing() == true) {
+                    return true;
+                }
+                else {
+                    return false;
                 }
             }
 
-            public void getPlans(ArrayList<ArrayList<Tooth>> with_multi_list, List<RPDPlan> plans) {
-
+            public boolean isBadPeriphery(Tooth tooth) {
+                if (tooth.getMobility() != ToothMobility.No) {
+                    return true;
+                }
+                if (tooth.getFurcationInvolvement() != FurcationInvolvement.NO) {
+                    return true;
+                }
+                if (tooth.getAlveolarAbsorption() != AlveolarAbsorption.No) {
+                    return true;
+                }
+                return false;
             }
 
-            public void getPlans(List<Tooth> no_multi_list, List<RPDPlan> plans) {
+            public boolean isMesialInclination(Tooth tooth) {
+                if (tooth.getClassificationOfSurveyLineOnBuccalSurface() == ClassificationOfSurveyLineOnBuccalSurface.O
+                        || tooth.getToothPosition() == ToothPosition.Mesial) {
+                    return true;
+                }
+                else {
+                    return false;
+                }
+            }
 
+            public boolean isBothSideMissing(ArrayList<Tooth> teeth) {
+                Collections.sort(teeth);
+                Tooth tooth_mesial = teeth.get(0);
+                Tooth tooth_distal = teeth.get(1);
+
+                if (tooth_distal.getNum() == 7 || tooth_mesial.getNum() == 1) {
+                    return true;
+                }
+                if (tooth_distal.getZone() != tooth_mesial.getZone()) {
+                    System.out.println("Error: wrong successive position for clasp");
+                    return false;
+                }
+
+                boolean flag_distal_missing = false;
+                boolean flag_mesial_missing = false;
+                int cur_zone = tooth_distal.getZone();
+                int distal_num = tooth_distal.getNum();
+                int mesial_num = tooth_mesial.getNum();
+                for (int num = distal_num; num <= 8; num++) {
+                    if (mouth.getTooth(cur_zone, num).isMissing()) {
+                        flag_distal_missing = true;
+                        break;
+                    }
+                }
+                for (int num = mesial_num; num >= 1; num--) {
+                    if (mouth.getTooth(cur_zone, num).isMissing()) {
+                        flag_mesial_missing = true;
+                        break;
+                    }
+                }
+                if (flag_distal_missing && flag_mesial_missing){
+                    return true;
+                }
+                else {
+                    return false;
+                }
+            }
+
+            public Clasp chooseClaspOnMultiTeeth(ArrayList<Tooth> teeth, RPDPlan plan) throws RuleException {
+                if (teeth.size() == 1) {
+                    return chooseClaspOnTooth(teeth.get(0), plan);
+                }
+                else if (teeth.size() == 2) {
+                    ClaspMaterial material = ClaspMaterial.Cast;
+                    for (Tooth tooth:teeth) {
+                        if (isBadPeriphery(tooth)) {
+                            material = ClaspMaterial.WW;
+                            break;
+                        }
+                    }
+
+                    if (!isBothSideMissing(teeth)) {
+                        Map<String,Object> info_0 = plan.getNearestEdentulous(teeth.get(0));
+                        Map<String,Object> info_1 = plan.getNearestEdentulous(teeth.get(1));
+                        int distance0 = (Integer)info_0.get("distance");
+                        int distance1 = (Integer)info_1.get("distance");
+                        if (distance0 >= 2 && distance1 >= 2) {
+                            if (material == ClaspMaterial.WW) {
+                                return new EmbrasureClasp(teeth);
+                            }
+                            else {
+                                return new CombinedClasp(teeth);
+                            }
+                        }
+                    }
+                    else {
+                        if (material == ClaspMaterial.WW) {
+                            return new ContinuousClasp(teeth, material);
+                        }
+                        else {
+                            return null;
+                        }
+                    }
+                }
+                else {
+                    System.out.println("Error: Wrong number of successive multi teeth while chooseClaspOnMultiTeeth");
+                    return null;
+                }
+                return null;
+            }
+
+            public Clasp chooseClaspOnTooth(Tooth tooth, RPDPlan plan) throws RuleException {
+                Clasp res = null;
+                if (tooth.getToothType() == ToothType.Canine) {
+                    res = chooseClaspOnCanine(tooth, plan);
+                }
+                else if (tooth.getToothType() == ToothType.Premolar) {
+                    res = chooseClaspOnPremolar(tooth, plan);
+                }
+                else if (tooth.getToothType() == ToothType.Molar) {
+                    res = chooseClaspOnDistomolar(tooth, plan);
+                }
+                else {
+                    System.out.println("Error: Wrong tooth type while chooseClaspOnTooth!");
+                }
+                return res;
+            }
+
+            public Clasp chooseClaspOnCanine(Tooth tooth, RPDPlan plan) throws RuleException {
+                ClaspMaterial material = ClaspMaterial.Cast;
+                if (isBadPeriphery(tooth)){
+                    material = ClaspMaterial.WW;
+                }
+
+                if (isDislocate(tooth) && tooth.getCrownRootRatio() == CrownRootRatio.SHORT) {
+                    return new BackActionClasp(tooth, material);
+                }
+                else if (tooth.isCingulum()) {
+                    return new CanineClasp(tooth, material);
+                }
+                else {
+                    Map<String, Object> info = plan.getNearestEdentulous(tooth);
+                    Position tip_direction = (Position)info.get("direction");
+                    return new CanineAkerClasp(tooth, tip_direction, material);
+                }
+            }
+
+            public Clasp chooseClaspOnPremolar(Tooth tooth, RPDPlan plan) throws RuleException{
+                ClaspMaterial material = ClaspMaterial.Cast;
+                if (isBadPeriphery(tooth)){
+                    material = ClaspMaterial.WW;
+                }
+
+                if (isDislocate(tooth)) {
+                    if (tooth.getCrownRootRatio() == CrownRootRatio.SHORT
+                            || tooth.getBuccalSurfaceSlope() == true
+                            || tooth.getLingualSurfaceSlope() == true) {
+                        return new BackActionClasp(tooth, material);
+                    }
+                    else if (isMesialInclination(tooth)) {
+                        return new CombinationClasp(tooth);
+                    }
+                    else {
+                        return new RPAClasp(tooth, material);
+                    }
+                }
+                else if (isIsolate(tooth)){
+                    return new HalfHalfClasp(tooth, material);
+                }
+                else {
+                    Map<String,Object> info = plan.getNearestEdentulous(tooth);
+                    Position tip_direction = (Position)info.get("direction");
+                    if (material == ClaspMaterial.WW) {
+                        return new WroughtWireClasp(tooth, tip_direction);
+                    }
+                    else {
+                        return new AkerClasp(tooth, tip_direction);
+                    }
+                }
+            }
+
+            public Clasp chooseClaspOnDistomolar(Tooth tooth, RPDPlan plan) throws RuleException {
+                ClaspMaterial material = ClaspMaterial.Cast;
+                if (isBadPeriphery(tooth)){
+                    material = ClaspMaterial.WW;
+                }
+
+                if (isDislocate(tooth)) {
+                    if (isMesialInclination(tooth)) {
+                        return new CombinationClasp(tooth);
+                    }
+                    else {
+                        return new RPAClasp(tooth, material);
+                    }
+                }
+                else if (isIsolate(tooth)){
+                    return new RingClasp(tooth, material);
+                }
+                else {
+                    Map<String,Object> info = plan.getNearestEdentulous(tooth);
+                    Position tip_direction = (Position)info.get("direction");
+                    if (material == ClaspMaterial.WW) {
+                        return new WroughtWireClasp(tooth, tip_direction);
+                    }
+                    else {
+                        return new AkerClasp(tooth, tip_direction);
+                    }
+                }
+            }
+
+            public void getPlans(ArrayList<ArrayList<Tooth>> with_multi_list, RPDPlan abutment_plan, List<RPDPlan> plans)
+                    throws RuleException{
+                RPDPlan new_plan = new RPDPlan(abutment_plan);
+                for (ArrayList<Tooth> teeth:with_multi_list) {
+                    Clasp clasp  = chooseClaspOnMultiTeeth(teeth, abutment_plan);
+                    if (clasp == null) {
+                        return;
+                    }
+                    new_plan.addComponent(clasp);
+                }
+                plans.add(new_plan);
+            }
+
+            public void getPlans(List<Tooth> no_multi_list, RPDPlan abutment_plan, List<RPDPlan> plans)
+                    throws RuleException {
+                RPDPlan new_plan = new RPDPlan(abutment_plan);
+                for (Tooth tooth:no_multi_list) {
+                    Clasp clasp  = chooseClaspOnTooth(tooth, abutment_plan);
+                    if (clasp == null) {
+                        return;
+                    }
+                    new_plan.addComponent(clasp);
+                }
+                plans.add(new_plan);
             }
 
             public List<RPDPlan> apply(List<RPDPlan> rpd_plans) throws RuleException {
@@ -86,47 +315,52 @@ public class ClaspRule {
                     abutment_teeth.addAll(plan.getAbutmentTeeth());
                     Collections.sort(abutment_teeth);
                     List<Tooth> no_multi_list = new ArrayList<>(abutment_teeth);
-                    ArrayList<ArrayList<Tooth>> continuous_tooth_list = new ArrayList<ArrayList<Tooth>>(); //连续牙位列表
-                    Set<Tooth> continuous_tooth_set = new HashSet<>(); //连续牙位位置集合
+                    getPlans(no_multi_list, plan, res);
 
+                    ArrayList<ArrayList<Tooth>> succ_tooth_list = new ArrayList<ArrayList<Tooth>>(); //连续牙位列表
+                    Set<Tooth> succ_tooth_set = new HashSet<>(); //连续牙位位置集合
+
+                    //找到可能的放置多牙卡环的位置,最长连续2个牙位
                     int last_num = 0;
                     Tooth last_tooth = null;
                     for (Tooth tooth:abutment_teeth) {
                         int tooth_num = Integer.parseInt(tooth.toString().substring(5));
                         if (tooth_num - last_num == 1 || last_num - tooth_num == 1) {
-                            ArrayList<Tooth> current_tooth = new ArrayList<Tooth>();
-                            current_tooth.add(last_tooth);
-                            current_tooth.add(tooth);
-                            continuous_tooth_list.add(current_tooth);
-                            continuous_tooth_set.addAll(current_tooth);
+                            ArrayList<Tooth> current_teeth = new ArrayList<Tooth>();
+                            current_teeth.add(last_tooth);
+                            current_teeth.add(tooth);
+                            succ_tooth_list.add(current_teeth);
+                            succ_tooth_set.addAll(current_teeth);
                         }
                         last_num = tooth_num;
                         last_tooth = tooth;
                     }
 
-
-                    if (continuous_tooth_set.size() == 4) {
-                        for (int i=1;i<=2;i++) {
-                            if (i == 1) {
-                                //只有一个连续牙位
-                                getPlansFromWithMultiList(continuous_tooth_list, abutment_teeth, res);
+                    //有两个多牙卡环的位置
+                    if (succ_tooth_set.size() != 0) {
+                        //只有一个位置放多牙卡环
+                        for (ArrayList<Tooth> succ_teeth:succ_tooth_list) {
+                            ArrayList<ArrayList<Tooth>> with_multi_list = new ArrayList<ArrayList<Tooth>>();
+                            with_multi_list.add(succ_teeth);
+                            Set<Tooth> differ_set = new HashSet<>();
+                            differ_set.addAll(abutment_teeth);
+                            differ_set.removeAll(succ_teeth);
+                            for (Tooth differ_tooth:differ_set) {
+                                ArrayList<Tooth> current_list = new ArrayList<Tooth>();
+                                current_list.add(differ_tooth);
+                                with_multi_list.add(current_list);
                             }
-                            else {
-                                //有两个连续牙位
-                                ArrayList<ArrayList<Tooth>> with_multi_list = new ArrayList<ArrayList<Tooth>>();
-                                with_multi_list.add(continuous_tooth_list.get(0));
-                                with_multi_list.add(continuous_tooth_list.get(continuous_tooth_list.size()-1));
-                                getPlans(with_multi_list, res);
-                            }
+                            getPlans(with_multi_list, plan, res);
                         }
-
-                    }
-                    else {
-                        getPlansFromWithMultiList(continuous_tooth_list, abutment_teeth, res);
                     }
 
-                    getPlans(no_multi_list, res);
-
+                    //两个位置都放多牙卡环
+                    if (succ_tooth_set.size() == 4) {
+                        ArrayList<ArrayList<Tooth>> with_multi_list = new ArrayList<ArrayList<Tooth>>();
+                        with_multi_list.add(succ_tooth_list.get(0));
+                        with_multi_list.add(succ_tooth_list.get(succ_tooth_list.size()-1));
+                        getPlans(with_multi_list, plan, res);
+                    }
                 }
                 return res;
             }
