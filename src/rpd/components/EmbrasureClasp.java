@@ -41,13 +41,25 @@ public class EmbrasureClasp extends Clasp {
         rpd_plan.addComponent(this);
     }
 
+    public boolean isIndirectRetainer() {
+    	if (this.distal_rest != null) {
+    	    return this.distal_rest.isIndirectRetainer();
+        }
+        else if (this.mesial_rest != null) {
+    	    return this.mesial_rest.isIndirectRetainer();
+        }
+        else {
+    	    System.out.println("No rest!");
+    	    return false;
+        }
+	}
 
     public String print() {
 
         StringBuilder s = new StringBuilder();
-        s.append(this.tooth_pos.toString() + ":");
+        s.append(super.toString());
         s.append("间隙（Embrasure）卡环，");
-
+        s.append("弯制材料");
         return s.toString();
     }
 

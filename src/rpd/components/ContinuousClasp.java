@@ -73,12 +73,49 @@ public class ContinuousClasp extends Clasp {
         rpd_plan.addComponent(this);
     }
 
+    public boolean isIndirectRetainer() {
+    	if (this.distal_rest != null) {
+    	    return this.distal_rest.isIndirectRetainer();
+        }
+        else if (this.mesial_rest != null) {
+    	    return this.mesial_rest.isIndirectRetainer();
+        }
+        else {
+    	    System.out.println("No rest!");
+    	    return false;
+        }
+	}
+
+	public ClaspMaterial getMaterial() {
+		if (this.buccal_distal_arm != null) {
+			return this.buccal_distal_arm.getClaspMaterial();
+		}
+		else if (this.buccal_mesial_arm != null) {
+			return this.buccal_mesial_arm.getClaspMaterial();
+		}
+		else if (this.lingual_distal_arm != null) {
+			return this.lingual_distal_arm.getClaspMaterial();
+		}
+		else if (this.lingual_mesial_arm != null) {
+			return this.lingual_mesial_arm.getClaspMaterial();
+		}
+		else {
+			System.out.println("There is no clasp arm!");
+			return null;
+		}
+	}
 
     public String print() {
 
         StringBuilder s = new StringBuilder();
-        s.append(this.tooth_pos.toString() + ":");
+        s.append(super.toString());
         s.append("连续（Continuous）卡环，");
+
+        if(this.getMaterial().equals(ClaspMaterial.WW))
+			s.append("弯制材料");
+		else if(this.getMaterial().equals(ClaspMaterial.Cast))
+			s.append("铸造材料");
+		else {}
 
         return s.toString();
     }

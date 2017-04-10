@@ -196,8 +196,6 @@ public class Tooth implements Comparable<Tooth> {
 		return res;
 	}
 	
-
-
 	@Override
 	public int compareTo(Tooth arg0) {
 		return this.toString().compareTo(arg0.toString());

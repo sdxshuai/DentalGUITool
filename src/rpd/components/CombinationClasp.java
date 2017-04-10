@@ -33,10 +33,13 @@ public class CombinationClasp extends Clasp {
         this.occlusal_rest = new OcclusalRest(tooth_pos, Position.Distal);
     }
 
-    @Override
     public void addToPlan(RPDPlan rpd_plan) {
         rpd_plan.addComponent(this);
     }
+
+    public boolean isIndirectRetainer() {
+		return this.occlusal_rest.isIndirectRetainer();
+	}
 
     public Position getTipDirection() {
 
@@ -57,6 +60,7 @@ public class CombinationClasp extends Clasp {
         StringBuilder s = new StringBuilder();
         s.append(this.tooth_pos.toString() + ":");
         s.append("结合（Combination）卡环，");
+        s.append("颊侧铸造材料，舌侧弯制材料，");
         if(this.getTipDirection().equals(Position.Mesial))
             s.append("卡环臂尖朝向近中");
         else if(this.getTipDirection().equals(Position.Distal))

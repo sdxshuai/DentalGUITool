@@ -231,21 +231,21 @@ public class ChooseAbutmentRule {
     }
 
     public double scorePlan(RPDPlan plan) throws RuleException {
-        double canine_weight = 0.7;
-        double premolar_weight = 0.9;
-        double distomolar_weight = 1.0;
+        double canine_weight = 2.5;
+        double premolar_weight = 0.2;
+        double distomolar_weight = 0.1;
         double score = 0.0;
         for (Tooth tooth:plan.getAbutmentTeeth()){
             Map<String, Object> info = plan.getNearestEdentulous(tooth);
             int distance = (Integer)info.get("distance");
             if (tooth.getToothType() == ToothType.Canine) {
-                score += distance*canine_weight;
+                score += distance + canine_weight;
             }
             else if (tooth.getToothType() == ToothType.Premolar) {
-                score += distance*premolar_weight;
+                score += distance + premolar_weight;
             }
             else {
-                score += distance;
+                score += distance + distomolar_weight;
             }
         }
         return score;
@@ -336,7 +336,7 @@ public class ChooseAbutmentRule {
             }
 
             public int getRuleNum() {
-                return 2;
+                return 3;
             }
 
             public List<RPDPlan> apply(List<RPDPlan> rpd_plans) throws RuleException {
@@ -366,7 +366,7 @@ public class ChooseAbutmentRule {
             }
 
             public int getRuleNum() {
-                return 2;
+                return 4;
             }
 
             public List<RPDPlan> apply(List<RPDPlan> rpd_plans) throws RuleException {
@@ -391,7 +391,7 @@ public class ChooseAbutmentRule {
             }
 
             public int getRuleNum() {
-                return 2;
+                return 5;
             }
 
             public List<RPDPlan> apply(List<RPDPlan> rpd_plans) throws RuleException {
@@ -415,7 +415,7 @@ public class ChooseAbutmentRule {
             }
 
             public int getRuleNum() {
-                return 2;
+                return 6;
             }
 
             public List<RPDPlan> apply(List<RPDPlan> rpd_plans) throws RuleException {
@@ -433,7 +433,7 @@ public class ChooseAbutmentRule {
                     }
                 });
 
-                int total_count = 5;
+                int total_count = 0;
                 int count_2 = 0;
                 int count_3 = 0;
                 int count_4 = 0;
@@ -457,27 +457,6 @@ public class ChooseAbutmentRule {
                         }
                     }
                 }
-                return res;
-            }
-        });
-
-        choose_abutment_rules.add(new ChooseAbutmentRule() {
-
-            public String getExplaination() {
-                return "占位符";
-            }
-
-            public String toString() {
-                return this.getExplaination();
-            }
-
-            public int getRuleNum() {
-                return 2;
-            }
-
-            public List<RPDPlan> apply(List<RPDPlan> rpd_plans) throws RuleException {
-                List<RPDPlan> res = new ArrayList<>();
-                res.addAll(rpd_plans);
                 return res;
             }
         });

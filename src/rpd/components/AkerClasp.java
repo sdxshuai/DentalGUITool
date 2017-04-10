@@ -70,10 +70,12 @@ public class AkerClasp extends Clasp {
 		}
 	}
 
-
-	@Override
 	public void addToPlan(RPDPlan rpd_plan) {
 		rpd_plan.addComponent(this);
+	}
+
+	public boolean isIndirectRetainer() {
+		return this.occlusal_rest.isIndirectRetainer();
 	}
 
 	public Position getTipDirection() {
@@ -89,17 +91,38 @@ public class AkerClasp extends Clasp {
 			return null;
 		}
 	}
+
+	public ClaspMaterial getMaterial() {
+		if (this.buccal_arm != null) {
+			return this.buccal_arm.getClaspMaterial();
+		}
+		else if (this.lingual_arm != null) {
+			return this.lingual_arm.getClaspMaterial();
+		}
+		else {
+			System.out.println("There is no clasp arm!");
+			return null;
+		}
+	}
 	
 	public String print() {
 
 		StringBuilder s = new StringBuilder();
 		s.append(this.tooth_pos.toString() + ":");
 		s.append("Aker卡环，");
+
+		if(this.getMaterial().equals(ClaspMaterial.WW))
+			s.append("弯制材料，");
+		else if(this.getMaterial().equals(ClaspMaterial.Cast))
+			s.append("铸造材料，");
+		else {}
+
 		if(this.getTipDirection().equals(Position.Mesial))
 			s.append("卡环臂尖朝向近中");
 		else if(this.getTipDirection().equals(Position.Distal))
 			s.append("卡环臂尖朝向远中");
 		else {}
+
 		return s.toString();
 	}
 	

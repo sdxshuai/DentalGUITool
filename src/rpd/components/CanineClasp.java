@@ -32,16 +32,44 @@ public class CanineClasp extends Clasp {
         return Position.Distal;
     }
 
+    public ClaspMaterial getMaterial() {
+		if (this.arm != null) {
+			return this.arm.getClaspMaterial();
+		}
+		else {
+			System.out.println("There is no clasp arm!");
+			return null;
+		}
+	}
+
+
     @Override
     public void addToPlan(RPDPlan rpd_plan) {
         rpd_plan.addComponent(this);
     }
+
+    public boolean isIndirectRetainer() {
+		return this.rest.isIndirectRetainer();
+	}
+
 
     public String print() {
 
         StringBuilder s = new StringBuilder();
         s.append(this.tooth_pos.toString() + ":");
         s.append("尖牙(Canine)卡环");
+
+        if(this.getMaterial().equals(ClaspMaterial.WW))
+			s.append("弯制材料，");
+		else if(this.getMaterial().equals(ClaspMaterial.Cast))
+			s.append("铸造材料，");
+		else {}
+
+		if(this.getTipDirection().equals(Position.Mesial))
+			s.append("卡环臂尖朝向近中");
+		else if(this.getTipDirection().equals(Position.Distal))
+			s.append("卡环臂尖朝向远中");
+		else {}
 
         return s.toString();
     }

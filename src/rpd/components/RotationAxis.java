@@ -98,17 +98,17 @@ public class RotationAxis {
 		int component_num = component.getToothPos().get(0).getNum();
 		
 		if(axis_left_num == axis_right_num)
-			if(component_num < axis_left_num)
+			if(component_num < axis_left_num && component_num <= 4)
 				return true;
 			else
 				return false;
 		else if(axis_left_num < axis_right_num)
-			if((component_zone == 2 || component_zone == 3) && component_num < axis_right_num)
+			if((component_zone == 2 || component_zone == 3) && component_num < axis_right_num && component_num <= 4)
 				return true;
 			else
 				return false;
 		else
-			if((component_zone == 1 || component_zone == 4) && component_num < axis_left_num)
+			if((component_zone == 1 || component_zone == 4) && component_num < axis_left_num && component_num <= 4)
 				return true;
 			else
 				return false;
@@ -123,12 +123,12 @@ public class RotationAxis {
 		int component_num = component.getToothPos().get(0).getNum();
 		
 		if(component_zone == 4 || component_zone == 1)
-			if(component_num > axis_left_num)
+			if(component_num > axis_left_num && component_num >= 4)
 				return true;
 			else
 				return false;
 		else
-			if(component_num > axis_right_num)
+			if(component_num > axis_right_num && component_num >= 4)
 				return true;
 			else
 				return false;

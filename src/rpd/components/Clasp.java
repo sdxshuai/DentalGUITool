@@ -43,8 +43,17 @@ public abstract class Clasp implements Component {
 	public boolean isPlating() {
 		return false;
 	}
-	
+
 	public boolean isIndirectRetainer() {
 		return false;
+	}
+
+	public String toString() {
+		StringBuilder s = new StringBuilder();
+		for (Tooth tooth:this.tooth_pos) {
+			s.append(tooth.toString());
+		}
+        s.append(":");
+		return s.toString();
 	}
 }

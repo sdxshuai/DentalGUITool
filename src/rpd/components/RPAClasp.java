@@ -33,16 +33,37 @@ public class RPAClasp extends Clasp {
         rpd_plan.addComponent(this);
     }
 
+    public boolean isIndirectRetainer() {
+		return this.occlusal_rest.isIndirectRetainer();
+	}
+
     public Position getTipDirection() {
 
         return Position.Distal;
     }
+
+    public ClaspMaterial getMaterial() {
+		if (this.buccal_arm != null) {
+			return this.buccal_arm.getClaspMaterial();
+		}
+		else {
+			System.out.println("There is no clasp arm!");
+			return null;
+		}
+	}
 
     public String print() {
 
         StringBuilder s = new StringBuilder();
         s.append(this.tooth_pos.toString() + ":");
         s.append("RPA卡环，");
+
+        if(this.getMaterial().equals(ClaspMaterial.WW))
+			s.append("弯制材料，");
+		else if(this.getMaterial().equals(ClaspMaterial.Cast))
+			s.append("铸造材料，");
+		else {}
+
         s.append("卡环臂尖朝向远中");
         return s.toString();
     }

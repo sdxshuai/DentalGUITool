@@ -45,10 +45,13 @@ public class WroughtWireClasp extends Clasp {
         }
     }
 
-    @Override
     public void addToPlan(RPDPlan rpd_plan) {
         rpd_plan.addComponent(this);
     }
+
+    public boolean isIndirectRetainer() {
+		return this.occlusal_rest.isIndirectRetainer();
+	}
 
     public Position getTipDirection() {
 
@@ -64,11 +67,13 @@ public class WroughtWireClasp extends Clasp {
         }
     }
 
+
     public String print() {
 
         StringBuilder s = new StringBuilder();
         s.append(this.tooth_pos.toString() + ":");
         s.append("弯制Aker（Wrought Wire Aker）卡环，");
+
         if(this.getTipDirection().equals(Position.Mesial))
             s.append("卡环臂尖朝向近中");
         else if(this.getTipDirection().equals(Position.Distal))
