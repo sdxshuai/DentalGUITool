@@ -5,7 +5,7 @@ package rpd.conceptions;
  */
 public enum ClaspOnMultiTeeth {
 
-    EmbrasureClasp,
-    CombinedClasp,
-    ContinuousClasp,
+	EmbrasureClasp,
+	CombinedClasp,
+	ContinuousClasp,
 }

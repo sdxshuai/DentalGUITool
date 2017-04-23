@@ -11,9 +11,9 @@ public class WWClasp extends Clasp implements Component {
 
 	//private Position tip_direction = null;
 	//private ClaspMaterial material = ClaspMaterial.WW;
-	
+
 	private ClaspArm buccal_arm = null;
-	
+
 	public WWClasp(Tooth tooth_pos, Position tip_direction) {
 		super(tooth_pos);
 		//this.tip_direction = tip_direction;
@@ -23,7 +23,7 @@ public class WWClasp extends Clasp implements Component {
 	/*public Position getTipdirection() {
 		return this.tip_direction;
 	}*/
-	
+
 	@Override
 	public void addToPlan(RPDPlan rpd_plan) {
 		rpd_plan.addComponent(this.buccal_arm);

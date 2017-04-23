@@ -6,9 +6,9 @@ public class Tooth implements Comparable<Tooth> {
 
 	private int zone;
 	private int num;
-	
+
 	private ToothType tooth_type = null;
-	
+
 	private boolean missing = false;
 	private boolean bone_undercut = false;
 	private boolean buccal_surface_slope = false;
@@ -132,31 +132,32 @@ public class Tooth implements Comparable<Tooth> {
 	public void setCrownRootRatio(CrownRootRatio crown_root_ratio) {
 		this.crown_root_ratio = crown_root_ratio;
 	}
-	
+
 	public Tooth(int zone, int num) {
-		
+
 		this.zone = zone;
 		this.num = num;
-		
-		if(num == 1 || num == 2)
+
+		if (num == 1 || num == 2)
 			this.tooth_type = ToothType.Incisor;
-		else if(num == 3)
+		else if (num == 3)
 			this.tooth_type = ToothType.Canine;
-		else if(num == 4 || num == 5)
+		else if (num == 4 || num == 5)
 			this.tooth_type = ToothType.Premolar;
-		else if(num == 6 || num == 7 || num == 8)
+		else if (num == 6 || num == 7 || num == 8)
 			this.tooth_type = ToothType.Molar;
-		else {}
+		else {
+		}
 	}
-	
+
 	public String toString() {
 		return "tooth" + zone + num;
 	}
-	
+
 	public int getZone() {
 		return this.zone;
 	}
-	
+
 	public int getNum() {
 		return this.num;
 	}
@@ -167,35 +168,29 @@ public class Tooth implements Comparable<Tooth> {
 		if (this.zone == 1 || this.zone == 2) {
 			if (tooth.getZone() != 1 && tooth.getZone() != 2) {
 				return -1;
-			}
-			else {
+			} else {
 				if (this.zone == tooth.getZone()) {
 					res = Math.abs(this.num - tooth.getNum());
-				}
-				else {
+				} else {
 					res = this.num + tooth.getNum() - 1;
 				}
 			}
-		}
-		else if (this.zone == 3 || this.zone == 4) {
+		} else if (this.zone == 3 || this.zone == 4) {
 			if (tooth.getZone() != 3 && tooth.getZone() != 4) {
 				return -1;
-			}
-			else {
+			} else {
 				if (this.zone == tooth.getZone()) {
 					res = Math.abs(this.num - tooth.getNum());
-				}
-				else {
+				} else {
 					res = this.num + tooth.getNum() - 1;
 				}
 			}
-		}
-		else {
+		} else {
 			return -2;
 		}
 		return res;
 	}
-	
+
 	@Override
 	public int compareTo(Tooth arg0) {
 		return this.toString().compareTo(arg0.toString());

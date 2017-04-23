@@ -83,7 +83,7 @@ public enum DentalProperty {
 	Undercut,
 	Upper_Lip_Fullness,
 	Vertical_Dimension,
-	
+
 	After,
 	Before,
 	Belong_To,
@@ -97,5 +97,5 @@ public enum DentalProperty {
 	Is_Part_Of_Tooth,
 	Left_First_Tooth_Is,
 	Right_First_Tooth_Is,
-	
+
 }

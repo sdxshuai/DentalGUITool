@@ -12,60 +12,61 @@ import rpd.rules.EdentulousTypeRule;
 public class EdentulousSpace {
 
 	private EdentulousType edentulous_type = EdentulousType.Undefined;
-	
+
 	private Tooth left_neighbor = null;
 	private Tooth right_neighbor = null;
-	
+
 	private boolean is_mandibular = false;
 	private boolean is_maxillary = false;
-	
+
 	public EdentulousSpace(Tooth left_neighbor, Tooth right_neighbor, Position mandibular_or_maxillary) throws RuleException {
-		
+
 		this.left_neighbor = left_neighbor;
 		this.right_neighbor = right_neighbor;
-		if(mandibular_or_maxillary.equals(Position.Mandibular))
+		if (mandibular_or_maxillary.equals(Position.Mandibular))
 			this.is_mandibular = true;
-		if(mandibular_or_maxillary.equals(Position.Maxillary))
+		if (mandibular_or_maxillary.equals(Position.Maxillary))
 			this.is_maxillary = true;
 		computeType();
 	}
-	
+
 	public boolean isMandibular() {
 		return this.is_mandibular;
 	}
-	
+
 	public boolean isMaxillary() {
 		return this.is_maxillary;
 	}
-	
+
 	public EdentulousType getEdentulousType() {
 		return this.edentulous_type;
 	}
-	
+
 	public Tooth getLeftNeighbor() {
 		return this.left_neighbor;
 	}
-	
+
 	public Tooth getRightNeighbor() {
 		return this.right_neighbor;
 	}
-	
+
 	private void computeType() throws RuleException {
-		
+
 		List<EdentulousType> types = new ArrayList<EdentulousType>();
-		if(EdentulousTypeRule.edentulous_type_rules == null)
+		if (EdentulousTypeRule.edentulous_type_rules == null)
 			EdentulousTypeRule.initRules();
-		for(EdentulousTypeRule edentulous_type_rule : EdentulousTypeRule.edentulous_type_rules) {
+		for (EdentulousTypeRule edentulous_type_rule : EdentulousTypeRule.edentulous_type_rules) {
 			EdentulousType res = edentulous_type_rule.apply(this);
-			if(res != null)
+			if (res != null)
 				types.add(res);
 		}
-		
-		if(types.size() > 1)
+
+		if (types.size() > 1)
 			throw new RuleException("more than 1 rules applied");
-		else if(types.size() == 1)
+		else if (types.size() == 1)
 			this.edentulous_type = types.get(0);
-		else {}
+		else {
+		}
 	}
 	
 	/*private void computeTypeOld() {

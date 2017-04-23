@@ -9,7 +9,7 @@ import rpd.oral.Tooth;
 public class CircumferentialClasp extends Clasp implements Component {
 
 	//private Position tip_direction = null;
-	
+
 	private ClaspArm buccal_arm = null;
 	private ClaspArm lingual_arm = null;
 	
@@ -17,7 +17,7 @@ public class CircumferentialClasp extends Clasp implements Component {
 		super(tooth_pos);
 		//this.tip_direction = tip_direction;
 	}*/
-	
+
 	public CircumferentialClasp(Tooth tooth_pos, Position tip_direction, ClaspMaterial buccal_material, ClaspMaterial lingual_material) {
 		super(tooth_pos);
 		//this.tip_direction = tip_direction;
@@ -50,7 +50,7 @@ public class CircumferentialClasp extends Clasp implements Component {
 		rpd_plan.addComponent(this.buccal_arm);
 		rpd_plan.addComponent(this.lingual_arm);
 	}
-	
+
 	public String print() throws ComponentException {
 		throw new ComponentException("this should not be called");
 	}

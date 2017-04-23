@@ -1,4 +1,5 @@
 package rpd.oral;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
@@ -24,14 +25,14 @@ import ontologies.LabelModifier;
 public class Instantialize {
 
 	private static String ont_prefix = "http://www.semanticweb.org/msiip/ontologies/CDSSinRPD#";
-	
+
 	private static void initTeeth(OntModel dental_model) {
-		
+
 		OntClass tooth_class = dental_model.getOntClass(ont_prefix + "tooth");
 		DatatypeProperty tooth_zone_dp = dental_model.getDatatypeProperty(ont_prefix + "tooth_zone");
 		DatatypeProperty tooth_ordinal_dp = dental_model.getDatatypeProperty(ont_prefix + "tooth_ordinal");
 		DatatypeProperty is_missing_dp = dental_model.getDatatypeProperty(ont_prefix + "is_missing");
-		
+
 		for (int i = 1; i < 5; i++) {
 			for (int j = 1; j < 9; j++) {
 				int zone = i;
@@ -39,65 +40,65 @@ public class Instantialize {
 				Individual tooth = tooth_class.createIndividual(ont_prefix + "tooth" + zone + number);
 				tooth.addProperty(tooth_zone_dp, dental_model.createTypedLiteral(i));
 				tooth.addProperty(tooth_ordinal_dp, dental_model.createTypedLiteral(j));
-				if(number == 8)
+				if (number == 8)
 					tooth.addProperty(is_missing_dp, dental_model.createTypedLiteral(true));
 			}
 		}
 	}
-	
+
 	public static void convertXmlToOnt(OntModel dental_ont, File label_xml_file) throws ParserConfigurationException, SAXException, IOException, ToothMapException, ToothModifierException, PropertyValueException {
-		
+
 		initTeeth(dental_ont);
-		
+
 		DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
-        DocumentBuilder db = dbf.newDocumentBuilder();
-        org.w3c.dom.Document document = db.parse(label_xml_file);
-        
-        Node all_labels = document.getFirstChild();
-        NodeList label_node_list = all_labels.getChildNodes();
-        
-        for (int i = 0; i < label_node_list.getLength(); i++) {
-        	
+		DocumentBuilder db = dbf.newDocumentBuilder();
+		org.w3c.dom.Document document = db.parse(label_xml_file);
+
+		Node all_labels = document.getFirstChild();
+		NodeList label_node_list = all_labels.getChildNodes();
+
+		for (int i = 0; i < label_node_list.getLength(); i++) {
+
 			String property_str = null;
-        	DatatypeProperty property = null;
+			DatatypeProperty property = null;
 			String value_type = null;
 			String value_str = null;
 			LabelModifier modifier = null;
 			String tooth_map_str = null;
-        	
-            Node label_node = label_node_list.item(i);
-            NodeList label_node_fields = label_node.getChildNodes();
-            if(label_node_fields.getLength() == 0)
+
+			Node label_node = label_node_list.item(i);
+			NodeList label_node_fields = label_node.getChildNodes();
+			if (label_node_fields.getLength() == 0)
 				continue;
-            
-            for (int j = 0; j < label_node_fields.getLength(); j++) {
-            	
-            	Node label_node_field = label_node_fields.item(j);
-				
+
+			for (int j = 0; j < label_node_fields.getLength(); j++) {
+
+				Node label_node_field = label_node_fields.item(j);
+
 				String field_name = label_node_field.getNodeName();
 				String field_content = label_node_field.getTextContent();
-				
-				if(field_name.equals("property")) {
-					
+
+				if (field_name.equals("property")) {
+
 					property_str = field_content;
 					property = dental_ont.getDatatypeProperty(ont_prefix + field_content);
 				}
-				if(field_name.equals("value_type"))
+				if (field_name.equals("value_type"))
 					value_type = field_content;
-				if(field_name.equals("value"))
+				if (field_name.equals("value"))
 					value_str = field_content;
-				if(field_name.equals("modifier"))
+				if (field_name.equals("modifier"))
 					modifier = LabelModifier.valueOf(field_content);
-				if(field_name.equals("tooth_map_str"))
+				if (field_name.equals("tooth_map_str"))
 					tooth_map_str = field_content;
-            }
-            
-            if(property == null) {
-				
+			}
+
+			if (property == null) {
+
 				System.out.println("unknown property: " + property_str + " in " + label_xml_file.getName());
 				continue;
 			}
-            
+
 			if (tooth_map_str != null) {
 
 				List<String> tooth_list = null;
@@ -117,20 +118,16 @@ public class Instantialize {
 							tooth_ind.addProperty(property, dental_ont.createTypedLiteral(true));
 						else
 							throw new PropertyValueException("can not parse boolean value: " + value_str);
-					} 
-					else if (value_type.equals("list_int")) {
+					} else if (value_type.equals("list_int")) {
 						int int_value = Integer.valueOf(value_str);
 						tooth_ind.addProperty(property, dental_ont.createTypedLiteral(int_value));
-					} 
-					else if (value_type.equals("int")) {
+					} else if (value_type.equals("int")) {
 						int int_value = Integer.valueOf(value_str);
 						tooth_ind.addProperty(property, dental_ont.createTypedLiteral(int_value));
-					} 
-					else if (value_type.equals("double")) {
+					} else if (value_type.equals("double")) {
 						double double_value = Double.valueOf(value_str);
 						tooth_ind.addProperty(property, dental_ont.createTypedLiteral(double_value));
-					} 
-					else if (value_type.equals("string"))
+					} else if (value_type.equals("string"))
 						tooth_ind.addProperty(property, dental_ont.createTypedLiteral(value_str));
 					else
 						throw new PropertyValueException("unknown value type: " + value_type);
@@ -143,7 +140,7 @@ public class Instantialize {
 					}*/
 				}
 			}
-        }
+		}
 	}
-	
+
 }

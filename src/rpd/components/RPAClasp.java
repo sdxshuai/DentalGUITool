@@ -10,65 +10,65 @@ import rpd.oral.Tooth;
  */
 public class RPAClasp extends Clasp {
 
-    private OcclusalRest occlusal_rest = null;
-    private ClaspArm buccal_arm = null;
+	private OcclusalRest occlusal_rest = null;
+	private ClaspArm buccal_arm = null;
 
-    public RPAClasp(Tooth tooth_pos) {
+	public RPAClasp(Tooth tooth_pos) {
 
-        super(tooth_pos);
-        this.occlusal_rest = new OcclusalRest(tooth_pos, Position.Mesial);
-        this.buccal_arm = new ClaspArm(tooth_pos, Position.Distal, Position.Buccal, ClaspMaterial.Cast);
-    }
+		super(tooth_pos);
+		this.occlusal_rest = new OcclusalRest(tooth_pos, Position.Mesial);
+		this.buccal_arm = new ClaspArm(tooth_pos, Position.Distal, Position.Buccal, ClaspMaterial.Cast);
+	}
 
-    public RPAClasp(Tooth tooth_pos, ClaspMaterial material) {
+	public RPAClasp(Tooth tooth_pos, ClaspMaterial material) {
 
-        super(tooth_pos);
-        this.occlusal_rest = new OcclusalRest(tooth_pos, Position.Mesial);
-        this.buccal_arm = new ClaspArm(tooth_pos, Position.Distal, Position.Buccal, material);
-    }
+		super(tooth_pos);
+		this.occlusal_rest = new OcclusalRest(tooth_pos, Position.Mesial);
+		this.buccal_arm = new ClaspArm(tooth_pos, Position.Distal, Position.Buccal, material);
+	}
 
 
-    @Override
-    public void addToPlan(RPDPlan rpd_plan) {
-        rpd_plan.addComponent(this);
-    }
+	@Override
+	public void addToPlan(RPDPlan rpd_plan) {
+		rpd_plan.addComponent(this);
+	}
 
-    public boolean isIndirectRetainer() {
+	public boolean isIndirectRetainer() {
 		return this.occlusal_rest.isIndirectRetainer();
 	}
 
-    public Position getTipDirection() {
+	public Position getTipDirection() {
 
-        return Position.Distal;
-    }
+		return Position.Distal;
+	}
 
-    public ClaspMaterial getMaterial() {
+	public ClaspMaterial getMaterial() {
 		if (this.buccal_arm != null) {
 			return this.buccal_arm.getClaspMaterial();
-		}
-		else {
+		} else {
 			System.out.println("There is no clasp arm!");
 			return null;
 		}
 	}
 
-    public String print() {
+	public String print() {
 
-        StringBuilder s = new StringBuilder();
-        s.append(this.tooth_pos.toString() + ":");
-        s.append("RPA卡环，");
+		StringBuilder s = new StringBuilder();
+		s.append(this.tooth_pos.toString() + ":");
+		s.append("RPA卡环，");
 
-        if(this.getMaterial().equals(ClaspMaterial.WW))
+		if (this.getMaterial().equals(ClaspMaterial.WW))
 			s.append("弯制材料，");
-		else if(this.getMaterial().equals(ClaspMaterial.Cast))
+		else if (this.getMaterial().equals(ClaspMaterial.Cast))
 			s.append("铸造材料，");
-		else {}
+		else {
+		}
 
-        s.append("卡环臂尖朝向远中");
-        return s.toString();
-    }
+		s.append("卡环臂尖朝向远中");
+		return s.toString();
+	}
 
-    public String toString()  {
-        return this.print();
-    }
+	public String toString() {
+		return this.print();
+	}
 }

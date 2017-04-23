@@ -13,114 +13,109 @@ import java.util.Collections;
  */
 public class ContinuousClasp extends Clasp {
 
-    private ClaspArm buccal_distal_arm = null;
-    private ClaspArm buccal_mesial_arm = null;
-    private ClaspArm lingual_distal_arm = null;
-    private ClaspArm lingual_mesial_arm = null;
-    private OcclusalRest distal_rest = null;
-    private OcclusalRest mesial_rest = null;
+	private ClaspArm buccal_distal_arm = null;
+	private ClaspArm buccal_mesial_arm = null;
+	private ClaspArm lingual_distal_arm = null;
+	private ClaspArm lingual_mesial_arm = null;
+	private OcclusalRest distal_rest = null;
+	private OcclusalRest mesial_rest = null;
 
-    public ContinuousClasp(ArrayList<Tooth> tooth_pos) {
+	public ContinuousClasp(ArrayList<Tooth> tooth_pos) {
 
-        super(tooth_pos);
-        Collections.sort(tooth_pos);
-        Tooth mesial_tooth = tooth_pos.get(0);
-        Tooth distal_tooth = tooth_pos.get(1);
+		super(tooth_pos);
+		Collections.sort(tooth_pos);
+		Tooth mesial_tooth = tooth_pos.get(0);
+		Tooth distal_tooth = tooth_pos.get(1);
 
-        this.buccal_distal_arm = new ClaspArm(distal_tooth, Position.Mesial, Position.Buccal, ClaspMaterial.Cast);
-        this.buccal_mesial_arm = new ClaspArm(mesial_tooth, Position.Distal, Position.Buccal, ClaspMaterial.Cast);
-        this.lingual_distal_arm = new ClaspArm(distal_tooth, Position.Mesial, Position.Lingual, ClaspMaterial.Cast);
-        this.lingual_mesial_arm = new ClaspArm(mesial_tooth, Position.Distal, Position.Lingual, ClaspMaterial.Cast);
+		this.buccal_distal_arm = new ClaspArm(distal_tooth, Position.Mesial, Position.Buccal, ClaspMaterial.Cast);
+		this.buccal_mesial_arm = new ClaspArm(mesial_tooth, Position.Distal, Position.Buccal, ClaspMaterial.Cast);
+		this.lingual_distal_arm = new ClaspArm(distal_tooth, Position.Mesial, Position.Lingual, ClaspMaterial.Cast);
+		this.lingual_mesial_arm = new ClaspArm(mesial_tooth, Position.Distal, Position.Lingual, ClaspMaterial.Cast);
 
-        this.distal_rest = new OcclusalRest(distal_tooth, Position.Distal);
-        this.mesial_rest = new OcclusalRest(mesial_tooth, Position.Mesial);
-    }
+		this.distal_rest = new OcclusalRest(distal_tooth, Position.Distal);
+		this.mesial_rest = new OcclusalRest(mesial_tooth, Position.Mesial);
+	}
 
-    public ContinuousClasp(ArrayList<Tooth> tooth_pos, ClaspMaterial material) {
+	public ContinuousClasp(ArrayList<Tooth> tooth_pos, ClaspMaterial material) {
 
-        super(tooth_pos);
-        Collections.sort(tooth_pos);
-        Tooth mesial_tooth = tooth_pos.get(0);
-        Tooth distal_tooth = tooth_pos.get(1);
+		super(tooth_pos);
+		Collections.sort(tooth_pos);
+		Tooth mesial_tooth = tooth_pos.get(0);
+		Tooth distal_tooth = tooth_pos.get(1);
 
-        this.buccal_distal_arm = new ClaspArm(distal_tooth, Position.Mesial, Position.Buccal, material);
-        this.buccal_mesial_arm = new ClaspArm(mesial_tooth, Position.Distal, Position.Buccal, material);
-        this.lingual_distal_arm = new ClaspArm(distal_tooth, Position.Mesial, Position.Lingual, material);
-        this.lingual_mesial_arm = new ClaspArm(mesial_tooth, Position.Distal, Position.Lingual, material);
+		this.buccal_distal_arm = new ClaspArm(distal_tooth, Position.Mesial, Position.Buccal, material);
+		this.buccal_mesial_arm = new ClaspArm(mesial_tooth, Position.Distal, Position.Buccal, material);
+		this.lingual_distal_arm = new ClaspArm(distal_tooth, Position.Mesial, Position.Lingual, material);
+		this.lingual_mesial_arm = new ClaspArm(mesial_tooth, Position.Distal, Position.Lingual, material);
 
-        this.distal_rest = new OcclusalRest(distal_tooth, Position.Distal);
-        this.mesial_rest = new OcclusalRest(mesial_tooth, Position.Mesial);
-    }
+		this.distal_rest = new OcclusalRest(distal_tooth, Position.Distal);
+		this.mesial_rest = new OcclusalRest(mesial_tooth, Position.Mesial);
+	}
 
-    public ContinuousClasp(ArrayList<Tooth> tooth_pos, ClaspMaterial buccal_material, ClaspMaterial lingual_material) {
+	public ContinuousClasp(ArrayList<Tooth> tooth_pos, ClaspMaterial buccal_material, ClaspMaterial lingual_material) {
 
-        super(tooth_pos);
-        Collections.sort(tooth_pos);
-        Tooth mesial_tooth = tooth_pos.get(0);
-        Tooth distal_tooth = tooth_pos.get(1);
+		super(tooth_pos);
+		Collections.sort(tooth_pos);
+		Tooth mesial_tooth = tooth_pos.get(0);
+		Tooth distal_tooth = tooth_pos.get(1);
 
-        this.buccal_distal_arm = new ClaspArm(distal_tooth, Position.Mesial, Position.Buccal, buccal_material);
-        this.buccal_mesial_arm = new ClaspArm(mesial_tooth, Position.Distal, Position.Buccal, buccal_material);
-        this.lingual_distal_arm = new ClaspArm(distal_tooth, Position.Mesial, Position.Lingual, lingual_material);
-        this.lingual_mesial_arm = new ClaspArm(mesial_tooth, Position.Distal, Position.Lingual, lingual_material);
+		this.buccal_distal_arm = new ClaspArm(distal_tooth, Position.Mesial, Position.Buccal, buccal_material);
+		this.buccal_mesial_arm = new ClaspArm(mesial_tooth, Position.Distal, Position.Buccal, buccal_material);
+		this.lingual_distal_arm = new ClaspArm(distal_tooth, Position.Mesial, Position.Lingual, lingual_material);
+		this.lingual_mesial_arm = new ClaspArm(mesial_tooth, Position.Distal, Position.Lingual, lingual_material);
 
-        this.distal_rest = new OcclusalRest(distal_tooth, Position.Distal);
-        this.mesial_rest = new OcclusalRest(mesial_tooth, Position.Mesial);
-    }
+		this.distal_rest = new OcclusalRest(distal_tooth, Position.Distal);
+		this.mesial_rest = new OcclusalRest(mesial_tooth, Position.Mesial);
+	}
 
-    @Override
-    public void addToPlan(RPDPlan rpd_plan) {
-        rpd_plan.addComponent(this);
-    }
+	@Override
+	public void addToPlan(RPDPlan rpd_plan) {
+		rpd_plan.addComponent(this);
+	}
 
-    public boolean isIndirectRetainer() {
-    	if (this.distal_rest != null) {
-    	    return this.distal_rest.isIndirectRetainer();
-        }
-        else if (this.mesial_rest != null) {
-    	    return this.mesial_rest.isIndirectRetainer();
-        }
-        else {
-    	    System.out.println("No rest!");
-    	    return false;
-        }
+	public boolean isIndirectRetainer() {
+		if (this.distal_rest != null) {
+			return this.distal_rest.isIndirectRetainer();
+		} else if (this.mesial_rest != null) {
+			return this.mesial_rest.isIndirectRetainer();
+		} else {
+			System.out.println("No rest!");
+			return false;
+		}
 	}
 
 	public ClaspMaterial getMaterial() {
 		if (this.buccal_distal_arm != null) {
 			return this.buccal_distal_arm.getClaspMaterial();
-		}
-		else if (this.buccal_mesial_arm != null) {
+		} else if (this.buccal_mesial_arm != null) {
 			return this.buccal_mesial_arm.getClaspMaterial();
-		}
-		else if (this.lingual_distal_arm != null) {
+		} else if (this.lingual_distal_arm != null) {
 			return this.lingual_distal_arm.getClaspMaterial();
-		}
-		else if (this.lingual_mesial_arm != null) {
+		} else if (this.lingual_mesial_arm != null) {
 			return this.lingual_mesial_arm.getClaspMaterial();
-		}
-		else {
+		} else {
 			System.out.println("There is no clasp arm!");
 			return null;
 		}
 	}
 
-    public String print() {
+	public String print() {
 
-        StringBuilder s = new StringBuilder();
-        s.append(super.toString());
-        s.append("连续（Continuous）卡环，");
+		StringBuilder s = new StringBuilder();
+		s.append(super.toString());
+		s.append("连续（Continuous）卡环，");
 
-        if(this.getMaterial().equals(ClaspMaterial.WW))
+		if (this.getMaterial().equals(ClaspMaterial.WW))
 			s.append("弯制材料");
-		else if(this.getMaterial().equals(ClaspMaterial.Cast))
+		else if (this.getMaterial().equals(ClaspMaterial.Cast))
 			s.append("铸造材料");
-		else {}
+		else {
+		}
 
-        return s.toString();
-    }
+		return s.toString();
+	}
 
-    public String toString()  {
-        return this.print();
-    }
+	public String toString() {
+		return this.print();
+	}
 }

@@ -5,9 +5,9 @@ package rpd.conceptions;
  */
 public enum ClaspOnDistomolar {
 
-    CombinationClasp,
-    RPAClasp,
-    RingClasp,
-    WroughtWireClasp,
-    AkerClasp,
+	CombinationClasp,
+	RPAClasp,
+	RingClasp,
+	WroughtWireClasp,
+	AkerClasp,
 }

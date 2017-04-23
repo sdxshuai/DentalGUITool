@@ -5,11 +5,11 @@ package rpd.conceptions;
  */
 public enum ClaspOnPremolar {
 
-    CombinationClasp,
-    BackActionClasp,
-    ReverseBackActionClasp,
-    RPAClasp,
-    HalfHalfClasp,
-    WroughtWireClasp,
-    AkerClasp,
+	CombinationClasp,
+	BackActionClasp,
+	ReverseBackActionClasp,
+	RPAClasp,
+	HalfHalfClasp,
+	WroughtWireClasp,
+	AkerClasp,
 }

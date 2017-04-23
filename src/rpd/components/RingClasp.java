@@ -17,12 +17,10 @@ public class RingClasp extends Clasp {
 		super(tooth_pos);
 		Position arm_position = null;
 		if (tooth_pos.getZone() == 1 || tooth_pos.getZone() == 2) {
-			arm_position =  Position.Buccal;
-		}
-		else if (tooth_pos.getZone() == 3 || tooth_pos.getZone() == 4) {
+			arm_position = Position.Buccal;
+		} else if (tooth_pos.getZone() == 3 || tooth_pos.getZone() == 4) {
 			arm_position = Position.Lingual;
-		}
-		else {
+		} else {
 			System.out.println("No zone for tooth");
 		}
 
@@ -31,8 +29,7 @@ public class RingClasp extends Clasp {
 		if (material.equals(ClaspMaterial.Cast)) {
 			this.mesial_rest = new OcclusalRest(tooth_pos, Position.Mesial);
 			this.distal_rest = new OcclusalRest(tooth_pos, Position.Distal);
-		}
-		else if (material.equals(ClaspMaterial.WW)) {
+		} else if (material.equals(ClaspMaterial.WW)) {
 			this.mesial_rest = new OcclusalRest(tooth_pos, Position.Mesial);
 			this.distal_rest = null;
 		}
@@ -44,11 +41,9 @@ public class RingClasp extends Clasp {
 		Position arm_position = null;
 		if (tooth_pos.getZone() == 1 || tooth_pos.getZone() == 2) {
 			arm_position = Position.Buccal;
-		}
-		else if (tooth_pos.getZone() == 3 || tooth_pos.getZone() == 4) {
+		} else if (tooth_pos.getZone() == 3 || tooth_pos.getZone() == 4) {
 			arm_position = Position.Lingual;
-		}
-		else {
+		} else {
 			System.out.println("No zone for tooth");
 		}
 
@@ -65,23 +60,20 @@ public class RingClasp extends Clasp {
 
 	@Override
 	public boolean isIndirectRetainer() {
-    	if (this.distal_rest != null) {
-    	    return this.distal_rest.isIndirectRetainer();
-        }
-        else if (this.mesial_rest != null) {
-    	    return this.mesial_rest.isIndirectRetainer();
-        }
-        else {
-    	    System.out.println("No rest!");
-    	    return false;
-        }
+		if (this.distal_rest != null) {
+			return this.distal_rest.isIndirectRetainer();
+		} else if (this.mesial_rest != null) {
+			return this.mesial_rest.isIndirectRetainer();
+		} else {
+			System.out.println("No rest!");
+			return false;
+		}
 	}
 
 	public ClaspMaterial getMaterial() {
 		if (this.clasp_arm != null) {
 			return this.clasp_arm.getClaspMaterial();
-		}
-		else {
+		} else {
 			System.out.println("There is no clasp arm!");
 			return null;
 		}
@@ -91,8 +83,7 @@ public class RingClasp extends Clasp {
 
 		if (this.clasp_arm != null) {
 			return this.clasp_arm.getTipDirection();
-		}
-		else {
+		} else {
 			System.out.println("There is no clasp arm!");
 			return null;
 		}
@@ -105,16 +96,17 @@ public class RingClasp extends Clasp {
 		s.append(this.tooth_pos.toString() + ":");
 		s.append("圈形（Ring）卡环，");
 
-		if(this.getMaterial().equals(ClaspMaterial.WW))
+		if (this.getMaterial().equals(ClaspMaterial.WW))
 			s.append("弯制材料");
-		else if(this.getMaterial().equals(ClaspMaterial.Cast))
+		else if (this.getMaterial().equals(ClaspMaterial.Cast))
 			s.append("铸造材料");
-		else {}
+		else {
+		}
 
 		return s.toString();
 	}
 
-	public String toString()  {
+	public String toString() {
 		return this.print();
 	}
 }

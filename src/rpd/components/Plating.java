@@ -8,9 +8,9 @@ import java.util.ArrayList;
 public class Plating implements Component {
 
 	private ArrayList<Tooth> tooth_pos = null;
-	
+
 	private String rule_explanation = null;
-	
+
 	public Plating(ArrayList<Tooth> tooth_pos) {
 		this.tooth_pos = tooth_pos;
 	}
@@ -21,7 +21,7 @@ public class Plating implements Component {
 		tooth_list.add(tooth_pos);
 		this.tooth_pos = tooth_list;
 	}
-	
+
 	public ArrayList<Tooth> getToothPos() {
 		return this.tooth_pos;
 	}
@@ -29,21 +29,21 @@ public class Plating implements Component {
 	public int hashCode() {
 		return this.tooth_pos.hashCode();
 	}
-	
+
 	public boolean equals(Object obj) {
-		
-		if(obj == null)
+
+		if (obj == null)
 			return false;
-		if(!obj.getClass().equals(this.getClass()))
+		if (!obj.getClass().equals(this.getClass()))
 			return false;
-		
-		Plating plating = (Plating)obj;
-		if(this.tooth_pos == plating.tooth_pos)
+
+		Plating plating = (Plating) obj;
+		if (this.tooth_pos == plating.tooth_pos)
 			return true;
 		else
 			return false;
 	}
-	
+
 	@Override
 	public void addToPlan(RPDPlan rpd_plan) {
 		rpd_plan.addComponent(this);
@@ -51,13 +51,13 @@ public class Plating implements Component {
 
 	@Override
 	public String print() {
-		
+
 		StringBuilder s = new StringBuilder();
 		s.append(this.tooth_pos.toString() + ":");
 		s.append("舌板覆盖");
 		return s.toString();
 	}
-	
+
 	public String toString() {
 		return this.print();
 	}
@@ -81,7 +81,7 @@ public class Plating implements Component {
 	public boolean isPlating() {
 		return false;
 	}
-	
+
 	public boolean isIndirectRetainer() {
 		return true;
 	}

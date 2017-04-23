@@ -14,7 +14,7 @@ public class Mouth {
 
 	private Mandibular mandibular = null;
 	private Maxillary maxillary = null;
-	
+
 	private OntModel dental_ont = null;
 	
 	/*public Mouth(File owl_file) throws IOException, RuleException, ToothPosException {
@@ -22,7 +22,7 @@ public class Mouth {
 		this.dental_ont.read("file:" + owl_file.getCanonicalPath());
 		this.mandibular = new Mandibular(dental_ont);
 	}*/
-	
+
 	public Mouth(OntModel dental_ont) throws IOException, RuleException, ToothPosException {
 		this.dental_ont = dental_ont;
 		this.mandibular = new Mandibular(dental_ont);
@@ -30,19 +30,19 @@ public class Mouth {
 	}
 
 	public Tooth getTooth(int zone, int num) {
-		
-		if(zone == 1 || zone == 2)
+
+		if (zone == 1 || zone == 2)
 			return maxillary.getTooth(zone, num);
-		else if(zone == 3 || zone == 4)
+		else if (zone == 3 || zone == 4)
 			return mandibular.getTooth(zone, num);
 		else
 			return null;
 	}
-	
+
 	public Mandibular getMandibular() {
 		return this.mandibular;
 	}
-	
+
 	public Maxillary getMaxillary() {
 		return this.maxillary;
 	}

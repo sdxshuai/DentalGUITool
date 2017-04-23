@@ -5,7 +5,7 @@ package rpd.conceptions;
  */
 public enum ClaspOnCanine {
 
-    BackActionClasp,
-    ReverseBackActionClasp,
-    CanineClasp,
+	BackActionClasp,
+	ReverseBackActionClasp,
+	CanineClasp,
 }

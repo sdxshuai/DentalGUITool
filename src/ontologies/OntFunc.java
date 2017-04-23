@@ -19,30 +19,30 @@ public class OntFunc {
 
 	//get top level data
 	public static Set<DatatypeProperty> getTopDataProperties(OntModel dental_ont) {
-		
+
 		Set<DatatypeProperty> top_dps = new HashSet<DatatypeProperty>();
 		ExtendedIterator<DatatypeProperty> data_ps = dental_ont.listDatatypeProperties();
-		while(data_ps.hasNext()) {
-		
+		while (data_ps.hasNext()) {
+
 			DatatypeProperty dp = data_ps.next();
-			if(dp.listSuperProperties().toList().size() == 0)
+			if (dp.listSuperProperties().toList().size() == 0)
 				top_dps.add(dp);
 		}
-		
+
 		return top_dps;
 	}
 
 	//取出子属性
 	public static List<? extends OntProperty> getSubProperties(OntProperty dp) {
-		
+
 		ExtendedIterator<? extends OntProperty> sub_dps = dp.listSubProperties();
 		List<? extends OntProperty> sub_dps_list = sub_dps.toList();
-		if(sub_dps_list.size() == 0)
+		if (sub_dps_list.size() == 0)
 			return null;
 		else
 			return sub_dps_list;
 	}
-	
+
 	public static String getComment(OntResource r) {
 		
 		/*Resource c = r.getPropertyResourceValue(RDFS.comment);
@@ -53,11 +53,11 @@ public class OntFunc {
 		String c = r.getComment(null);
 		return c;
 	}
-	
+
 	public static boolean isRDFList(Resource datatype) {
-		
+
 		Resource r = datatype.getPropertyResourceValue(OWL.oneOf);
 		return (r != null);
 	}
-	
+
 }

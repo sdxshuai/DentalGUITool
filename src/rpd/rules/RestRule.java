@@ -23,67 +23,67 @@ import rpd.oral.Tooth;
 //规则2
 public class RestRule {
 
-    public static List<RestRule> rest_rules = null;
+	public static List<RestRule> rest_rules = null;
 
-    private static Mouth mouth = null;
+	private static Mouth mouth = null;
 
-    public List<RPDPlan> apply(List<RPDPlan> rpd_plan) throws RuleException, ClaspAssemblyException, ToothPosException {
-        throw new RuleException("call from abstract class");
-    }
+	public List<RPDPlan> apply(List<RPDPlan> rpd_plan) throws RuleException, ClaspAssemblyException, ToothPosException {
+		throw new RuleException("call from abstract class");
+	}
 
-    public int getRuleNum() throws RuleException {
-        throw new RuleException("call from abstract class");
-    }
+	public int getRuleNum() throws RuleException {
+		throw new RuleException("call from abstract class");
+	}
 
-    public String getExplaination() throws RuleException {
-        throw new RuleException("call from abstract class");
-    }
+	public String getExplaination() throws RuleException {
+		throw new RuleException("call from abstract class");
+	}
 
-    public static void initRules(Mouth mouth_obj) {
+	public static void initRules(Mouth mouth_obj) {
 
-        mouth = mouth_obj;
-        rest_rules = new ArrayList<RestRule>();
+		mouth = mouth_obj;
+		rest_rules = new ArrayList<RestRule>();
 
-        rest_rules.add(new RestRule() {
+		rest_rules.add(new RestRule() {
 
-            public String getExplaination() {
-                return "初始化搜索树，遍历选择支托";
-            }
+			public String getExplaination() {
+				return "初始化搜索树，遍历选择支托";
+			}
 
-            public String toString() {
-                return this.getExplaination();
-            }
+			public String toString() {
+				return this.getExplaination();
+			}
 
-            public int getRuleNum() {
-                return 1;
-            }
+			public int getRuleNum() {
+				return 1;
+			}
 
-            public List<RPDPlan> apply(List<RPDPlan> rpd_plans) throws RuleException {
-                List<RPDPlan> res = new ArrayList<>();
-                res.addAll(rpd_plans);
-                return res;
-            }
-        });
+			public List<RPDPlan> apply(List<RPDPlan> rpd_plans) throws RuleException {
+				List<RPDPlan> res = new ArrayList<>();
+				res.addAll(rpd_plans);
+				return res;
+			}
+		});
 
-        rest_rules.add(new RestRule() {
+		rest_rules.add(new RestRule() {
 
-            public String getExplaination() {
-                return "";
-            }
+			public String getExplaination() {
+				return "";
+			}
 
-            public String toString() {
-                return this.getExplaination();
-            }
+			public String toString() {
+				return this.getExplaination();
+			}
 
-            public int getRuleNum() {
-                return 2;
-            }
+			public int getRuleNum() {
+				return 2;
+			}
 
-            public List<RPDPlan> apply(List<RPDPlan> rpd_plans) throws RuleException {
-                List<RPDPlan> res = new ArrayList<>();
-                res.addAll(rpd_plans);
-                return res;
-            }
-        });
-    }
+			public List<RPDPlan> apply(List<RPDPlan> rpd_plans) throws RuleException {
+				List<RPDPlan> res = new ArrayList<>();
+				res.addAll(rpd_plans);
+				return res;
+			}
+		});
+	}
 }

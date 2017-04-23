@@ -9,36 +9,36 @@ import rpd.oral.Tooth;
  */
 public class RPIClasp extends Clasp {
 
-    private OcclusalRest occlusal_rest = null;
+	private OcclusalRest occlusal_rest = null;
 
-    public RPIClasp(Tooth tooth_pos) {
+	public RPIClasp(Tooth tooth_pos) {
 
-        super(tooth_pos);
-        this.occlusal_rest = new OcclusalRest(tooth_pos, Position.Mesial);
+		super(tooth_pos);
+		this.occlusal_rest = new OcclusalRest(tooth_pos, Position.Mesial);
 
-    }
+	}
 
 
-    @Override
-    public void addToPlan(RPDPlan rpd_plan) {
-        rpd_plan.addComponent(this);
-    }
+	@Override
+	public void addToPlan(RPDPlan rpd_plan) {
+		rpd_plan.addComponent(this);
+	}
 
-    public Position getTipDirection() {
+	public Position getTipDirection() {
 
-        return Position.Distal;
-    }
+		return Position.Distal;
+	}
 
-    public String print() {
+	public String print() {
 
-        StringBuilder s = new StringBuilder();
-        s.append(this.tooth_pos.toString() + ":");
-        s.append("RPI卡环，");
-        s.append("卡环臂尖朝向远中");
-        return s.toString();
-    }
+		StringBuilder s = new StringBuilder();
+		s.append(this.tooth_pos.toString() + ":");
+		s.append("RPI卡环，");
+		s.append("卡环臂尖朝向远中");
+		return s.toString();
+	}
 
-    public String toString()  {
-        return this.print();
-    }
+	public String toString() {
+		return this.print();
+	}
 }

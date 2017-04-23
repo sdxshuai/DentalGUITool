@@ -31,15 +31,14 @@ public class AkerClasp extends Clasp {
 	}
 
 	public AkerClasp(Tooth tooth_pos, Position tip_direction, ClaspMaterial buccal_material,
-					 ClaspMaterial lingual_material) {
+	                 ClaspMaterial lingual_material) {
 
 		super(tooth_pos);
 		this.buccal_arm = new ClaspArm(tooth_pos, tip_direction, Position.Buccal, buccal_material);
 		this.lingual_arm = new ClaspArm(tooth_pos, tip_direction, Position.Lingual, lingual_material);
 		if (tip_direction.equals(Position.Distal)) {
 			this.occlusal_rest = new OcclusalRest(tooth_pos, Position.Mesial);
-		}
-		else if (tip_direction.equals(Position.Mesial)) {
+		} else if (tip_direction.equals(Position.Mesial)) {
 			this.occlusal_rest = new OcclusalRest(tooth_pos, Position.Distal);
 		}
 	}
@@ -51,8 +50,7 @@ public class AkerClasp extends Clasp {
 		this.lingual_arm = new ClaspArm(tooth_pos, tip_direction, Position.Lingual, material);
 		if (tip_direction.equals(Position.Distal)) {
 			this.occlusal_rest = new OcclusalRest(tooth_pos, Position.Mesial);
-		}
-		else if (tip_direction.equals(Position.Mesial)) {
+		} else if (tip_direction.equals(Position.Mesial)) {
 			this.occlusal_rest = new OcclusalRest(tooth_pos, Position.Distal);
 		}
 	}
@@ -64,8 +62,7 @@ public class AkerClasp extends Clasp {
 		this.lingual_arm = new ClaspArm(tooth_pos, tip_direction, Position.Lingual, ClaspMaterial.Cast);
 		if (tip_direction.equals(Position.Distal)) {
 			this.occlusal_rest = new OcclusalRest(tooth_pos, Position.Mesial);
-		}
-		else if (tip_direction.equals(Position.Mesial)) {
+		} else if (tip_direction.equals(Position.Mesial)) {
 			this.occlusal_rest = new OcclusalRest(tooth_pos, Position.Distal);
 		}
 	}
@@ -82,11 +79,9 @@ public class AkerClasp extends Clasp {
 
 		if (this.buccal_arm != null) {
 			return this.buccal_arm.getTipDirection();
-		}
-		else if (this.lingual_arm != null) {
+		} else if (this.lingual_arm != null) {
 			return this.lingual_arm.getTipDirection();
-		}
-		else {
+		} else {
 			System.out.println("There is no clasp arm!");
 			return null;
 		}
@@ -95,38 +90,38 @@ public class AkerClasp extends Clasp {
 	public ClaspMaterial getMaterial() {
 		if (this.buccal_arm != null) {
 			return this.buccal_arm.getClaspMaterial();
-		}
-		else if (this.lingual_arm != null) {
+		} else if (this.lingual_arm != null) {
 			return this.lingual_arm.getClaspMaterial();
-		}
-		else {
+		} else {
 			System.out.println("There is no clasp arm!");
 			return null;
 		}
 	}
-	
+
 	public String print() {
 
 		StringBuilder s = new StringBuilder();
 		s.append(this.tooth_pos.toString() + ":");
 		s.append("Aker卡环，");
 
-		if(this.getMaterial().equals(ClaspMaterial.WW))
+		if (this.getMaterial().equals(ClaspMaterial.WW))
 			s.append("弯制材料，");
-		else if(this.getMaterial().equals(ClaspMaterial.Cast))
+		else if (this.getMaterial().equals(ClaspMaterial.Cast))
 			s.append("铸造材料，");
-		else {}
+		else {
+		}
 
-		if(this.getTipDirection().equals(Position.Mesial))
+		if (this.getTipDirection().equals(Position.Mesial))
 			s.append("卡环臂尖朝向近中");
-		else if(this.getTipDirection().equals(Position.Distal))
+		else if (this.getTipDirection().equals(Position.Distal))
 			s.append("卡环臂尖朝向远中");
-		else {}
+		else {
+		}
 
 		return s.toString();
 	}
-	
-	public String toString()  {
+
+	public String toString() {
 		return this.print();
 	}
 }

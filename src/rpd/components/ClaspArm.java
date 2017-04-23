@@ -10,22 +10,22 @@ import java.util.ArrayList;
 public class ClaspArm implements Component {
 
 	public static void main(String[] args) {
-		
+
 		Tooth tooth1 = new Tooth(3, 4);
 		Tooth tooth2 = new Tooth(3, 4);
 		Component clasp_arm1 = new ClaspArm(tooth1, Position.Mesial, Position.Buccal, ClaspMaterial.WW);
 		Component clasp_arm2 = new ClaspArm(tooth2, Position.Mesial, Position.Buccal, ClaspMaterial.WW);
 		System.out.println(clasp_arm1.equals(clasp_arm2));
 	}
-	
+
 	private Tooth tooth_pos = null;
 	private Position tip_direction = null;
 	private Position buccal_or_lingual = null;
 	private ClaspMaterial material = null;
-	
-	public ClaspArm(Tooth tooth_pos, Position tip_direction, 
-			Position buccal_or_lingual, ClaspMaterial material) {
-		
+
+	public ClaspArm(Tooth tooth_pos, Position tip_direction,
+	                Position buccal_or_lingual, ClaspMaterial material) {
+
 		this.tooth_pos = tooth_pos;
 		this.tip_direction = tip_direction;
 		this.buccal_or_lingual = buccal_or_lingual;
@@ -33,28 +33,28 @@ public class ClaspArm implements Component {
 	}
 
 	public int hashCode() {
-		return this.tooth_pos.hashCode() + this.tip_direction.hashCode() + 
+		return this.tooth_pos.hashCode() + this.tip_direction.hashCode() +
 				this.buccal_or_lingual.hashCode() + this.material.hashCode();
 	}
-	
+
 	public boolean equals(Object obj) {
-		
-		if(obj == null)
+
+		if (obj == null)
 			return false;
-		if(!obj.getClass().equals(this.getClass()))
+		if (!obj.getClass().equals(this.getClass()))
 			return false;
-		
-		ClaspArm clasp_arm = (ClaspArm)obj;
-		if(this.tooth_pos == clasp_arm.tooth_pos && 
-			this.tip_direction == clasp_arm.tip_direction &&
-			this.buccal_or_lingual == clasp_arm.buccal_or_lingual &&
-			this.material == clasp_arm.material)
-			
+
+		ClaspArm clasp_arm = (ClaspArm) obj;
+		if (this.tooth_pos == clasp_arm.tooth_pos &&
+				this.tip_direction == clasp_arm.tip_direction &&
+				this.buccal_or_lingual == clasp_arm.buccal_or_lingual &&
+				this.material == clasp_arm.material)
+
 			return true;
 		else
 			return false;
 	}
-	
+
 	@Override
 	public void addToPlan(RPDPlan rpd_plan) {
 		rpd_plan.addComponent(this);
@@ -63,19 +63,19 @@ public class ClaspArm implements Component {
 	public Position getTipDirection() {
 		return this.tip_direction;
 	}
-	
+
 	public Position getBuccalOrLingual() {
 		return this.buccal_or_lingual;
 	}
-	
+
 	public void setClaspMaterial(ClaspMaterial material) {
 		this.material = material;
 	}
-	
+
 	public ClaspMaterial getClaspMaterial() {
 		return this.material;
 	}
-	
+
 	@Override
 	public ArrayList<Tooth> getToothPos() {
 
@@ -86,34 +86,37 @@ public class ClaspArm implements Component {
 
 	@Override
 	public String print() {
-		
+
 		StringBuilder s = new StringBuilder();
 		s.append(this.tooth_pos.toString() + ":");
-		if(buccal_or_lingual.equals(Position.Buccal))
+		if (buccal_or_lingual.equals(Position.Buccal))
 			s.append("颊侧");
-		else if(buccal_or_lingual.equals(Position.Lingual))
+		else if (buccal_or_lingual.equals(Position.Lingual))
 			s.append("舌侧");
-		else {}
-			
-		if(material.equals(ClaspMaterial.WW))
+		else {
+		}
+
+		if (material.equals(ClaspMaterial.WW))
 			s.append("弯制卡环，");
-		else if(material.equals(ClaspMaterial.Cast))
+		else if (material.equals(ClaspMaterial.Cast))
 			s.append("铸造卡环，");
-		else {}
-		
-		if(tip_direction.equals(Position.Mesial))
+		else {
+		}
+
+		if (tip_direction.equals(Position.Mesial))
 			s.append("卡环臂尖朝向近中");
-		else if(tip_direction.equals(Position.Distal))
+		else if (tip_direction.equals(Position.Distal))
 			s.append("卡环臂尖朝向远中");
-		else {}
-		
+		else {
+		}
+
 		return s.toString();
 	}
 
 	public String toString() {
 		return this.print();
 	}
-	
+
 	@Override
 	public boolean isRest() {
 		return false;
