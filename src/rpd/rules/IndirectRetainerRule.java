@@ -146,6 +146,7 @@ public class IndirectRetainerRule {
 						RPDPlan new_plan = new RPDPlan(rpd_plan);
 						Component indirect_retainer = rotation_axis.properIndirectRetainet(mouth, Position.Mandibular);
 						new_plan.addComponent(indirect_retainer);
+						new_plan.addAbutmentTeeth(indirect_retainer.getToothPos());
 						return new_plan;
 					} else
 						return null;

@@ -7,9 +7,18 @@ import rpd.oral.Tooth;
 import rpd.RPDPlan;
 import rpd.conceptions.Position;
 import java.util.ArrayList;
+import java.util.Set;
+
 public class CombinationAnteriorPosteriorPalatalStrapConnector extends MajorConnector{
 	public CombinationAnteriorPosteriorPalatalStrapConnector(ArrayList<Tooth> tooth_pos) {
 		super(tooth_pos);
+		this.mandibular_or_maxillary = Position.Maxillary;
+	}
+
+	public CombinationAnteriorPosteriorPalatalStrapConnector(Set<Tooth> abutment_teeth) {
+
+		this.tooth_pos = new ArrayList<>();
+		this.tooth_pos.addAll(abutment_teeth);
 		this.mandibular_or_maxillary = Position.Maxillary;
 	}
 

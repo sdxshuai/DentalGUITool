@@ -101,6 +101,10 @@ public class RPDPlan {
 		this.abutment_teeth.addAll(tooth);
 	}
 
+	public void addAbutmentTeeth(Tooth tooth) {
+		this.abutment_teeth.add(tooth);
+	}
+
 	public Set<Component> getComponents() {
 		return this.components;
 	}

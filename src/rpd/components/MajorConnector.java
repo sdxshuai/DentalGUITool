@@ -15,6 +15,8 @@ public abstract class MajorConnector implements Component{
 
 	protected String rule_explanation = null;
 
+	public MajorConnector(){}
+
 	public MajorConnector(ArrayList<Tooth> tooth_pos) {
 		this.tooth_pos = tooth_pos;
 	}

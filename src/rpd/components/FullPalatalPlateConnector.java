@@ -8,11 +8,19 @@ import rpd.oral.Tooth;
 import rpd.RPDPlan;
 import rpd.conceptions.Position;
 import java.util.ArrayList;
+import java.util.Set;
 
 public class FullPalatalPlateConnector extends MajorConnector{
 
 	public FullPalatalPlateConnector(ArrayList<Tooth> tooth_pos) {
 		super(tooth_pos);
+		this.mandibular_or_maxillary = Position.Maxillary;
+	}
+
+	public FullPalatalPlateConnector(Set<Tooth> abutment_teeth) {
+
+		this.tooth_pos = new ArrayList<>();
+		this.tooth_pos.addAll(tooth_pos);
 		this.mandibular_or_maxillary = Position.Maxillary;
 	}
 

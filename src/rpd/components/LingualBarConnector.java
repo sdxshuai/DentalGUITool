@@ -4,6 +4,7 @@ import rpd.oral.Tooth;
 import rpd.RPDPlan;
 import rpd.conceptions.Position;
 import java.util.ArrayList;
+import java.util.Set;
 
 /**
  * Created by sdxshuai on 2017/4/23.
@@ -12,6 +13,12 @@ public class LingualBarConnector extends MajorConnector{
 
 	public LingualBarConnector(ArrayList<Tooth> tooth_pos) {
 		super(tooth_pos);
+		this.mandibular_or_maxillary = Position.Mandibular;
+	}
+
+	public LingualBarConnector(Set<Tooth> abutment_teeth) {
+		this.tooth_pos = new ArrayList<>();
+		this.tooth_pos.addAll(abutment_teeth);
 		this.mandibular_or_maxillary = Position.Mandibular;
 	}
 
