@@ -76,22 +76,23 @@ public class MajorConnectorRule {
 
 			public MajorConnector chooseMajorConnectorOnMaxillary(RPDPlan plan) {
 				if (isDislocateWithMoreThanFiveMissing(mouth, plan.getPosition())) {
-					return new FullPalatalPlateConnector(plan.getAbutmentTeeth());
+					return new FullPalatalPlateConnector(plan.getAbutmentTeeth(), mouth.getMaxillary());
 				}
 				else {
 					KennedyType kennedyType = getKennedyType(mouth, plan.getPosition());
 					if (kennedyType == KennedyType.KENNEDY_TYPE_I) {
-						return new FullPalatalPlateConnector(plan.getAbutmentTeeth());
+						return new PalatalPlateConnector(plan.getAbutmentTeeth(), mouth.getMaxillary());
 					}
 					else if (kennedyType == KennedyType.KENNEDY_TYPE_II) {
-						return new ModifiedPalatalPlateConnector(plan.getAbutmentTeeth());
+						return new ModifiedPalatalPlateConnector(plan.getAbutmentTeeth(), mouth.getMaxillary());
 					}
 					else if (kennedyType == KennedyType.KENNEDY_TYPE_III
 							&& isToothSupportPlan(mouth.getMaxillary().getEdentulousSpaces(), plan.getAbutmentTeeth())) {
-						return new SinglePalatalStrapConnector(plan.getAbutmentTeeth());
+						return new SinglePalatalStrapConnector(plan.getAbutmentTeeth(), mouth.getMaxillary());
 					}
 					else {
-						return new CombinationAnteriorPosteriorPalatalStrapConnector(plan.getAbutmentTeeth());
+						return new CombinationAnteriorPosteriorPalatalStrapConnector(
+								plan.getAbutmentTeeth(), mouth.getMaxillary());
 					}
 				}
 			}
@@ -114,17 +115,18 @@ public class MajorConnectorRule {
 			}
 
 			public boolean isDislocateWithMoreThanFiveMissing(Mouth mouth, Position maxillary_or_mandibular) {
-				boolean flag = true;
+				boolean flag_left = true;
+				boolean flag_right = true;
 				if (maxillary_or_mandibular == Position.Mandibular) {
 					for (int numTooth=8; numTooth>=3; numTooth--){
 						if (!mouth.getMandibular().getTooth(3, numTooth).isMissing()) {
-							flag = false;
+							flag_right = false;
 							break;
 						}
 					}
 					for (int numTooth=8; numTooth>=3; numTooth--){
 						if (!mouth.getMandibular().getTooth(4, numTooth).isMissing()) {
-							flag = false;
+							flag_left = false;
 							break;
 						}
 					}
@@ -132,18 +134,18 @@ public class MajorConnectorRule {
 				else {
 					for (int numTooth=8; numTooth>=3; numTooth--) {
 						if (!mouth.getMaxillary().getTooth(1, numTooth).isMissing()) {
-							flag = false;
+							flag_left = false;
 							break;
 						}
 					}
 					for (int numTooth=8; numTooth>=3; numTooth--) {
 						if (!mouth.getMaxillary().getTooth(2, numTooth).isMissing()) {
-							flag = false;
+							flag_right = false;
 							break;
 						}
 					}
 				}
-				return flag;
+				return flag_left || flag_right;
 			}
 
 			public KennedyType getKennedyType(Mouth mouth, Position maxillary_or_mandibular) {

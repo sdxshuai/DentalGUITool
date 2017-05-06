@@ -100,7 +100,7 @@ public class SearchRPDPlan {
 		List<RPDPlan> major_connector_plans = new ArrayList<RPDPlan>();
 		major_connector_plans.addAll(indirect_retainer_plans);
 		for (MajorConnectorRule rule : MajorConnectorRule.major_connector_rules) {
-			List<RPDPlan> plans = rule.apply(clasp_plans);
+			List<RPDPlan> plans = rule.apply(major_connector_plans);
 			major_connector_plans.clear();
 			major_connector_plans.addAll(plans);
 		}
@@ -129,9 +129,11 @@ public class SearchRPDPlan {
 //        PlatingRule.initRules(mouth);
 //        RemovingRule.initRules(mouth);
 
+		EdentulousTypeRule.initRules();
 		ChooseAbutmentRule.initRules(mouth);
 		ClaspRule.initRules(mouth);
 		IndirectRetainerRule.initRules(mouth);
+		MajorConnectorRule.initRules(mouth);
 
 		List<RPDPlan> res = new ArrayList<RPDPlan>();
 		RPDPlan empty_plan = new RPDPlan(mouth, Position.Maxillary);
@@ -173,7 +175,15 @@ public class SearchRPDPlan {
 			indirect_retainer_plans_buffer.clear();
 		}
 
-		res.addAll(indirect_retainer_plans);
+		List<RPDPlan> major_connector_plans = new ArrayList<RPDPlan>();
+		major_connector_plans.addAll(indirect_retainer_plans);
+		for (MajorConnectorRule rule : MajorConnectorRule.major_connector_rules) {
+			List<RPDPlan> plans = rule.apply(major_connector_plans);
+			major_connector_plans.clear();
+			major_connector_plans.addAll(plans);
+		}
+
+		res.addAll(major_connector_plans);
 		if (res.size() == 1) {
 			RPDPlan plan = res.get(0);
 			if (plan.isEmptyPlan())

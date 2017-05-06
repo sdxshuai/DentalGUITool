@@ -4,6 +4,7 @@ import rpd.oral.Tooth;
 import rpd.RPDPlan;
 import rpd.conceptions.Position;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Set;
 
 /**
@@ -18,7 +19,20 @@ public class LingualBarConnector extends MajorConnector{
 
 	public LingualBarConnector(Set<Tooth> abutment_teeth) {
 		this.tooth_pos = new ArrayList<>();
-		this.tooth_pos.addAll(abutment_teeth);
+		ArrayList<Tooth> sorted_zone3 = new ArrayList<>();
+		ArrayList<Tooth> sorted_zone4 = new ArrayList<>();
+		for (Tooth tooth:abutment_teeth) {
+			if (tooth.getZone() == 3) {
+				sorted_zone3.add(tooth);
+			}
+			else {
+				sorted_zone4.add(tooth);
+			}
+		}
+		Collections.sort(sorted_zone3);
+		Collections.sort(sorted_zone4);
+		this.tooth_pos.add(sorted_zone3.get(sorted_zone3.size()-1));
+		this.tooth_pos.add(sorted_zone4.get(sorted_zone4.size()-1));
 		this.mandibular_or_maxillary = Position.Mandibular;
 	}
 
@@ -30,7 +44,7 @@ public class LingualBarConnector extends MajorConnector{
 
 		StringBuilder s = new StringBuilder();
 		s.append(super.toString());
-		s.append("上颌舌杆（Lingual Bar）");
+		s.append("下颌舌杆（Lingual Bar）");
 		if (this.lingual_confrontation != null) {
 			s.append("，舌侧对抗（");
 			for (Tooth tooth:this.lingual_confrontation) {

@@ -107,6 +107,32 @@ public class Maxillary {
 		return flag;
 	}
 
+	public boolean isZone1AllMissingExceptIncisor() {
+		boolean flag = true;
+		for (Tooth tooth : zone1) {
+			if (tooth != null && tooth.getToothType() != ToothType.Incisor) {
+				if (!tooth.isMissing()) {
+					flag = false;
+					break;
+				}
+			}
+		}
+		return flag;
+	}
+
+	public boolean isZone2AllMissingExceptIncisor() {
+		boolean flag = true;
+		for (Tooth tooth : zone2) {
+			if (tooth != null && tooth.getToothType() != ToothType.Incisor) {
+				if (!tooth.isMissing()) {
+					flag = false;
+					break;
+				}
+			}
+		}
+		return flag;
+	}
+
 	public boolean isZone1NoMissing() {
 		boolean flag = true;
 		for (Tooth tooth : zone1) {
@@ -155,6 +181,22 @@ public class Maxillary {
 		}
 		return teeth_missing_flags;
 	}
+
+	public List<Tooth> getMissingTeeth() {
+		List<Tooth> res = new ArrayList<Tooth>();
+		for (Tooth tooth : zone1) {
+			if (tooth != null && tooth.getNum() != 8) {
+				if (tooth.isMissing()) res.add(tooth);
+			}
+		}
+		for (Tooth tooth : zone2) {
+			if (tooth != null && tooth.getNum() != 8) {
+				if (tooth.isMissing()) res.add(tooth);
+			}
+		}
+		return res;
+	}
+
 
 	public static List<EdentulousSpace> getEdentulousSpaces(List<Tooth> zone1, List<Tooth> zone2) throws RuleException {
 

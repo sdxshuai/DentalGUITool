@@ -564,7 +564,9 @@ public class LabelTool {
 					mandibular_rpd_plans = SearchRPDPlan.searchMandibular(mouth);
 					maxillary_rpd_plans = SearchRPDPlan.searchMaxillary(mouth);
 					@SuppressWarnings("unused")
-					List<RPDPlan> plans_buffer = mandibular_rpd_plans;
+					List<RPDPlan> plans_buffer = new ArrayList<>();
+					plans_buffer.addAll(mandibular_rpd_plans);
+					plans_buffer.addAll(maxillary_rpd_plans);
 					showRPDPlans();
 				} catch (ParserConfigurationException | SAXException | IOException | ToothMapException
 						| ToothModifierException | PropertyValueException e) {

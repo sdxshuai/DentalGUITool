@@ -151,6 +151,32 @@ public class Mandibular {
 		return flag;
 	}
 
+	public boolean isZone3AllMissingExceptIncisor() {
+		boolean flag = true;
+		for (Tooth tooth : zone3) {
+			if (tooth != null && tooth.getToothType() != ToothType.Incisor) {
+				if (!tooth.isMissing()) {
+					flag = false;
+					break;
+				}
+			}
+		}
+		return flag;
+	}
+
+	public boolean isZone4AllMissingExceptIncisor() {
+		boolean flag = true;
+		for (Tooth tooth : zone4) {
+			if (tooth != null && tooth.getToothType() != ToothType.Incisor) {
+				if (!tooth.isMissing()) {
+					flag = false;
+					break;
+				}
+			}
+		}
+		return flag;
+	}
+
 	public boolean isZone3NoMissing() {
 		boolean flag = true;
 		for (Tooth tooth : zone3) {

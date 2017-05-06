@@ -104,6 +104,22 @@ public class ChooseAbutmentRule {
 		return flag;
 	}
 
+	public boolean isOneSideAllMissingExceptIncisor(Mouth mouth, Position position) {
+		boolean flag = false;
+		if (position == Position.Mandibular) {
+			if (mouth.getMandibular().isZone3AllMissingExceptIncisor()
+					|| mouth.getMandibular().isZone4AllMissingExceptIncisor()) {
+				flag = true;
+			}
+		} else if (position == Position.Maxillary) {
+			if (mouth.getMaxillary().isZone1AllMissingExceptIncisor()
+					|| mouth.getMaxillary().isZone2AllMissingExceptIncisor()) {
+				flag = true;
+			}
+		}
+		return flag;
+	}
+
 	public boolean isSingleZone(Set<Tooth> abutment_teeth) {
 		boolean flag = true;
 		int tooth_zone = 0;
@@ -351,7 +367,7 @@ public class ChooseAbutmentRule {
 		choose_abutment_rules.add(new ChooseAbutmentRule() {
 
 			public String getExplaination() {
-				return "如果不是一侧全部缺牙，不能全部在同一个zone";
+				return "如果不是一侧除切牙外全部缺牙，不能全部在同一个zone";
 			}
 
 			public String toString() {
@@ -364,7 +380,7 @@ public class ChooseAbutmentRule {
 
 			public List<RPDPlan> apply(List<RPDPlan> rpd_plans) throws RuleException {
 				List<RPDPlan> res = new ArrayList<>();
-				if (isOneSideAllMissing(mouth, rpd_plans.get(0).getPosition())) {
+				if (isOneSideAllMissingExceptIncisor(mouth, rpd_plans.get(0).getPosition())) {
 					res.addAll(rpd_plans);
 				} else {
 					for (RPDPlan plan : rpd_plans) {
