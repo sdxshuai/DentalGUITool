@@ -18,6 +18,12 @@ public class ToothMap {
 		this.end_index = end_index;
 	}
 
+	public ToothMap(ToothMap toothMap) {
+
+		this.tooth_map_str = toothMap.getToothMapString();
+		this.start_index = toothMap.getStartIndex();
+		this.end_index = toothMap.getEndIndex();
+	}
 	//取出下颌部分
 	public String getMandibular() throws ToothMapException {
 

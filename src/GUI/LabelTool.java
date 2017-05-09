@@ -1,19 +1,13 @@
 package GUI;
 
-import java.awt.EventQueue;
-import java.awt.BorderLayout;
-import java.awt.Color;
+import java.awt.*;
 
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
-import javax.swing.JTextPane;
-import javax.swing.JTree;
+import javax.swing.*;
+import javax.swing.border.Border;
+import javax.swing.event.TableModelEvent;
+import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.text.BadLocationException;
-import javax.swing.text.DefaultStyledDocument;
-import javax.swing.text.SimpleAttributeSet;
-import javax.swing.text.StyleConstants;
+import javax.swing.text.*;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.TreeNode;
 import javax.swing.tree.TreePath;
@@ -27,23 +21,20 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
-import org.apache.jena.ontology.DatatypeProperty;
-import org.apache.jena.ontology.OntModel;
-import org.apache.jena.ontology.OntModelSpec;
-import org.apache.jena.ontology.OntProperty;
-import org.apache.jena.ontology.OntResource;
+import com.sun.org.apache.xpath.internal.operations.Mod;
+import com.sun.xml.internal.bind.v2.schemagen.xmlschema.Occurs;
+import org.apache.jena.ontology.*;
+import org.apache.jena.ontology.impl.OntModelImpl;
+import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.ModelFactory;
+import org.apache.jena.rdf.model.RDFNode;
 import org.apache.jena.vocabulary.XSD;
+import org.opencv.core.Mat;
+import org.opencv.imgcodecs.Imgcodecs;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
-
-import javax.swing.JPanel;
-import javax.swing.JButton;
-import javax.swing.JComponent;
-import javax.swing.JDialog;
-import javax.swing.JFileChooser;
 
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
@@ -74,48 +65,45 @@ import ontologies.StringPropertyValue;
 import rpd.BeamSearch;
 import rpd.RPDPlan;
 import rpd.SearchRPDPlan;
+import rpd.components.*;
+import rpd.oral.EdentulousSpace;
 import rpd.oral.Instantialize;
 import rpd.oral.Mouth;
 import rpd.oral.Tooth;
+import rpd.conceptions.Position;
+import rpd.conceptions.ClaspMaterial;
 
+import java.awt.Component;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
+import java.io.*;
 import java.util.*;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.awt.FlowLayout;
-import javax.swing.JMenu;
-import javax.swing.JMenuItem;
-import java.awt.GridLayout;
-import java.awt.Toolkit;
-import java.awt.Font;
-import javax.swing.JScrollPane;
-import javax.swing.JPopupMenu;
-import java.awt.Component;
 import java.awt.Dialog.ModalityType;
-import java.awt.Dimension;
 
-import javax.swing.JTable;
-import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
-import javax.swing.JCheckBox;
-import javax.swing.JComboBox;
 
 import java.awt.event.ItemListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 
+import static org.opencv.imgcodecs.Imgcodecs.imread;
+import static org.opencv.imgcodecs.Imgcodecs.imwrite;
+
 public class LabelTool {
+
+	static {
+		System.loadLibrary("RpdDesignLib");
+		System.loadLibrary("opencv_java320");
+	}
+
+	public static native Mat getRpdDesign(OntModel ontModel, Mat mat);
+
+	public static native Mat getRpdDesign(OntModel ontModel);
 
 	private OntModel dental_ont = null;
 
@@ -182,9 +170,16 @@ public class LabelTool {
 	 */
 	public static void main(String[] args) throws IOException, PropertyValueException {
 
+//		OntModel ontModel = ModelFactory.createOntologyModel(OntModelSpec.OWL_DL_MEM);
+//		ontModel.read("res//sample.owl");
+//		Mat base = imread("D:/Codes/DentalGUITool/res/base.png");
+//		imwrite("design_with_base.png", getRpdDesign(ontModel, base));
+//		imwrite("design.png", getRpdDesign(ontModel));
+
 //		File owl_file = new File("res//CDSSinRPD_ontology_161209.owl");
 		File owl_file = new File("res//CDSSinRPD_ontology_170406.owl");
 		File modifier_file = new File("res//label_modifier_description.txt");
+
 
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -237,10 +232,13 @@ public class LabelTool {
 		this.chckbx_show_all_labels = chckbx_show_all_labels;
 
 		label_table = new JTable();
+
+
 		ListSelectionModel label_table_model = label_table.getSelectionModel();
 		label_table_model.addListSelectionListener(new ListSelectionListener() {
 
 			public void valueChanged(ListSelectionEvent e) {
+//				label_table.validate();
 
 				int selected_row = label_table.getSelectedRow();
 				if (selected_row == -1)
@@ -508,6 +506,7 @@ public class LabelTool {
 					String input_file_path = file.getCanonicalPath();
 					int dot_index = input_file_path.lastIndexOf(".");
 					String xml_file_path = input_file_path.substring(0, dot_index) + ".xml";
+					updateLabelList();
 					writeLabelsAsXml(new File(xml_file_path));
 				} catch (IOException e1) {
 					e1.printStackTrace();
@@ -563,11 +562,35 @@ public class LabelTool {
 					//rpd_plans = BeamSearch.searchMandibular(mouth);
 					mandibular_rpd_plans = SearchRPDPlan.searchMandibular(mouth);
 					maxillary_rpd_plans = SearchRPDPlan.searchMaxillary(mouth);
+//					int design_count = 0;
+//					for (RPDPlan plan:mandibular_rpd_plans) {
+//						design_count++;
+//						OntModel design_ont = ModelFactory.createOntologyModel(OntModelSpec.OWL_DL_MEM);
+//						design_ont.read("file:" + owl_file.getCanonicalPath());
+//						planToOwl(plan, design_ont);
+//						FileWriter out = new FileWriter("res//" + design_count+"_owl.owl");
+//						design_ont.write(out);
+//						imwrite(design_count + "mandibular_design.png", getRpdDesign(design_ont));
+//					}
+//
+//					for (RPDPlan plan:maxillary_rpd_plans) {
+//						design_count++;
+//						OntModel design_ont = ModelFactory.createOntologyModel(OntModelSpec.OWL_DL_MEM);
+//						design_ont.read("file:" + owl_file.getCanonicalPath());
+//						planToOwl(plan, design_ont);
+//						FileWriter out = new FileWriter("res//" + design_count+"_owl.owl");
+//						design_ont.write(out);
+//						imwrite(design_count + "maxillary_design.png", getRpdDesign(design_ont));
+//					}
+
 					@SuppressWarnings("unused")
 					List<RPDPlan> plans_buffer = new ArrayList<>();
-					plans_buffer.addAll(mandibular_rpd_plans);
-					plans_buffer.addAll(maxillary_rpd_plans);
-					showRPDPlans();
+					if (mandibular_rpd_plans != null) plans_buffer.addAll(mandibular_rpd_plans);
+					if (maxillary_rpd_plans != null) plans_buffer.addAll(maxillary_rpd_plans);
+					drawRPDPlans();
+//					drawRPDPlans(mandibular_rpd_plans);
+//					drawRPDPlans(maxillary_rpd_plans);
+//					showRPDPlans();
 				} catch (ParserConfigurationException | SAXException | IOException | ToothMapException
 						| ToothModifierException | PropertyValueException e) {
 					e.printStackTrace();
@@ -701,6 +724,152 @@ public class LabelTool {
 			}
 		});
 	}
+
+	private void drawRPDPlans() throws java.io.IOException, exceptions.rpd.RuleException {
+		if ((this.mandibular_rpd_plans == null || this.mandibular_rpd_plans.size() == 0)
+				&& (this.maxillary_rpd_plans == null || this.maxillary_rpd_plans.size() == 0)) {
+			return;
+		}
+		JDialog design_dialog = new JDialog(this.frame, "设计图");
+		JPanel rpd_plan_panel = new JPanel(new FlowLayout());
+		int total_height = 0;
+		int total_width = 0;
+		int line_height = 460;
+
+		if (!(this.mandibular_rpd_plans == null || this.mandibular_rpd_plans.size() == 0)) {
+
+			generateAndSaveRPDPlanPicture(this.mandibular_rpd_plans);
+
+			total_height += line_height;
+			for (int i=1;i<=3;i++){
+				ImageIcon im = new ImageIcon("out//picture//mandibular_RPD_design_" + i + ".png");
+				int src_im_height = im.getIconHeight();
+				int src_im_width = im.getIconWidth();
+				double scale_factor = (double)line_height/(double) src_im_height;
+				double rescale_height = src_im_height * scale_factor;
+				double rescale_width = src_im_width * scale_factor;
+				int dest_im_width = (int)rescale_width;
+				int dest_im_height = (int)rescale_height;
+				im.setImage(im.getImage().getScaledInstance(dest_im_width, dest_im_height, Image.SCALE_DEFAULT));
+				JLabel rpd_plan_label = new JLabel();
+				rpd_plan_label.setSize(dest_im_width, dest_im_height);
+				rpd_plan_label.setIcon(im);
+				Border label_border = BorderFactory.createLineBorder(Color.BLACK);
+				rpd_plan_label.setBorder(label_border);
+
+				rpd_plan_panel.add(rpd_plan_label);
+				total_width += dest_im_width;
+			}
+
+			rpd_plan_panel.setSize(total_width, line_height);
+			design_dialog.add(rpd_plan_panel);
+		}
+
+		if (!(this.maxillary_rpd_plans == null || this.maxillary_rpd_plans.size() == 0)) {
+			generateAndSaveRPDPlanPicture(this.maxillary_rpd_plans);
+
+			total_height += line_height;
+			total_width = 0;
+			for (int i=1;i<=3;i++){
+				ImageIcon im = new ImageIcon("out//picture//maxillary_RPD_design_" + i + ".png");
+				int src_im_height = im.getIconHeight();
+				int src_im_width = im.getIconWidth();
+				double scale_factor = (double)line_height/(double)src_im_height;
+				double rescale_height = src_im_height * scale_factor;
+				double rescale_width = src_im_width * scale_factor;
+				int dest_im_width = (int)rescale_width;
+				int dest_im_height = (int)rescale_height;
+				im.setImage(im.getImage().getScaledInstance(dest_im_width, dest_im_height, Image.SCALE_DEFAULT));
+				JLabel rpd_plan_label = new JLabel();
+				rpd_plan_label.setSize(dest_im_width, dest_im_height);
+				rpd_plan_label.setIcon(im);
+				Border label_border = BorderFactory.createLineBorder(Color.BLACK);
+				rpd_plan_label.setBorder(label_border);
+
+				rpd_plan_panel.add(rpd_plan_label);
+				total_width += dest_im_width;
+			}
+			rpd_plan_panel.setSize(total_width, line_height);
+			design_dialog.add(rpd_plan_panel);
+		}
+
+		total_width += 100;
+		total_height += 20;
+		rpd_plan_panel.setSize(total_width,total_height);
+		design_dialog.setSize(total_width, total_height+40);
+		design_dialog.setLocationRelativeTo(null);
+		design_dialog.setVisible(true);
+	}
+
+	private void drawRPDPlans(List<RPDPlan> plans) throws java.io.IOException, exceptions.rpd.RuleException {
+		if (plans == null || plans.size() == 0) {
+			return;
+		}
+		JDialog design_dialog = new JDialog(this.frame, "设计图");
+		JPanel rpd_plan_panel = new JPanel(new FlowLayout());
+		Border panel_border = BorderFactory.createEmptyBorder(5, 5, 5, 5);
+		rpd_plan_panel.setBorder(panel_border);
+
+		int total_height = 0;
+		int total_width = 0;
+		int line_height = 500;
+
+		generateAndSaveRPDPlanPicture(plans);
+
+		total_height += line_height;
+		String plan_position_str = plans.get(0).getPosition().toString();
+		for (int i=1;i<=3;i++){
+			ImageIcon im = new ImageIcon("out//picture//" + plan_position_str + "_RPD_design_" + i + ".png");
+			int src_im_height = im.getIconHeight();
+			int src_im_width = im.getIconWidth();
+			double scale_factor = (double)line_height/(double) src_im_height;
+			double rescale_height = src_im_height * scale_factor;
+			double rescale_width = src_im_width * scale_factor;
+			int dest_im_width = (int)rescale_width;
+			int dest_im_height = (int)rescale_height;
+			im.setImage(im.getImage().getScaledInstance(dest_im_width, dest_im_height, Image.SCALE_DEFAULT));
+			JLabel rpd_plan_label = new JLabel();
+			rpd_plan_label.setSize(dest_im_width, dest_im_height);
+			rpd_plan_label.setIcon(im);
+			Border label_border = BorderFactory.createLineBorder(Color.BLACK);
+			rpd_plan_label.setBorder(label_border);
+
+			rpd_plan_panel.add(rpd_plan_label);
+			total_width += dest_im_width;
+		}
+
+		rpd_plan_panel.setSize(total_width, line_height);
+		design_dialog.add(rpd_plan_panel);
+
+		total_width += 100;
+		total_height += 20;
+		rpd_plan_panel.setSize(total_width,total_height);
+		design_dialog.setSize(total_width, total_height+40);
+		design_dialog.setLocationRelativeTo(null);
+		design_dialog.setVisible(true);
+	}
+
+	private void generateAndSaveRPDPlanPicture(List<RPDPlan> plans)
+			throws java.io.IOException, exceptions.rpd.RuleException {
+		if (plans == null || plans.size() == 0) {
+			return;
+		}
+		String plan_position_str = plans.get(0).getPosition().toString();
+		int design_count = 0;
+		for (RPDPlan plan:plans) {
+			design_count++;
+			OntModel design_ont = ModelFactory.createOntologyModel(OntModelSpec.OWL_DL_MEM);
+			design_ont.read("file:" + owl_file.getCanonicalPath());
+			planToOwl(plan, design_ont);
+			String output_ont = "out//ontology//" + plan_position_str + "_RPD_design_" + design_count + ".owl";
+			String output_picture = "out//picture//" + plan_position_str + "_RPD_design_" + design_count + ".png";
+			FileWriter out = new FileWriter(output_ont);
+			design_ont.write(out);
+			imwrite(output_picture, getRpdDesign(design_ont));
+		}
+	}
+
+
 
 	private void showRPDPlans() throws IOException {
 
@@ -1182,7 +1351,7 @@ public class LabelTool {
 		}
 	}
 
-	private void addEMRTextPopup(Component component, final JPopupMenu popup) {
+	private void addEMRTextPopup(java.awt.Component component, final JPopupMenu popup) {
 		component.addMouseListener(new MouseAdapter() {
 
 			public void mousePressed(MouseEvent e) {
@@ -1341,6 +1510,87 @@ public class LabelTool {
 			return null;
 		else
 			return tooth_maps.get(i - 1);
+	}
+
+	private void updateLabelList() {
+		List<PropertyLabel> new_lable_list = new ArrayList<>();
+		for (int num_row=0; num_row<label_table.getRowCount(); num_row++) {
+			int start_offset = -1;
+			int end_offset = -1;
+			String property_text = null;
+			String property_str = null;
+			DatatypeProperty property = null;
+			String value_type = null;
+			String value_str = null;
+			PropertyValue value = null;
+			LabelModifier modifier = null;
+			ToothMap tooth_map = null;
+
+
+
+			start_offset = label_list.get(0).getStartOffset();
+			end_offset = label_list.get(0).getEndOffset();
+			if (label_table.getModel().getValueAt(num_row, 0) != null) {
+				if (label_table.getModel().getValueAt(num_row, 0).getClass() == ToothMap.class) {
+					tooth_map = (ToothMap) label_table.getModel().getValueAt(num_row, 0);
+				}
+				else {
+					tooth_map = new ToothMap(
+							(String) label_table.getModel().getValueAt(num_row, 0),
+							label_list.get(num_row).getStartOffset(),
+							label_list.get(num_row).getEndOffset());
+				}
+			}
+			if (label_table.getModel().getValueAt(num_row, 1) != null) {
+				property_text = (String) label_table.getModel().getValueAt(num_row, 1);
+			}
+			if (label_table.getModel().getValueAt(num_row, 2) != null) {
+				property_str = (String) label_table.getModel().getValueAt(num_row, 2);
+				property = this.dental_ont.getDatatypeProperty(OntFunc.prefix + property_str);
+			}
+			if (label_table.getModel().getValueAt(num_row, 3) != null) {
+				if (label_table.getModel().getValueAt(num_row, 3) instanceof PropertyValue) {
+					value = (PropertyValue) label_table.getModel().getValueAt(num_row, 3);
+				}
+				else {
+					value_str = (String) label_table.getModel().getValueAt(num_row, 3);
+					String NS = "http://www.w3.org/2001/XMLSchema#";
+					if (property.hasRange(dental_ont.getOntResource(NS + "boolean"))) {
+						if (value_str.equals("0") || value_str.equals("false")) {
+							value = new BooleanPropertyValue(false);
+						}
+						else if (value_str.equals("1") || value_str.equals("true")) {
+							value = new BooleanPropertyValue(true);
+						}
+					}
+					else if (property.hasRange(dental_ont.getOntResource(NS + "list"))) {
+						value = new ListPropertyValue(Integer.valueOf(value_str));
+					}
+					else if (property.hasRange(dental_ont.getOntResource(NS + "int"))) {
+						value = new IntPropertyValue(Integer.valueOf(value_str));
+					}
+					else if (property.hasRange(dental_ont.getOntResource(NS + "double"))) {
+						value = new DoublePropertyValue(Double.valueOf(value_str));
+					}
+					else if (property.hasRange(dental_ont.getOntResource(NS + "string"))) {
+						value = new StringPropertyValue(value_str);
+					}
+				}
+			}
+			if (label_table.getModel().getValueAt(num_row, 5) != null) {
+				if (label_table.getModel().getValueAt(num_row, 5).getClass() == LabelModifier.class) {
+					modifier = (LabelModifier) label_table.getModel().getValueAt(num_row, 5);
+				}
+				else {
+					modifier = LabelModifier.valueOf((String) label_table.getModel().getValueAt(num_row, 5));
+				}
+			}
+			PropertyLabel label = new PropertyLabel(
+					start_offset, end_offset, property_text, property, value, modifier, tooth_map);
+			new_lable_list.add(label);
+		}
+		label_list.clear();
+		label_list.addAll(new_lable_list);
 	}
 
 	private void writeLabelsAsXml(File label_xml_file) throws ParserConfigurationException,
@@ -1708,6 +1958,398 @@ public class LabelTool {
 			tooth_map_item.setFont(new Font("微软雅黑", Font.PLAIN, 20));
 			tooth_map_menu.add(tooth_map_item);
 			this.tooth_map_items.add(tooth_map_item);
+		}
+	}
+
+	public void planToOwl(RPDPlan plan, OntModel resOnt) throws exceptions.rpd.RuleException, java.io.IOException {
+//		FileWriter out = new FileWriter("instance_model.owl");
+//		template_model.write(out);
+//		File instance_model_file = new File("instance_model.owl");
+//		OntModel resOnt = ModelFactory.createOntologyModel(OntModelSpec.OWL_DL_MEM);
+//		resOnt.read("file:" + instance_model_file.getCanonicalPath());
+		String SOURCE = "http://www.semanticweb.org/msiip/ontologies/CDSSinRPD";
+		String NS = SOURCE + "#";
+		int indCount = 0;
+
+		Map<ArrayList<Tooth>, Set<rpd.components.Component>> tooth_components = plan.getToothComponents();
+		for (ArrayList<Tooth> tooth_pos:tooth_components.keySet())
+			for (rpd.components.Component component:tooth_components.get(tooth_pos)) {
+				indCount++;
+				String className = component.getClass().getName();
+				switch (className) {
+					case "rpd.components.AkerClasp":
+						addAkerClaspToOwl(component, resOnt, NS, indCount);
+						break;
+					case "rpd.components.WroughtWireClasp":
+						addWroughtWireClaspToOwl(component, resOnt, NS, indCount);
+						break;
+					case "rpd.components.CombinationClasp":
+						addCombinationClaspToOwl(component, resOnt, NS, indCount);
+						break;
+					case "rpd.components.CanineClasp":
+						addCanineClaspToOwl(component, resOnt, NS, indCount);
+						break;
+					case "rpd.components.CanineAkerClasp":
+						addCanineAkerClaspToOwl(component, resOnt, NS, indCount);
+						break;
+					case "rpd.components.HalfHalfClasp":
+						addHalfHalfClaspToOwl(component, resOnt, NS, indCount);
+						break;
+					case "rpd.components.BackActionClasp":
+						addBackActionClaspToOwl(component, resOnt, NS, indCount);
+						break;
+					case "rpd.components.ReverseBackActionClasp":
+						addReverseBackActionClaspToOwl(component, resOnt, NS, indCount);
+						break;
+					case "rpd.components.RingClasp":
+						addRingClaspToOwl(component, resOnt, NS, indCount);
+						break;
+					case "rpd.components.CombinedClasp":
+						addCombinedClaspToOwl(component, resOnt, NS, indCount);
+						break;
+					case "rpd.components.EmbrasureClasp":
+						addEmbrasureClaspToOwl(component, resOnt, NS, indCount);
+						break;
+					case "rpd.components.ContinuousClasp":
+						addContinuousClaspToOwl(component, resOnt, NS, indCount);
+						break;
+					case "rpd.components.RPAClasp":
+						addRPAClaspToOwl(component, resOnt, NS, indCount);
+						break;
+					case "rpd.components.OcclusalRest":
+						addOcclusalRestToOwl(component, resOnt, NS, indCount);
+						break;
+					case "rpd.components.LingualRest":
+						addLingualRestToOwl(component, resOnt, NS, indCount);
+						break;
+					case "rpd.components.SinglePalatalStrapConnector":
+						addSinglePalatalStrapConnectorToOwl(component, resOnt, NS, indCount);
+						break;
+					case "rpd.components.CombinationAnteriorPosteriorPalatalStrapConnector":
+						addCombinationAnteriorPosteriorPalatalStrapConnectorToOwl(component, resOnt, NS, indCount);
+						break;
+					case "rpd.components.PalatalPlateConnector":
+						addPalatalPlateConnectorToOwl(component, resOnt, NS, indCount);
+						break;
+					case "rpd.components.FullPalatalPlateConnector":
+						addFullPalatalPlateConnectorToOwl(component, resOnt, NS, indCount);
+						break;
+					case "rpd.components.ModifiedPalatalPlateConnector":
+						addModifiedPalatalPlateConnectorToOwl(component, resOnt, NS, indCount);
+						break;
+					case "rpd.components.LingualBarConnector":
+						addLingualBarConnectorToOwl(component, resOnt, NS, indCount);
+						break;
+					case "rpd.components.LingualPlateConnector":
+						addLingualPlateConnectorToOwl(component, resOnt, NS, indCount);
+						break;
+					case "rpd.components.DentureBase":
+						addDentureBase(component, resOnt, NS, indCount);
+						break;
+				}
+			}
+		for (EdentulousSpace edentulousSpace:plan.getEdentulousSpaces()) {
+			indCount++;
+			addEdentulousSpace(edentulousSpace, resOnt, NS, indCount);
+		}
+		return;
+	}
+
+	public void addEdentulousSpace(EdentulousSpace edentulousSpace, OntModel model, String NS, int indCount) {
+
+		OntClass edentulousSpaceClass = model.getOntClass(NS + "edentulous_space");
+		Individual indEdentulousSpace = model.createIndividual(NS + indCount, edentulousSpaceClass);
+		OntProperty component_position = model.getObjectProperty(NS + "component_position");
+		indEdentulousSpace.addProperty(
+				component_position,
+				model.getIndividual(NS + edentulousSpace.getLeftMost().toString()));
+//		indEdentulousSpace.addProperty(
+//				component_position,
+//				model.getIndividual(NS + edentulousSpace.getRightMost().toString()));
+		if (!edentulousSpace.getRightMost().equals(edentulousSpace.getLeftMost())) {
+			indEdentulousSpace.addProperty(
+				component_position,
+				model.getIndividual(NS + edentulousSpace.getRightMost().toString()));
+		}
+
+		return;
+	}
+
+	public void addDentureBase(rpd.components.Component base, OntModel model, String NS, int indCount) {
+		DentureBase dentureBase = (DentureBase) base;
+		OntClass dentureBaseClass = model.getOntClass(NS + "denture_base");
+		Individual indDentureBase = model.createIndividual(NS + indCount, dentureBaseClass);
+		setComponentToothPos(model, indDentureBase, dentureBase.getToothPos(), NS);
+	}
+
+	public void addAkerClaspToOwl(rpd.components.Component clasp, OntModel model, String NS, int indCount) {
+
+		AkerClasp akerClasp = (AkerClasp) clasp;
+		OntClass akerClaspClass = model.getOntClass(NS + "aker_clasp");
+		Individual indAkerClasp = model.createIndividual(NS+indCount, akerClaspClass);
+		setClaspTipDirection(model, indAkerClasp, akerClasp.getTipDirection(), NS);
+		setClaspMaterial(model, indAkerClasp, akerClasp.getMaterial(), NS);
+		setComponentToothPos(model, indAkerClasp, akerClasp.getToothPos(), NS);
+		return;
+	}
+
+	public void addWroughtWireClaspToOwl(rpd.components.Component clasp, OntModel model, String NS, int indCount) {
+
+		WroughtWireClasp wroughtWireClasp = (WroughtWireClasp) clasp;
+		OntClass wroughtWireClaspClass = model.getOntClass(NS + "wrought_wire_clasp");
+		Individual indWroughtWireClasp = model.createIndividual(NS + indCount, wroughtWireClaspClass);
+		setClaspTipDirection(model, indWroughtWireClasp, wroughtWireClasp.getTipDirection(), NS);
+		setClaspMaterial(model, indWroughtWireClasp, wroughtWireClasp.getMaterial(), NS);
+		setComponentToothPos(model, indWroughtWireClasp, wroughtWireClasp.getToothPos(), NS);
+		return;
+	}
+
+	public void addCombinationClaspToOwl(rpd.components.Component clasp, OntModel model, String NS, int indCount) {
+		CombinationClasp combinationClasp = (CombinationClasp) clasp;
+		OntClass combinationClaspClass = model.getOntClass(NS + "combination_clasp");
+		Individual indCombinationClasp = model.createIndividual(NS+indCount, combinationClaspClass);
+		setClaspTipDirection(model, indCombinationClasp, combinationClasp.getTipDirection(), NS);
+		setComponentToothPos(model, indCombinationClasp, combinationClasp.getToothPos(), NS);
+		return;
+	}
+
+	public void addCanineClaspToOwl(rpd.components.Component clasp, OntModel model, String NS, int indCount) {
+
+		CanineClasp canineClasp = (CanineClasp) clasp;
+		OntClass canineClaspClass = model.getOntClass(NS + "canine_clasp");
+		Individual indCanineClasp = model.createIndividual(NS + indCount, canineClaspClass);
+		setClaspTipDirection(model, indCanineClasp, canineClasp.getTipDirection(), NS);
+		setClaspMaterial(model, indCanineClasp, canineClasp.getMaterial(), NS);
+		return;
+	}
+
+	public void addCanineAkerClaspToOwl(rpd.components.Component clasp, OntModel model, String NS, int indCount) {
+
+		CanineAkerClasp canineAkerClasp = (CanineAkerClasp) clasp;
+		OntClass canineAkerClaspClass = model.getOntClass(NS + "canine_aker_clasp");
+		Individual indCanineAkerClasp = model.createIndividual(NS + indCount, canineAkerClaspClass);
+		setClaspTipDirection(model, indCanineAkerClasp, canineAkerClasp.getTipDirection(), NS);
+		setClaspMaterial(model, indCanineAkerClasp, canineAkerClasp.getMaterial(), NS);
+		setComponentToothPos(model, indCanineAkerClasp, canineAkerClasp.getToothPos(), NS);
+		return;
+	}
+
+	public void addHalfHalfClaspToOwl(rpd.components.Component clasp, OntModel model, String NS, int indCount) {
+
+		HalfHalfClasp halfHalfClasp = (HalfHalfClasp) clasp;
+		OntClass halfHalfClaspClass = model.getOntClass(NS + "half_and_half_clasp");
+		Individual indHalfHalfClasp = model.createIndividual(NS + indCount, halfHalfClaspClass);
+		setClaspMaterial(model, indHalfHalfClasp, halfHalfClasp.getMaterial(), NS);
+		setComponentToothPos(model, indHalfHalfClasp, halfHalfClasp.getToothPos(), NS);
+		return;
+	}
+
+	public void addBackActionClaspToOwl(rpd.components.Component clasp, OntModel model, String NS, int indCount) {
+
+		BackActionClasp backActionClasp = (BackActionClasp) clasp;
+		OntClass backActionClaspClass = model.getOntClass(NS + "back_action_clasp");
+		Individual indBackActionClasp = model.createIndividual(NS + indCount, backActionClaspClass);
+		setClaspTipDirection(model, indBackActionClasp, backActionClasp.getTipDirection(), NS);
+		setClaspMaterial(model, indBackActionClasp, backActionClasp.getMaterial(), NS);
+		setComponentToothPos(model, indBackActionClasp, backActionClasp.getToothPos(), NS);
+		return;
+	}
+
+	public void addReverseBackActionClaspToOwl(
+			rpd.components.Component clasp, OntModel model, String NS, int indCount) {
+
+		ReverseBackActionClasp reverseBackActionClasp = (ReverseBackActionClasp) clasp;
+		OntClass reverseBackActionClaspClass = model.getOntClass(NS + "reverse_back_action_clasp");
+		Individual indReverseBackActionClasp = model.createIndividual(NS + indCount, reverseBackActionClaspClass);
+		setClaspTipDirection(model, indReverseBackActionClasp, reverseBackActionClasp.getTipDirection(), NS);
+		setClaspMaterial(model, indReverseBackActionClasp, reverseBackActionClasp.getMaterial(), NS);
+		setComponentToothPos(model, indReverseBackActionClasp, reverseBackActionClasp.getToothPos(), NS);
+		return;
+	}
+
+	public void addRingClaspToOwl(rpd.components.Component clasp, OntModel model, String NS, int indCount) {
+
+		RingClasp ringClasp = (RingClasp) clasp;
+		OntClass ringClaspClass = model.getOntClass(NS + "ring_clasp");
+		Individual indRingClasp = model.createIndividual(NS+indCount, ringClaspClass);
+		setClaspTipDirection(model, indRingClasp, ringClasp.getTipDirection(), NS);
+		setClaspMaterial(model, indRingClasp, ringClasp.getMaterial(), NS);
+		setComponentToothPos(model, indRingClasp, ringClasp.getToothPos(), NS);
+		return;
+	}
+
+	public void addCombinedClaspToOwl(rpd.components.Component clasp, OntModel model, String NS, int indCount) {
+
+		CombinedClasp combinedClasp = (CombinedClasp) clasp;
+		OntClass combinedClaspClass = model.getOntClass(NS + "combined_clasp");
+		Individual indCombinedClasp = model.createIndividual(NS + indCount, combinedClaspClass);
+		setClaspMaterial(model, indCombinedClasp, combinedClasp.getMaterial(), NS);
+		setComponentToothPos(model, indCombinedClasp, combinedClasp.getToothPos(), NS);
+		return;
+	}
+
+	public void addEmbrasureClaspToOwl(rpd.components.Component clasp, OntModel model, String NS, int indCount) {
+
+		EmbrasureClasp embrasureClasp = (EmbrasureClasp) clasp;
+		OntClass embrasureClaspClass = model.getOntClass(NS + "embrasure_clasp");
+		Individual indEmbrasureClasp = model.createIndividual(NS + indCount, embrasureClaspClass);
+		setClaspMaterial(model, indEmbrasureClasp, embrasureClasp.getMaterial(), NS);
+		setComponentToothPos(model, indEmbrasureClasp, embrasureClasp.getToothPos(), NS);
+		return;
+	}
+
+	public void addContinuousClaspToOwl(rpd.components.Component clasp, OntModel model, String NS, int indCount) {
+
+		ContinuousClasp continuousClasp = (ContinuousClasp) clasp;
+		OntClass continuousClaspClass = model.getOntClass(NS + "continuous_clasp");
+		Individual indContinuousClasp = model.createIndividual(NS + indCount, continuousClaspClass);
+		setClaspMaterial(model, indContinuousClasp, continuousClasp.getMaterial(), NS);
+		setComponentToothPos(model, indContinuousClasp, continuousClasp.getToothPos(), NS);
+		return;
+	}
+
+	public void addRPAClaspToOwl(rpd.components.Component clasp, OntModel model, String NS, int indCount) {
+
+		RPAClasp RPAClasp = (RPAClasp) clasp;
+		OntClass RPAClaspClass = model.getOntClass(NS + "RPA_clasps");
+		Individual indRPAClasp = model.createIndividual(NS + indCount, RPAClaspClass);
+		setClaspTipDirection(model, indRPAClasp, RPAClasp.getTipDirection(), NS);
+		setClaspMaterial(model, indRPAClasp, RPAClasp.getMaterial(), NS);
+		setComponentToothPos(model, indRPAClasp, RPAClasp.getToothPos(), NS);
+		return;
+	}
+
+	public void addOcclusalRestToOwl(rpd.components.Component rest, OntModel model, String NS, int indCount) {
+
+		OcclusalRest occlusalRest = (OcclusalRest) rest;
+		OntClass occlusalRestClass = model.getOntClass(NS + "occlusal_rest");
+		Individual indOcclusalRest = model.createIndividual(NS + indCount, occlusalRestClass);
+		setRestMesialOrDistal(model, indOcclusalRest, occlusalRest.getMesialOrDistal(), NS);
+		setComponentToothPos(model, indOcclusalRest, occlusalRest.getToothPos(), NS);
+		return;
+	}
+
+	public void addLingualRestToOwl(rpd.components.Component rest, OntModel model, String NS, int indCount) {
+
+		LingualRest lingualRest = (LingualRest) rest;
+		OntClass lingualRestClass = model.getOntClass(NS + "lingual_rest");
+		Individual indLingualRest = model.createIndividual(NS + indCount, lingualRestClass);
+		setComponentToothPos(model, indLingualRest, lingualRest.getToothPos(), NS);
+		return;
+	}
+
+	public void addSinglePalatalStrapConnectorToOwl(
+			rpd.components.Component connector, OntModel model, String NS, int indCount) {
+
+		SinglePalatalStrapConnector singlePalatalStrapConnector = (SinglePalatalStrapConnector) connector;
+		OntClass singlePalatalStrapConnectorClass = model.getOntClass(NS + "single_palatal_strap");
+		Individual indSinglePalatalStrapConnector
+				= model.createIndividual(NS + indCount, singlePalatalStrapConnectorClass);
+		setComponentToothPos(model, indSinglePalatalStrapConnector, singlePalatalStrapConnector.getToothPos(), NS);
+		return;
+	}
+
+	public void addCombinationAnteriorPosteriorPalatalStrapConnectorToOwl(
+			rpd.components.Component connector, OntModel model, String NS, int indCount) {
+
+		CombinationAnteriorPosteriorPalatalStrapConnector CAPPSConnector
+				= (CombinationAnteriorPosteriorPalatalStrapConnector) connector;
+		OntClass CAPPSConnectorClass = model.getOntClass(NS + "combination_anterior_posterior_palatal_strap");
+		Individual indCAPPSConnector = model.createIndividual(NS + indCount, CAPPSConnectorClass);
+		setComponentToothPos(model, indCAPPSConnector, CAPPSConnector.getToothPos(), NS);
+		return;
+	}
+
+	public void addPalatalPlateConnectorToOwl(
+			rpd.components.Component connector, OntModel model, String NS, int indCount) {
+
+		PalatalPlateConnector palatalPlateConnector = (PalatalPlateConnector) connector;
+		OntClass palatalPlateConnectorClass = model.getOntClass(NS + "palatal_plate");
+		Individual indPalatalPlateConnector = model.createIndividual(NS + indCount, palatalPlateConnectorClass);
+		setComponentToothPos(model, indPalatalPlateConnector, palatalPlateConnector.getToothPos(), NS);
+		return;
+	}
+
+	public void addFullPalatalPlateConnectorToOwl(
+			rpd.components.Component cnnector, OntModel model, String NS, int indCount) {
+
+		FullPalatalPlateConnector fullPalatalPlateConnector = (FullPalatalPlateConnector) cnnector;
+		OntClass fullPalatalPlateConnectorClass = model.getOntClass(NS + "full_palatal_plate");
+		Individual indFullPalatalPlateConnector
+				= model.createIndividual(NS + indCount, fullPalatalPlateConnectorClass);
+		setComponentToothPos(model, indFullPalatalPlateConnector, fullPalatalPlateConnector.getToothPos(), NS);
+		return;
+	}
+
+	public void addModifiedPalatalPlateConnectorToOwl(
+			rpd.components.Component connector, OntModel model, String NS, int indCount) {
+
+		ModifiedPalatalPlateConnector modifiedPalatalPlateConnector = (ModifiedPalatalPlateConnector) connector;
+		OntClass modifiedPalatalPlateConnectorClass = model.getOntClass(NS + "modified_palatal_plate");
+		Individual indModifiedPalatalPlateConnector
+				= model.createIndividual(NS + indCount, modifiedPalatalPlateConnectorClass);
+		setComponentToothPos(model, indModifiedPalatalPlateConnector, modifiedPalatalPlateConnector.getToothPos(), NS);
+		return;
+	}
+
+	public void addLingualBarConnectorToOwl(
+			rpd.components.Component connector, OntModel model, String NS, int indCount) {
+
+		LingualBarConnector lingualBarConnector = (LingualBarConnector) connector;
+		OntClass lingualBarConnectorClass = model.getOntClass(NS + "lingual_bar");
+		Individual indLingualBarConnector = model.createIndividual(NS + indCount, lingualBarConnectorClass);
+		setComponentToothPos(model, indLingualBarConnector, lingualBarConnector.getToothPos(), NS);
+		return;
+	}
+
+	public void addLingualPlateConnectorToOwl(
+			rpd.components.Component connector, OntModel model, String NS, int indCount) {
+
+		LingualPlateConnector lingualPlateConnector = (LingualPlateConnector) connector;
+		OntClass lingualPlateConnectorClass = model.getOntClass(NS + "lingual_plate");
+		Individual indLingualPlateConnector = model.createIndividual(NS + indCount, lingualPlateConnectorClass);
+		setComponentToothPos(model, indLingualPlateConnector, lingualPlateConnector.getToothPos(), NS);
+		return;
+	}
+
+	public void setClaspTipDirection(OntModel model, Individual indClasp, Position tip_direction, String NS) {
+
+		OntProperty clasp_tip_direction = model.getOntProperty(NS + "clasp_tip_direction");
+		if (tip_direction == Position.Mesial) {
+			indClasp.addProperty(clasp_tip_direction, model.createTypedLiteral(0));
+		}
+		else if (tip_direction == Position.Distal) {
+			indClasp.addProperty(clasp_tip_direction, model.createTypedLiteral(1));
+		}
+	}
+
+	public void setClaspMaterial(OntModel model, Individual indClasp, ClaspMaterial material, String NS) {
+
+		OntProperty clasp_material = model.getOntProperty(NS + "clasp_material");
+		if (material == ClaspMaterial.Cast) {
+			indClasp.addProperty(clasp_material, model.createTypedLiteral(0));
+		}
+		else if (material == ClaspMaterial.WW) {
+			indClasp.addProperty(clasp_material, model.createTypedLiteral(1));
+		}
+	}
+
+	public void setRestMesialOrDistal(OntModel model, Individual indRest, Position mesial_or_distal, String NS) {
+
+		OntProperty rest_mesial_or_distal = model.getOntProperty(NS + "rest_mesial_or_distal");
+		if (mesial_or_distal == Position.Mesial) {
+			indRest.addProperty(rest_mesial_or_distal, model.createTypedLiteral(0));
+		}
+		else if (mesial_or_distal == Position.Distal) {
+			indRest.addProperty(rest_mesial_or_distal, model.createTypedLiteral(1));
+		}
+	}
+
+	public void setComponentToothPos(OntModel model, Individual indComponent, ArrayList<Tooth> tooth_pos, String NS) {
+
+		OntProperty component_position = model.getObjectProperty(NS + "component_position");
+		for (Tooth tooth:tooth_pos) {
+			indComponent.addProperty(component_position, model.getIndividual(NS + tooth.toString()));
 		}
 	}
 }

@@ -15,6 +15,8 @@ public class EdentulousSpace {
 
 	private Tooth left_neighbor = null;
 	private Tooth right_neighbor = null;
+	private Tooth left_most = null;
+	private Tooth right_most = null;
 
 	private boolean is_mandibular = false;
 	private boolean is_maxillary = false;
@@ -23,6 +25,68 @@ public class EdentulousSpace {
 
 		this.left_neighbor = left_neighbor;
 		this.right_neighbor = right_neighbor;
+
+
+
+
+		if (this.left_neighbor == null) {
+			if (mandibular_or_maxillary == Position.Mandibular) {
+				this.left_most = new Tooth(4, 7);
+			}
+			else {
+				this.left_most = new Tooth(1, 7);
+			}
+		}
+		else {
+			int numLeftNeighbor = this.left_neighbor.getNum();
+			int zoneLeftNeighbor = this.left_neighbor.getZone();
+			if (numLeftNeighbor == 1) {
+				if (mandibular_or_maxillary == Position.Mandibular) {
+					this.left_most = new Tooth(3, 1);
+				}
+				else {
+					this.left_most = new Tooth(2, 1);
+				}
+			}
+			else {
+				if (zoneLeftNeighbor == 1 || zoneLeftNeighbor == 4) {
+					this.left_most = new Tooth(zoneLeftNeighbor, numLeftNeighbor - 1);
+				}
+				else {
+					this.left_most = new Tooth(zoneLeftNeighbor, numLeftNeighbor + 1);
+				}
+			}
+		}
+
+		if (this.right_neighbor == null) {
+			if (mandibular_or_maxillary == Position.Mandibular) {
+				this.right_most = new Tooth(3, 7);
+			}
+			else {
+				this.right_most = new Tooth(2, 7);
+			}
+		}
+		else {
+			int numRightNeighbor = this.right_neighbor.getNum();
+			int zoneRightNeighbor = this.right_neighbor.getZone();
+			if (numRightNeighbor == 1) {
+				if (mandibular_or_maxillary == Position.Mandibular) {
+					this.right_most = new Tooth(4, 1);
+				}
+				else {
+					this.right_most = new Tooth(1, 1);
+				}
+			}
+			else {
+				if (zoneRightNeighbor == 2 || zoneRightNeighbor == 3) {
+					this.right_most = new Tooth(zoneRightNeighbor, numRightNeighbor - 1);
+				}
+				else {
+					this.right_most = new Tooth(zoneRightNeighbor, numRightNeighbor + 1);
+				}
+			}
+		}
+
 		if (mandibular_or_maxillary.equals(Position.Mandibular))
 			this.is_mandibular = true;
 		if (mandibular_or_maxillary.equals(Position.Maxillary))
@@ -50,6 +114,13 @@ public class EdentulousSpace {
 		return this.right_neighbor;
 	}
 
+	public Tooth getLeftMost() {
+		return this.left_most;
+	}
+
+	public Tooth getRightMost() {
+		return this.right_most;
+	}
 	private void computeType() throws RuleException {
 
 		List<EdentulousType> types = new ArrayList<EdentulousType>();

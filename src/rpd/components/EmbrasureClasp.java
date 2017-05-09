@@ -52,6 +52,10 @@ public class EmbrasureClasp extends Clasp {
 		}
 	}
 
+	public ClaspMaterial getMaterial(){
+		return ClaspMaterial.WW;
+	}
+
 	public String print() {
 
 		StringBuilder s = new StringBuilder();

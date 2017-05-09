@@ -86,8 +86,7 @@ public class MajorConnectorRule {
 					else if (kennedyType == KennedyType.KENNEDY_TYPE_II) {
 						return new ModifiedPalatalPlateConnector(plan.getAbutmentTeeth(), mouth.getMaxillary());
 					}
-					else if (kennedyType == KennedyType.KENNEDY_TYPE_III
-							&& isToothSupportPlan(mouth.getMaxillary().getEdentulousSpaces(), plan.getAbutmentTeeth())) {
+					else if (kennedyType == KennedyType.KENNEDY_TYPE_III) {
 						return new SinglePalatalStrapConnector(plan.getAbutmentTeeth(), mouth.getMaxillary());
 					}
 					else {
@@ -110,9 +109,9 @@ public class MajorConnectorRule {
 				return flag;
 			}
 
-			public boolean isToothSupportPlan(List<EdentulousSpace> edentulousSpaces, Set<Tooth> abutment_teeth) {
-				return false;
-			}
+//			public boolean isToothSupportPlan(List<EdentulousSpace> edentulousSpaces, Set<Tooth> abutment_teeth) {
+//				return ;
+//			}
 
 			public boolean isDislocateWithMoreThanFiveMissing(Mouth mouth, Position maxillary_or_mandibular) {
 				boolean flag_left = true;

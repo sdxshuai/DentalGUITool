@@ -64,6 +64,10 @@ public class WroughtWireClasp extends Clasp {
 		}
 	}
 
+	public ClaspMaterial getMaterial() {
+		return ClaspMaterial.WW;
+	}
+
 
 	public String print() {
 

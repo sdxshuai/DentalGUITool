@@ -1,23 +1,24 @@
 package rpd.components;
 
-import rpd.conceptions.ClaspMaterial;
-import rpd.conceptions.Position;
+import rpd.RPDPlan;
 import rpd.oral.Tooth;
-
 import java.util.ArrayList;
 
-public abstract class Clasp implements Component {
+/**
+ * Created by sdxshuai on 2017/5/8.
+ */
+public class DentureBase implements Component{
 
 	protected ArrayList<Tooth> tooth_pos = null;
 
 	protected String rule_explanation = null;
 
-	public Clasp(ArrayList<Tooth> tooth_pos) {
-		this.tooth_pos = tooth_pos;
+	public DentureBase(ArrayList<Tooth> tooth_pos) {
+		this.tooth_pos = new ArrayList<Tooth>();
+		this.tooth_pos.addAll(tooth_pos);
 	}
 
-	public Clasp(Tooth tooth_pos) {
-
+	public DentureBase(Tooth tooth_pos) {
 		this.tooth_pos = new ArrayList<Tooth>();
 		this.tooth_pos.add(tooth_pos);
 	}
@@ -26,13 +27,11 @@ public abstract class Clasp implements Component {
 		return this.tooth_pos;
 	}
 
-	public Position getTipDirection() {
-		return null;
+	@Override
+	public void addToPlan(RPDPlan rpd_plan) {
+		rpd_plan.addComponent(this);
 	}
 
-	public ClaspMaterial getMaterial() {
-		return null;
-	}
 
 	@Override
 	public boolean isRest() {
@@ -41,7 +40,7 @@ public abstract class Clasp implements Component {
 
 	@Override
 	public boolean isClasp() {
-		return true;
+		return false;
 	}
 
 	@Override
@@ -54,16 +53,21 @@ public abstract class Clasp implements Component {
 		return false;
 	}
 
+	@Override
 	public boolean isIndirectRetainer() {
 		return false;
 	}
 
-	public String toString() {
+	public String print() {
 		StringBuilder s = new StringBuilder();
 		for (Tooth tooth : this.tooth_pos) {
 			s.append(tooth.toString());
 		}
-		s.append(":");
+		s.append(": 基托（Denture Base）");
 		return s.toString();
+	}
+
+	public String toString() {
+		return this.print();
 	}
 }

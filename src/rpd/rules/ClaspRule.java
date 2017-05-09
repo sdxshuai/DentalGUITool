@@ -377,7 +377,7 @@ public class ClaspRule {
 							premolar_weight = 0.5;
 							distomolar_weight = 0.0;
 						} else {
-							canine_weight = 1.2;
+							canine_weight = 0.8;
 							premolar_weight = 0.5;
 							distomolar_weight = 0.0;
 						}
@@ -387,7 +387,7 @@ public class ClaspRule {
 							premolar_weight = 0.5;
 							distomolar_weight = 0.0;
 						} else {
-							canine_weight = 1.2;
+							canine_weight = 0.8;
 							premolar_weight = 0.5;
 							distomolar_weight = 0.0;
 						}

@@ -21,9 +21,17 @@ public class RPDPlan {
 
 	private Set<Tooth> abutment_teeth = new HashSet<Tooth>();
 
+	private List<EdentulousSpace> edentulousSpaces = new ArrayList<>();
+
 	public RPDPlan(Mouth mouth, Position mandibular_or_maxillary) {
 		this.mouth = mouth;
 		this.mandibular_or_maxillary = mandibular_or_maxillary;
+		if (this.mandibular_or_maxillary == Position.Mandibular) {
+			this.edentulousSpaces.addAll(mouth.getMandibular().getEdentulousSpaces());
+		}
+		else if (this.mandibular_or_maxillary == Position.Maxillary) {
+			this.edentulousSpaces.addAll(mouth.getMaxillary().getEdentulousSpaces());
+		}
 	}
 
 	public RPDPlan(RPDPlan raw_plan) {
@@ -32,6 +40,12 @@ public class RPDPlan {
 		this.tooth_components.putAll(raw_plan.tooth_components);
 		this.mouth = raw_plan.mouth;
 		this.abutment_teeth.addAll(raw_plan.abutment_teeth);
+		if (this.mandibular_or_maxillary == Position.Mandibular) {
+			this.edentulousSpaces.addAll(mouth.getMandibular().getEdentulousSpaces());
+		}
+		else if (this.mandibular_or_maxillary == Position.Maxillary) {
+			this.edentulousSpaces.addAll(mouth.getMaxillary().getEdentulousSpaces());
+		}
 	}
 
 	public boolean isEmptyPlan() {

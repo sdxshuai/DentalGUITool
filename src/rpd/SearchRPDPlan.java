@@ -7,11 +7,9 @@ import exceptions.rpd.ClaspAssemblyException;
 import exceptions.rpd.EdentulousTypeException;
 import exceptions.rpd.RuleException;
 import exceptions.rpd.ToothPosException;
+import rpd.components.DentureBase;
 import rpd.conceptions.Position;
-import rpd.oral.EdentulousSpace;
-import rpd.oral.Mandibular;
-import rpd.oral.Maxillary;
-import rpd.oral.Mouth;
+import rpd.oral.*;
 import rpd.rules.*;
 
 //生成设计方案
@@ -112,6 +110,20 @@ public class SearchRPDPlan {
 				res.remove(0);
 		}
 
+		for (EdentulousSpace edentulous_space : mandibular.getEdentulousSpaces()) {
+			ArrayList<Tooth> denture_base_tooth_pos = new ArrayList<>();
+			denture_base_tooth_pos.add(edentulous_space.getLeftMost());
+			if (!edentulous_space.getRightMost().equals(edentulous_space.getLeftMost())) {
+				denture_base_tooth_pos.add(edentulous_space.getRightMost());
+			}
+//			denture_base_tooth_pos.add(edentulous_space.getRightMost());
+			DentureBase dentureBase = new DentureBase(denture_base_tooth_pos);
+
+			for (RPDPlan plan : res) {
+				plan.addComponent(dentureBase);
+			}
+		}
+
 		return res;
 	}
 
@@ -188,6 +200,19 @@ public class SearchRPDPlan {
 			RPDPlan plan = res.get(0);
 			if (plan.isEmptyPlan())
 				res.remove(0);
+		}
+
+		for (EdentulousSpace edentulous_space : maxillary.getEdentulousSpaces()) {
+			ArrayList<Tooth> denture_base_tooth_pos = new ArrayList<>();
+			denture_base_tooth_pos.add(edentulous_space.getLeftMost());
+			if (!edentulous_space.getLeftMost().equals(edentulous_space.getRightMost())) {
+				denture_base_tooth_pos.add(edentulous_space.getRightMost());
+			}
+			DentureBase dentureBase = new DentureBase(denture_base_tooth_pos);
+
+			for (RPDPlan plan : res) {
+				plan.addComponent(dentureBase);
+			}
 		}
 
 		return res;

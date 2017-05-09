@@ -1,0 +1,4 @@
+Manifest-Version: 1.0
+Class-Path: D:\Codes\RPD-Design\x64\Release
+Main-Class: GUI.LabelTool
+
