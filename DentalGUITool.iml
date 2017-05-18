@@ -51,5 +51,15 @@
         <SOURCES />
       </library>
     </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="file://D:/lib/DentalEMRParser" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+        <jarDirectory url="file://D:/lib/DentalEMRParser" recursive="false" />
+      </library>
+    </orderEntry>
   </component>
 </module>

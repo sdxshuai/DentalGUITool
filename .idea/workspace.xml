@@ -6,12 +6,7 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9efcce7d-9cdf-4ffc-a888-c6d36f3be804" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/artifacts/DentalGUITool_jar.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/encodings.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/META-INF/MANIFEST.MF" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/rpd/components/DentureBase.java" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.gitignore.swp" afterPath="" />
+    <list default="true" id="9efcce7d-9cdf-4ffc-a888-c6d36f3be804" name="Default" comment="combined design-part and draw-part">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$1.class" afterPath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$1.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$10.class" afterPath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$10.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$11.class" afterPath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$11.class" />
@@ -37,33 +32,14 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$8.class" afterPath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$8.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$9.class" afterPath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$9.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool.class" afterPath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/DentalGUITool/misc/ToothMap.class" afterPath="$PROJECT_DIR$/out/production/DentalGUITool/misc/ToothMap.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/DentalGUITool/rpd/RPDPlan.class" afterPath="$PROJECT_DIR$/out/production/DentalGUITool/rpd/RPDPlan.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/DentalGUITool/rpd/components/Clasp.class" afterPath="$PROJECT_DIR$/out/production/DentalGUITool/rpd/components/Clasp.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/DentalGUITool/rpd/oral/EdentulousSpace.class" afterPath="$PROJECT_DIR$/out/production/DentalGUITool/rpd/oral/EdentulousSpace.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/DentalGUITool/rpd/oral/Mandibular.class" afterPath="$PROJECT_DIR$/out/production/DentalGUITool/rpd/oral/Mandibular.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/DentalGUITool/rpd/oral/Maxillary.class" afterPath="$PROJECT_DIR$/out/production/DentalGUITool/rpd/oral/Maxillary.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/lib.xml" afterPath="$PROJECT_DIR$/.idea/libraries/lib.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/artifacts/DentalGUITool_jar.xml" afterPath="$PROJECT_DIR$/.idea/artifacts/DentalGUITool_jar.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/DentalGUITool.iml" afterPath="$PROJECT_DIR$/DentalGUITool.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/000052.xml" afterPath="$PROJECT_DIR$/data/000052.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/001231.xml" afterPath="$PROJECT_DIR$/data/001231.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/catalog-v001.xml" afterPath="$PROJECT_DIR$/res/catalog-v001.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/sample.owl" afterPath="$PROJECT_DIR$/res/sample.owl" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/GUI/LabelTool.java" afterPath="$PROJECT_DIR$/src/GUI/LabelTool.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/misc/ToothMap.java" afterPath="$PROJECT_DIR$/src/misc/ToothMap.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rpd/RPDPlan.java" afterPath="$PROJECT_DIR$/src/rpd/RPDPlan.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rpd/SearchRPDPlan.java" afterPath="$PROJECT_DIR$/src/rpd/SearchRPDPlan.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rpd/components/Clasp.java" afterPath="$PROJECT_DIR$/src/rpd/components/Clasp.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rpd/components/CombinationAnteriorPosteriorPalatalStrapConnector.java" afterPath="$PROJECT_DIR$/src/rpd/components/CombinationAnteriorPosteriorPalatalStrapConnector.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rpd/components/Component.java" afterPath="$PROJECT_DIR$/src/rpd/components/Component.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rpd/components/EmbrasureClasp.java" afterPath="$PROJECT_DIR$/src/rpd/components/EmbrasureClasp.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rpd/components/ModifiedPalatalPlateConnector.java" afterPath="$PROJECT_DIR$/src/rpd/components/ModifiedPalatalPlateConnector.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rpd/components/PalatalPlateConnector.java" afterPath="$PROJECT_DIR$/src/rpd/components/PalatalPlateConnector.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rpd/components/SinglePalatalStrapConnector.java" afterPath="$PROJECT_DIR$/src/rpd/components/SinglePalatalStrapConnector.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rpd/components/WroughtWireClasp.java" afterPath="$PROJECT_DIR$/src/rpd/components/WroughtWireClasp.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rpd/oral/EdentulousSpace.java" afterPath="$PROJECT_DIR$/src/rpd/oral/EdentulousSpace.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rpd/rules/ClaspRule.java" afterPath="$PROJECT_DIR$/src/rpd/rules/ClaspRule.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rpd/rules/MajorConnectorRule.java" afterPath="$PROJECT_DIR$/src/rpd/rules/MajorConnectorRule.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/META-INF/MANIFEST.MF" afterPath="$PROJECT_DIR$/src/META-INF/MANIFEST.MF" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -94,83 +70,75 @@
       <file leaf-file-name="SearchRPDPlan.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/rpd/SearchRPDPlan.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="17">
+            <state relative-caret-position="1785">
               <caret line="115" column="17" lean-forward="false" selection-start-line="115" selection-start-column="17" selection-end-line="115" selection-end-column="17" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="LabelTool.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/GUI/LabelTool.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="197">
-              <caret line="784" column="43" lean-forward="true" selection-start-line="784" selection-start-column="43" selection-end-line="784" selection-end-column="43" />
               <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#4187#4216#0" expanded="true" />
-                <element signature="e#4313#4328#0" expanded="true" />
-                <element signature="e#4606#4617#0" expanded="true" />
-                <element signature="e#8707#9226#0" expanded="true" />
-                <element signature="e#9225#9226#0" expanded="true" />
-                <element signature="e#9792#10175#0" expanded="true" />
-                <element signature="e#10174#10175#0" expanded="true" />
-                <element signature="e#10342#10846#0" expanded="true" />
-                <element signature="e#10845#10846#0" expanded="true" />
-                <element signature="e#10967#11363#0" expanded="true" />
-                <element signature="e#11362#11363#0" expanded="true" />
-                <element signature="e#15778#16479#0" expanded="true" />
-                <element signature="e#16478#16479#0" expanded="true" />
-                <element signature="e#17026#19285#0" expanded="true" />
-                <element signature="e#18592#18619#1" expanded="true" />
-                <element signature="e#19284#19285#0" expanded="true" />
-                <element signature="e#20329#20910#0" expanded="true" />
-                <element signature="e#20909#20910#0" expanded="true" />
-                <element signature="e#21149#21730#0" expanded="true" />
-                <element signature="e#21729#21730#0" expanded="true" />
-                <element signature="e#22053#22860#0" expanded="true" />
-                <element signature="e#22859#22860#0" expanded="true" />
-                <element signature="e#23167#24036#0" expanded="true" />
-                <element signature="e#24035#24036#0" expanded="true" />
-                <element signature="e#30146#31112#0" expanded="true" />
-                <element signature="e#31111#31112#0" expanded="true" />
-                <element signature="e#31216#31225#0" expanded="true" />
-                <element signature="e#33415#33444#0" expanded="true" />
-                <element signature="e#34104#34112#0" expanded="true" />
-                <element signature="e#34345#34363#0" expanded="true" />
-                <element signature="e#34654#34662#0" expanded="true" />
-                <element signature="e#35483#35491#0" expanded="true" />
-                <element signature="e#37134#38249#0" expanded="true" />
-                <element signature="e#38248#38249#0" expanded="true" />
-                <element signature="e#39015#40115#0" expanded="true" />
-                <element signature="e#40114#40115#0" expanded="true" />
-                <element signature="e#40564#41723#0" expanded="true" />
-                <element signature="e#41722#41723#0" expanded="true" />
-                <element signature="e#42183#43359#0" expanded="true" />
-                <element signature="e#43358#43359#0" expanded="true" />
-                <element signature="e#43819#44995#0" expanded="true" />
-                <element signature="e#44994#44995#0" expanded="true" />
-                <element signature="e#50267#50277#0" expanded="true" />
-                <element signature="e#65036#65309#0" expanded="true" />
-                <element signature="e#65308#65309#0" expanded="true" />
+                <element signature="imports" expanded="false" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ClaspRule.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="LabelTool.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/GUI/LabelTool.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="527">
+              <caret line="649" column="34" lean-forward="false" selection-start-line="649" selection-start-column="34" selection-end-line="649" selection-end-column="34" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MANIFEST.MF" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/META-INF/MANIFEST.MF">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ruleParserWithStats.class" pinned="false" current-in-tab="false">
+        <entry file="jar://D:/lib/DentalEMRParser/DentalEMRParser.jar!/emrpaser/rule/ruleParserWithStats.class">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-25">
+              <caret line="169" column="45" lean-forward="false" selection-start-line="169" selection-start-column="45" selection-end-line="169" selection-end-column="45" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ClaspRule.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/rpd/rules/ClaspRule.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="408">
+            <state relative-caret-position="6171">
               <caret line="386" column="49" lean-forward="false" selection-start-line="386" selection-start-column="49" selection-end-line="386" selection-end-column="49" />
               <folding>
-                <element signature="e#9232#9250#0" expanded="true" />
-                <element signature="e#9643#9650#0" expanded="true" />
-                <element signature="e#10086#10104#0" expanded="true" />
-                <element signature="e#10379#10386#0" expanded="true" />
-                <element signature="e#10665#10683#0" expanded="true" />
-                <element signature="e#12758#12775#0" expanded="true" />
-                <element signature="e#12949#12977#0" expanded="true" />
+                <element signature="imports" expanded="false" />
+                <element signature="e#1052#1053#0" expanded="false" />
+                <element signature="e#1085#1086#0" expanded="false" />
+                <element signature="e#1116#1117#0" expanded="false" />
+                <element signature="e#1156#1157#0" expanded="false" />
+                <element signature="e#1186#1187#0" expanded="false" />
+                <element signature="e#1205#1206#0" expanded="false" />
+                <element signature="e#9232#9250#0" expanded="false" />
+                <element signature="e#9643#9650#0" expanded="false" />
+                <element signature="e#10086#10104#0" expanded="false" />
+                <element signature="e#10379#10386#0" expanded="false" />
+                <element signature="e#10665#10683#0" expanded="false" />
+                <element signature="e#10971#10972#0" expanded="false" />
+                <element signature="e#11004#11005#0" expanded="false" />
+                <element signature="e#11035#11036#0" expanded="false" />
+                <element signature="e#11075#11076#0" expanded="false" />
+                <element signature="e#11105#11106#0" expanded="false" />
+                <element signature="e#11124#11125#0" expanded="false" />
+                <element signature="e#12758#12775#0" expanded="false" />
+                <element signature="e#12949#12977#0" expanded="false" />
+                <element signature="e#13047#13271#0" expanded="false" />
+                <element signature="e#13270#13271#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -179,9 +147,15 @@
       <file leaf-file-name="ModifiedPalatalPlateConnector.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/rpd/components/ModifiedPalatalPlateConnector.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
+            <state relative-caret-position="578">
               <caret line="41" column="8" lean-forward="false" selection-start-line="41" selection-start-column="8" selection-end-line="41" selection-end-column="8" />
-              <folding />
+              <folding>
+                <element signature="imports" expanded="false" />
+                <element signature="e#2341#2342#0" expanded="false" />
+                <element signature="e#2375#2376#0" expanded="false" />
+                <element signature="e#2770#2771#0" expanded="false" />
+                <element signature="e#2796#2797#0" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -189,9 +163,15 @@
       <file leaf-file-name="PalatalPlateConnector.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/rpd/components/PalatalPlateConnector.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
+            <state relative-caret-position="578">
               <caret line="41" column="8" lean-forward="false" selection-start-line="41" selection-start-column="8" selection-end-line="41" selection-end-column="8" />
-              <folding />
+              <folding>
+                <element signature="imports" expanded="false" />
+                <element signature="e#2317#2318#0" expanded="false" />
+                <element signature="e#2351#2352#0" expanded="false" />
+                <element signature="e#2735#2736#0" expanded="false" />
+                <element signature="e#2761#2762#0" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -199,9 +179,15 @@
       <file leaf-file-name="CombinationAnteriorPosteriorPalatalStrapConnector.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/rpd/components/CombinationAnteriorPosteriorPalatalStrapConnector.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="357">
+            <state relative-caret-position="1139">
               <caret line="74" column="0" lean-forward="false" selection-start-line="74" selection-start-column="0" selection-end-line="74" selection-end-column="0" />
-              <folding />
+              <folding>
+                <element signature="imports" expanded="false" />
+                <element signature="e#2399#2400#0" expanded="false" />
+                <element signature="e#2433#2434#0" expanded="false" />
+                <element signature="e#2854#2855#0" expanded="false" />
+                <element signature="e#2880#2881#0" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -209,39 +195,17 @@
       <file leaf-file-name="MajorConnectorRule.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/rpd/rules/MajorConnectorRule.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="344">
+            <state relative-caret-position="1156">
               <caret line="88" column="71" lean-forward="false" selection-start-line="88" selection-start-column="71" selection-end-line="88" selection-end-column="71" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Mandibular.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/rpd/oral/Mandibular.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="276">
-              <caret line="442" column="59" lean-forward="false" selection-start-line="442" selection-start-column="59" selection-end-line="442" selection-end-column="59" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ToothMap.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/misc/ToothMap.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="357">
-              <caret line="24" column="46" lean-forward="false" selection-start-line="24" selection-start-column="46" selection-end-line="24" selection-end-column="46" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="PropertyLabel.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/ontologies/PropertyLabel.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-338">
-              <caret line="9" column="13" lean-forward="false" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
-              <folding />
+              <folding>
+                <element signature="imports" expanded="false" />
+                <element signature="e#1224#1225#0" expanded="false" />
+                <element signature="e#1255#1256#0" expanded="false" />
+                <element signature="e#1286#1287#0" expanded="false" />
+                <element signature="e#1326#1327#0" expanded="false" />
+                <element signature="e#1356#1357#0" expanded="false" />
+                <element signature="e#1375#1376#0" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -336,7 +300,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/rpd/conceptions/TeethRelatedImaging.java" />
         <option value="$PROJECT_DIR$/src/rpd/conceptions/SpaceBelowGingivalMargins.java" />
         <option value="$PROJECT_DIR$/src/rpd/conceptions/MultiToothClasp.java" />
         <option value="$PROJECT_DIR$/src/rpd/conceptions/ClaspOnCanine.java" />
@@ -385,8 +348,9 @@
         <option value="$PROJECT_DIR$/src/rpd/components/ModifiedPalatalPlateConnector.java" />
         <option value="$PROJECT_DIR$/src/rpd/components/PalatalPlateConnector.java" />
         <option value="$PROJECT_DIR$/src/rpd/components/CombinationAnteriorPosteriorPalatalStrapConnector.java" />
-        <option value="$PROJECT_DIR$/src/GUI/LabelTool.java" />
         <option value="$PROJECT_DIR$/src/rpd/rules/ClaspRule.java" />
+        <option value="D:/lib/DentalEMRParser/DentalEMRParser.jar!/emrpaser/rule/ruleParserWithStats.class" />
+        <option value="$PROJECT_DIR$/src/GUI/LabelTool.java" />
       </list>
     </option>
   </component>
@@ -423,8 +387,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
-      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -433,8 +395,8 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="DentalGUITool" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+              <option name="myItemId" value="External Libraries" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ExternalLibrariesNode" />
             </PATH_ELEMENT>
           </PATH>
           <PATH>
@@ -444,138 +406,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="DentalGUITool" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="rpd" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="DentalGUITool" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="DentalGUITool" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="rpd" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="rules" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="DentalGUITool" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="DentalGUITool" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="rpd" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="oral" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="DentalGUITool" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="DentalGUITool" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="rpd" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="conceptions" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="DentalGUITool" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="DentalGUITool" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="rpd" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="components" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="DentalGUITool" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="DentalGUITool" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ontologies" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="DentalGUITool" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="DentalGUITool" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="misc" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -607,13 +437,15 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="GUI" />
+              <option name="myItemId" value="META-INF" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
       <pane id="PackagesPane" />
+      <pane id="Scratches" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -1200,7 +1032,18 @@
       <workItem from="1494208428774" duration="30665000" />
       <workItem from="1494245285130" duration="2668000" />
       <workItem from="1494248486890" duration="3169000" />
-      <workItem from="1494298457958" duration="36687000" />
+      <workItem from="1494298457958" duration="36770000" />
+      <workItem from="1494401274184" duration="2448000" />
+      <workItem from="1494410406957" duration="281000" />
+      <workItem from="1494504222490" duration="291000" />
+      <workItem from="1494558956790" duration="72000" />
+      <workItem from="1494681088648" duration="613000" />
+      <workItem from="1494753661859" duration="1113000" />
+      <workItem from="1495011164140" duration="130000" />
+      <workItem from="1495087245573" duration="75000" />
+      <workItem from="1495090302036" duration="144000" />
+      <workItem from="1495090999256" duration="1983000" />
+      <workItem from="1495093195233" duration="5129000" />
     </task>
     <task id="LOCAL-00001" summary="Build the ontology">
       <created>1488690342848</created>
@@ -1300,11 +1143,18 @@
       <option name="project" value="LOCAL" />
       <updated>1494061188057</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="combined design-part and draw-part">
+      <created>1494340375075</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1494340375075</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="277583000" />
+    <option name="totallyTimeSpent" value="289945000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1321,26 +1171,26 @@
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3295711" sideWeight="0.49570817" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Nl-Palette" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.16648045" sideWeight="0.49785408" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16648045" sideWeight="0.49785408" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3027933" sideWeight="0.29157782" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3299356" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32942432" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.30614525" sideWeight="0.49570817" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2799097" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.30726257" sideWeight="0.49570817" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3295711" sideWeight="0.49785408" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.27345416" sideWeight="0.6670429" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.28624734" sideWeight="0.6670429" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3299356" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.26066098" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.26012793" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.36871508" sideWeight="0.7084222" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.21995708" sideWeight="0.33295712" order="6" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.28044692" sideWeight="0.7084222" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -1387,7 +1237,8 @@
     <MESSAGE value="complete indirect retainer rule" />
     <MESSAGE value="Add classes of major connector" />
     <MESSAGE value="Complete the design of major connector" />
-    <option name="LAST_COMMIT_MESSAGE" value="Complete the design of major connector" />
+    <MESSAGE value="combined design-part and draw-part" />
+    <option name="LAST_COMMIT_MESSAGE" value="combined design-part and draw-part" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1406,144 +1257,74 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/GUI/LabelTool.java</url>
-          <line>568</line>
+          <line>624</line>
           <properties />
           <option name="timeStamp" value="197" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/GUI/LabelTool.java</url>
-          <line>804</line>
+          <line>860</line>
           <properties />
           <option name="timeStamp" value="209" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/GUI/LabelTool.java</url>
-          <line>311</line>
+          <line>345</line>
           <properties />
           <option name="timeStamp" value="212" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/GUI/LabelTool.java</url>
-          <line>1915</line>
+          <line>1975</line>
           <properties />
           <option name="timeStamp" value="221" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/GUI/LabelTool.java</url>
-          <line>1593</line>
+          <line>1653</line>
           <properties />
           <option name="timeStamp" value="225" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/GUI/LabelTool.java</url>
-          <line>508</line>
+          <line>564</line>
           <properties />
           <option name="timeStamp" value="229" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/GUI/LabelTool.java</url>
-          <line>1555</line>
+          <line>1615</line>
           <properties />
           <option name="timeStamp" value="233" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/GUI/LabelTool.java</url>
-          <line>798</line>
+          <line>854</line>
           <properties />
           <option name="timeStamp" value="237" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/GUI/LabelTool.java</url>
-          <line>760</line>
+          <url>jar://D:/lib/DentalEMRParser/DentalEMRParser.jar!/rule/ruleParserWithStats.class</url>
+          <line>484</line>
           <properties />
-          <option name="timeStamp" value="238" />
+          <option name="timeStamp" value="243" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/GUI/LabelTool.java</url>
+          <line>434</line>
+          <properties />
+          <option name="timeStamp" value="245" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="239" />
+      <option name="time" value="247" />
     </breakpoint-manager>
-    <watches-manager>
-      <configuration name="Application">
-        <watch expression="label_list" language="JAVA" />
-        <watch expression="e.getType()" language="JAVA" />
-        <watch expression="label_table.getModel().getValueAt(num_row,0)" language="JAVA" />
-        <watch expression="label_table.getModel().getValueAt(num_row,2)" language="JAVA" />
-        <watch expression="LabelModifier.valueOf((String) label_table.getModel().getValueAt(num_row,5))" language="JAVA" />
-        <watch expression="property.hasRange(dental_ont.getOntResource(&quot;http://www.w3.org/2001/XMLSchema#list&quot;))" language="JAVA" custom="org.apache.jena.datatypes.xsd.XSDDatatype,org.apache.jena.rdf.model.Resource,org.apache.jena.util.iterator.ExtendedIterator" />
-      </configuration>
-    </watches-manager>
+    <watches-manager />
   </component>
   <component name="antWorkspaceConfiguration">
     <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_131/src.zip!/java/lang/System.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="18122">
-          <caret line="1122" column="0" lean-forward="false" selection-start-line="1122" selection-start-column="0" selection-end-line="1122" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#53706#0" expanded="false" />
-            <element signature="imports" expanded="false" />
-            <element signature="e#10898#11156#0" expanded="false" />
-            <element signature="e#11155#11156#0" expanded="false" />
-            <element signature="e#11566#11567#0" expanded="false" />
-            <element signature="e#11597#11598#0" expanded="false" />
-            <element signature="e#26565#26566#0" expanded="false" />
-            <element signature="e#26601#26602#0" expanded="false" />
-            <element signature="e#40171#40172#0" expanded="false" />
-            <element signature="e#40220#40221#0" expanded="false" />
-            <element signature="e#40917#40918#0" expanded="false" />
-            <element signature="e#40958#40959#0" expanded="false" />
-            <element signature="e#41780#41781#0" expanded="false" />
-            <element signature="e#41834#41835#0" expanded="false" />
-            <element signature="e#43077#43078#0" expanded="false" />
-            <element signature="e#43127#43128#0" expanded="false" />
-            <element signature="e#44970#44971#0" expanded="false" />
-            <element signature="e#45051#45052#0" expanded="false" />
-            <element signature="e#51559#51560#0" expanded="false" />
-            <element signature="e#51621#51622#0" expanded="false" />
-            <element signature="e#51882#51883#0" expanded="false" />
-            <element signature="e#51946#51947#0" expanded="false" />
-            <element signature="e#52191#52192#0" expanded="false" />
-            <element signature="e#52255#52256#0" expanded="false" />
-            <element signature="e#52326#52327#0" expanded="false" />
-            <element signature="e#52394#52395#0" expanded="false" />
-            <element signature="e#52670#52671#0" expanded="false" />
-            <element signature="e#52739#52740#0" expanded="false" />
-            <element signature="e#52802#52803#0" expanded="false" />
-            <element signature="e#52848#52849#0" expanded="false" />
-            <element signature="e#53097#53098#0" expanded="false" />
-            <element signature="e#53158#53159#0" expanded="false" />
-            <element signature="e#53238#53239#0" expanded="false" />
-            <element signature="e#53302#53303#0" expanded="false" />
-            <element signature="e#53360#53361#0" expanded="false" />
-            <element signature="e#53422#53423#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_131/src.zip!/java/lang/ClassLoader.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="31603">
-          <caret line="1940" column="0" lean-forward="false" selection-start-line="1940" selection-start-column="0" selection-end-line="1940" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_131/src.zip!/java/util/ArrayList.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="186">
-          <caret line="576" column="0" lean-forward="false" selection-start-line="576" selection-start-column="0" selection-end-line="576" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/rpd/components/RingClasp.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="81" column="15" lean-forward="false" selection-start-line="81" selection-start-column="15" selection-end-line="81" selection-end-column="15" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_131/src.zip!/java/lang/UnsatisfiedLinkError.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="493">
@@ -1667,34 +1448,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="680">
           <caret line="47" column="8" lean-forward="false" selection-start-line="47" selection-start-column="8" selection-end-line="47" selection-end-column="8" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#400#434#0" expanded="false" />
-            <element signature="e#487#498#0" expanded="false" />
-            <element signature="e#551#558#0" expanded="false" />
-            <element signature="e#1689#1690#0" expanded="false" />
-            <element signature="e#1730#1731#0" expanded="false" />
-            <element signature="e#1758#1759#0" expanded="false" />
-            <element signature="e#1782#1783#0" expanded="false" />
-            <element signature="e#1816#1817#0" expanded="false" />
-            <element signature="e#1858#1859#0" expanded="false" />
-            <element signature="e#2131#2138#0" expanded="false" />
-            <element signature="e#2382#2389#0" expanded="false" />
-            <element signature="e#3352#3353#0" expanded="false" />
-            <element signature="e#3385#3386#0" expanded="false" />
-            <element signature="e#3443#3444#0" expanded="false" />
-            <element signature="e#3487#3488#0" expanded="false" />
-            <element signature="e#3631#3632#0" expanded="false" />
-            <element signature="e#3668#3669#0" expanded="false" />
-            <element signature="e#3710#3711#0" expanded="false" />
-            <element signature="e#3739#3740#0" expanded="false" />
-            <element signature="e#3803#3804#0" expanded="false" />
-            <element signature="e#3849#3850#0" expanded="false" />
-            <element signature="e#3919#3920#0" expanded="false" />
-            <element signature="e#3954#3955#0" expanded="false" />
-            <element signature="e#7087#7103#0" expanded="false" />
-            <element signature="e#7780#7788#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1702,9 +1455,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="255">
           <caret line="21" column="0" lean-forward="false" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1712,58 +1462,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1462">
           <caret line="122" column="0" lean-forward="false" selection-start-line="122" selection-start-column="0" selection-end-line="122" selection-end-column="0" />
-          <folding>
-            <element signature="e#1025#1026#0" expanded="false" />
-            <element signature="e#1053#1054#0" expanded="false" />
-            <element signature="e#1116#1117#0" expanded="false" />
-            <element signature="e#1159#1160#0" expanded="false" />
-            <element signature="e#1213#1214#0" expanded="false" />
-            <element signature="e#1246#1247#0" expanded="false" />
-            <element signature="e#1426#1427#0" expanded="false" />
-            <element signature="e#1468#1469#0" expanded="false" />
-            <element signature="e#1665#1666#0" expanded="false" />
-            <element signature="e#1699#1700#0" expanded="false" />
-            <element signature="e#1767#1768#0" expanded="false" />
-            <element signature="e#1822#1823#0" expanded="false" />
-            <element signature="e#1866#1867#0" expanded="false" />
-            <element signature="e#1901#1902#0" expanded="false" />
-            <element signature="e#2060#2061#0" expanded="false" />
-            <element signature="e#2082#2083#0" expanded="false" />
-            <element signature="e#2128#2129#0" expanded="false" />
-            <element signature="e#2159#2160#0" expanded="false" />
-            <element signature="e#2188#2189#0" expanded="false" />
-            <element signature="e#2207#2208#0" expanded="false" />
-            <element signature="e#2247#2248#0" expanded="false" />
-            <element signature="e#2272#2273#0" expanded="false" />
-            <element signature="e#2330#2331#0" expanded="false" />
-            <element signature="e#2365#2366#0" expanded="false" />
-            <element signature="e#2964#2965#0" expanded="false" />
-            <element signature="e#2993#2994#0" expanded="false" />
-            <element signature="e#3024#3025#0" expanded="false" />
-            <element signature="e#3050#3051#0" expanded="false" />
-            <element signature="e#3094#3095#0" expanded="false" />
-            <element signature="e#3123#3124#0" expanded="false" />
-            <element signature="e#3159#3160#0" expanded="false" />
-            <element signature="e#3191#3192#0" expanded="false" />
-            <element signature="e#3246#3247#0" expanded="false" />
-            <element signature="e#3287#3288#0" expanded="false" />
-            <element signature="e#3326#3327#0" expanded="false" />
-            <element signature="e#3353#3354#0" expanded="false" />
-            <element signature="e#3405#3406#0" expanded="false" />
-            <element signature="e#3436#3437#0" expanded="false" />
-            <element signature="e#3482#3483#0" expanded="false" />
-            <element signature="e#3512#3513#0" expanded="false" />
-            <element signature="e#3579#3580#0" expanded="false" />
-            <element signature="e#3626#3627#0" expanded="false" />
-            <element signature="e#4032#4033#0" expanded="false" />
-            <element signature="e#4066#4067#0" expanded="false" />
-            <element signature="e#4091#4092#0" expanded="false" />
-            <element signature="e#4114#4115#0" expanded="false" />
-            <element signature="e#4138#4139#0" expanded="false" />
-            <element signature="e#4160#4161#0" expanded="false" />
-            <element signature="e#4901#4902#0" expanded="false" />
-            <element signature="e#4957#4958#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1771,25 +1469,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="425">
           <caret line="30" column="0" lean-forward="false" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#495#496#0" expanded="false" />
-            <element signature="e#528#529#0" expanded="false" />
-            <element signature="e#774#775#0" expanded="false" />
-            <element signature="e#818#819#0" expanded="false" />
-            <element signature="e#887#888#0" expanded="false" />
-            <element signature="e#939#940#0" expanded="false" />
-            <element signature="e#978#979#0" expanded="false" />
-            <element signature="e#997#998#0" expanded="false" />
-            <element signature="e#1037#1038#0" expanded="false" />
-            <element signature="e#1056#1057#0" expanded="false" />
-            <element signature="e#1103#1104#0" expanded="false" />
-            <element signature="e#1122#1123#0" expanded="false" />
-            <element signature="e#1164#1165#0" expanded="false" />
-            <element signature="e#1183#1184#0" expanded="false" />
-            <element signature="e#1223#1224#0" expanded="false" />
-            <element signature="e#1242#1243#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1852,7 +1531,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="187">
           <caret line="14" column="11" lean-forward="false" selection-start-line="14" selection-start-column="11" selection-end-line="14" selection-end-column="11" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1864,25 +1542,16 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ontologies/Descriptions.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-727">
-          <caret line="231" column="24" lean-forward="false" selection-start-line="231" selection-start-column="24" selection-end-line="231" selection-end-column="24" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/ontologies/LabelModifier.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="34">
           <caret line="2" column="12" lean-forward="false" selection-start-line="2" selection-start-column="12" selection-end-line="2" selection-end-column="12" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/ontologies/PropertyLabel.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-338">
+        <state relative-caret-position="85">
           <caret line="9" column="13" lean-forward="false" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
           <folding />
         </state>
@@ -1890,7 +1559,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/misc/ToothMap.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
+        <state relative-caret-position="408">
           <caret line="24" column="46" lean-forward="false" selection-start-line="24" selection-start-column="46" selection-end-line="24" selection-end-column="46" />
           <folding />
         </state>
@@ -1900,7 +1569,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="194">
           <caret line="56" column="16" lean-forward="false" selection-start-line="56" selection-start-column="16" selection-end-line="56" selection-end-column="16" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1908,13 +1576,12 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="255">
           <caret line="17" column="40" lean-forward="false" selection-start-line="17" selection-start-column="40" selection-end-line="17" selection-end-column="40" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/rpd/oral/Mandibular.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="276">
+        <state relative-caret-position="7276">
           <caret line="442" column="59" lean-forward="false" selection-start-line="442" selection-start-column="59" selection-end-line="442" selection-end-column="59" />
           <folding />
         </state>
@@ -1924,7 +1591,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="68">
           <caret line="4" column="13" lean-forward="false" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1932,15 +1598,22 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="68">
           <caret line="4" column="22" lean-forward="false" selection-start-line="4" selection-start-column="22" selection-end-line="4" selection-end-column="22" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/rpd/rules/MajorConnectorRule.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="344">
+        <state relative-caret-position="1156">
           <caret line="88" column="71" lean-forward="false" selection-start-line="88" selection-start-column="71" selection-end-line="88" selection-end-column="71" />
-          <folding />
+          <folding>
+            <element signature="imports" expanded="false" />
+            <element signature="e#1224#1225#0" expanded="false" />
+            <element signature="e#1255#1256#0" expanded="false" />
+            <element signature="e#1286#1287#0" expanded="false" />
+            <element signature="e#1326#1327#0" expanded="false" />
+            <element signature="e#1356#1357#0" expanded="false" />
+            <element signature="e#1375#1376#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1948,109 +1621,138 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="102">
           <caret line="40" column="8" lean-forward="true" selection-start-line="40" selection-start-column="8" selection-end-line="40" selection-end-column="8" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/rpd/SearchRPDPlan.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
+        <state relative-caret-position="1785">
           <caret line="115" column="17" lean-forward="false" selection-start-line="115" selection-start-column="17" selection-end-line="115" selection-end-column="17" />
-          <folding />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/rpd/components/ModifiedPalatalPlateConnector.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
+        <state relative-caret-position="578">
           <caret line="41" column="8" lean-forward="false" selection-start-line="41" selection-start-column="8" selection-end-line="41" selection-end-column="8" />
-          <folding />
+          <folding>
+            <element signature="imports" expanded="false" />
+            <element signature="e#2341#2342#0" expanded="false" />
+            <element signature="e#2375#2376#0" expanded="false" />
+            <element signature="e#2770#2771#0" expanded="false" />
+            <element signature="e#2796#2797#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/rpd/components/PalatalPlateConnector.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
+        <state relative-caret-position="578">
           <caret line="41" column="8" lean-forward="false" selection-start-line="41" selection-start-column="8" selection-end-line="41" selection-end-column="8" />
-          <folding />
+          <folding>
+            <element signature="imports" expanded="false" />
+            <element signature="e#2317#2318#0" expanded="false" />
+            <element signature="e#2351#2352#0" expanded="false" />
+            <element signature="e#2735#2736#0" expanded="false" />
+            <element signature="e#2761#2762#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/rpd/components/CombinationAnteriorPosteriorPalatalStrapConnector.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
+        <state relative-caret-position="1139">
           <caret line="74" column="0" lean-forward="false" selection-start-line="74" selection-start-column="0" selection-end-line="74" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/GUI/LabelTool.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="197">
-          <caret line="784" column="43" lean-forward="true" selection-start-line="784" selection-start-column="43" selection-end-line="784" selection-end-column="43" />
           <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#4187#4216#0" expanded="true" />
-            <element signature="e#4313#4328#0" expanded="true" />
-            <element signature="e#4606#4617#0" expanded="true" />
-            <element signature="e#8707#9226#0" expanded="true" />
-            <element signature="e#9225#9226#0" expanded="true" />
-            <element signature="e#9792#10175#0" expanded="true" />
-            <element signature="e#10174#10175#0" expanded="true" />
-            <element signature="e#10342#10846#0" expanded="true" />
-            <element signature="e#10845#10846#0" expanded="true" />
-            <element signature="e#10967#11363#0" expanded="true" />
-            <element signature="e#11362#11363#0" expanded="true" />
-            <element signature="e#15778#16479#0" expanded="true" />
-            <element signature="e#16478#16479#0" expanded="true" />
-            <element signature="e#17026#19285#0" expanded="true" />
-            <element signature="e#18592#18619#1" expanded="true" />
-            <element signature="e#19284#19285#0" expanded="true" />
-            <element signature="e#20329#20910#0" expanded="true" />
-            <element signature="e#20909#20910#0" expanded="true" />
-            <element signature="e#21149#21730#0" expanded="true" />
-            <element signature="e#21729#21730#0" expanded="true" />
-            <element signature="e#22053#22860#0" expanded="true" />
-            <element signature="e#22859#22860#0" expanded="true" />
-            <element signature="e#23167#24036#0" expanded="true" />
-            <element signature="e#24035#24036#0" expanded="true" />
-            <element signature="e#30146#31112#0" expanded="true" />
-            <element signature="e#31111#31112#0" expanded="true" />
-            <element signature="e#31216#31225#0" expanded="true" />
-            <element signature="e#33415#33444#0" expanded="true" />
-            <element signature="e#34104#34112#0" expanded="true" />
-            <element signature="e#34345#34363#0" expanded="true" />
-            <element signature="e#34654#34662#0" expanded="true" />
-            <element signature="e#35483#35491#0" expanded="true" />
-            <element signature="e#37134#38249#0" expanded="true" />
-            <element signature="e#38248#38249#0" expanded="true" />
-            <element signature="e#39015#40115#0" expanded="true" />
-            <element signature="e#40114#40115#0" expanded="true" />
-            <element signature="e#40564#41723#0" expanded="true" />
-            <element signature="e#41722#41723#0" expanded="true" />
-            <element signature="e#42183#43359#0" expanded="true" />
-            <element signature="e#43358#43359#0" expanded="true" />
-            <element signature="e#43819#44995#0" expanded="true" />
-            <element signature="e#44994#44995#0" expanded="true" />
-            <element signature="e#50267#50277#0" expanded="true" />
-            <element signature="e#65036#65309#0" expanded="true" />
-            <element signature="e#65308#65309#0" expanded="true" />
+            <element signature="imports" expanded="false" />
+            <element signature="e#2399#2400#0" expanded="false" />
+            <element signature="e#2433#2434#0" expanded="false" />
+            <element signature="e#2854#2855#0" expanded="false" />
+            <element signature="e#2880#2881#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/rpd/rules/ClaspRule.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="408">
+        <state relative-caret-position="6171">
           <caret line="386" column="49" lean-forward="false" selection-start-line="386" selection-start-column="49" selection-end-line="386" selection-end-column="49" />
           <folding>
-            <element signature="e#9232#9250#0" expanded="true" />
-            <element signature="e#9643#9650#0" expanded="true" />
-            <element signature="e#10086#10104#0" expanded="true" />
-            <element signature="e#10379#10386#0" expanded="true" />
-            <element signature="e#10665#10683#0" expanded="true" />
-            <element signature="e#12758#12775#0" expanded="true" />
-            <element signature="e#12949#12977#0" expanded="true" />
+            <element signature="imports" expanded="false" />
+            <element signature="e#1052#1053#0" expanded="false" />
+            <element signature="e#1085#1086#0" expanded="false" />
+            <element signature="e#1116#1117#0" expanded="false" />
+            <element signature="e#1156#1157#0" expanded="false" />
+            <element signature="e#1186#1187#0" expanded="false" />
+            <element signature="e#1205#1206#0" expanded="false" />
+            <element signature="e#9232#9250#0" expanded="false" />
+            <element signature="e#9643#9650#0" expanded="false" />
+            <element signature="e#10086#10104#0" expanded="false" />
+            <element signature="e#10379#10386#0" expanded="false" />
+            <element signature="e#10665#10683#0" expanded="false" />
+            <element signature="e#10971#10972#0" expanded="false" />
+            <element signature="e#11004#11005#0" expanded="false" />
+            <element signature="e#11035#11036#0" expanded="false" />
+            <element signature="e#11075#11076#0" expanded="false" />
+            <element signature="e#11105#11106#0" expanded="false" />
+            <element signature="e#11124#11125#0" expanded="false" />
+            <element signature="e#12758#12775#0" expanded="false" />
+            <element signature="e#12949#12977#0" expanded="false" />
+            <element signature="e#13047#13271#0" expanded="false" />
+            <element signature="e#13270#13271#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ontologies/Descriptions.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-536">
+          <caret line="231" column="24" lean-forward="false" selection-start-line="231" selection-start-column="24" selection-end-line="231" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://D:/lib/DentalEMRParser/DentalEMRParser.jar!/ontologies/Descriptions.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3791">
+          <caret line="244" column="24" lean-forward="false" selection-start-line="244" selection-start-column="24" selection-end-line="244" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://D:/lib/DentalEMRParser/DentalEMRParser.jar!/rule/ruleParserWithStats.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="92">
+          <caret line="480" column="0" lean-forward="true" selection-start-line="480" selection-start-column="0" selection-end-line="480" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://D:/lib/DentalEMRParser/DentalEMRParser.jar!/emrpaser/rule/ruleParserWithStats.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-25">
+          <caret line="169" column="45" lean-forward="false" selection-start-line="169" selection-start-column="45" selection-end-line="169" selection-end-column="45" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/META-INF/MANIFEST.MF">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/GUI/LabelTool.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="527">
+          <caret line="649" column="34" lean-forward="false" selection-start-line="649" selection-start-column="34" selection-end-line="649" selection-end-column="34" />
+          <folding>
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>

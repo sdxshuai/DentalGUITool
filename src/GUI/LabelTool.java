@@ -23,11 +23,14 @@ import javax.xml.transform.stream.StreamResult;
 
 import com.sun.org.apache.xpath.internal.operations.Mod;
 import com.sun.xml.internal.bind.v2.schemagen.xmlschema.Occurs;
+import org.apache.jena.base.Sys;
 import org.apache.jena.ontology.*;
 import org.apache.jena.ontology.impl.OntModelImpl;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.ModelFactory;
 import org.apache.jena.rdf.model.RDFNode;
+import org.apache.jena.riot.RDFDataMgr;
+import org.apache.jena.riot.RDFFormat;
 import org.apache.jena.vocabulary.XSD;
 import org.opencv.core.Mat;
 import org.opencv.imgcodecs.Imgcodecs;
@@ -93,6 +96,8 @@ import java.awt.event.ItemEvent;
 
 import static org.opencv.imgcodecs.Imgcodecs.imread;
 import static org.opencv.imgcodecs.Imgcodecs.imwrite;
+
+import emrpaser.rule.ruleParserWithStats;
 
 public class LabelTool {
 
@@ -168,7 +173,31 @@ public class LabelTool {
 	 * @throws IOException
 	 * @throws PropertyValueException
 	 */
-	public static void main(String[] args) throws IOException, PropertyValueException {
+	public static void main(String[] args)
+			throws IOException, PropertyValueException,
+			javax.xml.parsers.ParserConfigurationException,
+			javax.xml.transform.TransformerException,
+			emrpaser.exceptions.PropertyValueException{
+
+
+		File owl_file = new File("res//base_template.owl");
+		File modifier_file = new File("res//label_modifier_description.txt");
+//
+//		File res_dir = new File("res");
+//        File data_dir = new File("data");
+//        File excel_file = new File(res_dir.getCanonicalPath() + "\\ontology_definition_1209.xlsx");
+//        File rule_file = new File(res_dir.getCanonicalPath() + "\\rules_all_with_value_20170116.txt");
+//        File general_regex_file = new File(res_dir.getCanonicalPath() + "\\general_regex_with_value.txt");
+//        File emr_file_dir = new File(data_dir.getCanonicalPath() + "\\emr_data");
+//        File output_dir = new File(data_dir.getCanonicalPath() + "\\xml_data");
+//        File all_sen_file = new File(data_dir.getCanonicalPath() + "\\all_sen_checking.txt");
+//        File unmatched_file = new File(data_dir.getCanonicalPath() + "\\emr_data_ummatched.txt");
+//        if(!output_dir.exists()) {
+//            output_dir.mkdirs();
+//        }
+//
+//        ruleParserWithStats p = new ruleParserWithStats(rule_file, general_regex_file, owl_file, modifier_file, excel_file);
+//        p.parse(emr_file_dir, output_dir, all_sen_file, unmatched_file);
 
 //		OntModel ontModel = ModelFactory.createOntologyModel(OntModelSpec.OWL_DL_MEM);
 //		ontModel.read("res//sample.owl");
@@ -177,8 +206,7 @@ public class LabelTool {
 //		imwrite("design.png", getRpdDesign(ontModel));
 
 //		File owl_file = new File("res//CDSSinRPD_ontology_161209.owl");
-		File owl_file = new File("res//CDSSinRPD_ontology_170406.owl");
-		File modifier_file = new File("res//label_modifier_description.txt");
+
 
 
 		EventQueue.invokeLater(new Runnable() {
@@ -199,7 +227,10 @@ public class LabelTool {
 	 * @throws PropertyValueException
 	 * @throws IOException
 	 */
-	public LabelTool(File owl_file, File modifier_file) throws PropertyValueException, IOException {
+	public LabelTool(File owl_file, File modifier_file)
+			throws PropertyValueException, IOException,
+			javax.xml.parsers.ParserConfigurationException, javax.xml.transform.TransformerException,
+			emrpaser.exceptions.PropertyValueException {
 
 		dental_ont = ModelFactory.createOntologyModel(OntModelSpec.OWL_DL_MEM);
 		dental_ont.read("file:" + owl_file.getCanonicalPath());
@@ -215,7 +246,10 @@ public class LabelTool {
 	 *
 	 * @throws PropertyValueException
 	 */
-	private void initialize() throws PropertyValueException {
+	private void initialize() throws PropertyValueException,
+			javax.xml.parsers.ParserConfigurationException,
+			javax.xml.transform.TransformerException,
+			emrpaser.exceptions.PropertyValueException {
 
 		frame = new JFrame();
 		frame.setBounds(100, 100, 861, 688);
@@ -434,10 +468,28 @@ public class LabelTool {
 						String xml_file_path = input_file_path.substring(0, dot_index) + ".xml";
 						File xml_file = new File(xml_file_path);
 						label_xml_file = null;
-						if (xml_file.exists()) {
-							label_xml_file = xml_file;
-							readLabelsFromXml(xml_file);
+
+						if (!xml_file.exists()) {
+							File owl_file = new File("res//base_template.owl");
+							File modifier_file = new File("res//label_modifier_description.txt");
+							File res_dir = new File("res");
+                            File data_dir = new File("data");
+                            File excel_file = new File(res_dir.getCanonicalPath() + "\\ontology_definition_1209.xlsx");
+                            File rule_file = new File(res_dir.getCanonicalPath() + "\\rules_all_with_value_20170116.txt");
+                            File general_regex_file = new File(res_dir.getCanonicalPath() + "\\general_regex_with_value.txt");
+                            File all_sen_file = new File(data_dir.getCanonicalPath() + "\\all_sen_checking.txt");
+                            File unmatched_file = new File(data_dir.getCanonicalPath() + "\\emr_data_ummatched.txt");
+
+                            ruleParserWithStats p = new ruleParserWithStats(rule_file, general_regex_file, owl_file, modifier_file, excel_file);
+                            p.parse(current_dir, current_dir, all_sen_file, unmatched_file);
+                            xml_file = new File(xml_file_path);
 						}
+//						if (xml_file.exists()) {
+//							label_xml_file = xml_file;
+//							readLabelsFromXml(xml_file);
+//						}
+						label_xml_file = xml_file;
+						readLabelsFromXml(xml_file);
 
 					} catch (IOException e) {
 						e.printStackTrace();
@@ -448,6 +500,10 @@ public class LabelTool {
 					} catch (PropertyValueException e) {
 						e.printStackTrace();
 					} catch (BadLocationException e) {
+						e.printStackTrace();
+					} catch (emrpaser.exceptions.PropertyValueException e) {
+						e.printStackTrace();
+					} catch (javax.xml.transform.TransformerException e) {
 						e.printStackTrace();
 					}
 				}
@@ -860,11 +916,15 @@ public class LabelTool {
 			design_count++;
 			OntModel design_ont = ModelFactory.createOntologyModel(OntModelSpec.OWL_DL_MEM);
 			design_ont.read("file:" + owl_file.getCanonicalPath());
+//			design_ont.read("res//sample.owl");
 			planToOwl(plan, design_ont);
 			String output_ont = "out//ontology//" + plan_position_str + "_RPD_design_" + design_count + ".owl";
 			String output_picture = "out//picture//" + plan_position_str + "_RPD_design_" + design_count + ".png";
-			FileWriter out = new FileWriter(output_ont);
-			design_ont.write(out);
+//			FileWriter out = new FileWriter(output_ont);
+//			design_ont.write(out, "RDF/XML");
+			File out_file = new File(output_ont);
+			FileOutputStream out_stream = new FileOutputStream(out_file);
+			RDFDataMgr.write(out_stream, design_ont, RDFFormat.RDFXML);
 			imwrite(output_picture, getRpdDesign(design_ont));
 		}
 	}
