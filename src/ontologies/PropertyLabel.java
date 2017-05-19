@@ -1,10 +1,7 @@
 package ontologies;
 
-import org.apache.jena.ontology.OntProperty;
-
 import misc.ToothMap;
-import ontologies.LabelModifier;
-import ontologies.PropertyValue;
+import org.apache.jena.ontology.OntProperty;
 
 //label属性
 public class PropertyLabel {
@@ -71,12 +68,12 @@ public class PropertyLabel {
 		return this.property_text + " (" + this.modifier.name() + ") " + "(" + this.property.getLocalName() + ")";
 	}
 
-	public void setModifier(LabelModifier modifier) {
-		this.modifier = modifier;
-	}
-
 	public LabelModifier getModifier() {
 		return this.modifier;
+	}
+
+	public void setModifier(LabelModifier modifier) {
+		this.modifier = modifier;
 	}
 }
 

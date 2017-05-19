@@ -1,18 +1,15 @@
 package rpd.oral;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-
+import exceptions.rpd.RuleException;
+import ontologies.OntFunc;
 import org.apache.jena.ontology.DatatypeProperty;
 import org.apache.jena.ontology.Individual;
 import org.apache.jena.ontology.OntModel;
 import org.apache.jena.rdf.model.RDFNode;
-
-import exceptions.rpd.RuleException;
-import exceptions.rpd.ToothPosException;
-import ontologies.OntFunc;
 import rpd.conceptions.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Maxillary {
 
@@ -23,6 +20,99 @@ public class Maxillary {
 
 	public Maxillary(OntModel dental_ont) throws RuleException {
 		init(dental_ont);
+	}
+
+	public static boolean[] getTeethMissingFlags(List<Tooth> zone1, List<Tooth> zone2) {
+
+		boolean[] teeth_missing_flags = new boolean[17];
+		for (int i = 1; i <= 8; i++) {
+			Tooth tooth = zone1.get(i);
+			teeth_missing_flags[9 - i] = tooth.isMissing();
+		}
+		for (int i = 1; i <= 8; i++) {
+			Tooth tooth = zone2.get(i);
+			teeth_missing_flags[8 + i] = tooth.isMissing();
+		}
+		return teeth_missing_flags;
+	}
+
+	public static List<EdentulousSpace> getEdentulousSpaces(List<Tooth> zone1, List<Tooth> zone2) throws RuleException {
+
+		List<EdentulousSpace> edentulous_spaces = new ArrayList<EdentulousSpace>();
+		boolean[] teeth_missing_flags = getTeethMissingFlags(zone1, zone2);
+		int i = 1;
+		int edentulous_space_start = -1;
+		int edentulous_space_end = -1;
+		while (i <= 16) {
+
+			if (!teeth_missing_flags[i]) {
+				i++;
+				continue;
+			} else {
+				edentulous_space_start = i;
+				int j = i + 1;
+				while (j <= 16 && teeth_missing_flags[j])
+					j++;
+				edentulous_space_end = j - 1;
+
+				int start_zone = -1;
+				int start_number = -1;
+				int end_zone = -1;
+				int end_number = -1;
+
+				if (edentulous_space_start <= 8) {
+					start_zone = 1;
+					start_number = 9 - edentulous_space_start;
+				} else {
+					start_zone = 2;
+					start_number = edentulous_space_start - 8;
+				}
+
+				if (edentulous_space_end <= 8) {
+					end_zone = 1;
+					end_number = 9 - edentulous_space_end;
+				} else {
+					end_zone = 2;
+					end_number = edentulous_space_end - 8;
+				}
+
+				if (start_zone == 1 && start_number == 8 && end_zone == 1 && end_number == 8) {
+					i = edentulous_space_end + 1;
+					continue;
+				}
+
+				if (start_zone == 2 && start_number == 8 && end_zone == 2 && end_number == 8) {
+					i = edentulous_space_end + 1;
+					continue;
+				}
+
+				Tooth left_neighbor = null;
+				Tooth right_neighbor = null;
+				if (start_number != 8) {
+					if (start_zone == 1)
+						left_neighbor = zone1.get(start_number + 1);
+					else if (start_zone == 2 && start_number == 1)
+						left_neighbor = zone1.get(1);
+					else if (start_zone == 2 && start_number != 1)
+						left_neighbor = zone2.get(start_number - 1);
+					else {
+					}
+				}
+				if (end_number != 8) {
+					if (end_zone == 1 && end_number == 1)
+						right_neighbor = zone2.get(1);
+					else if (end_zone == 1 && end_number != 1)
+						right_neighbor = zone1.get(end_number - 1);
+					else if (end_zone == 2)
+						right_neighbor = zone2.get(end_number + 1);
+				}
+
+				EdentulousSpace edentulous_space = new EdentulousSpace(left_neighbor, right_neighbor, Position.Maxillary);
+				edentulous_spaces.add(edentulous_space);
+				i = edentulous_space_end + 1;
+			}
+		}
+		return edentulous_spaces;
 	}
 
 	public Tooth getTooth(int zone, int num) {
@@ -168,20 +258,6 @@ public class Maxillary {
 		}
 	}
 
-	public static boolean[] getTeethMissingFlags(List<Tooth> zone1, List<Tooth> zone2) {
-
-		boolean[] teeth_missing_flags = new boolean[17];
-		for (int i = 1; i <= 8; i++) {
-			Tooth tooth = zone1.get(i);
-			teeth_missing_flags[9 - i] = tooth.isMissing();
-		}
-		for (int i = 1; i <= 8; i++) {
-			Tooth tooth = zone2.get(i);
-			teeth_missing_flags[8 + i] = tooth.isMissing();
-		}
-		return teeth_missing_flags;
-	}
-
 	public List<Tooth> getMissingTeeth() {
 		List<Tooth> res = new ArrayList<Tooth>();
 		for (Tooth tooth : zone1) {
@@ -195,86 +271,6 @@ public class Maxillary {
 			}
 		}
 		return res;
-	}
-
-
-	public static List<EdentulousSpace> getEdentulousSpaces(List<Tooth> zone1, List<Tooth> zone2) throws RuleException {
-
-		List<EdentulousSpace> edentulous_spaces = new ArrayList<EdentulousSpace>();
-		boolean[] teeth_missing_flags = getTeethMissingFlags(zone1, zone2);
-		int i = 1;
-		int edentulous_space_start = -1;
-		int edentulous_space_end = -1;
-		while (i <= 16) {
-
-			if (!teeth_missing_flags[i]) {
-				i++;
-				continue;
-			} else {
-				edentulous_space_start = i;
-				int j = i + 1;
-				while (j <= 16 && teeth_missing_flags[j])
-					j++;
-				edentulous_space_end = j - 1;
-
-				int start_zone = -1;
-				int start_number = -1;
-				int end_zone = -1;
-				int end_number = -1;
-
-				if (edentulous_space_start <= 8) {
-					start_zone = 1;
-					start_number = 9 - edentulous_space_start;
-				} else {
-					start_zone = 2;
-					start_number = edentulous_space_start - 8;
-				}
-
-				if (edentulous_space_end <= 8) {
-					end_zone = 1;
-					end_number = 9 - edentulous_space_end;
-				} else {
-					end_zone = 2;
-					end_number = edentulous_space_end - 8;
-				}
-
-				if (start_zone == 1 && start_number == 8 && end_zone == 1 && end_number == 8) {
-					i = edentulous_space_end + 1;
-					continue;
-				}
-
-				if (start_zone == 2 && start_number == 8 && end_zone == 2 && end_number == 8) {
-					i = edentulous_space_end + 1;
-					continue;
-				}
-
-				Tooth left_neighbor = null;
-				Tooth right_neighbor = null;
-				if (start_number != 8) {
-					if (start_zone == 1)
-						left_neighbor = zone1.get(start_number + 1);
-					else if (start_zone == 2 && start_number == 1)
-						left_neighbor = zone1.get(1);
-					else if (start_zone == 2 && start_number != 1)
-						left_neighbor = zone2.get(start_number - 1);
-					else {
-					}
-				}
-				if (end_number != 8) {
-					if (end_zone == 1 && end_number == 1)
-						right_neighbor = zone2.get(1);
-					else if (end_zone == 1 && end_number != 1)
-						right_neighbor = zone1.get(end_number - 1);
-					else if (end_zone == 2)
-						right_neighbor = zone2.get(end_number + 1);
-				}
-
-				EdentulousSpace edentulous_space = new EdentulousSpace(left_neighbor, right_neighbor, Position.Maxillary);
-				edentulous_spaces.add(edentulous_space);
-				i = edentulous_space_end + 1;
-			}
-		}
-		return edentulous_spaces;
 	}
 
 	public void initEdentulousSpaces() throws RuleException {

@@ -1,9 +1,5 @@
 package rpd.rules;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
-
 import exceptions.rpd.ClaspAssemblyException;
 import exceptions.rpd.RuleException;
 import exceptions.rpd.ToothPosException;
@@ -16,24 +12,16 @@ import rpd.oral.EdentulousSpace;
 import rpd.oral.Mouth;
 import rpd.oral.Tooth;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+
 //规则2
 public class MajorConnectorRule {
 
 	public static List<MajorConnectorRule> major_connector_rules = null;
 
 	private static Mouth mouth = null;
-
-	public List<RPDPlan> apply(List<RPDPlan> rpd_plan) throws RuleException, ClaspAssemblyException, ToothPosException {
-		throw new RuleException("call from abstract class");
-	}
-
-	public int getRuleNum() throws RuleException {
-		throw new RuleException("call from abstract class");
-	}
-
-	public String getExplaination() throws RuleException {
-		throw new RuleException("call from abstract class");
-	}
 
 	public static void initRules(Mouth mouth_obj) {
 
@@ -58,8 +46,7 @@ public class MajorConnectorRule {
 				MajorConnector majorConnector = null;
 				if (plan.getPosition() == Position.Mandibular) {
 					majorConnector = chooseMajorConnectorOnMandibular(plan);
-				}
-				else {
+				} else {
 					majorConnector = chooseMajorConnectorOnMaxillary(plan);
 				}
 				return majorConnector;
@@ -68,8 +55,7 @@ public class MajorConnectorRule {
 			public MajorConnector chooseMajorConnectorOnMandibular(RPDPlan plan) {
 				if (isBadCondition(plan.getAbutmentTeeth())) {
 					return new LingualPlateConnector(plan.getAbutmentTeeth());
-				}
-				else {
+				} else {
 					return new LingualBarConnector(plan.getAbutmentTeeth());
 				}
 			}
@@ -77,19 +63,15 @@ public class MajorConnectorRule {
 			public MajorConnector chooseMajorConnectorOnMaxillary(RPDPlan plan) {
 				if (isDislocateWithMoreThanFiveMissing(mouth, plan.getPosition())) {
 					return new FullPalatalPlateConnector(plan.getAbutmentTeeth(), mouth.getMaxillary());
-				}
-				else {
+				} else {
 					KennedyType kennedyType = getKennedyType(mouth, plan.getPosition());
 					if (kennedyType == KennedyType.KENNEDY_TYPE_I) {
 						return new PalatalPlateConnector(plan.getAbutmentTeeth(), mouth.getMaxillary());
-					}
-					else if (kennedyType == KennedyType.KENNEDY_TYPE_II) {
+					} else if (kennedyType == KennedyType.KENNEDY_TYPE_II) {
 						return new ModifiedPalatalPlateConnector(plan.getAbutmentTeeth(), mouth.getMaxillary());
-					}
-					else if (kennedyType == KennedyType.KENNEDY_TYPE_III) {
+					} else if (kennedyType == KennedyType.KENNEDY_TYPE_III) {
 						return new SinglePalatalStrapConnector(plan.getAbutmentTeeth(), mouth.getMaxillary());
-					}
-					else {
+					} else {
 						return new CombinationAnteriorPosteriorPalatalStrapConnector(
 								plan.getAbutmentTeeth(), mouth.getMaxillary());
 					}
@@ -98,7 +80,7 @@ public class MajorConnectorRule {
 
 			public boolean isBadCondition(Set<Tooth> abutment_teeth) {
 				boolean flag = false;
-				for (Tooth tooth:abutment_teeth) {
+				for (Tooth tooth : abutment_teeth) {
 					if (tooth.getToothPosition() == ToothPosition.Lingual
 							|| tooth.isTorus()
 							|| tooth.isSpaceBelowGingivalMargins()) {
@@ -117,27 +99,26 @@ public class MajorConnectorRule {
 				boolean flag_left = true;
 				boolean flag_right = true;
 				if (maxillary_or_mandibular == Position.Mandibular) {
-					for (int numTooth=8; numTooth>=3; numTooth--){
+					for (int numTooth = 8; numTooth >= 3; numTooth--) {
 						if (!mouth.getMandibular().getTooth(3, numTooth).isMissing()) {
 							flag_right = false;
 							break;
 						}
 					}
-					for (int numTooth=8; numTooth>=3; numTooth--){
+					for (int numTooth = 8; numTooth >= 3; numTooth--) {
 						if (!mouth.getMandibular().getTooth(4, numTooth).isMissing()) {
 							flag_left = false;
 							break;
 						}
 					}
-				}
-				else {
-					for (int numTooth=8; numTooth>=3; numTooth--) {
+				} else {
+					for (int numTooth = 8; numTooth >= 3; numTooth--) {
 						if (!mouth.getMaxillary().getTooth(1, numTooth).isMissing()) {
 							flag_left = false;
 							break;
 						}
 					}
-					for (int numTooth=8; numTooth>=3; numTooth--) {
+					for (int numTooth = 8; numTooth >= 3; numTooth--) {
 						if (!mouth.getMaxillary().getTooth(2, numTooth).isMissing()) {
 							flag_right = false;
 							break;
@@ -151,14 +132,12 @@ public class MajorConnectorRule {
 				if (isLeftDislocate(mouth, maxillary_or_mandibular)
 						&& isRightDislocate(mouth, maxillary_or_mandibular)) {
 					return KennedyType.KENNEDY_TYPE_I;
-				}
-				else if ((isLeftDislocate(mouth, maxillary_or_mandibular)
+				} else if ((isLeftDislocate(mouth, maxillary_or_mandibular)
 						&& !isRightDislocate(mouth, maxillary_or_mandibular))
 						|| (!isLeftDislocate(mouth, maxillary_or_mandibular)
 						&& isRightDislocate(mouth, maxillary_or_mandibular))) {
 					return KennedyType.KENNEDY_TYPE_II;
-				}
-				else {
+				} else {
 					if (maxillary_or_mandibular == Position.Mandibular) {
 						List<EdentulousSpace> edentulousSpaces = mouth.getMandibular().getEdentulousSpaces();
 						if (edentulousSpaces.size() == 1) {
@@ -167,16 +146,13 @@ public class MajorConnectorRule {
 							Tooth right_neighbour = edentulousSpace.getRightNeighbor();
 							if (left_neighbour.getZone() != right_neighbour.getZone()) {
 								return KennedyType.KENNEDY_TYPE_IV;
-							}
-							else {
+							} else {
 								return KennedyType.KENNEDY_TYPE_III;
 							}
-						}
-						else {
+						} else {
 							return KennedyType.KENNEDY_TYPE_III;
 						}
-					}
-					else {
+					} else {
 						List<EdentulousSpace> edentulousSpaces = mouth.getMaxillary().getEdentulousSpaces();
 						if (edentulousSpaces.size() == 1) {
 							EdentulousSpace edentulousSpace = edentulousSpaces.get(0);
@@ -184,12 +160,10 @@ public class MajorConnectorRule {
 							Tooth right_neighbour = edentulousSpace.getRightNeighbor();
 							if (left_neighbour.getZone() != right_neighbour.getZone()) {
 								return KennedyType.KENNEDY_TYPE_IV;
-							}
-							else {
+							} else {
 								return KennedyType.KENNEDY_TYPE_III;
 							}
-						}
-						else {
+						} else {
 							return KennedyType.KENNEDY_TYPE_III;
 						}
 					}
@@ -204,8 +178,7 @@ public class MajorConnectorRule {
 							&& mouth.getMandibular().getTooth(4, 8).isMissing()) {
 						flag = true;
 					}
-				}
-				else {
+				} else {
 					if (mouth.getMaxillary().getTooth(1, 7).isMissing()
 							&& mouth.getMaxillary().getTooth(1, 8).isMissing()) {
 						flag = true;
@@ -221,8 +194,7 @@ public class MajorConnectorRule {
 							&& mouth.getMandibular().getTooth(3, 8).isMissing()) {
 						flag = true;
 					}
-				}
-				else {
+				} else {
 					if (mouth.getMaxillary().getTooth(2, 7).isMissing()
 							&& mouth.getMaxillary().getTooth(2, 8).isMissing()) {
 						flag = true;
@@ -233,7 +205,7 @@ public class MajorConnectorRule {
 
 			public List<RPDPlan> apply(List<RPDPlan> rpd_plans) throws RuleException {
 				List<RPDPlan> res = new ArrayList<>();
-				for (RPDPlan plan:rpd_plans) {
+				for (RPDPlan plan : rpd_plans) {
 					MajorConnector majorConnector = chooseMajorConnector(plan);
 					if (majorConnector != null) {
 						plan.addComponent(majorConnector);
@@ -244,5 +216,17 @@ public class MajorConnectorRule {
 				return res;
 			}
 		});
+	}
+
+	public List<RPDPlan> apply(List<RPDPlan> rpd_plan) throws RuleException, ClaspAssemblyException, ToothPosException {
+		throw new RuleException("call from abstract class");
+	}
+
+	public int getRuleNum() throws RuleException {
+		throw new RuleException("call from abstract class");
+	}
+
+	public String getExplaination() throws RuleException {
+		throw new RuleException("call from abstract class");
 	}
 }

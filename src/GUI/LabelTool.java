@@ -1,13 +1,46 @@
 package GUI;
 
-import java.awt.*;
+import com.jgoodies.forms.layout.*;
+import emrpaser.rule.ruleParserWithStats;
+import exceptions.PropertyValueException;
+import exceptions.ToothMapException;
+import exceptions.ToothModifierException;
+import exceptions.rpd.ClaspAssemblyException;
+import exceptions.rpd.EdentulousTypeException;
+import exceptions.rpd.RuleException;
+import exceptions.rpd.ToothPosException;
+import misc.ToothMap;
+import ontologies.*;
+import ontologies.Descriptions.PropertyDescription;
+import org.apache.jena.ontology.*;
+import org.apache.jena.rdf.model.ModelFactory;
+import org.apache.jena.riot.RDFDataMgr;
+import org.apache.jena.riot.RDFFormat;
+import org.apache.jena.vocabulary.XSD;
+import org.opencv.core.Mat;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
+import rpd.RPDPlan;
+import rpd.SearchRPDPlan;
+import rpd.components.*;
+import rpd.conceptions.ClaspMaterial;
+import rpd.conceptions.Position;
+import rpd.oral.EdentulousSpace;
+import rpd.oral.Instantialize;
+import rpd.oral.Mouth;
+import rpd.oral.Tooth;
 
 import javax.swing.*;
 import javax.swing.border.Border;
-import javax.swing.event.TableModelEvent;
-import javax.swing.event.TableModelListener;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.text.*;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.DefaultStyledDocument;
+import javax.swing.text.SimpleAttributeSet;
+import javax.swing.text.StyleConstants;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.TreeNode;
 import javax.swing.tree.TreePath;
@@ -20,84 +53,16 @@ import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
-
-import com.sun.org.apache.xpath.internal.operations.Mod;
-import com.sun.xml.internal.bind.v2.schemagen.xmlschema.Occurs;
-import org.apache.jena.base.Sys;
-import org.apache.jena.ontology.*;
-import org.apache.jena.ontology.impl.OntModelImpl;
-import org.apache.jena.rdf.model.Model;
-import org.apache.jena.rdf.model.ModelFactory;
-import org.apache.jena.rdf.model.RDFNode;
-import org.apache.jena.riot.RDFDataMgr;
-import org.apache.jena.riot.RDFFormat;
-import org.apache.jena.vocabulary.XSD;
-import org.opencv.core.Mat;
-import org.opencv.imgcodecs.Imgcodecs;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
-import org.xml.sax.SAXException;
-
-import com.jgoodies.forms.layout.FormLayout;
-import com.jgoodies.forms.layout.ColumnSpec;
-import com.jgoodies.forms.layout.RowSpec;
-import com.jgoodies.forms.layout.FormSpecs;
-import com.jgoodies.forms.layout.Sizes;
-
-import ontologies.LabelModifier;
-import ontologies.LabelPosComparator;
-import exceptions.PropertyValueException;
-import exceptions.ToothMapException;
-import exceptions.ToothModifierException;
-import exceptions.rpd.ClaspAssemblyException;
-import exceptions.rpd.EdentulousTypeException;
-import exceptions.rpd.RuleException;
-import exceptions.rpd.ToothPosException;
-import ontologies.BooleanPropertyValue;
-import ontologies.Descriptions;
-import ontologies.Descriptions.PropertyDescription;
-import misc.ToothMap;
-import ontologies.DoublePropertyValue;
-import ontologies.IntPropertyValue;
-import ontologies.ListPropertyValue;
-import ontologies.OntFunc;
-import ontologies.PropertyLabel;
-import ontologies.PropertyValue;
-import ontologies.StringPropertyValue;
-import rpd.BeamSearch;
-import rpd.RPDPlan;
-import rpd.SearchRPDPlan;
-import rpd.components.*;
-import rpd.oral.EdentulousSpace;
-import rpd.oral.Instantialize;
-import rpd.oral.Mouth;
-import rpd.oral.Tooth;
-import rpd.conceptions.Position;
-import rpd.conceptions.ClaspMaterial;
-
-import java.awt.Component;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.*;
+import java.awt.Dialog.ModalityType;
+import java.awt.event.*;
 import java.io.*;
 import java.util.*;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.awt.Dialog.ModalityType;
 
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
-
-import java.awt.event.ItemListener;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-
-import static org.opencv.imgcodecs.Imgcodecs.imread;
 import static org.opencv.imgcodecs.Imgcodecs.imwrite;
-
-import emrpaser.rule.ruleParserWithStats;
 
 public class LabelTool {
 
@@ -106,121 +71,42 @@ public class LabelTool {
 		System.loadLibrary("opencv_java320");
 	}
 
-	public static native Mat getRpdDesign(OntModel ontModel, Mat mat);
-
-	public static native Mat getRpdDesign(OntModel ontModel);
-
 	private OntModel dental_ont = null;
-
 	private OntModel mouth_ont = null;
 	private Mouth mouth = null;
 	private List<RPDPlan> mandibular_rpd_plans = null;
 	private List<RPDPlan> maxillary_rpd_plans = null;
-
 	private Descriptions des = null;
-
 	private File owl_file = null;
 	private File choosed_file = null;
 	private File current_dir = new File("D:\\Codes\\DentalGUITool\\data");
-
 	private File label_xml_file = null;
-
 	private JTextPane emr_text = null;
-
 	private JFrame frame;
 	private JTextField choose_file_path;
-
 	private JDialog value_dialog = null;
 	private String value = null;
 	private boolean value_valid = false;
-
 	private boolean locate_tooth_map_when_reading = false;
-
 	private Map<DatatypeProperty, JMenuItem> property_menu_map = new HashMap<DatatypeProperty, JMenuItem>();
-
 	private JTable label_table = null;
-
 	private List<PropertyLabel> label_list = new ArrayList<PropertyLabel>();
-
 	private List<ToothMap> tooth_maps = null;
-
 	private JPopupMenu label_menu = null;
 	private JMenu tooth_map_menu = null;
 	private JMenuItem remove_tooth_map = null;
-
 	private JCheckBox chckbx_show_all_labels = null;
-
 	private List<JMenuItem> tooth_map_items = new ArrayList<JMenuItem>();
-
 	private String[] label_table_headers = {"牙位", "文本", "属性", "属性值", "说明", "标记"};
-
 	private String is_missing_str = null;
-
 	private RPDPlan current_rpd_plan = null;
 	private JTree rpd_plan_tree = null;
+	private JComboBox<Integer> plan_choice = null;
+	private JPopupMenu rpd_plan_menu = null;
 
 	//private ToothMap is_missing_map = null;
-
-	private JComboBox<Integer> plan_choice = null;
-
-	private JPopupMenu rpd_plan_menu = null;
 	private JPopupMenu tooth_menu = null;
 	private JPopupMenu component_menu = null;
-
-	/**
-	 * Launch the application.
-	 *
-	 * @throws IOException
-	 * @throws PropertyValueException
-	 */
-	public static void main(String[] args)
-			throws IOException, PropertyValueException,
-			javax.xml.parsers.ParserConfigurationException,
-			javax.xml.transform.TransformerException,
-			emrpaser.exceptions.PropertyValueException{
-
-
-		File owl_file = new File("res//base_template.owl");
-		File modifier_file = new File("res//label_modifier_description.txt");
-//
-//		File res_dir = new File("res");
-//        File data_dir = new File("data");
-//        File excel_file = new File(res_dir.getCanonicalPath() + "\\ontology_definition_1209.xlsx");
-//        File rule_file = new File(res_dir.getCanonicalPath() + "\\rules_all_with_value_20170116.txt");
-//        File general_regex_file = new File(res_dir.getCanonicalPath() + "\\general_regex_with_value.txt");
-//        File emr_file_dir = new File(data_dir.getCanonicalPath() + "\\emr_data");
-//        File output_dir = new File(data_dir.getCanonicalPath() + "\\xml_data");
-//        File all_sen_file = new File(data_dir.getCanonicalPath() + "\\all_sen_checking.txt");
-//        File unmatched_file = new File(data_dir.getCanonicalPath() + "\\emr_data_ummatched.txt");
-//        if(!output_dir.exists()) {
-//            output_dir.mkdirs();
-//        }
-//
-//        ruleParserWithStats p = new ruleParserWithStats(rule_file, general_regex_file, owl_file, modifier_file, excel_file);
-//        p.parse(emr_file_dir, output_dir, all_sen_file, unmatched_file);
-
-//		OntModel ontModel = ModelFactory.createOntologyModel(OntModelSpec.OWL_DL_MEM);
-//		ontModel.read("res//sample.owl");
-//		Mat base = imread("D:/Codes/DentalGUITool/res/base.png");
-//		imwrite("design_with_base.png", getRpdDesign(ontModel, base));
-//		imwrite("design.png", getRpdDesign(ontModel));
-
-//		File owl_file = new File("res//CDSSinRPD_ontology_161209.owl");
-
-
-
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					LabelTool window = new LabelTool(owl_file, modifier_file);
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
 	/**
 	 * Create the application.
 	 *
@@ -239,6 +125,56 @@ public class LabelTool {
 		des = new Descriptions(dental_ont, modifier_file);
 		this.owl_file = owl_file;
 		initialize();
+	}
+
+	public static native Mat getRpdDesign(OntModel ontModel, Mat mat);
+
+	public static native Mat getRpdDesign(OntModel ontModel);
+
+	/**
+	 * Launch the application.
+	 *
+	 * @throws IOException
+	 * @throws PropertyValueException
+	 */
+	public static void main(String[] args)
+			throws IOException, PropertyValueException,
+			javax.xml.parsers.ParserConfigurationException,
+			javax.xml.transform.TransformerException,
+			emrpaser.exceptions.PropertyValueException {
+
+
+		File owl_file = new File("res//base_template.owl");
+		File modifier_file = new File("res//label_modifier_description.txt");
+
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					LabelTool window = new LabelTool(owl_file, modifier_file);
+					window.frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	private static List<ToothMap> locateToothMaps(String content_str, int content_start) {
+
+		List<ToothMap> res = new ArrayList<ToothMap>();
+		Pattern tooth_map_pattern = Pattern.compile(ToothMap.tooth_map_regex);
+		Matcher m = tooth_map_pattern.matcher(content_str);
+
+		while (m.find()) {
+
+			int start_index = m.start();
+			int end_index = m.end();
+
+			String tooth_map_str = content_str.substring(start_index, end_index);
+			ToothMap tooth_map = new ToothMap(tooth_map_str, content_start + start_index, content_start + end_index);
+			res.add(tooth_map);
+		}
+		return res;
 	}
 
 	/**
@@ -473,16 +409,16 @@ public class LabelTool {
 							File owl_file = new File("res//base_template.owl");
 							File modifier_file = new File("res//label_modifier_description.txt");
 							File res_dir = new File("res");
-                            File data_dir = new File("data");
-                            File excel_file = new File(res_dir.getCanonicalPath() + "\\ontology_definition_1209.xlsx");
-                            File rule_file = new File(res_dir.getCanonicalPath() + "\\rules_all_with_value_20170116.txt");
-                            File general_regex_file = new File(res_dir.getCanonicalPath() + "\\general_regex_with_value.txt");
-                            File all_sen_file = new File(data_dir.getCanonicalPath() + "\\all_sen_checking.txt");
-                            File unmatched_file = new File(data_dir.getCanonicalPath() + "\\emr_data_ummatched.txt");
+							File data_dir = new File("data");
+							File excel_file = new File(res_dir.getCanonicalPath() + "\\ontology_definition_1209.xlsx");
+							File rule_file = new File(res_dir.getCanonicalPath() + "\\rules_all_with_value_20170116.txt");
+							File general_regex_file = new File(res_dir.getCanonicalPath() + "\\general_regex_with_value.txt");
+							File all_sen_file = new File(data_dir.getCanonicalPath() + "\\all_sen_checking.txt");
+							File unmatched_file = new File(data_dir.getCanonicalPath() + "\\emr_data_ummatched.txt");
 
-                            ruleParserWithStats p = new ruleParserWithStats(rule_file, general_regex_file, owl_file, modifier_file, excel_file);
-                            p.parse(current_dir, current_dir, all_sen_file, unmatched_file);
-                            xml_file = new File(xml_file_path);
+							ruleParserWithStats p = new ruleParserWithStats(rule_file, general_regex_file, owl_file, modifier_file, excel_file);
+							p.parseFile(choosed_file, xml_file);
+							xml_file = new File(xml_file_path);
 						}
 //						if (xml_file.exists()) {
 //							label_xml_file = xml_file;
@@ -797,15 +733,15 @@ public class LabelTool {
 			generateAndSaveRPDPlanPicture(this.mandibular_rpd_plans);
 
 			total_height += line_height;
-			for (int i=1;i<=3;i++){
+			for (int i = 1; i <= 3; i++) {
 				ImageIcon im = new ImageIcon("out//picture//mandibular_RPD_design_" + i + ".png");
 				int src_im_height = im.getIconHeight();
 				int src_im_width = im.getIconWidth();
-				double scale_factor = (double)line_height/(double) src_im_height;
+				double scale_factor = (double) line_height / (double) src_im_height;
 				double rescale_height = src_im_height * scale_factor;
 				double rescale_width = src_im_width * scale_factor;
-				int dest_im_width = (int)rescale_width;
-				int dest_im_height = (int)rescale_height;
+				int dest_im_width = (int) rescale_width;
+				int dest_im_height = (int) rescale_height;
 				im.setImage(im.getImage().getScaledInstance(dest_im_width, dest_im_height, Image.SCALE_DEFAULT));
 				JLabel rpd_plan_label = new JLabel();
 				rpd_plan_label.setSize(dest_im_width, dest_im_height);
@@ -826,15 +762,15 @@ public class LabelTool {
 
 			total_height += line_height;
 			total_width = 0;
-			for (int i=1;i<=3;i++){
+			for (int i = 1; i <= 3; i++) {
 				ImageIcon im = new ImageIcon("out//picture//maxillary_RPD_design_" + i + ".png");
 				int src_im_height = im.getIconHeight();
 				int src_im_width = im.getIconWidth();
-				double scale_factor = (double)line_height/(double)src_im_height;
+				double scale_factor = (double) line_height / (double) src_im_height;
 				double rescale_height = src_im_height * scale_factor;
 				double rescale_width = src_im_width * scale_factor;
-				int dest_im_width = (int)rescale_width;
-				int dest_im_height = (int)rescale_height;
+				int dest_im_width = (int) rescale_width;
+				int dest_im_height = (int) rescale_height;
 				im.setImage(im.getImage().getScaledInstance(dest_im_width, dest_im_height, Image.SCALE_DEFAULT));
 				JLabel rpd_plan_label = new JLabel();
 				rpd_plan_label.setSize(dest_im_width, dest_im_height);
@@ -851,8 +787,8 @@ public class LabelTool {
 
 		total_width += 100;
 		total_height += 20;
-		rpd_plan_panel.setSize(total_width,total_height);
-		design_dialog.setSize(total_width, total_height+40);
+		rpd_plan_panel.setSize(total_width, total_height);
+		design_dialog.setSize(total_width, total_height + 40);
 		design_dialog.setLocationRelativeTo(null);
 		design_dialog.setVisible(true);
 	}
@@ -874,15 +810,15 @@ public class LabelTool {
 
 		total_height += line_height;
 		String plan_position_str = plans.get(0).getPosition().toString();
-		for (int i=1;i<=3;i++){
+		for (int i = 1; i <= 3; i++) {
 			ImageIcon im = new ImageIcon("out//picture//" + plan_position_str + "_RPD_design_" + i + ".png");
 			int src_im_height = im.getIconHeight();
 			int src_im_width = im.getIconWidth();
-			double scale_factor = (double)line_height/(double) src_im_height;
+			double scale_factor = (double) line_height / (double) src_im_height;
 			double rescale_height = src_im_height * scale_factor;
 			double rescale_width = src_im_width * scale_factor;
-			int dest_im_width = (int)rescale_width;
-			int dest_im_height = (int)rescale_height;
+			int dest_im_width = (int) rescale_width;
+			int dest_im_height = (int) rescale_height;
 			im.setImage(im.getImage().getScaledInstance(dest_im_width, dest_im_height, Image.SCALE_DEFAULT));
 			JLabel rpd_plan_label = new JLabel();
 			rpd_plan_label.setSize(dest_im_width, dest_im_height);
@@ -899,8 +835,8 @@ public class LabelTool {
 
 		total_width += 100;
 		total_height += 20;
-		rpd_plan_panel.setSize(total_width,total_height);
-		design_dialog.setSize(total_width, total_height+40);
+		rpd_plan_panel.setSize(total_width, total_height);
+		design_dialog.setSize(total_width, total_height + 40);
 		design_dialog.setLocationRelativeTo(null);
 		design_dialog.setVisible(true);
 	}
@@ -910,9 +846,10 @@ public class LabelTool {
 		if (plans == null || plans.size() == 0) {
 			return;
 		}
+
 		String plan_position_str = plans.get(0).getPosition().toString();
 		int design_count = 0;
-		for (RPDPlan plan:plans) {
+		for (RPDPlan plan : plans) {
 			design_count++;
 			OntModel design_ont = ModelFactory.createOntologyModel(OntModelSpec.OWL_DL_MEM);
 			design_ont.read("file:" + owl_file.getCanonicalPath());
@@ -922,14 +859,31 @@ public class LabelTool {
 			String output_picture = "out//picture//" + plan_position_str + "_RPD_design_" + design_count + ".png";
 //			FileWriter out = new FileWriter(output_ont);
 //			design_ont.write(out, "RDF/XML");
-			File out_file = new File(output_ont);
-			FileOutputStream out_stream = new FileOutputStream(out_file);
+//			File out_file = new File(output_ont);
+			checkAndCreateFile(output_ont);
+			checkAndCreateFile(output_picture);
+			File out_ont_file = new File(output_ont);
+			FileOutputStream out_stream = new FileOutputStream(out_ont_file);
 			RDFDataMgr.write(out_stream, design_ont, RDFFormat.RDFXML);
 			imwrite(output_picture, getRpdDesign(design_ont));
 		}
 	}
 
+	private void checkAndCreateFile(String filepath) throws java.io.IOException{
+		File file = new File(filepath);
+		File file_dir = new File(file.getParent());
 
+		if (file_dir.exists()) {
+			if (!file.exists()) {
+				file.createNewFile();
+			}
+		}
+		else {
+			file_dir.mkdirs();
+			file.createNewFile();
+		}
+
+	}
 
 	private void showRPDPlans() throws IOException {
 
@@ -1537,24 +1491,6 @@ public class LabelTool {
 		emr_text.setCaretPosition(old_pos);
 	}
 
-	private static List<ToothMap> locateToothMaps(String content_str, int content_start) {
-
-		List<ToothMap> res = new ArrayList<ToothMap>();
-		Pattern tooth_map_pattern = Pattern.compile(ToothMap.tooth_map_regex);
-		Matcher m = tooth_map_pattern.matcher(content_str);
-
-		while (m.find()) {
-
-			int start_index = m.start();
-			int end_index = m.end();
-
-			String tooth_map_str = content_str.substring(start_index, end_index);
-			ToothMap tooth_map = new ToothMap(tooth_map_str, content_start + start_index, content_start + end_index);
-			res.add(tooth_map);
-		}
-		return res;
-	}
-
 	private ToothMap findValidToothMap(int sentence_start) {
 
 		int i = 0;
@@ -1574,7 +1510,7 @@ public class LabelTool {
 
 	private void updateLabelList() {
 		List<PropertyLabel> new_lable_list = new ArrayList<>();
-		for (int num_row=0; num_row<label_table.getRowCount(); num_row++) {
+		for (int num_row = 0; num_row < label_table.getRowCount(); num_row++) {
 			int start_offset = -1;
 			int end_offset = -1;
 			String property_text = null;
@@ -1587,14 +1523,12 @@ public class LabelTool {
 			ToothMap tooth_map = null;
 
 
-
 			start_offset = label_list.get(0).getStartOffset();
 			end_offset = label_list.get(0).getEndOffset();
 			if (label_table.getModel().getValueAt(num_row, 0) != null) {
 				if (label_table.getModel().getValueAt(num_row, 0).getClass() == ToothMap.class) {
 					tooth_map = (ToothMap) label_table.getModel().getValueAt(num_row, 0);
-				}
-				else {
+				} else {
 					tooth_map = new ToothMap(
 							(String) label_table.getModel().getValueAt(num_row, 0),
 							label_list.get(num_row).getStartOffset(),
@@ -1611,28 +1545,22 @@ public class LabelTool {
 			if (label_table.getModel().getValueAt(num_row, 3) != null) {
 				if (label_table.getModel().getValueAt(num_row, 3) instanceof PropertyValue) {
 					value = (PropertyValue) label_table.getModel().getValueAt(num_row, 3);
-				}
-				else {
+				} else {
 					value_str = (String) label_table.getModel().getValueAt(num_row, 3);
 					String NS = "http://www.w3.org/2001/XMLSchema#";
 					if (property.hasRange(dental_ont.getOntResource(NS + "boolean"))) {
 						if (value_str.equals("0") || value_str.equals("false")) {
 							value = new BooleanPropertyValue(false);
-						}
-						else if (value_str.equals("1") || value_str.equals("true")) {
+						} else if (value_str.equals("1") || value_str.equals("true")) {
 							value = new BooleanPropertyValue(true);
 						}
-					}
-					else if (property.hasRange(dental_ont.getOntResource(NS + "list"))) {
+					} else if (property.hasRange(dental_ont.getOntResource(NS + "list"))) {
 						value = new ListPropertyValue(Integer.valueOf(value_str));
-					}
-					else if (property.hasRange(dental_ont.getOntResource(NS + "int"))) {
+					} else if (property.hasRange(dental_ont.getOntResource(NS + "int"))) {
 						value = new IntPropertyValue(Integer.valueOf(value_str));
-					}
-					else if (property.hasRange(dental_ont.getOntResource(NS + "double"))) {
+					} else if (property.hasRange(dental_ont.getOntResource(NS + "double"))) {
 						value = new DoublePropertyValue(Double.valueOf(value_str));
-					}
-					else if (property.hasRange(dental_ont.getOntResource(NS + "string"))) {
+					} else if (property.hasRange(dental_ont.getOntResource(NS + "string"))) {
 						value = new StringPropertyValue(value_str);
 					}
 				}
@@ -1640,8 +1568,7 @@ public class LabelTool {
 			if (label_table.getModel().getValueAt(num_row, 5) != null) {
 				if (label_table.getModel().getValueAt(num_row, 5).getClass() == LabelModifier.class) {
 					modifier = (LabelModifier) label_table.getModel().getValueAt(num_row, 5);
-				}
-				else {
+				} else {
 					modifier = LabelModifier.valueOf((String) label_table.getModel().getValueAt(num_row, 5));
 				}
 			}
@@ -2032,8 +1959,8 @@ public class LabelTool {
 		int indCount = 0;
 
 		Map<ArrayList<Tooth>, Set<rpd.components.Component>> tooth_components = plan.getToothComponents();
-		for (ArrayList<Tooth> tooth_pos:tooth_components.keySet())
-			for (rpd.components.Component component:tooth_components.get(tooth_pos)) {
+		for (ArrayList<Tooth> tooth_pos : tooth_components.keySet())
+			for (rpd.components.Component component : tooth_components.get(tooth_pos)) {
 				indCount++;
 				String className = component.getClass().getName();
 				switch (className) {
@@ -2108,7 +2035,7 @@ public class LabelTool {
 						break;
 				}
 			}
-		for (EdentulousSpace edentulousSpace:plan.getEdentulousSpaces()) {
+		for (EdentulousSpace edentulousSpace : plan.getEdentulousSpaces()) {
 			indCount++;
 			addEdentulousSpace(edentulousSpace, resOnt, NS, indCount);
 		}
@@ -2128,8 +2055,8 @@ public class LabelTool {
 //				model.getIndividual(NS + edentulousSpace.getRightMost().toString()));
 		if (!edentulousSpace.getRightMost().equals(edentulousSpace.getLeftMost())) {
 			indEdentulousSpace.addProperty(
-				component_position,
-				model.getIndividual(NS + edentulousSpace.getRightMost().toString()));
+					component_position,
+					model.getIndividual(NS + edentulousSpace.getRightMost().toString()));
 		}
 
 		return;
@@ -2146,7 +2073,7 @@ public class LabelTool {
 
 		AkerClasp akerClasp = (AkerClasp) clasp;
 		OntClass akerClaspClass = model.getOntClass(NS + "aker_clasp");
-		Individual indAkerClasp = model.createIndividual(NS+indCount, akerClaspClass);
+		Individual indAkerClasp = model.createIndividual(NS + indCount, akerClaspClass);
 		setClaspTipDirection(model, indAkerClasp, akerClasp.getTipDirection(), NS);
 		setClaspMaterial(model, indAkerClasp, akerClasp.getMaterial(), NS);
 		setComponentToothPos(model, indAkerClasp, akerClasp.getToothPos(), NS);
@@ -2167,7 +2094,7 @@ public class LabelTool {
 	public void addCombinationClaspToOwl(rpd.components.Component clasp, OntModel model, String NS, int indCount) {
 		CombinationClasp combinationClasp = (CombinationClasp) clasp;
 		OntClass combinationClaspClass = model.getOntClass(NS + "combination_clasp");
-		Individual indCombinationClasp = model.createIndividual(NS+indCount, combinationClaspClass);
+		Individual indCombinationClasp = model.createIndividual(NS + indCount, combinationClaspClass);
 		setClaspTipDirection(model, indCombinationClasp, combinationClasp.getTipDirection(), NS);
 		setComponentToothPos(model, indCombinationClasp, combinationClasp.getToothPos(), NS);
 		return;
@@ -2231,7 +2158,7 @@ public class LabelTool {
 
 		RingClasp ringClasp = (RingClasp) clasp;
 		OntClass ringClaspClass = model.getOntClass(NS + "ring_clasp");
-		Individual indRingClasp = model.createIndividual(NS+indCount, ringClaspClass);
+		Individual indRingClasp = model.createIndividual(NS + indCount, ringClaspClass);
 		setClaspTipDirection(model, indRingClasp, ringClasp.getTipDirection(), NS);
 		setClaspMaterial(model, indRingClasp, ringClasp.getMaterial(), NS);
 		setComponentToothPos(model, indRingClasp, ringClasp.getToothPos(), NS);
@@ -2377,8 +2304,7 @@ public class LabelTool {
 		OntProperty clasp_tip_direction = model.getOntProperty(NS + "clasp_tip_direction");
 		if (tip_direction == Position.Mesial) {
 			indClasp.addProperty(clasp_tip_direction, model.createTypedLiteral(0));
-		}
-		else if (tip_direction == Position.Distal) {
+		} else if (tip_direction == Position.Distal) {
 			indClasp.addProperty(clasp_tip_direction, model.createTypedLiteral(1));
 		}
 	}
@@ -2388,8 +2314,7 @@ public class LabelTool {
 		OntProperty clasp_material = model.getOntProperty(NS + "clasp_material");
 		if (material == ClaspMaterial.Cast) {
 			indClasp.addProperty(clasp_material, model.createTypedLiteral(0));
-		}
-		else if (material == ClaspMaterial.WW) {
+		} else if (material == ClaspMaterial.WW) {
 			indClasp.addProperty(clasp_material, model.createTypedLiteral(1));
 		}
 	}
@@ -2399,8 +2324,7 @@ public class LabelTool {
 		OntProperty rest_mesial_or_distal = model.getOntProperty(NS + "rest_mesial_or_distal");
 		if (mesial_or_distal == Position.Mesial) {
 			indRest.addProperty(rest_mesial_or_distal, model.createTypedLiteral(0));
-		}
-		else if (mesial_or_distal == Position.Distal) {
+		} else if (mesial_or_distal == Position.Distal) {
 			indRest.addProperty(rest_mesial_or_distal, model.createTypedLiteral(1));
 		}
 	}
@@ -2408,7 +2332,7 @@ public class LabelTool {
 	public void setComponentToothPos(OntModel model, Individual indComponent, ArrayList<Tooth> tooth_pos, String NS) {
 
 		OntProperty component_position = model.getObjectProperty(NS + "component_position");
-		for (Tooth tooth:tooth_pos) {
+		for (Tooth tooth : tooth_pos) {
 			indComponent.addProperty(component_position, model.getIndividual(NS + tooth.toString()));
 		}
 	}

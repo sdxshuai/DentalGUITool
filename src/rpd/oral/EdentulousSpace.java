@@ -1,12 +1,12 @@
 package rpd.oral;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import exceptions.rpd.RuleException;
 import rpd.conceptions.EdentulousType;
 import rpd.conceptions.Position;
 import rpd.rules.EdentulousTypeRule;
+
+import java.util.ArrayList;
+import java.util.List;
 
 //缺牙区域
 public class EdentulousSpace {
@@ -27,32 +27,25 @@ public class EdentulousSpace {
 		this.right_neighbor = right_neighbor;
 
 
-
-
 		if (this.left_neighbor == null) {
 			if (mandibular_or_maxillary == Position.Mandibular) {
 				this.left_most = new Tooth(4, 7);
-			}
-			else {
+			} else {
 				this.left_most = new Tooth(1, 7);
 			}
-		}
-		else {
+		} else {
 			int numLeftNeighbor = this.left_neighbor.getNum();
 			int zoneLeftNeighbor = this.left_neighbor.getZone();
 			if (numLeftNeighbor == 1) {
 				if (mandibular_or_maxillary == Position.Mandibular) {
 					this.left_most = new Tooth(3, 1);
-				}
-				else {
+				} else {
 					this.left_most = new Tooth(2, 1);
 				}
-			}
-			else {
+			} else {
 				if (zoneLeftNeighbor == 1 || zoneLeftNeighbor == 4) {
 					this.left_most = new Tooth(zoneLeftNeighbor, numLeftNeighbor - 1);
-				}
-				else {
+				} else {
 					this.left_most = new Tooth(zoneLeftNeighbor, numLeftNeighbor + 1);
 				}
 			}
@@ -61,27 +54,22 @@ public class EdentulousSpace {
 		if (this.right_neighbor == null) {
 			if (mandibular_or_maxillary == Position.Mandibular) {
 				this.right_most = new Tooth(3, 7);
-			}
-			else {
+			} else {
 				this.right_most = new Tooth(2, 7);
 			}
-		}
-		else {
+		} else {
 			int numRightNeighbor = this.right_neighbor.getNum();
 			int zoneRightNeighbor = this.right_neighbor.getZone();
 			if (numRightNeighbor == 1) {
 				if (mandibular_or_maxillary == Position.Mandibular) {
 					this.right_most = new Tooth(4, 1);
-				}
-				else {
+				} else {
 					this.right_most = new Tooth(1, 1);
 				}
-			}
-			else {
+			} else {
 				if (zoneRightNeighbor == 2 || zoneRightNeighbor == 3) {
 					this.right_most = new Tooth(zoneRightNeighbor, numRightNeighbor - 1);
-				}
-				else {
+				} else {
 					this.right_most = new Tooth(zoneRightNeighbor, numRightNeighbor + 1);
 				}
 			}
@@ -121,6 +109,7 @@ public class EdentulousSpace {
 	public Tooth getRightMost() {
 		return this.right_most;
 	}
+
 	private void computeType() throws RuleException {
 
 		List<EdentulousType> types = new ArrayList<EdentulousType>();

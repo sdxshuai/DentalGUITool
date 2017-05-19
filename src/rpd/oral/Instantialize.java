@@ -1,12 +1,10 @@
 package rpd.oral;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.List;
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
-
+import exceptions.PropertyValueException;
+import exceptions.ToothMapException;
+import exceptions.ToothModifierException;
+import misc.ToothPosition;
+import ontologies.LabelModifier;
 import org.apache.jena.ontology.DatatypeProperty;
 import org.apache.jena.ontology.Individual;
 import org.apache.jena.ontology.OntClass;
@@ -15,11 +13,12 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
-import exceptions.PropertyValueException;
-import exceptions.ToothMapException;
-import exceptions.ToothModifierException;
-import misc.ToothPosition;
-import ontologies.LabelModifier;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import java.io.File;
+import java.io.IOException;
+import java.util.List;
 
 //初始化实例
 public class Instantialize {

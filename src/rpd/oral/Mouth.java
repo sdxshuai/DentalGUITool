@@ -1,14 +1,10 @@
 package rpd.oral;
 
-import java.io.File;
-import java.io.IOException;
-
-import org.apache.jena.ontology.OntModel;
-import org.apache.jena.ontology.OntModelSpec;
-import org.apache.jena.rdf.model.ModelFactory;
-
 import exceptions.rpd.RuleException;
 import exceptions.rpd.ToothPosException;
+import org.apache.jena.ontology.OntModel;
+
+import java.io.IOException;
 
 public class Mouth {
 

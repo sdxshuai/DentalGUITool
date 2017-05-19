@@ -1,16 +1,11 @@
 package misc;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
 import exceptions.ToothIndexException;
 import exceptions.ToothMapException;
 import exceptions.ToothModifierException;
 import ontologies.LabelModifier;
+
+import java.util.*;
 
 public class ToothPosition {
 

@@ -1,15 +1,17 @@
 package rpd.rules;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import exceptions.rpd.RuleException;
 import rpd.conceptions.EdentulousType;
 import rpd.oral.EdentulousSpace;
 import rpd.oral.Tooth;
 
+import java.util.ArrayList;
+import java.util.List;
+
 //规则1
 public abstract class EdentulousTypeRule {
+
+	public static List<EdentulousTypeRule> edentulous_type_rules = null;
 
 	public static void main(String[] args) throws RuleException {
 
@@ -18,20 +20,6 @@ public abstract class EdentulousTypeRule {
 
 		for (EdentulousTypeRule edentulous_type_rule : EdentulousTypeRule.edentulous_type_rules)
 			System.out.println(edentulous_type_rule.getExplaination());
-	}
-
-	public static List<EdentulousTypeRule> edentulous_type_rules = null;
-
-	public EdentulousType apply(EdentulousSpace edentulous_space) throws RuleException {
-		throw new RuleException("call from abstract class");
-	}
-
-	public int getRuleNum() throws RuleException {
-		throw new RuleException("call from abstract class");
-	}
-
-	public String getExplaination() throws RuleException {
-		throw new RuleException("call from abstract class");
 	}
 
 	public static void initRules() {
@@ -171,5 +159,17 @@ public abstract class EdentulousTypeRule {
 			}
 		});
 
+	}
+
+	public EdentulousType apply(EdentulousSpace edentulous_space) throws RuleException {
+		throw new RuleException("call from abstract class");
+	}
+
+	public int getRuleNum() throws RuleException {
+		throw new RuleException("call from abstract class");
+	}
+
+	public String getExplaination() throws RuleException {
+		throw new RuleException("call from abstract class");
 	}
 }

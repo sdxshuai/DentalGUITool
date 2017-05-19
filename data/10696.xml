@@ -1,208 +1,208 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <labels>
-<label>
-<text>检  查：缺失</text>
-<property>is_missing</property>
-<property_chn>缺失</property_chn>
-<value_type>boolean</value_type>
-<value>1</value>
-<description>缺失</description>
-<start_offset>104</start_offset>
-<end_offset>111</end_offset>
-</label>
-<label>
-<text>近远中间隙无明显丧失</text>
-<property>mesio_distal_space_distance</property>
-<property_chn>近远中间隙的距离</property_chn>
-<value_type>list_int</value_type>
-<value>0</value>
-<description>正常</description>
-<start_offset>112</start_offset>
-<end_offset>122</end_offset>
-</label>
-<label>
-<modifier>NT2</modifier>
-<text>邻牙无倾斜</text>
-<property>tooth_position</property>
-<property_chn>牙的位置</property_chn>
-<value_type>list_int</value_type>
-<value>0</value>
-<description>normal</description>
-<start_offset>123</start_offset>
-<end_offset>128</end_offset>
-</label>
-<label>
-<modifier>NT1</modifier>
-<text>对颌牙无过长</text>
-<property>relationship_with_the_occlusal_plane</property>
-<property_chn>与合平面的关系</property_chn>
-<value_type>list_int</value_type>
-<value>0</value>
-<description>normal</description>
-<start_offset>129</start_offset>
-<end_offset>135</end_offset>
-</label>
-<label>
-<text>剩余牙槽嵴中度吸收</text>
-<property>residual_ridge_conditions</property>
-<property_chn>缺牙部位剩余牙槽嵴情况</property_chn>
-<value_type>list_int</value_type>
-<value>2</value>
-<description>中度</description>
-<start_offset>136</start_offset>
-<end_offset>145</end_offset>
-</label>
-<label>
-<modifier>NT1</modifier>
-<text>叩痛(-)</text>
-<property>percussion</property>
-<property_chn>叩诊</property_chn>
-<value_type>list_int</value_type>
-<value>0</value>
-<description>0</description>
-<start_offset>155</start_offset>
-<end_offset>160</end_offset>
-</label>
-<label>
-<modifier>NT1</modifier>
-<text>不松</text>
-<property>mobility</property>
-<property_chn>松动度</property_chn>
-<value_type>list_int</value_type>
-<value>0</value>
-<description>no</description>
-<start_offset>161</start_offset>
-<end_offset>163</end_offset>
-</label>
-<label>
-<text>黏膜无红肿溃疡</text>
-<property>pain_hyperemization_swollen_and_ucler</property>
-<property_chn>黏膜疼痛,增生,肿胀,溃疡</property_chn>
-<value_type>boolean</value_type>
-<value>0</value>
-<description>无</description>
-<start_offset>164</start_offset>
-<end_offset>171</end_offset>
-</label>
-<label>
-<modifier>NT</modifier>
-<text>牙色充填体</text>
-<property>filling_material</property>
-<property_chn>充填体材料种类</property_chn>
-<value_type>list_int</value_type>
-<value>1</value>
-<description>composite resin,树脂充填体</description>
-<start_offset>173</start_offset>
-<end_offset>178</end_offset>
-</label>
-<label>
-<modifier>NT</modifier>
-<text>牙色充填体</text>
-<property>filling_existance</property>
-<property_chn>充填体是否存在</property_chn>
-<value_type>list_int</value_type>
-<value>0</value>
-<description>完好</description>
-<start_offset>173</start_offset>
-<end_offset>178</end_offset>
-</label>
-<label>
-<modifier>NT</modifier>
-<text>临床冠短</text>
-<property>crown_root_ratio</property>
-<property_chn>冠根比例</property_chn>
-<value_type>list_int</value_type>
-<value>2</value>
-<description>过短</description>
-<start_offset>184</start_offset>
-<end_offset>188</end_offset>
-</label>
-<label>
-<modifier>NT</modifier>
-<text>叩痛(-)</text>
-<property>percussion</property>
-<property_chn>叩诊</property_chn>
-<value_type>list_int</value_type>
-<value>0</value>
-<description>0</description>
-<start_offset>189</start_offset>
-<end_offset>194</end_offset>
-</label>
-<label>
-<modifier>NT</modifier>
-<text>不松</text>
-<property>mobility</property>
-<property_chn>松动度</property_chn>
-<value_type>list_int</value_type>
-<value>0</value>
-<description>no</description>
-<start_offset>195</start_offset>
-<end_offset>197</end_offset>
-</label>
-<label>
-<modifier>NT</modifier>
-<text>牙龈轻度红肿</text>
-<property>gingival_swollen</property>
-<property_chn>牙龈红肿</property_chn>
-<value_type>boolean</value_type>
-<value>1</value>
-<description>红肿</description>
-<start_offset>198</start_offset>
-<end_offset>204</end_offset>
-</label>
-<label>
-<modifier>NT</modifier>
-<text>x线片示：合面高密度充填体影</text>
-<property>filling_existance</property>
-<property_chn>充填体是否存在</property_chn>
-<value_type>list_int</value_type>
-<value>0</value>
-<description>完好</description>
-<start_offset>205</start_offset>
-<end_offset>219</end_offset>
-</label>
-<label>
-<modifier>NT</modifier>
-<text>根管内未见高密度充填物影</text>
-<property>filling_existance</property>
-<property_chn>充填体是否存在</property_chn>
-<value_type>list_int</value_type>
-<value>0</value>
-<description>完好</description>
-<start_offset>223</start_offset>
-<end_offset>235</end_offset>
-</label>
-<label>
-<modifier>NT</modifier>
-<text>根管内未见高密度充填物影</text>
-<property>root_canal_filling_imaging</property>
-<property_chn>根充影像</property_chn>
-<value_type>list_int</value_type>
-<value>0</value>
-<description>未见根充影像</description>
-<start_offset>223</start_offset>
-<end_offset>235</end_offset>
-</label>
-<label>
-<modifier>NT</modifier>
-<text>根尖周未见低密度影</text>
-<property>apical_root_imaging</property>
-<property_chn>根尖周影像</property_chn>
-<value_type>boolean</value_type>
-<value>0</value>
-<description>未见明显异常</description>
-<start_offset>236</start_offset>
-<end_offset>245</end_offset>
-</label>
-<label>
-<modifier>NT</modifier>
-<text>近中牙槽骨吸收至根中1/3</text>
-<property>teeth_related_imaging</property>
-<property_chn>牙相关影像-牙槽骨吸收情况</property_chn>
-<value_type>list_int</value_type>
-<value>2</value>
-<description>根长2/3</description>
-<start_offset>246</start_offset>
-<end_offset>259</end_offset>
-</label>
+    <label>
+        <text>检 查：缺失</text>
+        <property>is_missing</property>
+        <property_chn>缺失</property_chn>
+        <value_type>boolean</value_type>
+        <value>1</value>
+        <description>缺失</description>
+        <start_offset>104</start_offset>
+        <end_offset>111</end_offset>
+    </label>
+    <label>
+        <text>近远中间隙无明显丧失</text>
+        <property>mesio_distal_space_distance</property>
+        <property_chn>近远中间隙的距离</property_chn>
+        <value_type>list_int</value_type>
+        <value>0</value>
+        <description>正常</description>
+        <start_offset>112</start_offset>
+        <end_offset>122</end_offset>
+    </label>
+    <label>
+        <modifier>NT2</modifier>
+        <text>邻牙无倾斜</text>
+        <property>tooth_position</property>
+        <property_chn>牙的位置</property_chn>
+        <value_type>list_int</value_type>
+        <value>0</value>
+        <description>normal</description>
+        <start_offset>123</start_offset>
+        <end_offset>128</end_offset>
+    </label>
+    <label>
+        <modifier>NT1</modifier>
+        <text>对颌牙无过长</text>
+        <property>relationship_with_the_occlusal_plane</property>
+        <property_chn>与合平面的关系</property_chn>
+        <value_type>list_int</value_type>
+        <value>0</value>
+        <description>normal</description>
+        <start_offset>129</start_offset>
+        <end_offset>135</end_offset>
+    </label>
+    <label>
+        <text>剩余牙槽嵴中度吸收</text>
+        <property>residual_ridge_conditions</property>
+        <property_chn>缺牙部位剩余牙槽嵴情况</property_chn>
+        <value_type>list_int</value_type>
+        <value>2</value>
+        <description>中度</description>
+        <start_offset>136</start_offset>
+        <end_offset>145</end_offset>
+    </label>
+    <label>
+        <modifier>NT1</modifier>
+        <text>叩痛(-)</text>
+        <property>percussion</property>
+        <property_chn>叩诊</property_chn>
+        <value_type>list_int</value_type>
+        <value>0</value>
+        <description>0</description>
+        <start_offset>155</start_offset>
+        <end_offset>160</end_offset>
+    </label>
+    <label>
+        <modifier>NT1</modifier>
+        <text>不松</text>
+        <property>mobility</property>
+        <property_chn>松动度</property_chn>
+        <value_type>list_int</value_type>
+        <value>0</value>
+        <description>no</description>
+        <start_offset>161</start_offset>
+        <end_offset>163</end_offset>
+    </label>
+    <label>
+        <text>黏膜无红肿溃疡</text>
+        <property>pain_hyperemization_swollen_and_ucler</property>
+        <property_chn>黏膜疼痛,增生,肿胀,溃疡</property_chn>
+        <value_type>boolean</value_type>
+        <value>0</value>
+        <description>无</description>
+        <start_offset>164</start_offset>
+        <end_offset>171</end_offset>
+    </label>
+    <label>
+        <modifier>NT</modifier>
+        <text>牙色充填体</text>
+        <property>filling_material</property>
+        <property_chn>充填体材料种类</property_chn>
+        <value_type>list_int</value_type>
+        <value>1</value>
+        <description>composite resin,树脂充填体</description>
+        <start_offset>173</start_offset>
+        <end_offset>178</end_offset>
+    </label>
+    <label>
+        <modifier>NT</modifier>
+        <text>牙色充填体</text>
+        <property>filling_existance</property>
+        <property_chn>充填体是否存在</property_chn>
+        <value_type>list_int</value_type>
+        <value>0</value>
+        <description>完好</description>
+        <start_offset>173</start_offset>
+        <end_offset>178</end_offset>
+    </label>
+    <label>
+        <modifier>NT</modifier>
+        <text>临床冠短</text>
+        <property>crown_root_ratio</property>
+        <property_chn>冠根比例</property_chn>
+        <value_type>list_int</value_type>
+        <value>2</value>
+        <description>过短</description>
+        <start_offset>184</start_offset>
+        <end_offset>188</end_offset>
+    </label>
+    <label>
+        <modifier>NT</modifier>
+        <text>叩痛(-)</text>
+        <property>percussion</property>
+        <property_chn>叩诊</property_chn>
+        <value_type>list_int</value_type>
+        <value>0</value>
+        <description>0</description>
+        <start_offset>189</start_offset>
+        <end_offset>194</end_offset>
+    </label>
+    <label>
+        <modifier>NT</modifier>
+        <text>不松</text>
+        <property>mobility</property>
+        <property_chn>松动度</property_chn>
+        <value_type>list_int</value_type>
+        <value>0</value>
+        <description>no</description>
+        <start_offset>195</start_offset>
+        <end_offset>197</end_offset>
+    </label>
+    <label>
+        <modifier>NT</modifier>
+        <text>牙龈轻度红肿</text>
+        <property>gingival_swollen</property>
+        <property_chn>牙龈红肿</property_chn>
+        <value_type>boolean</value_type>
+        <value>1</value>
+        <description>红肿</description>
+        <start_offset>198</start_offset>
+        <end_offset>204</end_offset>
+    </label>
+    <label>
+        <modifier>NT</modifier>
+        <text>x线片示：合面高密度充填体影</text>
+        <property>filling_existance</property>
+        <property_chn>充填体是否存在</property_chn>
+        <value_type>list_int</value_type>
+        <value>0</value>
+        <description>完好</description>
+        <start_offset>205</start_offset>
+        <end_offset>219</end_offset>
+    </label>
+    <label>
+        <modifier>NT</modifier>
+        <text>根管内未见高密度充填物影</text>
+        <property>filling_existance</property>
+        <property_chn>充填体是否存在</property_chn>
+        <value_type>list_int</value_type>
+        <value>0</value>
+        <description>完好</description>
+        <start_offset>223</start_offset>
+        <end_offset>235</end_offset>
+    </label>
+    <label>
+        <modifier>NT</modifier>
+        <text>根管内未见高密度充填物影</text>
+        <property>root_canal_filling_imaging</property>
+        <property_chn>根充影像</property_chn>
+        <value_type>list_int</value_type>
+        <value>0</value>
+        <description>未见根充影像</description>
+        <start_offset>223</start_offset>
+        <end_offset>235</end_offset>
+    </label>
+    <label>
+        <modifier>NT</modifier>
+        <text>根尖周未见低密度影</text>
+        <property>apical_root_imaging</property>
+        <property_chn>根尖周影像</property_chn>
+        <value_type>boolean</value_type>
+        <value>0</value>
+        <description>未见明显异常</description>
+        <start_offset>236</start_offset>
+        <end_offset>245</end_offset>
+    </label>
+    <label>
+        <modifier>NT</modifier>
+        <text>近中牙槽骨吸收至根中1/3</text>
+        <property>teeth_related_imaging</property>
+        <property_chn>牙相关影像-牙槽骨吸收情况</property_chn>
+        <value_type>list_int</value_type>
+        <value>2</value>
+        <description>根长2/3</description>
+        <start_offset>246</start_offset>
+        <end_offset>259</end_offset>
+    </label>
 </labels>

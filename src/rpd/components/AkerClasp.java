@@ -1,6 +1,5 @@
 package rpd.components;
 
-import exceptions.rpd.ComponentException;
 import rpd.RPDPlan;
 import rpd.conceptions.ClaspMaterial;
 import rpd.conceptions.Position;
@@ -13,22 +12,6 @@ public class AkerClasp extends Clasp {
 	private OcclusalRest occlusal_rest = null;
 	private boolean enable_buccal = true;
 	private boolean enable_lingual = true;
-
-	public boolean isEnableBuccal() {
-		return enable_buccal;
-	}
-
-	public void setEnableBuccal(boolean enable_buccal) {
-		this.enable_buccal = enable_buccal;
-	}
-
-	public boolean isEnableLingual() {
-		return enable_lingual;
-	}
-
-	public void setEnableLingual(boolean enable_lingual) {
-		this.enable_lingual = enable_lingual;
-	}
 
 	public AkerClasp(Tooth tooth_pos, Position tip_direction, ClaspMaterial buccal_material,
 	                 ClaspMaterial lingual_material) {
@@ -65,6 +48,22 @@ public class AkerClasp extends Clasp {
 		} else if (tip_direction.equals(Position.Mesial)) {
 			this.occlusal_rest = new OcclusalRest(tooth_pos, Position.Distal);
 		}
+	}
+
+	public boolean isEnableBuccal() {
+		return enable_buccal;
+	}
+
+	public void setEnableBuccal(boolean enable_buccal) {
+		this.enable_buccal = enable_buccal;
+	}
+
+	public boolean isEnableLingual() {
+		return enable_lingual;
+	}
+
+	public void setEnableLingual(boolean enable_lingual) {
+		this.enable_lingual = enable_lingual;
 	}
 
 	public void addToPlan(RPDPlan rpd_plan) {

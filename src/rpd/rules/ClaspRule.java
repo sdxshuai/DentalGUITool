@@ -1,17 +1,15 @@
 package rpd.rules;
 
-import java.util.*;
-
 import exceptions.rpd.ClaspAssemblyException;
 import exceptions.rpd.RuleException;
 import exceptions.rpd.ToothPosException;
 import rpd.RPDPlan;
 import rpd.components.*;
 import rpd.conceptions.*;
-import rpd.oral.EdentulousSpace;
-import rpd.oral.Mandibular;
 import rpd.oral.Mouth;
 import rpd.oral.Tooth;
+
+import java.util.*;
 
 //规则2
 public class ClaspRule {
@@ -19,18 +17,6 @@ public class ClaspRule {
 	public static List<ClaspRule> clasp_rules = null;
 
 	private static Mouth mouth = null;
-
-	public List<RPDPlan> apply(List<RPDPlan> rpd_plan) throws RuleException, ClaspAssemblyException, ToothPosException {
-		throw new RuleException("call from abstract class");
-	}
-
-	public int getRuleNum() throws RuleException {
-		throw new RuleException("call from abstract class");
-	}
-
-	public String getExplaination() throws RuleException {
-		throw new RuleException("call from abstract class");
-	}
 
 	public static void initRules(Mouth mouth_obj) {
 
@@ -457,5 +443,17 @@ public class ClaspRule {
 				return res;
 			}
 		});
+	}
+
+	public List<RPDPlan> apply(List<RPDPlan> rpd_plan) throws RuleException, ClaspAssemblyException, ToothPosException {
+		throw new RuleException("call from abstract class");
+	}
+
+	public int getRuleNum() throws RuleException {
+		throw new RuleException("call from abstract class");
+	}
+
+	public String getExplaination() throws RuleException {
+		throw new RuleException("call from abstract class");
 	}
 }

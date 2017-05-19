@@ -25,6 +25,23 @@ public class Tooth implements Comparable<Tooth> {
 			= ClassificationOfSurveyLineOnBuccalSurface.UnknownDegree;
 	private rpd.conceptions.ToothPosition tooth_position = rpd.conceptions.ToothPosition.No;
 
+	public Tooth(int zone, int num) {
+
+		this.zone = zone;
+		this.num = num;
+
+		if (num == 1 || num == 2)
+			this.tooth_type = ToothType.Incisor;
+		else if (num == 3)
+			this.tooth_type = ToothType.Canine;
+		else if (num == 4 || num == 5)
+			this.tooth_type = ToothType.Premolar;
+		else if (num == 6 || num == 7 || num == 8)
+			this.tooth_type = ToothType.Molar;
+		else {
+		}
+	}
+
 	public ToothPosition getToothPosition() {
 		return tooth_position;
 	}
@@ -131,23 +148,6 @@ public class Tooth implements Comparable<Tooth> {
 
 	public void setCrownRootRatio(CrownRootRatio crown_root_ratio) {
 		this.crown_root_ratio = crown_root_ratio;
-	}
-
-	public Tooth(int zone, int num) {
-
-		this.zone = zone;
-		this.num = num;
-
-		if (num == 1 || num == 2)
-			this.tooth_type = ToothType.Incisor;
-		else if (num == 3)
-			this.tooth_type = ToothType.Canine;
-		else if (num == 4 || num == 5)
-			this.tooth_type = ToothType.Premolar;
-		else if (num == 6 || num == 7 || num == 8)
-			this.tooth_type = ToothType.Molar;
-		else {
-		}
 	}
 
 	public String toString() {

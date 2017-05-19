@@ -1,13 +1,18 @@
 package rpd.components;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import rpd.RPDPlan;
 import rpd.conceptions.Position;
 import rpd.oral.Tooth;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public class LingualRest extends Rest {
+
+	public LingualRest(Tooth tooth_pos) {
+		this.type = Position.Lingual;
+		this.tooth_pos = tooth_pos;
+	}
 
 	public static void main(String[] args) {
 
@@ -18,11 +23,6 @@ public class LingualRest extends Rest {
 		test.add(r1);
 		test.add(r2);
 		System.out.println(r1.equals(r2));
-	}
-
-	public LingualRest(Tooth tooth_pos) {
-		this.type = Position.Lingual;
-		this.tooth_pos = tooth_pos;
 	}
 
 	public int hashCode() {

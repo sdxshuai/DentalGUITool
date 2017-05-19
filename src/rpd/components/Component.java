@@ -2,8 +2,6 @@ package rpd.components;
 
 import exceptions.rpd.ComponentException;
 import rpd.RPDPlan;
-import rpd.conceptions.ClaspMaterial;
-import rpd.conceptions.Position;
 import rpd.oral.Tooth;
 
 import java.util.ArrayList;

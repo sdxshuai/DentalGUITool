@@ -1,216 +1,216 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <labels>
-<label>
-<tooth_map_str>8/7654321/8/1234567</tooth_map_str>
-<text>缺失</text>
-<property>is_missing</property>
-<property_chn>缺失</property_chn>
-<value_type>boolean</value_type>
-<value>1</value>
-<description>缺失</description>
-<start_offset>177</start_offset>
-<end_offset>179</end_offset>
-<tooth_map_start_offset>156</tooth_map_start_offset>
-<tooth_map_end_offset>177</tooth_map_end_offset>
-</label>
-<label>
-<text>上颌剩余牙槽嵴吸收轻度吸收</text>
-<property>residual_ridge_conditions</property>
-<property_chn>缺牙部位剩余牙槽嵴情况</property_chn>
-<value_type>list_int</value_type>
-<value>1</value>
-<description>轻度</description>
-<start_offset>180</start_offset>
-<end_offset>193</end_offset>
-</label>
-<label>
-<text>下颌剩余牙槽嵴吸收中度吸收</text>
-<property>residual_ridge_conditions</property>
-<property_chn>缺牙部位剩余牙槽嵴情况</property_chn>
-<value_type>list_int</value_type>
-<value>2</value>
-<description>中度</description>
-<start_offset>194</start_offset>
-<end_offset>207</end_offset>
-</label>
-<label>
-<modifier>NT6</modifier>
-<text>未见隆突</text>
-<property>cingulum</property>
-<property_chn>舌隆突</property_chn>
-<value_type>boolean</value_type>
-<value>0</value>
-<description>正常</description>
-<start_offset>221</start_offset>
-<end_offset>225</end_offset>
-</label>
-<label>
-<text>粘膜无红肿、弹性尚可、无扪痛</text>
-<property>pain_hyperemization_swollen_and_ucler</property>
-<property_chn>黏膜疼痛,增生,肿胀,溃疡</property_chn>
-<value_type>boolean</value_type>
-<value>0</value>
-<description>无</description>
-<start_offset>226</start_offset>
-<end_offset>240</end_offset>
-</label>
-<label>
-<text>开口型正常</text>
-<property>mandibular_opening_patterns</property>
-<property_chn>开口型检查</property_chn>
-<value_type>list_int</value_type>
-<value>0</value>
-<description>normal</description>
-<start_offset>279</start_offset>
-<end_offset>284</end_offset>
-</label>
-<label>
-<text>开口度正常；</text>
-<property>mandibular_opening</property>
-<property_chn>开口度检查</property_chn>
-<value_type>list_int</value_type>
-<value>0</value>
-<description>正常3.7-4.5cm</description>
-<start_offset>285</start_offset>
-<end_offset>291</end_offset>
-</label>
-<label>
-<text>面部外形对称</text>
-<property>maxillofacial_appearance</property>
-<property_chn>面部外形</property_chn>
-<value_type>boolean</value_type>
-<value>0</value>
-<description>对称</description>
-<start_offset>308</start_offset>
-<end_offset>314</end_offset>
-</label>
-<label>
-<text>上唇丰满度正常</text>
-<property>upper_lip_fullness</property>
-<property_chn>上唇丰满度</property_chn>
-<value_type>list_int</value_type>
-<value>0</value>
-<description>正常</description>
-<start_offset>315</start_offset>
-<end_offset>322</end_offset>
-</label>
-<label>
-<text>旧义齿合面中度磨耗</text>
-<property>artificial_tooth_wear</property>
-<property_chn>旧义齿人工牙合面磨耗情况</property_chn>
-<value_type>boolean</value_type>
-<value>1</value>
-<description>磨耗</description>
-<start_offset>330</start_offset>
-<end_offset>339</end_offset>
-</label>
-<label>
-<text>上颌、下颌义齿边缘伸展尚可</text>
-<property>mandibular_border_extension</property>
-<property_chn>下颌义齿部位边缘伸展</property_chn>
-<value_type>list_int</value_type>
-<value>0</value>
-<description>伸展良好</description>
-<start_offset>340</start_offset>
-<end_offset>353</end_offset>
-</label>
-<label>
-<text>下颌义齿固位差</text>
-<property>retention_of_existed_restorations</property>
-<property_chn>固位</property_chn>
-<value_type>list_int</value_type>
-<value>2</value>
-<description>差</description>
-<start_offset>354</start_offset>
-<end_offset>361</end_offset>
-</label>
-<label>
-<text>义齿无裂纹</text>
-<property>conditions_of_resin_base_of_existed_restorations</property>
-<property_chn>上/下颌义齿基托部位有无裂纹/折断</property_chn>
-<value_type>boolean</value_type>
-<value>0</value>
-<description>无裂纹折断</description>
-<start_offset>362</start_offset>
-<end_offset>367</end_offset>
-</label>
-<label>
-<text>面下1/3垂直距离适中</text>
-<property>vertical_dimension</property>
-<property_chn>面下1/3垂直距离</property_chn>
-<value_type>list_int</value_type>
-<value>0</value>
-<description>适中</description>
-<start_offset>374</start_offset>
-<end_offset>385</end_offset>
-</label>
-<label>
-<text>上唇丰满度正常</text>
-<property>upper_lip_fullness</property>
-<property_chn>上唇丰满度</property_chn>
-<value_type>list_int</value_type>
-<value>0</value>
-<description>正常</description>
-<start_offset>386</start_offset>
-<end_offset>393</end_offset>
-</label>
-<label>
-<text>残根残冠不能保留</text>
-<property>residual_crown</property>
-<property_chn>残冠</property_chn>
-<value_type>boolean</value_type>
-<value>1</value>
-<description>有</description>
-<start_offset>396</start_offset>
-<end_offset>404</end_offset>
-</label>
-<label>
-<text>残根残冠不能保留</text>
-<property>residual_root</property>
-<property_chn>残根</property_chn>
-<value_type>boolean</value_type>
-<value>1</value>
-<description>有</description>
-<start_offset>396</start_offset>
-<end_offset>404</end_offset>
-</label>
-<label>
-<tooth_map_str>/ / /7</tooth_map_str>
-<text>残根</text>
-<property>residual_root</property>
-<property_chn>残根</property_chn>
-<value_type>boolean</value_type>
-<value>1</value>
-<description>有</description>
-<start_offset>412</start_offset>
-<end_offset>414</end_offset>
-<tooth_map_start_offset>404</tooth_map_start_offset>
-<tooth_map_end_offset>412</tooth_map_end_offset>
-</label>
-<label>
-<tooth_map_str>/ / /7</tooth_map_str>
-<text>缺损严重</text>
-<property>tooth_defect</property>
-<property_chn>牙体缺损</property_chn>
-<value_type>boolean</value_type>
-<value>1</value>
-<description>有</description>
-<start_offset>415</start_offset>
-<end_offset>419</end_offset>
-<tooth_map_start_offset>404</tooth_map_start_offset>
-<tooth_map_end_offset>412</tooth_map_end_offset>
-</label>
-<label>
-<tooth_map_str>/ / /7</tooth_map_str>
-<text>不松动</text>
-<property>mobility</property>
-<property_chn>松动度</property_chn>
-<value_type>list_int</value_type>
-<value>0</value>
-<description>no</description>
-<start_offset>420</start_offset>
-<end_offset>423</end_offset>
-<tooth_map_start_offset>404</tooth_map_start_offset>
-<tooth_map_end_offset>412</tooth_map_end_offset>
-</label>
+    <label>
+        <tooth_map_str>8/7654321/8/1234567</tooth_map_str>
+        <text>缺失</text>
+        <property>is_missing</property>
+        <property_chn>缺失</property_chn>
+        <value_type>boolean</value_type>
+        <value>1</value>
+        <description>缺失</description>
+        <start_offset>177</start_offset>
+        <end_offset>179</end_offset>
+        <tooth_map_start_offset>156</tooth_map_start_offset>
+        <tooth_map_end_offset>177</tooth_map_end_offset>
+    </label>
+    <label>
+        <text>上颌剩余牙槽嵴吸收轻度吸收</text>
+        <property>residual_ridge_conditions</property>
+        <property_chn>缺牙部位剩余牙槽嵴情况</property_chn>
+        <value_type>list_int</value_type>
+        <value>1</value>
+        <description>轻度</description>
+        <start_offset>180</start_offset>
+        <end_offset>193</end_offset>
+    </label>
+    <label>
+        <text>下颌剩余牙槽嵴吸收中度吸收</text>
+        <property>residual_ridge_conditions</property>
+        <property_chn>缺牙部位剩余牙槽嵴情况</property_chn>
+        <value_type>list_int</value_type>
+        <value>2</value>
+        <description>中度</description>
+        <start_offset>194</start_offset>
+        <end_offset>207</end_offset>
+    </label>
+    <label>
+        <modifier>NT6</modifier>
+        <text>未见隆突</text>
+        <property>cingulum</property>
+        <property_chn>舌隆突</property_chn>
+        <value_type>boolean</value_type>
+        <value>0</value>
+        <description>正常</description>
+        <start_offset>221</start_offset>
+        <end_offset>225</end_offset>
+    </label>
+    <label>
+        <text>粘膜无红肿、弹性尚可、无扪痛</text>
+        <property>pain_hyperemization_swollen_and_ucler</property>
+        <property_chn>黏膜疼痛,增生,肿胀,溃疡</property_chn>
+        <value_type>boolean</value_type>
+        <value>0</value>
+        <description>无</description>
+        <start_offset>226</start_offset>
+        <end_offset>240</end_offset>
+    </label>
+    <label>
+        <text>开口型正常</text>
+        <property>mandibular_opening_patterns</property>
+        <property_chn>开口型检查</property_chn>
+        <value_type>list_int</value_type>
+        <value>0</value>
+        <description>normal</description>
+        <start_offset>279</start_offset>
+        <end_offset>284</end_offset>
+    </label>
+    <label>
+        <text>开口度正常；</text>
+        <property>mandibular_opening</property>
+        <property_chn>开口度检查</property_chn>
+        <value_type>list_int</value_type>
+        <value>0</value>
+        <description>正常3.7-4.5cm</description>
+        <start_offset>285</start_offset>
+        <end_offset>291</end_offset>
+    </label>
+    <label>
+        <text>面部外形对称</text>
+        <property>maxillofacial_appearance</property>
+        <property_chn>面部外形</property_chn>
+        <value_type>boolean</value_type>
+        <value>0</value>
+        <description>对称</description>
+        <start_offset>308</start_offset>
+        <end_offset>314</end_offset>
+    </label>
+    <label>
+        <text>上唇丰满度正常</text>
+        <property>upper_lip_fullness</property>
+        <property_chn>上唇丰满度</property_chn>
+        <value_type>list_int</value_type>
+        <value>0</value>
+        <description>正常</description>
+        <start_offset>315</start_offset>
+        <end_offset>322</end_offset>
+    </label>
+    <label>
+        <text>旧义齿合面中度磨耗</text>
+        <property>artificial_tooth_wear</property>
+        <property_chn>旧义齿人工牙合面磨耗情况</property_chn>
+        <value_type>boolean</value_type>
+        <value>1</value>
+        <description>磨耗</description>
+        <start_offset>330</start_offset>
+        <end_offset>339</end_offset>
+    </label>
+    <label>
+        <text>上颌、下颌义齿边缘伸展尚可</text>
+        <property>mandibular_border_extension</property>
+        <property_chn>下颌义齿部位边缘伸展</property_chn>
+        <value_type>list_int</value_type>
+        <value>0</value>
+        <description>伸展良好</description>
+        <start_offset>340</start_offset>
+        <end_offset>353</end_offset>
+    </label>
+    <label>
+        <text>下颌义齿固位差</text>
+        <property>retention_of_existed_restorations</property>
+        <property_chn>固位</property_chn>
+        <value_type>list_int</value_type>
+        <value>2</value>
+        <description>差</description>
+        <start_offset>354</start_offset>
+        <end_offset>361</end_offset>
+    </label>
+    <label>
+        <text>义齿无裂纹</text>
+        <property>conditions_of_resin_base_of_existed_restorations</property>
+        <property_chn>上/下颌义齿基托部位有无裂纹/折断</property_chn>
+        <value_type>boolean</value_type>
+        <value>0</value>
+        <description>无裂纹折断</description>
+        <start_offset>362</start_offset>
+        <end_offset>367</end_offset>
+    </label>
+    <label>
+        <text>面下1/3垂直距离适中</text>
+        <property>vertical_dimension</property>
+        <property_chn>面下1/3垂直距离</property_chn>
+        <value_type>list_int</value_type>
+        <value>0</value>
+        <description>适中</description>
+        <start_offset>374</start_offset>
+        <end_offset>385</end_offset>
+    </label>
+    <label>
+        <text>上唇丰满度正常</text>
+        <property>upper_lip_fullness</property>
+        <property_chn>上唇丰满度</property_chn>
+        <value_type>list_int</value_type>
+        <value>0</value>
+        <description>正常</description>
+        <start_offset>386</start_offset>
+        <end_offset>393</end_offset>
+    </label>
+    <label>
+        <text>残根残冠不能保留</text>
+        <property>residual_crown</property>
+        <property_chn>残冠</property_chn>
+        <value_type>boolean</value_type>
+        <value>1</value>
+        <description>有</description>
+        <start_offset>396</start_offset>
+        <end_offset>404</end_offset>
+    </label>
+    <label>
+        <text>残根残冠不能保留</text>
+        <property>residual_root</property>
+        <property_chn>残根</property_chn>
+        <value_type>boolean</value_type>
+        <value>1</value>
+        <description>有</description>
+        <start_offset>396</start_offset>
+        <end_offset>404</end_offset>
+    </label>
+    <label>
+        <tooth_map_str>/ / /7</tooth_map_str>
+        <text>残根</text>
+        <property>residual_root</property>
+        <property_chn>残根</property_chn>
+        <value_type>boolean</value_type>
+        <value>1</value>
+        <description>有</description>
+        <start_offset>412</start_offset>
+        <end_offset>414</end_offset>
+        <tooth_map_start_offset>404</tooth_map_start_offset>
+        <tooth_map_end_offset>412</tooth_map_end_offset>
+    </label>
+    <label>
+        <tooth_map_str>/ / /7</tooth_map_str>
+        <text>缺损严重</text>
+        <property>tooth_defect</property>
+        <property_chn>牙体缺损</property_chn>
+        <value_type>boolean</value_type>
+        <value>1</value>
+        <description>有</description>
+        <start_offset>415</start_offset>
+        <end_offset>419</end_offset>
+        <tooth_map_start_offset>404</tooth_map_start_offset>
+        <tooth_map_end_offset>412</tooth_map_end_offset>
+    </label>
+    <label>
+        <tooth_map_str>/ / /7</tooth_map_str>
+        <text>不松动</text>
+        <property>mobility</property>
+        <property_chn>松动度</property_chn>
+        <value_type>list_int</value_type>
+        <value>0</value>
+        <description>no</description>
+        <start_offset>420</start_offset>
+        <end_offset>423</end_offset>
+        <tooth_map_start_offset>404</tooth_map_start_offset>
+        <tooth_map_end_offset>412</tooth_map_end_offset>
+    </label>
 </labels>

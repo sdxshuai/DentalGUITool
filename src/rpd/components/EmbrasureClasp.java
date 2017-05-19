@@ -52,7 +52,7 @@ public class EmbrasureClasp extends Clasp {
 		}
 	}
 
-	public ClaspMaterial getMaterial(){
+	public ClaspMaterial getMaterial() {
 		return ClaspMaterial.WW;
 	}
 

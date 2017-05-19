@@ -1,152 +1,152 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <labels>
-<label>
-<tooth_map_str>/7;MO;/ /</tooth_map_str>
-<text>树脂充填体</text>
-<property>filling_material</property>
-<property_chn>充填体材料种类</property_chn>
-<value_type>list_int</value_type>
-<value>1</value>
-<description>composite resin,树脂充填体</description>
-<start_offset>123</start_offset>
-<end_offset>128</end_offset>
-<tooth_map_start_offset>111</tooth_map_start_offset>
-<tooth_map_end_offset>123</tooth_map_end_offset>
-</label>
-<label>
-<tooth_map_str>/7;MO;/ /</tooth_map_str>
-<text>树脂充填体</text>
-<property>filling_existance</property>
-<property_chn>充填体是否存在</property_chn>
-<value_type>list_int</value_type>
-<value>0</value>
-<description>完好</description>
-<start_offset>123</start_offset>
-<end_offset>128</end_offset>
-<tooth_map_start_offset>111</tooth_map_start_offset>
-<tooth_map_end_offset>123</tooth_map_end_offset>
-</label>
-<label>
-<tooth_map_str>/7;MO;/ /</tooth_map_str>
-<text>叩痛(-)</text>
-<property>percussion</property>
-<property_chn>叩诊</property_chn>
-<value_type>list_int</value_type>
-<value>0</value>
-<description>0</description>
-<start_offset>130</start_offset>
-<end_offset>135</end_offset>
-<tooth_map_start_offset>111</tooth_map_start_offset>
-<tooth_map_end_offset>123</tooth_map_end_offset>
-</label>
-<label>
-<tooth_map_str>/7;MO;/ /</tooth_map_str>
-<text>不松动</text>
-<property>mobility</property>
-<property_chn>松动度</property_chn>
-<value_type>list_int</value_type>
-<value>0</value>
-<description>no</description>
-<start_offset>136</start_offset>
-<end_offset>139</end_offset>
-<tooth_map_start_offset>111</tooth_map_start_offset>
-<tooth_map_end_offset>123</tooth_map_end_offset>
-</label>
-<label>
-<tooth_map_str>/7;MO;/ /</tooth_map_str>
-<text>牙龈红肿</text>
-<property>gingival_swollen</property>
-<property_chn>牙龈红肿</property_chn>
-<value_type>boolean</value_type>
-<value>1</value>
-<description>红肿</description>
-<start_offset>140</start_offset>
-<end_offset>144</end_offset>
-<tooth_map_start_offset>111</tooth_map_start_offset>
-<tooth_map_end_offset>123</tooth_map_end_offset>
-</label>
-<label>
-<tooth_map_str>/6/ /</tooth_map_str>
-<text>缺失</text>
-<property>is_missing</property>
-<property_chn>缺失</property_chn>
-<value_type>boolean</value_type>
-<value>1</value>
-<description>缺失</description>
-<start_offset>153</start_offset>
-<end_offset>155</end_offset>
-<tooth_map_start_offset>145</tooth_map_start_offset>
-<tooth_map_end_offset>153</tooth_map_end_offset>
-</label>
-<label>
-<text>缺牙间隙尚可</text>
-<property>mesio_distal_space_distance</property>
-<property_chn>近远中间隙的距离</property_chn>
-<value_type>list_int</value_type>
-<value>0</value>
-<description>正常</description>
-<start_offset>156</start_offset>
-<end_offset>162</end_offset>
-</label>
-<label>
-<tooth_map_str>/5/ /</tooth_map_str>
-<text>远中颈部充填体</text>
-<property>filling_existance</property>
-<property_chn>充填体是否存在</property_chn>
-<value_type>list_int</value_type>
-<value>0</value>
-<description>完好</description>
-<start_offset>171</start_offset>
-<end_offset>178</end_offset>
-<tooth_map_start_offset>163</tooth_map_start_offset>
-<tooth_map_end_offset>171</tooth_map_end_offset>
-</label>
-<label>
-<tooth_map_str>/7/ /</tooth_map_str>
-<text>根充恰填</text>
-<property>root_canal_filling_imaging</property>
-<property_chn>根充影像</property_chn>
-<value_type>list_int</value_type>
-<value>1</value>
-<description>根充恰填</description>
-<start_offset>193</start_offset>
-<end_offset>197</end_offset>
-<tooth_map_start_offset>185</tooth_map_start_offset>
-<tooth_map_end_offset>193</tooth_map_end_offset>
-</label>
-<label>
-<tooth_map_str>/7/ /</tooth_map_str>
-<text>根尖周未见明显异常</text>
-<property>apical_root_imaging</property>
-<property_chn>根尖周影像</property_chn>
-<value_type>boolean</value_type>
-<value>0</value>
-<description>未见明显异常</description>
-<start_offset>198</start_offset>
-<end_offset>207</end_offset>
-<tooth_map_start_offset>185</tooth_map_start_offset>
-<tooth_map_end_offset>193</tooth_map_end_offset>
-</label>
-<label>
-<modifier>NT9</modifier>
-<text>口腔卫生状况一般</text>
-<property>oral_hygiene</property>
-<property_chn>口腔卫生情况</property_chn>
-<value_type>list_int</value_type>
-<value>1</value>
-<description>一般</description>
-<start_offset>210</start_offset>
-<end_offset>218</end_offset>
-</label>
-<label>
-<modifier>NT9</modifier>
-<text>牙石(++)</text>
-<property>dental_calculus</property>
-<property_chn>牙石情况</property_chn>
-<value_type>list_int</value_type>
-<value>2</value>
-<description>++</description>
-<start_offset>219</start_offset>
-<end_offset>225</end_offset>
-</label>
+    <label>
+        <tooth_map_str>/7;MO;/ /</tooth_map_str>
+        <text>树脂充填体</text>
+        <property>filling_material</property>
+        <property_chn>充填体材料种类</property_chn>
+        <value_type>list_int</value_type>
+        <value>1</value>
+        <description>composite resin,树脂充填体</description>
+        <start_offset>123</start_offset>
+        <end_offset>128</end_offset>
+        <tooth_map_start_offset>111</tooth_map_start_offset>
+        <tooth_map_end_offset>123</tooth_map_end_offset>
+    </label>
+    <label>
+        <tooth_map_str>/7;MO;/ /</tooth_map_str>
+        <text>树脂充填体</text>
+        <property>filling_existance</property>
+        <property_chn>充填体是否存在</property_chn>
+        <value_type>list_int</value_type>
+        <value>0</value>
+        <description>完好</description>
+        <start_offset>123</start_offset>
+        <end_offset>128</end_offset>
+        <tooth_map_start_offset>111</tooth_map_start_offset>
+        <tooth_map_end_offset>123</tooth_map_end_offset>
+    </label>
+    <label>
+        <tooth_map_str>/7;MO;/ /</tooth_map_str>
+        <text>叩痛(-)</text>
+        <property>percussion</property>
+        <property_chn>叩诊</property_chn>
+        <value_type>list_int</value_type>
+        <value>0</value>
+        <description>0</description>
+        <start_offset>130</start_offset>
+        <end_offset>135</end_offset>
+        <tooth_map_start_offset>111</tooth_map_start_offset>
+        <tooth_map_end_offset>123</tooth_map_end_offset>
+    </label>
+    <label>
+        <tooth_map_str>/7;MO;/ /</tooth_map_str>
+        <text>不松动</text>
+        <property>mobility</property>
+        <property_chn>松动度</property_chn>
+        <value_type>list_int</value_type>
+        <value>0</value>
+        <description>no</description>
+        <start_offset>136</start_offset>
+        <end_offset>139</end_offset>
+        <tooth_map_start_offset>111</tooth_map_start_offset>
+        <tooth_map_end_offset>123</tooth_map_end_offset>
+    </label>
+    <label>
+        <tooth_map_str>/7;MO;/ /</tooth_map_str>
+        <text>牙龈红肿</text>
+        <property>gingival_swollen</property>
+        <property_chn>牙龈红肿</property_chn>
+        <value_type>boolean</value_type>
+        <value>1</value>
+        <description>红肿</description>
+        <start_offset>140</start_offset>
+        <end_offset>144</end_offset>
+        <tooth_map_start_offset>111</tooth_map_start_offset>
+        <tooth_map_end_offset>123</tooth_map_end_offset>
+    </label>
+    <label>
+        <tooth_map_str>/6/ /</tooth_map_str>
+        <text>缺失</text>
+        <property>is_missing</property>
+        <property_chn>缺失</property_chn>
+        <value_type>boolean</value_type>
+        <value>1</value>
+        <description>缺失</description>
+        <start_offset>153</start_offset>
+        <end_offset>155</end_offset>
+        <tooth_map_start_offset>145</tooth_map_start_offset>
+        <tooth_map_end_offset>153</tooth_map_end_offset>
+    </label>
+    <label>
+        <text>缺牙间隙尚可</text>
+        <property>mesio_distal_space_distance</property>
+        <property_chn>近远中间隙的距离</property_chn>
+        <value_type>list_int</value_type>
+        <value>0</value>
+        <description>正常</description>
+        <start_offset>156</start_offset>
+        <end_offset>162</end_offset>
+    </label>
+    <label>
+        <tooth_map_str>/5/ /</tooth_map_str>
+        <text>远中颈部充填体</text>
+        <property>filling_existance</property>
+        <property_chn>充填体是否存在</property_chn>
+        <value_type>list_int</value_type>
+        <value>0</value>
+        <description>完好</description>
+        <start_offset>171</start_offset>
+        <end_offset>178</end_offset>
+        <tooth_map_start_offset>163</tooth_map_start_offset>
+        <tooth_map_end_offset>171</tooth_map_end_offset>
+    </label>
+    <label>
+        <tooth_map_str>/7/ /</tooth_map_str>
+        <text>根充恰填</text>
+        <property>root_canal_filling_imaging</property>
+        <property_chn>根充影像</property_chn>
+        <value_type>list_int</value_type>
+        <value>1</value>
+        <description>根充恰填</description>
+        <start_offset>193</start_offset>
+        <end_offset>197</end_offset>
+        <tooth_map_start_offset>185</tooth_map_start_offset>
+        <tooth_map_end_offset>193</tooth_map_end_offset>
+    </label>
+    <label>
+        <tooth_map_str>/7/ /</tooth_map_str>
+        <text>根尖周未见明显异常</text>
+        <property>apical_root_imaging</property>
+        <property_chn>根尖周影像</property_chn>
+        <value_type>boolean</value_type>
+        <value>0</value>
+        <description>未见明显异常</description>
+        <start_offset>198</start_offset>
+        <end_offset>207</end_offset>
+        <tooth_map_start_offset>185</tooth_map_start_offset>
+        <tooth_map_end_offset>193</tooth_map_end_offset>
+    </label>
+    <label>
+        <modifier>NT9</modifier>
+        <text>口腔卫生状况一般</text>
+        <property>oral_hygiene</property>
+        <property_chn>口腔卫生情况</property_chn>
+        <value_type>list_int</value_type>
+        <value>1</value>
+        <description>一般</description>
+        <start_offset>210</start_offset>
+        <end_offset>218</end_offset>
+    </label>
+    <label>
+        <modifier>NT9</modifier>
+        <text>牙石(++)</text>
+        <property>dental_calculus</property>
+        <property_chn>牙石情况</property_chn>
+        <value_type>list_int</value_type>
+        <value>2</value>
+        <description>++</description>
+        <start_offset>219</start_offset>
+        <end_offset>225</end_offset>
+    </label>
 </labels>

@@ -2,12 +2,13 @@ package rpd.components;
 
 import rpd.RPDPlan;
 import rpd.oral.Tooth;
+
 import java.util.ArrayList;
 
 /**
  * Created by sdxshuai on 2017/5/8.
  */
-public class DentureBase implements Component{
+public class DentureBase implements Component {
 
 	protected ArrayList<Tooth> tooth_pos = null;
 

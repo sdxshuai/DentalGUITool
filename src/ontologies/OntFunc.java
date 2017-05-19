@@ -1,9 +1,5 @@
 package ontologies;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
 import org.apache.jena.ontology.DatatypeProperty;
 import org.apache.jena.ontology.OntModel;
 import org.apache.jena.ontology.OntProperty;
@@ -11,6 +7,10 @@ import org.apache.jena.ontology.OntResource;
 import org.apache.jena.rdf.model.Resource;
 import org.apache.jena.util.iterator.ExtendedIterator;
 import org.apache.jena.vocabulary.OWL;
+
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 //扩展jena功能
 public class OntFunc {

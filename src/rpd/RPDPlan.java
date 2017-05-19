@@ -1,13 +1,13 @@
 package rpd;
 
-import java.util.*;
-
 import exceptions.rpd.RuleException;
 import rpd.components.Component;
 import rpd.conceptions.Position;
 import rpd.oral.EdentulousSpace;
 import rpd.oral.Mouth;
 import rpd.oral.Tooth;
+
+import java.util.*;
 
 public class RPDPlan {
 
@@ -28,8 +28,7 @@ public class RPDPlan {
 		this.mandibular_or_maxillary = mandibular_or_maxillary;
 		if (this.mandibular_or_maxillary == Position.Mandibular) {
 			this.edentulousSpaces.addAll(mouth.getMandibular().getEdentulousSpaces());
-		}
-		else if (this.mandibular_or_maxillary == Position.Maxillary) {
+		} else if (this.mandibular_or_maxillary == Position.Maxillary) {
 			this.edentulousSpaces.addAll(mouth.getMaxillary().getEdentulousSpaces());
 		}
 	}
@@ -42,8 +41,7 @@ public class RPDPlan {
 		this.abutment_teeth.addAll(raw_plan.abutment_teeth);
 		if (this.mandibular_or_maxillary == Position.Mandibular) {
 			this.edentulousSpaces.addAll(mouth.getMandibular().getEdentulousSpaces());
-		}
-		else if (this.mandibular_or_maxillary == Position.Maxillary) {
+		} else if (this.mandibular_or_maxillary == Position.Maxillary) {
 			this.edentulousSpaces.addAll(mouth.getMaxillary().getEdentulousSpaces());
 		}
 	}

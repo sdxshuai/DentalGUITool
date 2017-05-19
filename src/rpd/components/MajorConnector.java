@@ -3,19 +3,21 @@ package rpd.components;
 /**
  * Created by sdxshuai on 2017/4/23.
  */
+
 import rpd.conceptions.Position;
 import rpd.oral.Tooth;
 
 import java.util.ArrayList;
 
-public abstract class MajorConnector implements Component{
+public abstract class MajorConnector implements Component {
 	protected ArrayList<Tooth> tooth_pos = null;
 	protected ArrayList<Tooth> lingual_confrontation = null;
 	protected Position mandibular_or_maxillary = null;
 
 	protected String rule_explanation = null;
 
-	public MajorConnector(){}
+	public MajorConnector() {
+	}
 
 	public MajorConnector(ArrayList<Tooth> tooth_pos) {
 		this.tooth_pos = tooth_pos;

@@ -16,6 +16,18 @@ public class WroughtWireClasp extends Clasp {
 	private boolean enable_buccal = true;
 	private boolean enable_lingual = true;
 
+	public WroughtWireClasp(Tooth tooth_pos, Position tip_direction) {
+
+		super(tooth_pos);
+		this.buccal_arm = new ClaspArm(tooth_pos, tip_direction, Position.Buccal, ClaspMaterial.WW);
+		this.lingual_arm = new ClaspArm(tooth_pos, tip_direction, Position.Lingual, ClaspMaterial.WW);
+		if (tip_direction.equals(Position.Distal)) {
+			this.occlusal_rest = new OcclusalRest(tooth_pos, Position.Mesial);
+		} else if (tip_direction.equals(Position.Mesial)) {
+			this.occlusal_rest = new OcclusalRest(tooth_pos, Position.Distal);
+		}
+	}
+
 	public boolean isEnableBuccal() {
 		return enable_buccal;
 	}
@@ -30,18 +42,6 @@ public class WroughtWireClasp extends Clasp {
 
 	public void setEnableLingual(boolean enable_lingual) {
 		this.enable_lingual = enable_lingual;
-	}
-
-	public WroughtWireClasp(Tooth tooth_pos, Position tip_direction) {
-
-		super(tooth_pos);
-		this.buccal_arm = new ClaspArm(tooth_pos, tip_direction, Position.Buccal, ClaspMaterial.WW);
-		this.lingual_arm = new ClaspArm(tooth_pos, tip_direction, Position.Lingual, ClaspMaterial.WW);
-		if (tip_direction.equals(Position.Distal)) {
-			this.occlusal_rest = new OcclusalRest(tooth_pos, Position.Mesial);
-		} else if (tip_direction.equals(Position.Mesial)) {
-			this.occlusal_rest = new OcclusalRest(tooth_pos, Position.Distal);
-		}
 	}
 
 	public void addToPlan(RPDPlan rpd_plan) {

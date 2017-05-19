@@ -1,28 +1,20 @@
 package ontologies;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
+import exceptions.PropertyValueException;
 import org.apache.jena.ontology.DatatypeProperty;
 import org.apache.jena.ontology.OntModel;
 import org.apache.jena.ontology.OntProperty;
 import org.apache.jena.ontology.OntResource;
 import org.apache.jena.rdf.model.RDFList;
 import org.apache.jena.rdf.model.RDFNode;
-import org.apache.jena.rdf.model.Resource;
 import org.apache.jena.vocabulary.OWL;
-import org.apache.jena.vocabulary.RDFS;
 import org.apache.jena.vocabulary.XSD;
 
-import ontologies.LabelModifier;
-import exceptions.PropertyValueException;
+import java.io.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 //取值含义
 public class Descriptions {
@@ -40,6 +32,74 @@ public class Descriptions {
 		this.dental_ont = dental_ont;
 		this.readModifiers(modifier_file);
 		this.readPropertyDescriptions(this.dental_ont);
+	}
+
+	public static Map<Integer, String> parseComment(String comment) {
+
+		if (comment == null)
+			return null;
+
+		comment = comment.replace("（", "(");
+		comment = comment.replace("）", ")");
+
+		String[] lines = comment.split("\n");
+		comment = lines[0].trim();
+
+		Map<Integer, String> res = new HashMap<Integer, String>();
+
+		int i = 0;
+		int value_start = -1;
+		int value_end = -1;
+		int meaning_start = -1;
+		int meaning_end = -1;
+		char ch;
+		while (i < comment.length()) {
+
+			ch = comment.charAt(i);
+			if (ch >= '0' && ch <= '9') {
+
+				value_start = i;
+				while (ch >= '0' && ch <= '9') {
+
+					i++;
+					if (i >= comment.length())
+						break;
+					ch = comment.charAt(i);
+				}
+				value_end = i - 1;
+				int value = Integer.valueOf(comment.substring(value_start, value_end + 1));
+
+				while (ch != '(') {
+
+					i++;
+					if (i >= comment.length())
+						break;
+					ch = comment.charAt(i);
+				}
+				meaning_start = i + 1;
+
+				while (ch != ')') {
+
+					i++;
+					if (i >= comment.length())
+						break;
+					ch = comment.charAt(i);
+				}
+				meaning_end = i - 1;
+				if (meaning_start < comment.length() && meaning_end < comment.length()) {
+
+					String meaning = comment.substring(meaning_start, meaning_end + 1);
+					res.put(value, meaning);
+				}
+				i++;
+			} else
+				i++;
+		}
+
+		if (res.size() == 0)
+			return null;
+		else
+			return res;
 	}
 
 	private void readModifiers(File modifier_file) throws IOException {
@@ -159,74 +219,6 @@ public class Descriptions {
 				}
 			}
 		}
-	}
-
-	public static Map<Integer, String> parseComment(String comment) {
-
-		if (comment == null)
-			return null;
-
-		comment = comment.replace("（", "(");
-		comment = comment.replace("）", ")");
-
-		String[] lines = comment.split("\n");
-		comment = lines[0].trim();
-
-		Map<Integer, String> res = new HashMap<Integer, String>();
-
-		int i = 0;
-		int value_start = -1;
-		int value_end = -1;
-		int meaning_start = -1;
-		int meaning_end = -1;
-		char ch;
-		while (i < comment.length()) {
-
-			ch = comment.charAt(i);
-			if (ch >= '0' && ch <= '9') {
-
-				value_start = i;
-				while (ch >= '0' && ch <= '9') {
-
-					i++;
-					if (i >= comment.length())
-						break;
-					ch = comment.charAt(i);
-				}
-				value_end = i - 1;
-				int value = Integer.valueOf(comment.substring(value_start, value_end + 1));
-
-				while (ch != '(') {
-
-					i++;
-					if (i >= comment.length())
-						break;
-					ch = comment.charAt(i);
-				}
-				meaning_start = i + 1;
-
-				while (ch != ')') {
-
-					i++;
-					if (i >= comment.length())
-						break;
-					ch = comment.charAt(i);
-				}
-				meaning_end = i - 1;
-				if (meaning_start < comment.length() && meaning_end < comment.length()) {
-
-					String meaning = comment.substring(meaning_start, meaning_end + 1);
-					res.put(value, meaning);
-				}
-				i++;
-			} else
-				i++;
-		}
-
-		if (res.size() == 0)
-			return null;
-		else
-			return res;
 	}
 
 	public static class PropertyDescription {

@@ -1,8 +1,5 @@
 package rpd.rules;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import exceptions.rpd.ClaspAssemblyException;
 import exceptions.rpd.EdentulousTypeException;
 import exceptions.rpd.RuleException;
@@ -15,24 +12,15 @@ import rpd.conceptions.Position;
 import rpd.oral.EdentulousSpace;
 import rpd.oral.Mouth;
 
+import java.util.ArrayList;
+import java.util.List;
+
 //规则4
 public class IndirectRetainerRule {
 
 	public static List<IndirectRetainerRule> indirect_retainer_rules = null;
 
 	private static Mouth mouth = null;
-
-	public RPDPlan apply(EdentulousSpace edentulous_space, RPDPlan rpd_plan) throws RuleException, ToothPosException, ClaspAssemblyException, EdentulousTypeException {
-		throw new RuleException("call from abstract class");
-	}
-
-	public int getRuleNum() throws RuleException {
-		throw new RuleException("call from abstract class");
-	}
-
-	public String getExplaination() throws RuleException {
-		throw new RuleException("call from abstract class");
-	}
 
 	private static RotationAxis findRotationAxis(EdentulousSpace edentulous_space, RPDPlan rpd_plan) {
 
@@ -153,5 +141,17 @@ public class IndirectRetainerRule {
 				}
 			}
 		});
+	}
+
+	public RPDPlan apply(EdentulousSpace edentulous_space, RPDPlan rpd_plan) throws RuleException, ToothPosException, ClaspAssemblyException, EdentulousTypeException {
+		throw new RuleException("call from abstract class");
+	}
+
+	public int getRuleNum() throws RuleException {
+		throw new RuleException("call from abstract class");
+	}
+
+	public String getExplaination() throws RuleException {
+		throw new RuleException("call from abstract class");
 	}
 }

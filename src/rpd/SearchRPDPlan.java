@@ -1,8 +1,5 @@
 package rpd;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import exceptions.rpd.ClaspAssemblyException;
 import exceptions.rpd.EdentulousTypeException;
 import exceptions.rpd.RuleException;
@@ -11,6 +8,9 @@ import rpd.components.DentureBase;
 import rpd.conceptions.Position;
 import rpd.oral.*;
 import rpd.rules.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 //生成设计方案
 public class SearchRPDPlan {

@@ -5,9 +5,8 @@
       <element id="archive" name="DentalGUITool.jar">
         <element id="module-output" name="DentalGUITool" />
       </element>
+      <element id="file-copy" path="E:/opencv/build/java/opencv-320.jar" />
       <element id="file-copy" path="D:/lib/DentalEMRParser/DentalEMRParser.jar" />
-      <element id="file-copy" path="D:/lib/DentalGUI/jgoodies-forms-1.7.2.jar" />
-      <element id="file-copy" path="D:/lib/DentalGUI/jgoodies-common-1.7.0.jar" />
       <element id="file-copy" path="D:/lib/apache-jena-3.2.0/lib/junit-4.12.jar" />
       <element id="file-copy" path="D:/lib/apache-jena-3.2.0/lib/log4j-1.2.17.jar" />
       <element id="file-copy" path="D:/lib/apache-jena-3.2.0/lib/collection-0.6.jar" />
@@ -46,7 +45,8 @@
       <element id="file-copy" path="D:/lib/apache-jena-3.2.0/lib/jackson-annotations-2.7.0.jar" />
       <element id="file-copy" path="D:/lib/apache-jena-3.2.0/lib/poi-excelant-3.14-20160307.jar" />
       <element id="file-copy" path="D:/lib/apache-jena-3.2.0/lib/poi-ooxml-schemas-3.14-20160307.jar" />
-      <element id="file-copy" path="E:/opencv/build/java/opencv-320.jar" />
+      <element id="file-copy" path="D:/lib/DentalGUI/jgoodies-forms-1.7.2.jar" />
+      <element id="file-copy" path="D:/lib/DentalGUI/jgoodies-common-1.7.0.jar" />
       <element id="file-copy" path="$PROJECT_DIR$/../RPD-Design/x64/Release/RpdDesignLib.dll" />
       <element id="file-copy" path="E:/opencv/build/java/x64/opencv_java320.dll" />
     </root>
