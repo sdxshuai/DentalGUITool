@@ -39,35 +39,39 @@ public class SinglePalatalStrapConnector extends MajorConnector {
 		}
 		Collections.sort(sorted_zone1);
 		Collections.sort(sorted_zone2);
-		if (sorted_zone1.size() > 1) {
-			this.tooth_pos.add(sorted_zone1.get(sorted_zone1.size() - 1));
-			this.tooth_pos.add(sorted_zone1.get(0));
-		} else if (sorted_zone1.size() == 1) {
-			this.tooth_pos.addAll(sorted_zone1);
-			int single_pos = sorted_zone1.get(0).getNum();
-			if (single_pos != 7) {
-				Tooth neighbor_tooth = new Tooth(1, sorted_zone1.get(0).getNum() + 1);
-				this.tooth_pos.add(neighbor_tooth);
-			} else {
-				Tooth neighbor_tooth = new Tooth(1, sorted_zone1.get(0).getNum() - 1);
-				this.tooth_pos.add(neighbor_tooth);
-			}
-		}
-
-		if (sorted_zone2.size() > 1) {
-			this.tooth_pos.add(sorted_zone2.get(0));
-			this.tooth_pos.add(sorted_zone2.get(sorted_zone2.size() - 1));
-		} else if (sorted_zone2.size() == 1) {
-			tooth_pos.addAll(sorted_zone2);
-			int single_pos = sorted_zone2.get(0).getNum();
-			if (single_pos != 7) {
-				Tooth neighbor_tooth = new Tooth(2, sorted_zone2.get(0).getNum() + 1);
-				this.tooth_pos.add(neighbor_tooth);
-			} else {
-				Tooth neighbor_tooth = new Tooth(2, sorted_zone2.get(0).getNum() - 1);
-				this.tooth_pos.add(neighbor_tooth);
-			}
-		}
+		this.tooth_pos.add(sorted_zone1.get(sorted_zone1.size() - 1));
+		this.tooth_pos.add(sorted_zone1.get(0));
+		this.tooth_pos.add(sorted_zone2.get(0));
+		this.tooth_pos.add(sorted_zone2.get(sorted_zone2.size() - 1));
+//		if (sorted_zone1.size() > 1) {
+//			this.tooth_pos.add(sorted_zone1.get(sorted_zone1.size() - 1));
+//			this.tooth_pos.add(sorted_zone1.get(0));
+//		} else if (sorted_zone1.size() == 1) {
+//			this.tooth_pos.addAll(sorted_zone1);
+//			int single_pos = sorted_zone1.get(0).getNum();
+//			if (single_pos != 7) {
+//				Tooth neighbor_tooth = new Tooth(1, sorted_zone1.get(0).getNum() + 1);
+//				this.tooth_pos.add(neighbor_tooth);
+//			} else {
+//				Tooth neighbor_tooth = new Tooth(1, sorted_zone1.get(0).getNum() - 1);
+//				this.tooth_pos.add(neighbor_tooth);
+//			}
+//		}
+//
+//		if (sorted_zone2.size() > 1) {
+//			this.tooth_pos.add(sorted_zone2.get(0));
+//			this.tooth_pos.add(sorted_zone2.get(sorted_zone2.size() - 1));
+//		} else if (sorted_zone2.size() == 1) {
+//			tooth_pos.addAll(sorted_zone2);
+//			int single_pos = sorted_zone2.get(0).getNum();
+//			if (single_pos != 7) {
+//				Tooth neighbor_tooth = new Tooth(2, sorted_zone2.get(0).getNum() + 1);
+//				this.tooth_pos.add(neighbor_tooth);
+//			} else {
+//				Tooth neighbor_tooth = new Tooth(2, sorted_zone2.get(0).getNum() - 1);
+//				this.tooth_pos.add(neighbor_tooth);
+//			}
+//		}
 		this.mandibular_or_maxillary = Position.Maxillary;
 	}
 

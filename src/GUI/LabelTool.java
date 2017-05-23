@@ -79,7 +79,7 @@ public class LabelTool {
 	private Descriptions des = null;
 	private File owl_file = null;
 	private File choosed_file = null;
-	private File current_dir = new File("D:\\Codes\\DentalGUITool\\data");
+	private File current_dir = new File("data");
 	private File label_xml_file = null;
 	private JTextPane emr_text = null;
 	private JFrame frame;
