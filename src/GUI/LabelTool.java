@@ -212,6 +212,7 @@ public class LabelTool {
 		JTextField label_scroll_title = new JTextField("结构化电子病历");
 		label_scroll_title.setHorizontalAlignment(JTextField.CENTER);
 		label_scroll_title.setFont(new Font("微软雅黑", Font.BOLD, 28));
+		label_scroll_title.setOpaque(false);
 		panel_label_title.setPreferredSize(new Dimension(0, 80));
 		panel_label_title.add(label_scroll_title, BorderLayout.CENTER);
 		panel_west.add(panel_label_title, BorderLayout.NORTH);
@@ -370,7 +371,16 @@ public class LabelTool {
 		emr_scroll_title.setHorizontalAlignment(JTextField.CENTER);
 		emr_scroll_title.setHorizontalAlignment(JTextField.CENTER);
 		emr_scroll_title.setFont(new Font("微软雅黑", Font.BOLD, 28));
-		JPanel panel_emr_title = new JPanel();
+		emr_scroll_title.setOpaque(false);
+		JPanel panel_emr_title = new JPanel() {
+			protected void paintComponent(Graphics g) {
+				ImageIcon icon = new ImageIcon("res\\icon.jpg");
+				icon.setImage(icon.getImage().getScaledInstance(120,107, Image.SCALE_DEFAULT));
+				g.drawImage(icon.getImage(), 0, 0, icon.getIconWidth(), icon.getIconHeight(), this);
+				g.drawImage(icon.getImage(), 120, 0, icon.getIconWidth(), icon.getIconHeight(), this);
+			}
+		};
+		panel_emr_title.setOpaque(false);
 		panel_emr_title.setLayout(new BorderLayout());
 		panel_emr_title.setPreferredSize(new Dimension(0, 80));
 		panel_emr_title.add(emr_scroll_title, BorderLayout.CENTER);

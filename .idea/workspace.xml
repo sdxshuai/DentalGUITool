@@ -7,27 +7,39 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9efcce7d-9cdf-4ffc-a888-c6d36f3be804" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$1.class" afterPath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$1.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$10.class" afterPath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$10.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$11.class" afterPath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$11.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$12.class" afterPath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$12.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$13.class" afterPath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$13.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$14.class" afterPath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$14.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$15.class" afterPath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$15.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$16.class" afterPath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$16.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$17.class" afterPath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$17.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$18.class" afterPath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$18.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$19.class" afterPath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$19.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$2.class" afterPath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$2.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$20.class" afterPath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$20.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$21.class" afterPath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$21.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$22.class" afterPath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$22.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$23.class" afterPath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$23.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$24.class" afterPath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$24.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$3.class" afterPath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$3.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$4.class" afterPath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$4.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$5.class" afterPath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$5.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$6.class" afterPath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$6.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$7.class" afterPath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$7.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$8.class" afterPath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$8.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$9.class" afterPath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$9.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool.class" afterPath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/DentalGUITool/rpd/components/AkerClasp.class" afterPath="$PROJECT_DIR$/out/production/DentalGUITool/rpd/components/AkerClasp.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/DentalGUITool/rpd/components/Clasp.class" afterPath="$PROJECT_DIR$/out/production/DentalGUITool/rpd/components/Clasp.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/DentalGUITool/rpd/components/LingualRest.class" afterPath="$PROJECT_DIR$/out/production/DentalGUITool/rpd/components/LingualRest.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/DentalGUITool/rpd/components/OcclusalRest.class" afterPath="$PROJECT_DIR$/out/production/DentalGUITool/rpd/components/OcclusalRest.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/DentalGUITool/rpd/components/Rest.class" afterPath="$PROJECT_DIR$/out/production/DentalGUITool/rpd/components/Rest.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/DentalGUITool/rpd/components/RingClasp.class" afterPath="$PROJECT_DIR$/out/production/DentalGUITool/rpd/components/RingClasp.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/GUI/LabelTool.java" afterPath="$PROJECT_DIR$/src/GUI/LabelTool.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rpd/components/AkerClasp.java" afterPath="$PROJECT_DIR$/src/rpd/components/AkerClasp.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rpd/components/BackActionClasp.java" afterPath="$PROJECT_DIR$/src/rpd/components/BackActionClasp.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rpd/components/CanineAkerClasp.java" afterPath="$PROJECT_DIR$/src/rpd/components/CanineAkerClasp.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rpd/components/CanineClasp.java" afterPath="$PROJECT_DIR$/src/rpd/components/CanineClasp.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rpd/components/Clasp.java" afterPath="$PROJECT_DIR$/src/rpd/components/Clasp.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rpd/components/CombinationClasp.java" afterPath="$PROJECT_DIR$/src/rpd/components/CombinationClasp.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rpd/components/ExtensionClasp.java" afterPath="$PROJECT_DIR$/src/rpd/components/ExtensionClasp.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rpd/components/HalfHalfClasp.java" afterPath="$PROJECT_DIR$/src/rpd/components/HalfHalfClasp.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rpd/components/IncisalRest.java" afterPath="$PROJECT_DIR$/src/rpd/components/IncisalRest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rpd/components/LingualRest.java" afterPath="$PROJECT_DIR$/src/rpd/components/LingualRest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rpd/components/MajorConnector.java" afterPath="$PROJECT_DIR$/src/rpd/components/MajorConnector.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rpd/components/OcclusalRest.java" afterPath="$PROJECT_DIR$/src/rpd/components/OcclusalRest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rpd/components/RPAClasp.java" afterPath="$PROJECT_DIR$/src/rpd/components/RPAClasp.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rpd/components/RPIClasp.java" afterPath="$PROJECT_DIR$/src/rpd/components/RPIClasp.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rpd/components/Rest.java" afterPath="$PROJECT_DIR$/src/rpd/components/Rest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rpd/components/ReverseBackActionClasp.java" afterPath="$PROJECT_DIR$/src/rpd/components/ReverseBackActionClasp.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rpd/components/ReverseHookClasp.java" afterPath="$PROJECT_DIR$/src/rpd/components/ReverseHookClasp.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rpd/components/RingClasp.java" afterPath="$PROJECT_DIR$/src/rpd/components/RingClasp.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rpd/components/WroughtWireClasp.java" afterPath="$PROJECT_DIR$/src/rpd/components/WroughtWireClasp.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -55,107 +67,16 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="IncisalRest.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/rpd/components/IncisalRest.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="313">
-              <caret line="50" column="33" lean-forward="false" selection-start-line="50" selection-start-column="33" selection-end-line="50" selection-end-column="33" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="OcclusalRest.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/rpd/components/OcclusalRest.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="287">
-              <caret line="50" column="33" lean-forward="false" selection-start-line="50" selection-start-column="33" selection-end-line="50" selection-end-column="33" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ReverseBackActionClasp.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/rpd/components/ReverseBackActionClasp.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="136">
-              <caret line="69" column="33" lean-forward="false" selection-start-line="69" selection-start-column="33" selection-end-line="69" selection-end-column="33" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ReverseHookClasp.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/rpd/components/ReverseHookClasp.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="287">
-              <caret line="74" column="33" lean-forward="false" selection-start-line="74" selection-start-column="33" selection-end-line="74" selection-end-column="33" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="RingClasp.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/rpd/components/RingClasp.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="253">
-              <caret line="95" column="33" lean-forward="false" selection-start-line="95" selection-start-column="33" selection-end-line="95" selection-end-column="33" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="RPAClasp.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/rpd/components/RPAClasp.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="236">
-              <caret line="56" column="33" lean-forward="false" selection-start-line="56" selection-start-column="33" selection-end-line="56" selection-end-column="33" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="RPIClasp.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/rpd/components/RPIClasp.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="372">
-              <caret line="34" column="33" lean-forward="false" selection-start-line="34" selection-start-column="33" selection-end-line="34" selection-end-column="33" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="WroughtWireClasp.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/rpd/components/WroughtWireClasp.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="270">
-              <caret line="74" column="33" lean-forward="false" selection-start-line="74" selection-start-column="33" selection-end-line="74" selection-end-column="33" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Rest.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/rpd/components/Rest.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="389">
-              <caret line="54" column="36" lean-forward="false" selection-start-line="54" selection-start-column="36" selection-end-line="54" selection-end-column="36" />
-              <folding>
-                <element signature="e#798#799#0" expanded="true" />
-                <element signature="e#816#817#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="LabelTool.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/GUI/LabelTool.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="390">
-              <caret line="1059" column="61" lean-forward="false" selection-start-line="1059" selection-start-column="61" selection-end-line="1059" selection-end-column="61" />
+            <state relative-caret-position="135">
+              <caret line="206" column="70" lean-forward="true" selection-start-line="206" selection-start-column="70" selection-end-line="206" selection-end-column="70" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <marker date="1496321019044" expanded="true" signature="16178:16390" ph="//..." />
+                <element signature="e#13014#13401#0" expanded="true" />
+                <element signature="e#13400#13401#0" expanded="true" />
+                <marker date="1496323872978" expanded="true" signature="16665:16877" ph="//..." />
               </folding>
             </state>
           </provider>
@@ -1139,7 +1060,7 @@
       <workItem from="1495453041293" duration="2017000" />
       <workItem from="1495455272185" duration="47000" />
       <workItem from="1495544994332" duration="663000" />
-      <workItem from="1496284547581" duration="26162000" />
+      <workItem from="1496284547581" duration="28642000" />
     </task>
     <task id="LOCAL-00001" summary="Build the ontology">
       <created>1488690342848</created>
@@ -1274,11 +1195,18 @@
       <option name="project" value="LOCAL" />
       <updated>1496304755848</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="Refine UI">
+      <created>1496321603638</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1496321603638</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="324791000" />
+    <option name="totallyTimeSpent" value="327271000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1313,7 +1241,7 @@
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3027933" sideWeight="0.7084222" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.224581" sideWeight="0.7084222" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.21995708" sideWeight="0.33295712" order="6" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -1366,7 +1294,8 @@
     <MESSAGE value="delete the unused class file" />
     <MESSAGE value="fix the bug: major connector with three tooth position" />
     <MESSAGE value="Refine UI, add printer" />
-    <option name="LAST_COMMIT_MESSAGE" value="Refine UI, add printer" />
+    <MESSAGE value="Refine UI" />
+    <option name="LAST_COMMIT_MESSAGE" value="Refine UI" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1379,31 +1308,31 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/GUI/LabelTool.java</url>
-          <line>647</line>
+          <line>657</line>
           <properties />
           <option name="timeStamp" value="197" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/GUI/LabelTool.java</url>
-          <line>300</line>
+          <line>301</line>
           <properties />
           <option name="timeStamp" value="212" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/GUI/LabelTool.java</url>
-          <line>2162</line>
+          <line>2172</line>
           <properties />
           <option name="timeStamp" value="221" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/GUI/LabelTool.java</url>
-          <line>1836</line>
+          <line>1846</line>
           <properties />
           <option name="timeStamp" value="225" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/GUI/LabelTool.java</url>
-          <line>529</line>
+          <line>539</line>
           <properties />
           <option name="timeStamp" value="229" />
         </line-breakpoint>
@@ -1415,42 +1344,36 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/GUI/LabelTool.java</url>
-          <line>420</line>
+          <line>430</line>
           <properties />
           <option name="timeStamp" value="247" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/GUI/LabelTool.java</url>
-          <line>861</line>
+          <line>871</line>
           <properties />
           <option name="timeStamp" value="250" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/GUI/LabelTool.java</url>
-          <line>571</line>
+          <line>581</line>
           <properties />
           <option name="timeStamp" value="252" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/GUI/LabelTool.java</url>
-          <line>846</line>
+          <line>856</line>
           <properties />
           <option name="timeStamp" value="253" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/GUI/LabelTool.java</url>
-          <line>821</line>
+          <line>374</line>
           <properties />
-          <option name="timeStamp" value="259" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/GUI/LabelTool.java</url>
-          <line>744</line>
-          <properties />
-          <option name="timeStamp" value="260" />
+          <option name="timeStamp" value="266" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="261" />
+      <option name="time" value="267" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -1846,11 +1769,13 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/GUI/LabelTool.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="390">
-          <caret line="1059" column="61" lean-forward="false" selection-start-line="1059" selection-start-column="61" selection-end-line="1059" selection-end-column="61" />
+        <state relative-caret-position="135">
+          <caret line="206" column="70" lean-forward="true" selection-start-line="206" selection-start-column="70" selection-end-line="206" selection-end-column="70" />
           <folding>
             <element signature="imports" expanded="true" />
-            <marker date="1496321019044" expanded="true" signature="16178:16390" ph="//..." />
+            <element signature="e#13014#13401#0" expanded="true" />
+            <element signature="e#13400#13401#0" expanded="true" />
+            <marker date="1496323872978" expanded="true" signature="16665:16877" ph="//..." />
           </folding>
         </state>
       </provider>
