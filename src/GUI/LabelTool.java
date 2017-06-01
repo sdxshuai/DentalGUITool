@@ -10,6 +10,7 @@ import exceptions.rpd.EdentulousTypeException;
 import exceptions.rpd.RuleException;
 import exceptions.rpd.ToothPosException;
 import misc.ToothMap;
+import misc.PrintImage;
 import ontologies.*;
 import ontologies.Descriptions.PropertyDescription;
 import org.apache.jena.ontology.*;
@@ -34,6 +35,8 @@ import rpd.oral.Tooth;
 
 import javax.swing.*;
 import javax.swing.border.Border;
+import javax.swing.border.LineBorder;
+import javax.swing.border.TitledBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
@@ -185,18 +188,29 @@ public class LabelTool {
 	private void initialize() throws PropertyValueException,
 			javax.xml.parsers.ParserConfigurationException,
 			javax.xml.transform.TransformerException,
-			emrpaser.exceptions.PropertyValueException {
+			emrpaser.exceptions.PropertyValueException,
+			java.io.IOException {
 
 		frame = new JFrame();
 		frame.setBounds(100, 100, 861, 688);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+		frame.setLayout(new BorderLayout(5, 5));
 
 		JPanel panel_west = new JPanel();
-		frame.getContentPane().add(panel_west, BorderLayout.WEST);
-		panel_west.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
-
+		frame.getContentPane().add(panel_west, BorderLayout.EAST);
+//		panel_west.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+		panel_west.setLayout(new BorderLayout());
+		JPanel panel_label_title = new JPanel();
+		panel_label_title.setLayout(new BorderLayout());
 		JScrollPane label_scroll_pane = new JScrollPane();
-		panel_west.add(label_scroll_pane);
+		JTextField label_scroll_title = new JTextField("结构化电子病历");
+		label_scroll_title.setHorizontalAlignment(JTextField.CENTER);
+		label_scroll_title.setFont(new Font("微软雅黑", Font.BOLD, 28));
+		panel_label_title.setPreferredSize(new Dimension(0, 80));
+		panel_label_title.add(label_scroll_title, BorderLayout.CENTER);
+		panel_west.add(panel_label_title, BorderLayout.NORTH);
+		panel_west.add(label_scroll_pane, BorderLayout.CENTER);
 
 		JCheckBox chckbx_show_all_labels = new JCheckBox("显示全部");
 		this.chckbx_show_all_labels = chckbx_show_all_labels;
@@ -339,15 +353,24 @@ public class LabelTool {
 
 		JPanel panel_center = new JPanel();
 		frame.getContentPane().add(panel_center, BorderLayout.CENTER);
-		panel_center.setLayout(new GridLayout(1, 1, 0, 0));
-
+//		panel_center.setLayout(new GridLayout(1, 1, 0, 0));
+		panel_center.setLayout(new BorderLayout(20, 0));
 		JTextPane emr_text = new JTextPane();
 		emr_text.setEditable(false);
 		this.emr_text = emr_text;
 
 		emr_text.setFont(new Font("微软雅黑", Font.PLAIN, 22));
 		JScrollPane emr_scroll_pane = new JScrollPane(emr_text);
-		panel_center.add(emr_scroll_pane);
+		JTextField emr_scroll_title = new JTextField("北京大学电子病历");
+		emr_scroll_title.setHorizontalAlignment(JTextField.CENTER);
+		emr_scroll_title.setHorizontalAlignment(JTextField.CENTER);
+		emr_scroll_title.setFont(new Font("微软雅黑", Font.BOLD, 28));
+		JPanel panel_emr_title = new JPanel();
+		panel_emr_title.setLayout(new BorderLayout());
+		panel_emr_title.setPreferredSize(new Dimension(0, 80));
+		panel_emr_title.add(emr_scroll_title, BorderLayout.CENTER);
+		panel_center.add(panel_emr_title, BorderLayout.NORTH);
+		panel_center.add(emr_scroll_pane, BorderLayout.CENTER);
 
 		JPanel panel_north = new JPanel();
 		frame.getContentPane().add(panel_north, BorderLayout.NORTH);
@@ -385,62 +408,61 @@ public class LabelTool {
 
 						choose_file_path.setText(choosed_file.getCanonicalPath());
 						readEMRFile(choosed_file);
-
-						File dir = choosed_file.getParentFile();
-						current_dir = dir;
-
-						DefaultTableModel label_table_model = (DefaultTableModel) label_table.getModel();
-						label_table_model.setDataVector(null, label_table_headers);
-
-						label_list.clear();
-						mouth_ont = null;
-						mandibular_rpd_plans = null;
-						maxillary_rpd_plans = null;
-						current_rpd_plan = null;
-						is_missing_str = null;
-
-						String input_file_path = choosed_file.getCanonicalPath();
-						int dot_index = input_file_path.lastIndexOf(".");
-						String xml_file_path = input_file_path.substring(0, dot_index) + ".xml";
-						File xml_file = new File(xml_file_path);
-						label_xml_file = null;
-
-						if (!xml_file.exists()) {
-							File owl_file = new File("res//base_template.owl");
-							File modifier_file = new File("res//label_modifier_description.txt");
-							File res_dir = new File("res");
-							File data_dir = new File("data");
-							File excel_file = new File(res_dir.getCanonicalPath() + "\\ontology_definition_1209.xlsx");
-							File rule_file = new File(res_dir.getCanonicalPath() + "\\rules_all_with_value_20170116.txt");
-							File general_regex_file = new File(res_dir.getCanonicalPath() + "\\general_regex_with_value.txt");
-							File all_sen_file = new File(data_dir.getCanonicalPath() + "\\all_sen_checking.txt");
-							File unmatched_file = new File(data_dir.getCanonicalPath() + "\\emr_data_ummatched.txt");
-
-							ruleParserWithStats p = new ruleParserWithStats(rule_file, general_regex_file, owl_file, modifier_file, excel_file);
-							p.parseFile(choosed_file, xml_file);
-							xml_file = new File(xml_file_path);
-						}
-//						if (xml_file.exists()) {
-//							label_xml_file = xml_file;
-//							readLabelsFromXml(xml_file);
+						((DefaultTableModel) label_table.getModel()).setRowCount(0);
+//
+//						File dir = choosed_file.getParentFile();
+//						current_dir = dir;
+//
+//						DefaultTableModel label_table_model = (DefaultTableModel) label_table.getModel();
+//						label_table_model.setDataVector(null, label_table_headers);
+//
+//						label_list.clear();
+//						mouth_ont = null;
+//						mandibular_rpd_plans = null;
+//						maxillary_rpd_plans = null;
+//						current_rpd_plan = null;
+//						is_missing_str = null;
+//
+//						String input_file_path = choosed_file.getCanonicalPath();
+//						int dot_index = input_file_path.lastIndexOf(".");
+//						String xml_file_path = input_file_path.substring(0, dot_index) + ".xml";
+//						File xml_file = new File(xml_file_path);
+//						label_xml_file = null;
+//
+//						if (!xml_file.exists()) {
+//							File owl_file = new File("res//base_template.owl");
+//							File modifier_file = new File("res//label_modifier_description.txt");
+//							File res_dir = new File("res");
+//							File data_dir = new File("data");
+//							File excel_file = new File(res_dir.getCanonicalPath() + "\\ontology_definition_1209.xlsx");
+//							File rule_file = new File(res_dir.getCanonicalPath() + "\\rules_all_with_value_20170116.txt");
+//							File general_regex_file = new File(res_dir.getCanonicalPath() + "\\general_regex_with_value.txt");
+//							File all_sen_file = new File(data_dir.getCanonicalPath() + "\\all_sen_checking.txt");
+//							File unmatched_file = new File(data_dir.getCanonicalPath() + "\\emr_data_ummatched.txt");
+//
+//							ruleParserWithStats p = new ruleParserWithStats(rule_file, general_regex_file, owl_file, modifier_file, excel_file);
+//							p.parseFile(choosed_file, xml_file);
+//							xml_file = new File(xml_file_path);
 //						}
-						label_xml_file = xml_file;
-						readLabelsFromXml(xml_file);
+//
+//						label_xml_file = xml_file;
+//						label_xml_file = null;
+//						readLabelsFromXml(label_xml_file);
 
 					} catch (IOException e) {
 						e.printStackTrace();
-					} catch (ParserConfigurationException e) {
-						e.printStackTrace();
-					} catch (SAXException e) {
-						e.printStackTrace();
-					} catch (PropertyValueException e) {
-						e.printStackTrace();
+//					} catch (ParserConfigurationException e) {
+//						e.printStackTrace();
+//					} catch (SAXException e) {
+//						e.printStackTrace();
+//					} catch (PropertyValueException e) {
+//						e.printStackTrace();
 					} catch (BadLocationException e) {
 						e.printStackTrace();
-					} catch (emrpaser.exceptions.PropertyValueException e) {
-						e.printStackTrace();
-					} catch (javax.xml.transform.TransformerException e) {
-						e.printStackTrace();
+//					} catch (emrpaser.exceptions.PropertyValueException e) {
+//						e.printStackTrace();
+//					} catch (javax.xml.transform.TransformerException e) {
+//						e.printStackTrace();
 					}
 				}
 			}
@@ -473,6 +495,8 @@ public class LabelTool {
 				ColumnSpec.decode("123px"),
 				FormSpecs.LABEL_COMPONENT_GAP_COLSPEC,
 				new ColumnSpec(ColumnSpec.FILL, Sizes.bounded(Sizes.PREFERRED, Sizes.constant("200px", true), Sizes.constant("500px", true)), 0),
+				FormSpecs.RELATED_GAP_COLSPEC,
+				FormSpecs.DEFAULT_COLSPEC,
 				FormSpecs.RELATED_GAP_COLSPEC,
 				FormSpecs.DEFAULT_COLSPEC,
 				FormSpecs.RELATED_GAP_COLSPEC,
@@ -535,7 +559,65 @@ public class LabelTool {
 			}
 		});
 
-		JButton gen_design_button = new JButton("生成设计图");
+
+		JButton txt2xml_button = new JButton("实例化病例");
+		txt2xml_button.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseReleased(MouseEvent arg0) {
+				try {
+					File dir = choosed_file.getParentFile();
+					current_dir = dir;
+
+					DefaultTableModel label_table_model = (DefaultTableModel) label_table.getModel();
+					label_table_model.setDataVector(null, label_table_headers);
+
+					label_list.clear();
+					mouth_ont = null;
+					mandibular_rpd_plans = null;
+					maxillary_rpd_plans = null;
+					current_rpd_plan = null;
+					is_missing_str = null;
+
+					String input_file_path = choosed_file.getCanonicalPath();
+					int dot_index = input_file_path.lastIndexOf(".");
+					String xml_file_path = input_file_path.substring(0, dot_index) + ".xml";
+					File xml_file = new File(xml_file_path);
+					label_xml_file = null;
+
+					if (!xml_file.exists()) {
+						File owl_file = new File("res//base_template.owl");
+						File modifier_file = new File("res//label_modifier_description.txt");
+						File res_dir = new File("res");
+						File data_dir = new File("data");
+						File excel_file = new File(res_dir.getCanonicalPath() + "\\ontology_definition_1209.xlsx");
+						File rule_file = new File(res_dir.getCanonicalPath() + "\\rules_all_with_value_20170116.txt");
+						File general_regex_file = new File(res_dir.getCanonicalPath() + "\\general_regex_with_value.txt");
+						File all_sen_file = new File(data_dir.getCanonicalPath() + "\\all_sen_checking.txt");
+						File unmatched_file = new File(data_dir.getCanonicalPath() + "\\emr_data_ummatched.txt");
+						ruleParserWithStats p = new ruleParserWithStats(rule_file, general_regex_file, owl_file, modifier_file, excel_file);
+						p.parseFile(choosed_file, xml_file);
+						xml_file = new File(xml_file_path);
+					}
+
+					label_xml_file = xml_file;
+					readLabelsFromXml(xml_file);
+				} catch (IOException e) {
+					e.printStackTrace();
+				} catch (ParserConfigurationException e) {
+					e.printStackTrace();
+				} catch (SAXException e) {
+					e.printStackTrace();
+				} catch (PropertyValueException e) {
+					e.printStackTrace();
+				} catch (emrpaser.exceptions.PropertyValueException e) {
+					e.printStackTrace();
+				} catch (javax.xml.transform.TransformerException e) {
+					e.printStackTrace();
+				}
+			}
+		});
+
+		JButton gen_design_button = new JButton("生成设计方案");
 		gen_design_button.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseReleased(MouseEvent arg0) {
@@ -591,9 +673,10 @@ public class LabelTool {
 				}
 			}
 		});
-		panel_north.add(gen_design_button, "8, 2");
+		panel_north.add(txt2xml_button, "8, 2");
+		panel_north.add(gen_design_button, "10, 2");
 		chckbx_show_all_labels.setFont(new Font("微软雅黑", Font.PLAIN, 18));
-		panel_north.add(chckbx_show_all_labels, "10, 2");
+		panel_north.add(chckbx_show_all_labels, "12, 2");
 
 		JPopupMenu property_menu = new JPopupMenu();
 		property_menu.setFont(new Font("微软雅黑", Font.PLAIN, 22));
@@ -722,19 +805,22 @@ public class LabelTool {
 				&& (this.maxillary_rpd_plans == null || this.maxillary_rpd_plans.size() == 0)) {
 			return;
 		}
-		JDialog design_dialog = new JDialog(this.frame, "设计图");
-		JPanel rpd_plan_panel = new JPanel(new FlowLayout());
+		JDialog design_dialog = new JDialog(this.frame, "可摘局部义齿设计方案");
+		JPanel rpd_plan_panel = new JPanel(new BorderLayout());
 		int total_height = 0;
 		int total_width = 0;
-		int line_height = 460;
+		int line_height = 400;
+		int print_height = 50;
 
 		if (!(this.mandibular_rpd_plans == null || this.mandibular_rpd_plans.size() == 0)) {
 
 			generateAndSaveRPDPlanPicture(this.mandibular_rpd_plans);
+			JPanel mandibular_plan_panel = new JPanel(new FlowLayout());
 
-			total_height += line_height;
+			total_height += line_height + print_height;
 			for (int i = 1; i <= 3; i++) {
-				ImageIcon im = new ImageIcon("out//picture//mandibular_RPD_design_" + i + ".png");
+				String picture_name = "out//picture//mandibular_RPD_design_" + i + ".png";
+				ImageIcon im = new ImageIcon(picture_name);
 				int src_im_height = im.getIconHeight();
 				int src_im_width = im.getIconWidth();
 				double scale_factor = (double) line_height / (double) src_im_height;
@@ -749,21 +835,51 @@ public class LabelTool {
 				Border label_border = BorderFactory.createLineBorder(Color.BLACK);
 				rpd_plan_label.setBorder(label_border);
 
-				rpd_plan_panel.add(rpd_plan_label);
+				JButton print_button = new JButton("打印");
+				print_button.addMouseListener(new MouseAdapter() {
+					@Override
+					public void mouseReleased(MouseEvent arg0) {
+						new PrintImage().drawImage(picture_name, 1);
+					}
+				});
+
+				JPanel cur_plan_panel = new JPanel(new BorderLayout());
+				cur_plan_panel.add(rpd_plan_label, BorderLayout.NORTH);
+				cur_plan_panel.add(print_button, BorderLayout.SOUTH);
+				mandibular_plan_panel.add(cur_plan_panel);
 				total_width += dest_im_width;
 			}
 
-			rpd_plan_panel.setSize(total_width, line_height);
-			design_dialog.add(rpd_plan_panel);
+			mandibular_plan_panel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(),
+					"下颌设计方案", TitledBorder.CENTER, TitledBorder.DEFAULT_POSITION,
+					new Font("微软雅黑", Font.BOLD, 20)));
+
+//			JPanel mandibular_title_panel = new JPanel(new BorderLayout());
+//			JTextField mandibular_title = new JTextField("下颌设计方案");
+//			mandibular_title.setHorizontalAlignment(JTextField.CENTER);
+//			mandibular_title.setFont(new Font("微软雅黑", Font.BOLD, 20));
+//			mandibular_title.setEditable(false);
+//			mandibular_title_panel.setPreferredSize(new Dimension(0, 35));
+//			mandibular_title_panel.add(mandibular_title, BorderLayout.CENTER);
+
+			JPanel mandibular_all_panel = new JPanel(new BorderLayout());
+//			mandibular_all_panel.add(mandibular_title_panel, BorderLayout.NORTH);
+			mandibular_all_panel.add(mandibular_plan_panel, BorderLayout.CENTER);
+
+//			rpd_plan_panel.setSize(total_width, line_height);
+			rpd_plan_panel.add(mandibular_all_panel, BorderLayout.SOUTH);
+//			design_dialog.add(rpd_plan_panel);
 		}
 
 		if (!(this.maxillary_rpd_plans == null || this.maxillary_rpd_plans.size() == 0)) {
 			generateAndSaveRPDPlanPicture(this.maxillary_rpd_plans);
+			JPanel maxillary_plan_panel = new JPanel(new FlowLayout());
 
-			total_height += line_height;
+			total_height += line_height + print_height;
 			total_width = 0;
 			for (int i = 1; i <= 3; i++) {
-				ImageIcon im = new ImageIcon("out//picture//maxillary_RPD_design_" + i + ".png");
+				String picture_name = "out//picture//maxillary_RPD_design_" + i + ".png";
+				ImageIcon im = new ImageIcon(picture_name);
 				int src_im_height = im.getIconHeight();
 				int src_im_width = im.getIconWidth();
 				double scale_factor = (double) line_height / (double) src_im_height;
@@ -778,17 +894,46 @@ public class LabelTool {
 				Border label_border = BorderFactory.createLineBorder(Color.BLACK);
 				rpd_plan_label.setBorder(label_border);
 
-				rpd_plan_panel.add(rpd_plan_label);
+				JButton print_button = new JButton("打印");
+				print_button.addMouseListener(new MouseAdapter() {
+					@Override
+					public void mouseReleased(MouseEvent arg0) {
+						new PrintImage().drawImage(picture_name, 1);
+					}
+				});
+
+				JPanel cur_plan_panel = new JPanel(new BorderLayout());
+				cur_plan_panel.add(rpd_plan_label, BorderLayout.NORTH);
+				cur_plan_panel.add(print_button, BorderLayout.SOUTH);
+				maxillary_plan_panel.add(cur_plan_panel);
 				total_width += dest_im_width;
 			}
-			rpd_plan_panel.setSize(total_width, line_height);
-			design_dialog.add(rpd_plan_panel);
-		}
+			maxillary_plan_panel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(),
+					"上颌设计方案", TitledBorder.CENTER, TitledBorder.DEFAULT_POSITION,
+					new Font("微软雅黑", Font.BOLD, 20)));
 
-		total_width += 100;
-		total_height += 20;
-		rpd_plan_panel.setSize(total_width, total_height);
-		design_dialog.setSize(total_width, total_height + 40);
+
+//			JPanel maxillary_title_panel = new JPanel(new BorderLayout());
+//			JTextField maxillary_title = new JTextField("上颌设计方案");
+//			maxillary_title.setHorizontalAlignment(JTextField.CENTER);
+//			maxillary_title.setFont(new Font("微软雅黑", Font.BOLD, 20));
+//			maxillary_title.setEditable(false);
+//			maxillary_title_panel.setPreferredSize(new Dimension(0, 35));
+//			maxillary_title_panel.add(maxillary_title, BorderLayout.CENTER);
+
+			JPanel maxillary_all_panel = new JPanel(new BorderLayout());
+//			maxillary_all_panel.add(maxillary_title_panel, BorderLayout.NORTH);
+			maxillary_all_panel.add(maxillary_plan_panel, BorderLayout.CENTER);
+//			rpd_plan_panel.setSize(total_width, line_height);
+			rpd_plan_panel.add(maxillary_all_panel, BorderLayout.NORTH);
+//			design_dialog.add(rpd_plan_panel);
+		}
+		design_dialog.add(rpd_plan_panel);
+
+		total_width += 60;
+		total_height += 80;
+//		rpd_plan_panel.setSize(total_width, total_height);
+		design_dialog.setSize(total_width, total_height);
 		design_dialog.setLocationRelativeTo(null);
 		design_dialog.setVisible(true);
 	}
@@ -797,7 +942,7 @@ public class LabelTool {
 		if (plans == null || plans.size() == 0) {
 			return;
 		}
-		JDialog design_dialog = new JDialog(this.frame, "设计图");
+		JDialog design_dialog = new JDialog(this.frame, "可摘局部义齿设计方案");
 		JPanel rpd_plan_panel = new JPanel(new FlowLayout());
 		Border panel_border = BorderFactory.createEmptyBorder(5, 5, 5, 5);
 		rpd_plan_panel.setBorder(panel_border);
@@ -890,7 +1035,7 @@ public class LabelTool {
 		if (mandibular_rpd_plans == null || mandibular_rpd_plans.size() == 0)
 			return;
 
-		JDialog design_dialog = new JDialog(this.frame, "设计图");
+		JDialog design_dialog = new JDialog(this.frame, "可摘局部义齿设计方案");
 		JPanel rpd_plan_panel = new JPanel(new BorderLayout());
 		design_dialog.add(rpd_plan_panel);
 
@@ -1699,6 +1844,10 @@ public class LabelTool {
 			SAXException, IOException, PropertyValueException {
 
 		//Map<OntProperty, PropertyDescription> property_descriptions = this.des.property_descriptions;
+//		if (label_xml_file == null) {
+//			label_table = null;
+//			return;
+//		}
 
 		DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 		DocumentBuilder db = dbf.newDocumentBuilder();
