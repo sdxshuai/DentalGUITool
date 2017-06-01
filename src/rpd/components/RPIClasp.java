@@ -32,7 +32,7 @@ public class RPIClasp extends Clasp {
 	public String print() {
 
 		StringBuilder s = new StringBuilder();
-		s.append(this.tooth_pos.toString() + ":");
+		s.append(super.toString());
 		s.append("RPI卡环，");
 		s.append("卡环臂尖朝向远中");
 		return s.toString();

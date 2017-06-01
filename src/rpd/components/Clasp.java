@@ -63,7 +63,7 @@ public abstract class Clasp implements Component {
 		for (Tooth tooth : this.tooth_pos) {
 			s.append(tooth.toString());
 		}
-		s.append(":");
+		s.append(": ");
 		return s.toString();
 	}
 }

@@ -57,7 +57,7 @@ public class CanineAkerClasp extends Clasp {
 	public String print() {
 
 		StringBuilder s = new StringBuilder();
-		s.append(this.tooth_pos.toString() + ":");
+		s.append(super.toString());
 		s.append("尖牙Aker（Canine Aker）卡环，");
 
 		if (this.getMaterial().equals(ClaspMaterial.WW))

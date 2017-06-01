@@ -54,7 +54,7 @@ public class LingualRest extends Rest {
 	public String print() {
 
 		StringBuilder s = new StringBuilder();
-		s.append(this.tooth_pos.toString() + ":");
+		s.append(super.toString());
 		s.append("舌支托");
 		return s.toString();
 	}

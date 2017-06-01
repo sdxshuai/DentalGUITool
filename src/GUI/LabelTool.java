@@ -18,6 +18,7 @@ import org.apache.jena.rdf.model.ModelFactory;
 import org.apache.jena.riot.RDFDataMgr;
 import org.apache.jena.riot.RDFFormat;
 import org.apache.jena.vocabulary.XSD;
+import org.apache.poi.ss.formula.functions.T;
 import org.opencv.core.Mat;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -104,8 +105,12 @@ public class LabelTool {
 	private String is_missing_str = null;
 	private RPDPlan current_rpd_plan = null;
 	private JTree rpd_plan_tree = null;
+	private JTree mandibular_plan_tree = null;
+	private JTree maxillary_plan_tree = null;
 	private JComboBox<Integer> plan_choice = null;
 	private JPopupMenu rpd_plan_menu = null;
+	private JPopupMenu mandibular_plan_menu = null;
+	private JPopupMenu maxillary_plan_menu = null;
 
 	//private ToothMap is_missing_map = null;
 	private JPopupMenu tooth_menu = null;
@@ -361,7 +366,7 @@ public class LabelTool {
 
 		emr_text.setFont(new Font("微软雅黑", Font.PLAIN, 22));
 		JScrollPane emr_scroll_pane = new JScrollPane(emr_text);
-		JTextField emr_scroll_title = new JTextField("北京大学电子病历");
+		JTextField emr_scroll_title = new JTextField("北京大学口腔医院电子病历");
 		emr_scroll_title.setHorizontalAlignment(JTextField.CENTER);
 		emr_scroll_title.setHorizontalAlignment(JTextField.CENTER);
 		emr_scroll_title.setFont(new Font("微软雅黑", Font.BOLD, 28));
@@ -851,7 +856,7 @@ public class LabelTool {
 			}
 
 			mandibular_plan_panel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(),
-					"下颌设计方案", TitledBorder.CENTER, TitledBorder.DEFAULT_POSITION,
+					"下颌设计方案图示", TitledBorder.CENTER, TitledBorder.DEFAULT_POSITION,
 					new Font("微软雅黑", Font.BOLD, 20)));
 
 //			JPanel mandibular_title_panel = new JPanel(new BorderLayout());
@@ -865,6 +870,7 @@ public class LabelTool {
 			JPanel mandibular_all_panel = new JPanel(new BorderLayout());
 //			mandibular_all_panel.add(mandibular_title_panel, BorderLayout.NORTH);
 			mandibular_all_panel.add(mandibular_plan_panel, BorderLayout.CENTER);
+			mandibular_all_panel.add(showMandibularPlans(), BorderLayout.EAST);
 
 //			rpd_plan_panel.setSize(total_width, line_height);
 			rpd_plan_panel.add(mandibular_all_panel, BorderLayout.SOUTH);
@@ -909,7 +915,7 @@ public class LabelTool {
 				total_width += dest_im_width;
 			}
 			maxillary_plan_panel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(),
-					"上颌设计方案", TitledBorder.CENTER, TitledBorder.DEFAULT_POSITION,
+					"上颌设计方案图示", TitledBorder.CENTER, TitledBorder.DEFAULT_POSITION,
 					new Font("微软雅黑", Font.BOLD, 20)));
 
 
@@ -924,13 +930,14 @@ public class LabelTool {
 			JPanel maxillary_all_panel = new JPanel(new BorderLayout());
 //			maxillary_all_panel.add(maxillary_title_panel, BorderLayout.NORTH);
 			maxillary_all_panel.add(maxillary_plan_panel, BorderLayout.CENTER);
+			maxillary_all_panel.add(showMaxillaryPlans(), BorderLayout.EAST);
 //			rpd_plan_panel.setSize(total_width, line_height);
 			rpd_plan_panel.add(maxillary_all_panel, BorderLayout.NORTH);
 //			design_dialog.add(rpd_plan_panel);
 		}
 		design_dialog.add(rpd_plan_panel);
 
-		total_width += 60;
+		total_width += 730;
 		total_height += 80;
 //		rpd_plan_panel.setSize(total_width, total_height);
 		design_dialog.setSize(total_width, total_height);
@@ -1030,6 +1037,38 @@ public class LabelTool {
 
 	}
 
+	private JPanel showMandibularPlans() throws IOException {
+		if (mandibular_rpd_plans == null || mandibular_rpd_plans.size() == 0) {
+			return null;
+		}
+		JPanel design_panel = new JPanel(new BorderLayout());
+		mandibular_plan_tree = buildMandibularPlanTree();
+		for (int i=0; i<mandibular_plan_tree.getRowCount();i++) {
+			mandibular_plan_tree.expandRow(i);
+		}
+		design_panel.add(mandibular_plan_tree, BorderLayout.CENTER);
+		design_panel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(),
+					"下颌设计方案文本", TitledBorder.CENTER, TitledBorder.DEFAULT_POSITION,
+					new Font("微软雅黑", Font.BOLD, 20)));
+		return design_panel;
+	}
+
+	private JPanel showMaxillaryPlans() throws IOException {
+		if (maxillary_rpd_plans == null || maxillary_rpd_plans.size() == 0) {
+			return null;
+		}
+		JPanel design_panel = new JPanel(new BorderLayout());
+		maxillary_plan_tree = buildMaxillaryPlanTree();
+		for (int i=0; i<maxillary_plan_tree.getRowCount();i++) {
+			maxillary_plan_tree.expandRow(i);
+		}
+		design_panel.add(maxillary_plan_tree, BorderLayout.CENTER);
+		design_panel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(),
+					"上颌设计方案文本", TitledBorder.CENTER, TitledBorder.DEFAULT_POSITION,
+					new Font("微软雅黑", Font.BOLD, 20)));
+		return design_panel;
+	}
+
 	private void showRPDPlans() throws IOException {
 
 		if (mandibular_rpd_plans == null || mandibular_rpd_plans.size() == 0)
@@ -1097,6 +1136,70 @@ public class LabelTool {
 		design_dialog.setVisible(true);
 	}
 
+	private JTree buildMandibularPlanTree() {
+		if (mandibular_rpd_plans == null || mandibular_rpd_plans.size() == 0) {
+			return null;
+		}
+		DefaultMutableTreeNode top_node = new DefaultMutableTreeNode("下颌设计方案");
+		JTree mandibular_plan_Tree = new JTree(top_node);
+		mandibular_plan_Tree.setEnabled(true);
+		mandibular_plan_Tree.setFont(new Font("微软雅黑", Font.PLAIN, 18));
+
+		int plan_count = 0;
+		for (RPDPlan plan:mandibular_rpd_plans) {
+			plan_count++;
+			DefaultMutableTreeNode plan_node = new DefaultMutableTreeNode("方案" + plan_count);
+			top_node.add(plan_node);
+			Map<ArrayList<Tooth>, Set<rpd.components.Component>> tooth_components = plan.getToothComponents();
+			ArrayList<ArrayList<Tooth>> plan_teeth = new ArrayList<>(tooth_components.keySet());
+			Collections.sort(plan_teeth, new Comparator<ArrayList<Tooth>>() {
+				public int compare(ArrayList<Tooth> left, ArrayList<Tooth> right) {
+					return left.get(0).compareTo(right.get(0));
+				}
+			});
+			for (ArrayList<Tooth> tooth : plan_teeth) {
+				Set<rpd.components.Component> components = tooth_components.get(tooth);
+				for (rpd.components.Component component : components) {
+					DefaultMutableTreeNode component_node = new DefaultMutableTreeNode(component);
+					plan_node.add(component_node);
+				}
+			}
+		}
+		return mandibular_plan_Tree;
+	}
+
+	private JTree buildMaxillaryPlanTree() {
+		if (maxillary_rpd_plans == null || maxillary_rpd_plans.size() == 0) {
+			return null;
+		}
+		DefaultMutableTreeNode top_node = new DefaultMutableTreeNode("上颌设计方案");
+		JTree maxillary_plan_tree = new JTree(top_node);
+		maxillary_plan_tree.setEnabled(true);
+		maxillary_plan_tree.setFont(new Font("微软雅黑", Font.PLAIN, 18));
+
+		int plan_count = 0;
+		for (RPDPlan plan:maxillary_rpd_plans) {
+			plan_count++;
+			DefaultMutableTreeNode plan_node = new DefaultMutableTreeNode("方案" + plan_count);
+			top_node.add(plan_node);
+			Map<ArrayList<Tooth>, Set<rpd.components.Component>> tooth_components = plan.getToothComponents();
+			ArrayList<ArrayList<Tooth>> plan_teeth = new ArrayList<>(tooth_components.keySet());
+			Collections.sort(plan_teeth, new Comparator<ArrayList<Tooth>>() {
+				public int compare(ArrayList<Tooth> left, ArrayList<Tooth> right) {
+					return left.get(0).compareTo(right.get(0));
+				}
+			});
+			for (ArrayList<Tooth> tooth : plan_teeth) {
+				Set<rpd.components.Component> components = tooth_components.get(tooth);
+				for (rpd.components.Component component : components) {
+					DefaultMutableTreeNode component_node = new DefaultMutableTreeNode(component);
+					plan_node.add(component_node);
+				}
+			}
+		}
+		return maxillary_plan_tree;
+	}
+
 	private JTree buildRPDPlanTree(RPDPlan rpd_plan, int plan_index) {
 
 		if (rpd_plan == null)
@@ -1116,14 +1219,22 @@ public class LabelTool {
 			}
 		});
 
+//		for (ArrayList<Tooth> tooth : plan_teeth) {
+//			Set<rpd.components.Component> components = tooth_components.get(tooth);
+//			DefaultMutableTreeNode tooth_node = new DefaultMutableTreeNode(tooth);
+//			top_node.add(tooth_node);
+//			for (rpd.components.Component component : components) {
+//				DefaultMutableTreeNode component_node = new DefaultMutableTreeNode(component);
+//				tooth_node.add(component_node);
+//			}
+//		}
 		for (ArrayList<Tooth> tooth : plan_teeth) {
 			Set<rpd.components.Component> components = tooth_components.get(tooth);
-			DefaultMutableTreeNode tooth_node = new DefaultMutableTreeNode(tooth);
-			top_node.add(tooth_node);
 			for (rpd.components.Component component : components) {
 				DefaultMutableTreeNode component_node = new DefaultMutableTreeNode(component);
-				tooth_node.add(component_node);
+				top_node.add(component_node);
 			}
+
 		}
 
 		return rpd_plan_tree;

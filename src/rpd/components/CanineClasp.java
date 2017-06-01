@@ -54,7 +54,7 @@ public class CanineClasp extends Clasp {
 	public String print() {
 
 		StringBuilder s = new StringBuilder();
-		s.append(this.tooth_pos.toString() + ":");
+		s.append(super.toString());
 		s.append("尖牙(Canine)卡环");
 
 		if (this.getMaterial().equals(ClaspMaterial.WW))

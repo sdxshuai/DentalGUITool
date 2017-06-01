@@ -93,7 +93,7 @@ public class RingClasp extends Clasp {
 	public String print() {
 
 		StringBuilder s = new StringBuilder();
-		s.append(this.tooth_pos.toString() + ":");
+		s.append(super.toString());
 		s.append("圈形（Ring）卡环，");
 
 		if (this.getMaterial().equals(ClaspMaterial.WW))

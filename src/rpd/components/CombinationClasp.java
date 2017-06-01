@@ -55,7 +55,7 @@ public class CombinationClasp extends Clasp {
 	public String print() {
 
 		StringBuilder s = new StringBuilder();
-		s.append(this.tooth_pos.toString() + ":");
+		s.append(super.toString());
 		s.append("结合（Combination）卡环，");
 		s.append("颊侧铸造材料，舌侧弯制材料，");
 		if (this.getTipDirection().equals(Position.Mesial))

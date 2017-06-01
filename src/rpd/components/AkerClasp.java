@@ -100,7 +100,7 @@ public class AkerClasp extends Clasp {
 	public String print() {
 
 		StringBuilder s = new StringBuilder();
-		s.append(this.tooth_pos.toString() + ":");
+		s.append(super.toString());
 		s.append("Aker卡环，");
 
 		if (this.getMaterial().equals(ClaspMaterial.WW))

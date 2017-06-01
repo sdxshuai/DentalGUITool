@@ -48,4 +48,14 @@ public abstract class Rest implements Component {
 	public boolean isIndirectRetainer() {
 		return true;
 	}
+	public String toString() {
+		StringBuilder s = new StringBuilder();
+		ArrayList<Tooth> tooth_list = new ArrayList<>();
+		tooth_list.add(this.tooth_pos);
+		for (Tooth tooth : tooth_list) {
+			s.append(tooth.toString());
+		}
+		s.append(": ");
+		return s.toString();
+	}
 }

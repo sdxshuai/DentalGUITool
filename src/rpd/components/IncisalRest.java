@@ -48,7 +48,7 @@ public class IncisalRest extends Rest {
 	public String print() {
 
 		StringBuilder s = new StringBuilder();
-		s.append(this.tooth_pos.toString() + ":");
+		s.append(super.toString());
 		if (mesial_or_distal.equals(Position.Mesial))
 			s.append("近中");
 		else if (mesial_or_distal.equals(Position.Distal))

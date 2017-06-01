@@ -71,7 +71,7 @@ public class ExtensionClasp extends Clasp {
 	public String print() {
 
 		StringBuilder s = new StringBuilder();
-		s.append(this.tooth_pos.toString() + ":");
+		s.append(super.toString());
 		s.append("延伸（Extension）卡环，");
 		if (this.getTipDirection().equals(Position.Mesial))
 			s.append("卡环臂尖朝向近中");

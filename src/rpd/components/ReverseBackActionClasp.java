@@ -67,7 +67,7 @@ public class ReverseBackActionClasp extends Clasp {
 	public String print() {
 
 		StringBuilder s = new StringBuilder();
-		s.append(this.tooth_pos.toString() + ":");
+		s.append(super.toString());
 		s.append("反回力（Reverse Back Action）卡环");
 
 		if (this.getMaterial().equals(ClaspMaterial.WW))
