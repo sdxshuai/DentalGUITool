@@ -215,8 +215,16 @@ public class LabelTool {
 		label_scroll_title.setOpaque(false);
 		panel_label_title.setPreferredSize(new Dimension(0, 80));
 		panel_label_title.add(label_scroll_title, BorderLayout.CENTER);
+
+		JTextField label_scroll_rights = new JTextField("口腔数字化医疗技术和材料国家工程实验室");
+		label_scroll_rights.setHorizontalAlignment(JTextField.CENTER);
+		label_scroll_rights.setHorizontalAlignment(JTextField.CENTER);
+		label_scroll_rights.setFont(new Font("宋体", Font.PLAIN, 14));
+		label_scroll_rights.setOpaque(false);
+
 		panel_west.add(panel_label_title, BorderLayout.NORTH);
 		panel_west.add(label_scroll_pane, BorderLayout.CENTER);
+		panel_west.add(label_scroll_rights, BorderLayout.SOUTH);
 
 		JCheckBox chckbx_show_all_labels = new JCheckBox("显示全部");
 		this.chckbx_show_all_labels = chckbx_show_all_labels;
@@ -374,18 +382,31 @@ public class LabelTool {
 		emr_scroll_title.setOpaque(false);
 		JPanel panel_emr_title = new JPanel() {
 			protected void paintComponent(Graphics g) {
-				ImageIcon icon = new ImageIcon("res\\icon.jpg");
-				icon.setImage(icon.getImage().getScaledInstance(120,107, Image.SCALE_DEFAULT));
-				g.drawImage(icon.getImage(), 0, 0, icon.getIconWidth(), icon.getIconHeight(), this);
-				g.drawImage(icon.getImage(), 120, 0, icon.getIconWidth(), icon.getIconHeight(), this);
+				ImageIcon icon1 = new ImageIcon("res\\icon1.png");
+				ImageIcon icon2 = new ImageIcon("res\\icon2.png");
+//				ImageIcon icon3 = new ImageIcon("res\\icon3.png");
+				icon1.setImage(icon1.getImage().getScaledInstance(54,54, Image.SCALE_DEFAULT));
+//				icon3.setImage(icon3.getImage().getScaledInstance(135,80, Image.SCALE_DEFAULT));
+				icon2.setImage(icon2.getImage().getScaledInstance(54,54, Image.SCALE_DEFAULT));
+				g.drawImage(icon1.getImage(), 100, 13, icon1.getIconWidth(), icon1.getIconHeight(), this);
+//				g.drawImage(icon3.getImage(), 165, 0, icon3.getIconWidth(), icon3.getIconHeight(), this);
+				g.drawImage(icon2.getImage(), 32, 13, icon2.getIconWidth(), icon2.getIconHeight(), this);
 			}
 		};
 		panel_emr_title.setOpaque(false);
 		panel_emr_title.setLayout(new BorderLayout());
 		panel_emr_title.setPreferredSize(new Dimension(0, 80));
 		panel_emr_title.add(emr_scroll_title, BorderLayout.CENTER);
+
+		JTextField emr_scroll_rights = new JTextField("北京大学口腔医院和清华大学联合研发");
+		emr_scroll_rights.setHorizontalAlignment(JTextField.CENTER);
+		emr_scroll_rights.setHorizontalAlignment(JTextField.CENTER);
+		emr_scroll_rights.setFont(new Font("宋体", Font.PLAIN, 14));
+		emr_scroll_rights.setOpaque(false);
+
 		panel_center.add(panel_emr_title, BorderLayout.NORTH);
 		panel_center.add(emr_scroll_pane, BorderLayout.CENTER);
+		panel_center.add(emr_scroll_rights, BorderLayout.SOUTH);
 
 		JPanel panel_north = new JPanel();
 		frame.getContentPane().add(panel_north, BorderLayout.NORTH);
@@ -827,15 +848,23 @@ public class LabelTool {
 		int line_height = 400;
 		int print_height = 50;
 
+		String input_file_path = choosed_file.getCanonicalPath();
+		int dot_index = input_file_path.lastIndexOf(".");
+		int gang_index = input_file_path.lastIndexOf("\\");
+		String txt_file_name = input_file_path.substring(gang_index+1, dot_index);
+
 		if (!(this.mandibular_rpd_plans == null || this.mandibular_rpd_plans.size() == 0)) {
 
-			generateAndSaveRPDPlanPicture(this.mandibular_rpd_plans);
+			generateAndSaveRPDPlanPicture(this.mandibular_rpd_plans, txt_file_name);
 			JPanel mandibular_plan_panel = new JPanel(new FlowLayout());
 
 			total_height += line_height + print_height;
 			for (int i = 1; i <= 3; i++) {
-				String picture_name = "out//picture//mandibular_RPD_design_" + i + ".png";
+				String picture_name = "out//picture//" + txt_file_name + "_mandibular_RPD_design_" + i + ".png";
 				ImageIcon im = new ImageIcon(picture_name);
+				if (im.getIconWidth() == -1) {
+					continue;
+				}
 				int src_im_height = im.getIconHeight();
 				int src_im_width = im.getIconWidth();
 				double scale_factor = (double) line_height / (double) src_im_height;
@@ -880,22 +909,29 @@ public class LabelTool {
 			JPanel mandibular_all_panel = new JPanel(new BorderLayout());
 //			mandibular_all_panel.add(mandibular_title_panel, BorderLayout.NORTH);
 			mandibular_all_panel.add(mandibular_plan_panel, BorderLayout.CENTER);
-			mandibular_all_panel.add(showMandibularPlans(), BorderLayout.EAST);
+			int v = ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED;
+			int h = ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED;
+			JScrollPane mandibular_scroll_pane = new JScrollPane(showMandibularPlans(), v, h);
+			mandibular_scroll_pane.setPreferredSize(new Dimension(670, line_height));
+			mandibular_all_panel.add(mandibular_scroll_pane, BorderLayout.EAST);
 
 //			rpd_plan_panel.setSize(total_width, line_height);
-			rpd_plan_panel.add(mandibular_all_panel, BorderLayout.SOUTH);
+			rpd_plan_panel.add(mandibular_all_panel, BorderLayout.CENTER);
 //			design_dialog.add(rpd_plan_panel);
 		}
 
 		if (!(this.maxillary_rpd_plans == null || this.maxillary_rpd_plans.size() == 0)) {
-			generateAndSaveRPDPlanPicture(this.maxillary_rpd_plans);
+			generateAndSaveRPDPlanPicture(this.maxillary_rpd_plans, txt_file_name);
 			JPanel maxillary_plan_panel = new JPanel(new FlowLayout());
 
 			total_height += line_height + print_height;
 			total_width = 0;
 			for (int i = 1; i <= 3; i++) {
-				String picture_name = "out//picture//maxillary_RPD_design_" + i + ".png";
+				String picture_name = "out//picture//" + txt_file_name + "_maxillary_RPD_design_" + i + ".png";
 				ImageIcon im = new ImageIcon(picture_name);
+				if (im.getIconWidth() == -1) {
+					continue;
+				}
 				int src_im_height = im.getIconHeight();
 				int src_im_width = im.getIconWidth();
 				double scale_factor = (double) line_height / (double) src_im_height;
@@ -940,70 +976,80 @@ public class LabelTool {
 			JPanel maxillary_all_panel = new JPanel(new BorderLayout());
 //			maxillary_all_panel.add(maxillary_title_panel, BorderLayout.NORTH);
 			maxillary_all_panel.add(maxillary_plan_panel, BorderLayout.CENTER);
-			maxillary_all_panel.add(showMaxillaryPlans(), BorderLayout.EAST);
+			int v = ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED;
+			int h = ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED;
+			JScrollPane maxillary_scroll_pane = new JScrollPane(showMaxillaryPlans(), v, h);
+			maxillary_scroll_pane.setPreferredSize(new Dimension(670, line_height));
+			maxillary_all_panel.add(maxillary_scroll_pane, BorderLayout.EAST);
 //			rpd_plan_panel.setSize(total_width, line_height);
 			rpd_plan_panel.add(maxillary_all_panel, BorderLayout.NORTH);
 //			design_dialog.add(rpd_plan_panel);
 		}
+		JTextField design_rights = new JTextField("北京大学口腔医院和清华大学联合研发");
+		design_rights.setHorizontalAlignment(JTextField.CENTER);
+		design_rights.setHorizontalAlignment(JTextField.CENTER);
+		design_rights.setFont(new Font("宋体", Font.PLAIN, 14));
+		design_rights.setOpaque(false);
+		rpd_plan_panel.add(design_rights, BorderLayout.SOUTH);
 		design_dialog.add(rpd_plan_panel);
 
-		total_width += 730;
-		total_height += 80;
+		total_width += 750;
+		total_height += 108;
 //		rpd_plan_panel.setSize(total_width, total_height);
 		design_dialog.setSize(total_width, total_height);
 		design_dialog.setLocationRelativeTo(null);
 		design_dialog.setVisible(true);
 	}
 
-	private void drawRPDPlans(List<RPDPlan> plans) throws java.io.IOException, exceptions.rpd.RuleException {
-		if (plans == null || plans.size() == 0) {
-			return;
-		}
-		JDialog design_dialog = new JDialog(this.frame, "可摘局部义齿设计方案");
-		JPanel rpd_plan_panel = new JPanel(new FlowLayout());
-		Border panel_border = BorderFactory.createEmptyBorder(5, 5, 5, 5);
-		rpd_plan_panel.setBorder(panel_border);
+//	private void drawRPDPlans(List<RPDPlan> plans) throws java.io.IOException, exceptions.rpd.RuleException {
+//		if (plans == null || plans.size() == 0) {
+//			return;
+//		}
+//		JDialog design_dialog = new JDialog(this.frame, "可摘局部义齿设计方案");
+//		JPanel rpd_plan_panel = new JPanel(new FlowLayout());
+//		Border panel_border = BorderFactory.createEmptyBorder(5, 5, 5, 5);
+//		rpd_plan_panel.setBorder(panel_border);
+//
+//		int total_height = 0;
+//		int total_width = 0;
+//		int line_height = 500;
+//
+//		generateAndSaveRPDPlanPicture(plans);
+//
+//		total_height += line_height;
+//		String plan_position_str = plans.get(0).getPosition().toString();
+//		for (int i = 1; i <= 3; i++) {
+//			ImageIcon im = new ImageIcon("out//picture//" + plan_position_str + "_RPD_design_" + i + ".png");
+//			int src_im_height = im.getIconHeight();
+//			int src_im_width = im.getIconWidth();
+//			double scale_factor = (double) line_height / (double) src_im_height;
+//			double rescale_height = src_im_height * scale_factor;
+//			double rescale_width = src_im_width * scale_factor;
+//			int dest_im_width = (int) rescale_width;
+//			int dest_im_height = (int) rescale_height;
+//			im.setImage(im.getImage().getScaledInstance(dest_im_width, dest_im_height, Image.SCALE_DEFAULT));
+//			JLabel rpd_plan_label = new JLabel();
+//			rpd_plan_label.setSize(dest_im_width, dest_im_height);
+//			rpd_plan_label.setIcon(im);
+//			Border label_border = BorderFactory.createLineBorder(Color.BLACK);
+//			rpd_plan_label.setBorder(label_border);
+//
+//			rpd_plan_panel.add(rpd_plan_label);
+//			total_width += dest_im_width;
+//		}
+//
+//		rpd_plan_panel.setSize(total_width, line_height);
+//		design_dialog.add(rpd_plan_panel);
+//
+//		total_width += 100;
+//		total_height += 20;
+//		rpd_plan_panel.setSize(total_width, total_height);
+//		design_dialog.setSize(total_width, total_height + 40);
+//		design_dialog.setLocationRelativeTo(null);
+//		design_dialog.setVisible(true);
+//	}
 
-		int total_height = 0;
-		int total_width = 0;
-		int line_height = 500;
-
-		generateAndSaveRPDPlanPicture(plans);
-
-		total_height += line_height;
-		String plan_position_str = plans.get(0).getPosition().toString();
-		for (int i = 1; i <= 3; i++) {
-			ImageIcon im = new ImageIcon("out//picture//" + plan_position_str + "_RPD_design_" + i + ".png");
-			int src_im_height = im.getIconHeight();
-			int src_im_width = im.getIconWidth();
-			double scale_factor = (double) line_height / (double) src_im_height;
-			double rescale_height = src_im_height * scale_factor;
-			double rescale_width = src_im_width * scale_factor;
-			int dest_im_width = (int) rescale_width;
-			int dest_im_height = (int) rescale_height;
-			im.setImage(im.getImage().getScaledInstance(dest_im_width, dest_im_height, Image.SCALE_DEFAULT));
-			JLabel rpd_plan_label = new JLabel();
-			rpd_plan_label.setSize(dest_im_width, dest_im_height);
-			rpd_plan_label.setIcon(im);
-			Border label_border = BorderFactory.createLineBorder(Color.BLACK);
-			rpd_plan_label.setBorder(label_border);
-
-			rpd_plan_panel.add(rpd_plan_label);
-			total_width += dest_im_width;
-		}
-
-		rpd_plan_panel.setSize(total_width, line_height);
-		design_dialog.add(rpd_plan_panel);
-
-		total_width += 100;
-		total_height += 20;
-		rpd_plan_panel.setSize(total_width, total_height);
-		design_dialog.setSize(total_width, total_height + 40);
-		design_dialog.setLocationRelativeTo(null);
-		design_dialog.setVisible(true);
-	}
-
-	private void generateAndSaveRPDPlanPicture(List<RPDPlan> plans)
+	private void generateAndSaveRPDPlanPicture(List<RPDPlan> plans, String txt_file_name)
 			throws java.io.IOException, exceptions.rpd.RuleException {
 		if (plans == null || plans.size() == 0) {
 			return;
@@ -1017,8 +1063,10 @@ public class LabelTool {
 			design_ont.read("file:" + owl_file.getCanonicalPath());
 //			design_ont.read("res//sample.owl");
 			planToOwl(plan, design_ont);
-			String output_ont = "out//ontology//" + plan_position_str + "_RPD_design_" + design_count + ".owl";
-			String output_picture = "out//picture//" + plan_position_str + "_RPD_design_" + design_count + ".png";
+			String output_ont =
+					"out//ontology//" + txt_file_name + "_" + plan_position_str + "_RPD_design_" + design_count + ".owl";
+			String output_picture =
+					"out//picture//" + txt_file_name + "_" + plan_position_str + "_RPD_design_" + design_count + ".png";
 //			FileWriter out = new FileWriter(output_ont);
 //			design_ont.write(out, "RDF/XML");
 //			File out_file = new File(output_ont);

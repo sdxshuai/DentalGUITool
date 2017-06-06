@@ -124,6 +124,9 @@ public class SearchRPDPlan {
 			}
 		}
 
+		if (res.size()==0) {
+			res = null;
+		}
 		return res;
 	}
 
@@ -215,6 +218,9 @@ public class SearchRPDPlan {
 			}
 		}
 
+		if (res.size()==0) {
+			res = null;
+		}
 		return res;
 	}
 }

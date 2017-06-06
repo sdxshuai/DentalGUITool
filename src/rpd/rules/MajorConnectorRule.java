@@ -54,9 +54,9 @@ public class MajorConnectorRule {
 
 			public MajorConnector chooseMajorConnectorOnMandibular(RPDPlan plan) {
 				if (isBadCondition(plan.getAbutmentTeeth())) {
-					return new LingualPlateConnector(plan.getAbutmentTeeth());
+					return new LingualPlateConnector(plan.getAbutmentTeeth(), mouth.getMandibular());
 				} else {
-					return new LingualBarConnector(plan.getAbutmentTeeth());
+					return new LingualBarConnector(plan.getAbutmentTeeth(), mouth.getMandibular());
 				}
 			}
 

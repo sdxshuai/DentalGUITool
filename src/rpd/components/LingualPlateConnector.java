@@ -6,10 +6,13 @@ package rpd.components;
 
 import rpd.RPDPlan;
 import rpd.conceptions.Position;
+import rpd.oral.EdentulousSpace;
+import rpd.oral.Mandibular;
 import rpd.oral.Tooth;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 import java.util.Set;
 
 public class LingualPlateConnector extends MajorConnector {
@@ -19,11 +22,23 @@ public class LingualPlateConnector extends MajorConnector {
 		this.mandibular_or_maxillary = Position.Mandibular;
 	}
 
-	public LingualPlateConnector(Set<Tooth> abutment_teeth) {
+	public LingualPlateConnector(Set<Tooth> abutment_teeth, Mandibular mandibular) {
+		ArrayList<Tooth> candidate_teeth = new ArrayList<>(abutment_teeth);
+		List<EdentulousSpace> edentulousSpaces = mandibular.getEdentulousSpaces();
+
+		for (EdentulousSpace edentulousSpace:edentulousSpaces) {
+			if (edentulousSpace.getLeftNeighbor() == null && edentulousSpace.getRightNeighbor() != null) {
+				candidate_teeth.add(edentulousSpace.getRightNeighbor());
+			}
+			if (edentulousSpace.getRightNeighbor() == null && edentulousSpace.getLeftNeighbor() != null) {
+				candidate_teeth.add(edentulousSpace.getLeftNeighbor());
+			}
+		}
+
 		this.tooth_pos = new ArrayList<>();
 		ArrayList<Tooth> sorted_zone3 = new ArrayList<>();
 		ArrayList<Tooth> sorted_zone4 = new ArrayList<>();
-		for (Tooth tooth : abutment_teeth) {
+		for (Tooth tooth : candidate_teeth) {
 			if (tooth.getZone() == 3) {
 				sorted_zone3.add(tooth);
 			} else {

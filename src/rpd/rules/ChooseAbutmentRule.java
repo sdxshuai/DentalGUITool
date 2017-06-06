@@ -107,6 +107,9 @@ public class ChooseAbutmentRule {
 			}
 
 			public List<RPDPlan> apply(List<RPDPlan> rpd_plans) throws RuleException {
+				if (rpd_plans.size() == 0 || rpd_plans == null) {
+					return rpd_plans;
+				}
 				List<RPDPlan> res = new ArrayList<>();
 				if (isOneSideAllMissingExceptIncisor(mouth, rpd_plans.get(0).getPosition())) {
 					res.addAll(rpd_plans);
