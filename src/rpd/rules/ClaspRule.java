@@ -3,13 +3,16 @@ package rpd.rules;
 import exceptions.rpd.ClaspAssemblyException;
 import exceptions.rpd.RuleException;
 import exceptions.rpd.ToothPosException;
+import javafx.geometry.Pos;
 import rpd.RPDPlan;
 import rpd.components.*;
 import rpd.conceptions.*;
+import rpd.oral.EdentulousSpace;
 import rpd.oral.Mouth;
 import rpd.oral.Tooth;
 
 import java.util.*;
+import static java.lang.Math.abs;
 
 //规则2
 public class ClaspRule {
@@ -191,9 +194,9 @@ public class ClaspRule {
 				} else if (tooth.isCingulum()) {
 					return new CanineClasp(tooth, material);
 				} else {
-					Map<String, Object> info = plan.getNearestEdentulous(tooth);
-					Position tip_direction = (Position) info.get("direction");
-					return new CanineAkerClasp(tooth, tip_direction, material);
+//					Map<String, Object> info = plan.getNearestEdentulous(tooth);
+//					Position tip_direction = (Position) info.get("direction");
+					return new CanineAkerClasp(tooth, Position.Mesial, material);
 				}
 			}
 
@@ -350,37 +353,143 @@ public class ClaspRule {
 				return 2;
 			}
 
+			public int getDistanceOppoToothTri(Tooth tooth, Tooth mesialTooth, Tooth distalTooth) {
+				int targetNum = (mesialTooth.getNum() + distalTooth.getNum())/2;
+				return abs(tooth.getNum() - targetNum);
+			}
+
+			public int getDistanceOppoToothRec(Tooth tooth, Tooth mesialTooth, Tooth distalTooth) {
+				int dis1 = abs(tooth.getNum()-mesialTooth.getNum());
+				int dis2 = abs(tooth.getNum()-distalTooth.getNum());
+				return (dis1<dis2)?dis1:dis2;
+			}
+
+			public boolean isDisociate(List<EdentulousSpace> edentulousSpaceList) {
+				boolean flag = false;
+				for (EdentulousSpace edentulousSpace : edentulousSpaceList) {
+					if (edentulousSpace.getEdentulousType() == EdentulousType.PosteriorExtension) {
+						flag = true;
+						break;
+					}
+				}
+				return flag;
+			}
+
 			public double scorePlan(RPDPlan plan) throws RuleException {
 				double score = 0.0;
 				double canine_weight = 0.0;
 				double premolar_weight = 0.0;
 				double distomolar_weight = 0.0;
+				int distance = 0;
 
-				for (Tooth tooth : plan.getAbutmentTeeth()) {
+				Set<Tooth> abutment_teeth = plan.getAbutmentTeeth();
+				ArrayList<Tooth> abutment_missing_teeth = new ArrayList<>(abutment_teeth);
+				ArrayList<Tooth> sorted_zone1 = new ArrayList<>();
+				ArrayList<Tooth> sorted_zone2 = new ArrayList<>();
+				ArrayList<Tooth> sorted_zone3 = new ArrayList<>();
+				ArrayList<Tooth> sorted_zone4 = new ArrayList<>();
+
+				if (plan.getPosition() == Position.Mandibular) {
+					List<Tooth> missing_teeth = mouth.getMandibular().getMissingTeeth();
+					abutment_missing_teeth.addAll(missing_teeth);
+
+					for (Tooth tooth : abutment_missing_teeth) {
+						if (tooth.getZone() == 3) {
+							sorted_zone3.add(tooth);
+						} else {
+							sorted_zone4.add(tooth);
+						}
+					}
+					Collections.sort(sorted_zone3);
+					Collections.sort(sorted_zone4);
+				}
+				else {
+					List<Tooth> missing_teeth = mouth.getMaxillary().getMissingTeeth();
+					abutment_missing_teeth.addAll(missing_teeth);
+
+					for (Tooth tooth : abutment_missing_teeth) {
+						if (tooth.getZone() == 1) {
+							sorted_zone1.add(tooth);
+						} else {
+							sorted_zone2.add(tooth);
+						}
+					}
+					Collections.sort(sorted_zone1);
+					Collections.sort(sorted_zone2);
+				}
+
+
+				for (Tooth tooth : abutment_teeth) {
 					if (plan.getPosition() == Position.Mandibular) {
 						if (mouth.getMandibular().isZoneNoMissing(tooth.getZone())) {
 							canine_weight = 2.2;
 							premolar_weight = 0.5;
 							distomolar_weight = 0.0;
+							if (isDisociate(mouth.getMandibular().getEdentulousSpaces())) {
+								if (tooth.getZone() == 3) {
+									distance = getDistanceOppoToothRec(
+											tooth, sorted_zone4.get(0), sorted_zone4.get(sorted_zone4.size()-1));
+								}
+								else {
+									distance = getDistanceOppoToothRec(
+											tooth, sorted_zone3.get(0), sorted_zone3.get(sorted_zone3.size()-1));
+								}
+							}
+							else {
+								if (tooth.getZone() == 3) {
+									distance = getDistanceOppoToothTri(
+											tooth, sorted_zone4.get(0), sorted_zone4.get(sorted_zone4.size()-1));
+								}
+								else {
+									distance = getDistanceOppoToothTri(
+											tooth, sorted_zone3.get(0), sorted_zone3.get(sorted_zone3.size()-1));
+								}
+							}
+
 						} else {
 							canine_weight = 0.8;
 							premolar_weight = 0.5;
 							distomolar_weight = 0.0;
+							Map<String, Object> info = plan.getNearestEdentulous(tooth);
+							distance = (Integer) info.get("distance");
 						}
 					} else {
 						if (mouth.getMaxillary().isZoneNoMissing(tooth.getZone())) {
 							canine_weight = 2.2;
 							premolar_weight = 0.5;
 							distomolar_weight = 0.0;
+
+							if (isDisociate(mouth.getMaxillary().getEdentulousSpaces())) {
+								if (tooth.getZone() == 1) {
+									distance = getDistanceOppoToothRec(
+											tooth, sorted_zone2.get(0), sorted_zone2.get(sorted_zone2.size()-1));
+								}
+								else {
+									distance = getDistanceOppoToothRec(
+											tooth, sorted_zone1.get(0), sorted_zone1.get(sorted_zone1.size()-1));
+								}
+							}
+							else {
+								if (tooth.getZone() == 1) {
+									distance = getDistanceOppoToothTri(
+											tooth, sorted_zone2.get(0), sorted_zone2.get(sorted_zone2.size()-1));
+								}
+								else {
+									distance = getDistanceOppoToothTri(
+											tooth, sorted_zone1.get(0), sorted_zone1.get(sorted_zone1.size()-1));
+								}
+							}
 						} else {
 							canine_weight = 0.8;
 							premolar_weight = 0.5;
 							distomolar_weight = 0.0;
+							Map<String, Object> info = plan.getNearestEdentulous(tooth);
+							distance = (Integer) info.get("distance");
 						}
 					}
 
-					Map<String, Object> info = plan.getNearestEdentulous(tooth);
-					int distance = (Integer) info.get("distance");
+//					Map<String, Object> info = plan.getNearestEdentulous(tooth);
+//					distance = (Integer) info.get("distance");
 					if (tooth.getToothType() == ToothType.Canine) {
 						score += distance + canine_weight;
 					} else if (tooth.getToothType() == ToothType.Premolar) {
@@ -391,6 +500,21 @@ public class ClaspRule {
 				}
 
 				for (Component component : plan.getComponents()) {
+					if (plan.getPosition() == Position.Mandibular) {
+						Tooth cur_tooth = component.getToothPos().get(0);
+						if (mouth.getMandibular().isZoneNoMissing(cur_tooth.getZone())
+								&& isDisociate(mouth.getMandibular().getEdentulousSpaces())) {
+							continue;
+						}
+					}
+					else {
+						Tooth cur_tooth = component.getToothPos().get(0);
+						if (mouth.getMaxillary().isZoneNoMissing(cur_tooth.getZone())
+								&& isDisociate(mouth.getMaxillary().getEdentulousSpaces())) {
+							continue;
+						}
+					}
+
 					if (component.getClass() == CombinedClasp.class || component.getClass() == EmbrasureClasp.class) {
 						score -= 5;
 					}

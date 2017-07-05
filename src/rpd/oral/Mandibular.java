@@ -185,6 +185,21 @@ public class Mandibular {
 		return res;
 	}
 
+	public List<Tooth> getMissingTeeth() {
+		List<Tooth> res = new ArrayList<Tooth>();
+		for (Tooth tooth : zone3) {
+			if (tooth != null && tooth.getNum() != 8) {
+				if (tooth.isMissing()) res.add(tooth);
+			}
+		}
+		for (Tooth tooth : zone4) {
+			if (tooth != null && tooth.getNum() != 8) {
+				if (tooth.isMissing()) res.add(tooth);
+			}
+		}
+		return res;
+	}
+
 	private void init(OntModel dental_ont) throws RuleException {
 		initZone3(dental_ont);
 		initZone4(dental_ont);

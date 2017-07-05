@@ -470,24 +470,24 @@ public class ChooseAbutmentRule {
 		return flag;
 	}
 
-	public double scorePlan(RPDPlan plan) throws RuleException {
-		double canine_weight = 1.2;
-		double premolar_weight = 0.5;
-		double distomolar_weight = 0.0;
-		double score = 0.0;
-		for (Tooth tooth : plan.getAbutmentTeeth()) {
-			Map<String, Object> info = plan.getNearestEdentulous(tooth);
-			int distance = (Integer) info.get("distance");
-			if (tooth.getToothType() == ToothType.Canine) {
-				score += distance + canine_weight;
-			} else if (tooth.getToothType() == ToothType.Premolar) {
-				score += distance + premolar_weight;
-			} else {
-				score += distance + distomolar_weight;
-			}
-		}
-		return score;
-	}
+//	public double scorePlan(RPDPlan plan) throws RuleException {
+//		double canine_weight = 1.2;
+//		double premolar_weight = 0.5;
+//		double distomolar_weight = 0.0;
+//		double score = 0.0;
+//		for (Tooth tooth : plan.getAbutmentTeeth()) {
+//			Map<String, Object> info = plan.getNearestEdentulous(tooth);
+//			int distance = (Integer) info.get("distance");
+//			if (tooth.getToothType() == ToothType.Canine) {
+//				score += distance + canine_weight;
+//			} else if (tooth.getToothType() == ToothType.Premolar) {
+//				score += distance + premolar_weight;
+//			} else {
+//				score += distance + distomolar_weight;
+//			}
+//		}
+//		return score;
+//	}
 
 	public boolean hasSuccessiveAbutment(ArrayList<Tooth> abutment_teeth) {
 
