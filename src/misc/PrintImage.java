@@ -57,6 +57,7 @@ public class PrintImage {
 		}
 	}
 
+
 	public static void main(String[] args) {
 		new PrintImage().drawImage("D:\\1.png", 1);
 	}

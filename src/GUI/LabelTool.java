@@ -34,6 +34,7 @@ import rpd.oral.Instantialize;
 import rpd.oral.Mouth;
 import rpd.oral.Tooth;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
@@ -60,6 +61,7 @@ import javax.xml.transform.stream.StreamResult;
 import java.awt.*;
 import java.awt.Dialog.ModalityType;
 import java.awt.event.*;
+import java.awt.image.BufferedImage;
 import java.io.*;
 import java.util.*;
 import java.util.List;
@@ -836,6 +838,18 @@ public class LabelTool {
 		});
 	}
 
+	public BufferedImage addTextToImage(BufferedImage image, String text) throws java.io.IOException {
+
+		Graphics g = image.getGraphics();
+		g.setFont(new Font("TimesRoman", Font.PLAIN, 30));
+		g.setColor(Color.BLACK);
+		g.drawString("病历："+text, 30, 50);
+		g.dispose();
+//		ImageIO.write(image, "png", new File("test.png"));
+
+		return image;
+	}
+
 	private void drawRPDPlans() throws java.io.IOException, exceptions.rpd.RuleException {
 		if ((this.mandibular_rpd_plans == null || this.mandibular_rpd_plans.size() == 0)
 				&& (this.maxillary_rpd_plans == null || this.maxillary_rpd_plans.size() == 0)) {
@@ -865,6 +879,22 @@ public class LabelTool {
 				if (im.getIconWidth() == -1) {
 					continue;
 				}
+
+				BufferedImage bi = new BufferedImage(
+						im.getIconWidth(),
+						im.getIconHeight(),
+						BufferedImage.TYPE_INT_RGB);
+				Graphics g = bi.createGraphics();
+
+				im.paintIcon(null, g, 0,0);
+				g.dispose();
+
+				BufferedImage im_print = addTextToImage(bi, txt_file_name);
+				String im_print_name = "out//picture//" + txt_file_name + "_mandibular_RPD_design_" + i + "_print.png";
+
+				File im_print_file = new File(im_print_name);
+				ImageIO.write(im_print, "png", im_print_file);
+
 				int src_im_height = im.getIconHeight();
 				int src_im_width = im.getIconWidth();
 				double scale_factor = (double) line_height / (double) src_im_height;
@@ -873,6 +903,8 @@ public class LabelTool {
 				int dest_im_width = (int) rescale_width;
 				int dest_im_height = (int) rescale_height;
 				im.setImage(im.getImage().getScaledInstance(dest_im_width, dest_im_height, Image.SCALE_DEFAULT));
+
+
 				JLabel rpd_plan_label = new JLabel();
 				rpd_plan_label.setSize(dest_im_width, dest_im_height);
 				rpd_plan_label.setIcon(im);
@@ -883,7 +915,7 @@ public class LabelTool {
 				print_button.addMouseListener(new MouseAdapter() {
 					@Override
 					public void mouseReleased(MouseEvent arg0) {
-						new PrintImage().drawImage(picture_name, 1);
+						new PrintImage().drawImage(im_print_name, 1);
 					}
 				});
 
@@ -932,6 +964,22 @@ public class LabelTool {
 				if (im.getIconWidth() == -1) {
 					continue;
 				}
+
+				BufferedImage bi = new BufferedImage(
+						im.getIconWidth(),
+						im.getIconHeight(),
+						BufferedImage.TYPE_INT_RGB);
+				Graphics g = bi.createGraphics();
+
+				im.paintIcon(null, g, 0,0);
+				g.dispose();
+
+				BufferedImage im_print = addTextToImage(bi, txt_file_name);
+				String im_print_name = "out//picture//" + txt_file_name + "_mandibular_RPD_design_" + i + "_print.png";
+
+				File im_print_file = new File(im_print_name);
+				ImageIO.write(im_print, "png", im_print_file);
+
 				int src_im_height = im.getIconHeight();
 				int src_im_width = im.getIconWidth();
 				double scale_factor = (double) line_height / (double) src_im_height;
@@ -950,7 +998,7 @@ public class LabelTool {
 				print_button.addMouseListener(new MouseAdapter() {
 					@Override
 					public void mouseReleased(MouseEvent arg0) {
-						new PrintImage().drawImage(picture_name, 1);
+						new PrintImage().drawImage(im_print_name, 1);
 					}
 				});
 
