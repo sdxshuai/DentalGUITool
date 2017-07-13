@@ -3,13 +3,7 @@ package misc;
 import java.io.FileInputStream;
 import java.io.IOException;
 
-import javax.print.Doc;
-import javax.print.DocFlavor;
-import javax.print.DocPrintJob;
-import javax.print.PrintException;
-import javax.print.PrintService;
-import javax.print.PrintServiceLookup;
-import javax.print.SimpleDoc;
+import javax.print.*;
 import javax.print.attribute.DocAttributeSet;
 import javax.print.attribute.HashDocAttributeSet;
 import javax.print.attribute.HashPrintRequestAttributeSet;
@@ -20,36 +14,34 @@ import javax.print.attribute.standard.OrientationRequested;
 import javax.print.attribute.standard.PrintQuality;
 
 public class PrintImage {
-	public void drawImage(String fileName, int count) {
+	public void drawImage(String fileNameList[], int count) {
 		try {
-			DocFlavor dof = null;
-			if (fileName.endsWith(".gif")) {
-				dof = DocFlavor.INPUT_STREAM.GIF;
-			} else if (fileName.endsWith(".jpg")) {
-				dof = DocFlavor.INPUT_STREAM.JPEG;
-			} else if (fileName.endsWith(".png")) {
-				dof = DocFlavor.INPUT_STREAM.PNG;
-			}
-
-			PrintService ps = PrintServiceLookup.lookupDefaultPrintService();
-
+			DocFlavor dof = DocFlavor.INPUT_STREAM.PNG;
 			PrintRequestAttributeSet pras = new HashPrintRequestAttributeSet();
-			pras.add(OrientationRequested.PORTRAIT);
 
+			PrintService printService[] = PrintServiceLookup.lookupPrintServices(dof, pras);
+			PrintService defaultPrintService = PrintServiceLookup.lookupDefaultPrintService();
+			PrintService ps = ServiceUI.printDialog(
+					null, 200, 200, printService,
+					 defaultPrintService, dof, pras);
+
+			pras.add(OrientationRequested.PORTRAIT);
 			pras.add(new Copies(count));
 			pras.add(PrintQuality.HIGH);
 			DocAttributeSet das = new HashDocAttributeSet();
 
 			// 设置打印纸张的大小（以毫米为单位）
 			das.add(new MediaPrintableArea(0, 0, 210, 296, MediaPrintableArea.MM));
-			FileInputStream fin = new FileInputStream(fileName);
+			for (String fileName:fileNameList) {
+				FileInputStream fin = new FileInputStream(fileName);
 
-			Doc doc = new SimpleDoc(fin, dof, das);
+				Doc doc = new SimpleDoc(fin, dof, das);
 
-			DocPrintJob job = ps.createPrintJob();
+				DocPrintJob job = ps.createPrintJob();
 
-			job.print(doc, pras);
-			fin.close();
+				job.print(doc, pras);
+				fin.close();
+			}
 		} catch (IOException ie) {
 			ie.printStackTrace();
 		} catch (PrintException pe) {
@@ -59,6 +51,6 @@ public class PrintImage {
 
 
 	public static void main(String[] args) {
-		new PrintImage().drawImage("D:\\1.png", 1);
+
 	}
 }

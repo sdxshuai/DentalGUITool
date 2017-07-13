@@ -46,8 +46,24 @@ public class LingualBarConnector extends MajorConnector {
 		}
 		Collections.sort(sorted_zone3);
 		Collections.sort(sorted_zone4);
-		this.tooth_pos.add(sorted_zone3.get(sorted_zone3.size() - 1));
-		this.tooth_pos.add(sorted_zone4.get(sorted_zone4.size() - 1));
+		if (sorted_zone3.size() != 0) {
+			this.tooth_pos.add(sorted_zone3.get(sorted_zone3.size() - 1));
+			if (sorted_zone4.size() != 0) {
+				this.tooth_pos.add(sorted_zone4.get(sorted_zone4.size() - 1));
+			}
+			else {
+				this.tooth_pos.add(sorted_zone3.get(0));
+			}
+		}
+		else {
+			if (sorted_zone4.size() != 0){
+				this.tooth_pos.add(sorted_zone4.get(sorted_zone4.size() - 1));
+				this.tooth_pos.add(sorted_zone4.get(0));
+			}
+			else {
+				System.out.println("There are no teeth left!");
+			}
+		}
 		this.mandibular_or_maxillary = Position.Mandibular;
 	}
 

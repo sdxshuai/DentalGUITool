@@ -9,6 +9,7 @@ import exceptions.rpd.ClaspAssemblyException;
 import exceptions.rpd.EdentulousTypeException;
 import exceptions.rpd.RuleException;
 import exceptions.rpd.ToothPosException;
+import misc.PrintTestFile;
 import misc.ToothMap;
 import misc.PrintImage;
 import ontologies.*;
@@ -841,7 +842,7 @@ public class LabelTool {
 	public BufferedImage addTextToImage(BufferedImage image, String text) throws java.io.IOException {
 
 		Graphics g = image.getGraphics();
-		g.setFont(new Font("TimesRoman", Font.PLAIN, 30));
+		g.setFont(new Font("微软雅黑", Font.PLAIN, 30));
 		g.setColor(Color.BLACK);
 		g.drawString("病历："+text, 30, 50);
 		g.dispose();
@@ -880,20 +881,34 @@ public class LabelTool {
 					continue;
 				}
 
-				BufferedImage bi = new BufferedImage(
+				BufferedImage buffered_pic = new BufferedImage(
 						im.getIconWidth(),
 						im.getIconHeight(),
-						BufferedImage.TYPE_INT_RGB);
-				Graphics g = bi.createGraphics();
+						BufferedImage.TYPE_INT_RGB
+				);
+				Graphics g_pic = buffered_pic.createGraphics();
+				im.paintIcon(null, g_pic, 0,0);
+				g_pic.dispose();
 
-				im.paintIcon(null, g, 0,0);
-				g.dispose();
+				ImageIcon base = new ImageIcon("res//base.png");
+				BufferedImage buffered_base = new BufferedImage(
+						base.getIconWidth(),
+						base.getIconHeight(),
+						BufferedImage.TYPE_INT_RGB
+				);
+				Graphics g_base = buffered_base.createGraphics();
+				base.paintIcon(null, g_base, 0, 0);
+				g_base.dispose();
 
-				BufferedImage im_print = addTextToImage(bi, txt_file_name);
+				BufferedImage im_print = addTextToImage(buffered_pic, txt_file_name);
+				BufferedImage base_print = addTextToImage(buffered_base, txt_file_name);
 				String im_print_name = "out//picture//" + txt_file_name + "_mandibular_RPD_design_" + i + "_print.png";
+				String base_print_name = "res//base_print.png";
 
 				File im_print_file = new File(im_print_name);
+				File base_print_file = new File(base_print_name);
 				ImageIO.write(im_print, "png", im_print_file);
+				ImageIO.write(base_print, "png", base_print_file);
 
 				int src_im_height = im.getIconHeight();
 				int src_im_width = im.getIconWidth();
@@ -915,7 +930,15 @@ public class LabelTool {
 				print_button.addMouseListener(new MouseAdapter() {
 					@Override
 					public void mouseReleased(MouseEvent arg0) {
-						new PrintImage().drawImage(im_print_name, 1);
+//						String[] imgFileNameList = {im_print_name, base_print_name};
+//						new PrintImage().drawImage(fileNameList, 1);
+						try {
+							new PrintTestFile().print(choosed_file, im_print_name, base_print_name, txt_file_name, 1);
+						}
+						catch (IOException ie) {
+							ie.printStackTrace();
+						}
+
 					}
 				});
 
@@ -965,21 +988,34 @@ public class LabelTool {
 					continue;
 				}
 
-				BufferedImage bi = new BufferedImage(
+				BufferedImage buffered_pic = new BufferedImage(
 						im.getIconWidth(),
 						im.getIconHeight(),
-						BufferedImage.TYPE_INT_RGB);
-				Graphics g = bi.createGraphics();
+						BufferedImage.TYPE_INT_RGB
+				);
+				Graphics g_pic = buffered_pic.createGraphics();
+				im.paintIcon(null, g_pic, 0,0);
+				g_pic.dispose();
 
-				im.paintIcon(null, g, 0,0);
-				g.dispose();
+				ImageIcon base = new ImageIcon("res//base.png");
+				BufferedImage buffered_base = new BufferedImage(
+						base.getIconWidth(),
+						base.getIconHeight(),
+						BufferedImage.TYPE_INT_RGB
+				);
+				Graphics g_base = buffered_base.createGraphics();
+				base.paintIcon(null, g_base, 0, 0);
+				g_base.dispose();
 
-				BufferedImage im_print = addTextToImage(bi, txt_file_name);
-				String im_print_name = "out//picture//" + txt_file_name + "_mandibular_RPD_design_" + i + "_print.png";
+				BufferedImage im_print = addTextToImage(buffered_pic, txt_file_name);
+				BufferedImage base_print = addTextToImage(buffered_base, txt_file_name);
+				String im_print_name = "out//picture//" + txt_file_name + "_maxillary_RPD_design_" + i + "_print.png";
+				String base_print_name = "res//base_print.png";
 
 				File im_print_file = new File(im_print_name);
+				File base_print_file = new File(base_print_name);
 				ImageIO.write(im_print, "png", im_print_file);
-
+				ImageIO.write(base_print, "png", base_print_file);
 				int src_im_height = im.getIconHeight();
 				int src_im_width = im.getIconWidth();
 				double scale_factor = (double) line_height / (double) src_im_height;
@@ -998,7 +1034,14 @@ public class LabelTool {
 				print_button.addMouseListener(new MouseAdapter() {
 					@Override
 					public void mouseReleased(MouseEvent arg0) {
-						new PrintImage().drawImage(im_print_name, 1);
+//						String[] imgFileNameList = {im_print_name, base_print_name};
+//						new PrintImage().drawImage(fileNameList, 1);
+						try {
+							new PrintTestFile().print(choosed_file, im_print_name, base_print_name, txt_file_name, 1);
+						}
+						catch (IOException ie) {
+							ie.printStackTrace();
+						}
 					}
 				});
 

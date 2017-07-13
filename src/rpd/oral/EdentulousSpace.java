@@ -36,7 +36,7 @@ public class EdentulousSpace {
 		} else {
 			int numLeftNeighbor = this.left_neighbor.getNum();
 			int zoneLeftNeighbor = this.left_neighbor.getZone();
-			if (numLeftNeighbor == 1) {
+			if (numLeftNeighbor == 1 && (zoneLeftNeighbor == 1 || zoneLeftNeighbor == 4)) {
 				if (mandibular_or_maxillary == Position.Mandibular) {
 					this.left_most = new Tooth(3, 1);
 				} else {
@@ -60,7 +60,7 @@ public class EdentulousSpace {
 		} else {
 			int numRightNeighbor = this.right_neighbor.getNum();
 			int zoneRightNeighbor = this.right_neighbor.getZone();
-			if (numRightNeighbor == 1) {
+			if (numRightNeighbor == 1 && (zoneRightNeighbor == 2 || zoneRightNeighbor == 3)) {
 				if (mandibular_or_maxillary == Position.Mandibular) {
 					this.right_most = new Tooth(4, 1);
 				} else {
