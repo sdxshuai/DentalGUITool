@@ -136,6 +136,11 @@ public class IndirectRetainerRule {
 						if (indirect_retainer != null) {
 							new_plan.addComponent(indirect_retainer);
 							new_plan.addAbutmentTeeth(indirect_retainer.getToothPos());
+							StringBuilder explanation = new StringBuilder();
+							explanation.append(indirect_retainer.getToothPos().toString());
+							explanation.append("：");
+							explanation.append("游离缺失，转动轴前侧无间接固位体，增设间接固位体\n");
+							new_plan.appendPlanExplanation(explanation.toString());
 						}
 						return new_plan;
 					} else

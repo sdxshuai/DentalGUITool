@@ -23,6 +23,16 @@ public class RPDPlan {
 
 	private List<EdentulousSpace> edentulousSpaces = new ArrayList<>();
 
+	private StringBuilder planExplanationBuilder = new StringBuilder("设计方案简要说明：\n");
+
+	public String getPlanExplanation() {
+		return planExplanationBuilder.toString();
+	}
+
+	public void appendPlanExplanation(String s) {
+		this.planExplanationBuilder.append(s);
+	}
+
 	public RPDPlan(Mouth mouth, Position mandibular_or_maxillary) {
 		this.mouth = mouth;
 		this.mandibular_or_maxillary = mandibular_or_maxillary;

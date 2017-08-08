@@ -126,9 +126,11 @@ public class ClaspRule {
 				}
 			}
 
-			public Clasp chooseClaspOnMultiTeeth(ArrayList<Tooth> teeth, RPDPlan plan) throws RuleException {
+			public Clasp chooseClaspOnMultiTeeth(
+					ArrayList<Tooth> teeth, RPDPlan plan, StringBuilder explanation) throws RuleException {
+
 				if (teeth.size() == 1) {
-					return chooseClaspOnTooth(teeth.get(0), plan);
+					return chooseClaspOnTooth(teeth.get(0), plan, explanation);
 				} else if (teeth.size() == 2) {
 					for (Tooth tooth : teeth) {
 						if (tooth.getToothType() == ToothType.Canine) {
@@ -142,21 +144,31 @@ public class ClaspRule {
 							break;
 						}
 					}
+					if (material == ClaspMaterial.WW) {
+						explanation.append("基牙牙周状况不佳，选择弯制材料，");
+					}
+					else {
+						explanation.append("基牙牙周状况良好，选择铸造材料，");
+					}
 
 					if (!isBothSideMissing(teeth)) {
+						explanation.append("单侧缺失，且距离缺失区距离大于2个牙位，");
 						Map<String, Object> info_0 = plan.getNearestEdentulous(teeth.get(0));
 						Map<String, Object> info_1 = plan.getNearestEdentulous(teeth.get(1));
 						int distance0 = (Integer) info_0.get("distance");
 						int distance1 = (Integer) info_1.get("distance");
 						if (distance0 >= 2 && distance1 >= 2) {
 							if (material == ClaspMaterial.WW) {
+								explanation.append("选择间隙（Embrasure）卡环\n");
 								return new EmbrasureClasp(teeth);
 							} else {
+								explanation.append("选择联合（Combined）卡环\n");
 								return new CombinedClasp(teeth);
 							}
 						}
 					} else {
 						if (material == ClaspMaterial.WW) {
+							explanation.append("双侧缺失，选择连续（Continuous）卡环\n");
 							return new ContinuousClasp(teeth, material);
 						} else {
 							return null;
@@ -169,58 +181,85 @@ public class ClaspRule {
 				return null;
 			}
 
-			public Clasp chooseClaspOnTooth(Tooth tooth, RPDPlan plan) throws RuleException {
+			public Clasp chooseClaspOnTooth(Tooth tooth, RPDPlan plan, StringBuilder explanation) throws RuleException {
 				Clasp res = null;
 				if (tooth.getToothType() == ToothType.Canine) {
-					res = chooseClaspOnCanine(tooth, plan);
+					res = chooseClaspOnCanine(tooth, plan, explanation);
 				} else if (tooth.getToothType() == ToothType.Premolar) {
-					res = chooseClaspOnPremolar(tooth, plan);
+					res = chooseClaspOnPremolar(tooth, plan, explanation);
 				} else if (tooth.getToothType() == ToothType.Molar) {
-					res = chooseClaspOnDistomolar(tooth, plan);
+					res = chooseClaspOnDistomolar(tooth, plan, explanation);
 				} else {
 					System.out.println("Error: Wrong tooth type while chooseClaspOnTooth!");
 				}
 				return res;
 			}
 
-			public Clasp chooseClaspOnCanine(Tooth tooth, RPDPlan plan) throws RuleException {
+			public Clasp chooseClaspOnCanine(Tooth tooth, RPDPlan plan, StringBuilder explanation) throws RuleException {
 				ClaspMaterial material = ClaspMaterial.Cast;
 				if (isBadPeriphery(tooth)) {
 					material = ClaspMaterial.WW;
+					explanation.append("基牙牙周状况不佳，选择弯制材料，");
+				}
+				else {
+					explanation.append("基牙牙周状况良好，选择铸造材料，");
 				}
 
 				if (isDislocate(tooth) && tooth.getCrownRootRatio() == CrownRootRatio.SHORT) {
+					explanation.append("基牙为尖牙，后牙游离缺失，基牙冠短，选择回力（Back Action）卡环\n");
 					return new BackActionClasp(tooth, material);
 				} else if (tooth.isCingulum()) {
+					explanation.append("基牙为尖牙，基牙舌隆突不明显，选择尖牙（Canine）卡环\n");
 					return new CanineClasp(tooth, material);
 				} else {
 //					Map<String, Object> info = plan.getNearestEdentulous(tooth);
 //					Position tip_direction = (Position) info.get("direction");
+					explanation.append("基牙为尖牙，基牙舌隆突明显，选择尖牙上Aker（Canine Aker）卡环\n");
 					return new CanineAkerClasp(tooth, Position.Mesial, material);
 				}
 			}
 
-			public Clasp chooseClaspOnPremolar(Tooth tooth, RPDPlan plan) throws RuleException {
+			public Clasp chooseClaspOnPremolar(Tooth tooth, RPDPlan plan, StringBuilder explanation) throws RuleException {
 				ClaspMaterial material = ClaspMaterial.Cast;
 				if (isBadPeriphery(tooth)) {
 					material = ClaspMaterial.WW;
+					explanation.append("基牙牙周状况不佳，选择弯制材料，");
+				}
+				else {
+					explanation.append("基牙牙周状况良好，选择铸造材料，");
 				}
 
 				if (isDislocate(tooth)) {
+					explanation.append("基牙为前磨牙，后牙游离缺失，");
 					if (tooth.getCrownRootRatio() == CrownRootRatio.SHORT
-							|| tooth.getBuccalSurfaceSlope() == true
-							|| tooth.getLingualSurfaceSlope() == true) {
+							|| tooth.getBuccalSurfaceSlope()
+							|| tooth.getLingualSurfaceSlope()) {
+						if (tooth.getCrownRootRatio() == CrownRootRatio.SHORT) {
+							explanation.append("基牙冠短，");
+						}
+						else if (tooth.getBuccalSurfaceSlope()) {
+							explanation.append("基牙颊面坡度小于20度，");
+						}
+						else if (tooth.getLingualSurfaceSlope()) {
+							explanation.append("基牙舌面坡度小于20度，");
+						}
+						explanation.append("选择回力（Back Action）卡环\n");
 						return new BackActionClasp(tooth, material);
 					} else if (isMesialInclination(tooth)) {
+					    explanation.delete(0, explanation.length());
+						explanation.append("基牙为前磨牙，后牙游离缺失，基牙近中倾斜，选择结合（Combination）卡环\n");
 						return new CombinationClasp(tooth);
 					} else {
+						explanation.append("基牙为远中游离缺失的末端基牙，选择RPA卡环\n");
 						return new RPAClasp(tooth, material);
 					}
 				} else if (isIsolate(tooth)) {
+					explanation.append("基牙为孤立前磨牙，选择对半（Half and Half）卡环\n");
 					return new HalfHalfClasp(tooth, material);
 				} else {
 					Map<String, Object> info = plan.getNearestEdentulous(tooth);
 					Position tip_direction = (Position) info.get("direction");
+					explanation.append("基牙无其他特殊状况，选择Aker卡环\n");
 					if (material == ClaspMaterial.WW) {
 						return new WroughtWireClasp(tooth, tip_direction);
 					} else {
@@ -229,23 +268,32 @@ public class ClaspRule {
 				}
 			}
 
-			public Clasp chooseClaspOnDistomolar(Tooth tooth, RPDPlan plan) throws RuleException {
+			public Clasp chooseClaspOnDistomolar(Tooth tooth, RPDPlan plan, StringBuilder explanation) throws RuleException {
 				ClaspMaterial material = ClaspMaterial.Cast;
 				if (isBadPeriphery(tooth)) {
 					material = ClaspMaterial.WW;
+					explanation.append("基牙牙周状况不佳，选择弯制材料，");
+				}
+				else {
+					explanation.append("基牙牙周状况良好，选择铸造材料，");
 				}
 
 				if (isDislocate(tooth)) {
 					if (isMesialInclination(tooth)) {
+						explanation.delete(0, explanation.length());
+						explanation.append("基牙为后磨牙，后牙游离缺失，基牙近中倾斜，选择结合（Combination）卡环\n");
 						return new CombinationClasp(tooth);
 					} else {
+						explanation.append("基牙为后磨牙，后牙游离缺失，基牙为远中游离缺失的末端基牙，选择RPA卡环\n");
 						return new RPAClasp(tooth, material);
 					}
 				} else if (isIsolate(tooth)) {
+					explanation.append("基牙为孤立后磨牙，选择圈形（Ring）卡环");
 					return new RingClasp(tooth, material);
 				} else {
 					Map<String, Object> info = plan.getNearestEdentulous(tooth);
 					Position tip_direction = (Position) info.get("direction");
+					explanation.append("基牙无其他特殊情况，选择Aker卡环");
 					if (material == ClaspMaterial.WW) {
 						return new WroughtWireClasp(tooth, tip_direction);
 					} else {
@@ -258,11 +306,17 @@ public class ClaspRule {
 					throws RuleException {
 				RPDPlan new_plan = new RPDPlan(abutment_plan);
 				for (ArrayList<Tooth> teeth : with_multi_list) {
-					Clasp clasp = chooseClaspOnMultiTeeth(teeth, abutment_plan);
+					StringBuilder explanation = new StringBuilder();
+					for (Tooth tooth:teeth) {
+						explanation.append(tooth.toString());
+					}
+					explanation.append("：");
+					Clasp clasp = chooseClaspOnMultiTeeth(teeth, abutment_plan, explanation);
 					if (clasp == null) {
 						return;
 					}
 					new_plan.addComponent(clasp);
+					new_plan.appendPlanExplanation(explanation.toString());
 				}
 				plans.add(new_plan);
 			}
@@ -271,11 +325,15 @@ public class ClaspRule {
 					throws RuleException {
 				RPDPlan new_plan = new RPDPlan(abutment_plan);
 				for (Tooth tooth : no_multi_list) {
-					Clasp clasp = chooseClaspOnTooth(tooth, abutment_plan);
+					StringBuilder explanation = new StringBuilder();
+					explanation.append(tooth.toString());
+					explanation.append("：");
+					Clasp clasp = chooseClaspOnTooth(tooth, abutment_plan, explanation);
 					if (clasp == null) {
 						return;
 					}
 					new_plan.addComponent(clasp);
+					new_plan.appendPlanExplanation(explanation.toString());
 				}
 				plans.add(new_plan);
 			}
