@@ -288,12 +288,12 @@ public class ClaspRule {
 						return new RPAClasp(tooth, material);
 					}
 				} else if (isIsolate(tooth)) {
-					explanation.append("基牙为孤立后磨牙，选择圈形（Ring）卡环");
+					explanation.append("基牙为孤立后磨牙，选择圈形（Ring）卡环\n");
 					return new RingClasp(tooth, material);
 				} else {
 					Map<String, Object> info = plan.getNearestEdentulous(tooth);
 					Position tip_direction = (Position) info.get("direction");
-					explanation.append("基牙无其他特殊情况，选择Aker卡环");
+					explanation.append("基牙无其他特殊情况，选择Aker卡环\n");
 					if (material == ClaspMaterial.WW) {
 						return new WroughtWireClasp(tooth, tip_direction);
 					} else {
