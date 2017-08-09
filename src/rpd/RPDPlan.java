@@ -44,6 +44,7 @@ public class RPDPlan {
 	}
 
 	public RPDPlan(RPDPlan raw_plan) {
+		this.planExplanationBuilder = new StringBuilder(raw_plan.getPlanExplanation());
 		this.components.addAll(raw_plan.components);
 		this.mandibular_or_maxillary = raw_plan.mandibular_or_maxillary;
 		this.tooth_components.putAll(raw_plan.tooth_components);

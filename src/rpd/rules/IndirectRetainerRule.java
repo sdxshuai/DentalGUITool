@@ -11,6 +11,7 @@ import rpd.conceptions.EdentulousType;
 import rpd.conceptions.Position;
 import rpd.oral.EdentulousSpace;
 import rpd.oral.Mouth;
+import rpd.oral.Tooth;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -137,7 +138,9 @@ public class IndirectRetainerRule {
 							new_plan.addComponent(indirect_retainer);
 							new_plan.addAbutmentTeeth(indirect_retainer.getToothPos());
 							StringBuilder explanation = new StringBuilder();
-							explanation.append(indirect_retainer.getToothPos().toString());
+							for (Tooth tooth : indirect_retainer.getToothPos()) {
+								explanation.append(tooth.toString());
+							}
 							explanation.append("：");
 							explanation.append("游离缺失，转动轴前侧无间接固位体，增设间接固位体\n");
 							new_plan.appendPlanExplanation(explanation.toString());

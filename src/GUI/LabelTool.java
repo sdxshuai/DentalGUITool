@@ -701,6 +701,7 @@ public class LabelTool {
 					if (mandibular_rpd_plans != null) plans_buffer.addAll(mandibular_rpd_plans);
 					if (maxillary_rpd_plans != null) plans_buffer.addAll(maxillary_rpd_plans);
 					drawRPDPlans();
+					drawPlanExplanation();
 //					drawRPDPlans(mandibular_rpd_plans);
 //					drawRPDPlans(maxillary_rpd_plans);
 //					showRPDPlans();
@@ -1092,53 +1093,78 @@ public class LabelTool {
 		design_dialog.setVisible(true);
 	}
 
-//	private void drawRPDPlans(List<RPDPlan> plans) throws java.io.IOException, exceptions.rpd.RuleException {
-//		if (plans == null || plans.size() == 0) {
-//			return;
-//		}
-//		JDialog design_dialog = new JDialog(this.frame, "可摘局部义齿设计方案");
-//		JPanel rpd_plan_panel = new JPanel(new FlowLayout());
-//		Border panel_border = BorderFactory.createEmptyBorder(5, 5, 5, 5);
-//		rpd_plan_panel.setBorder(panel_border);
-//
-//		int total_height = 0;
-//		int total_width = 0;
-//		int line_height = 500;
-//
-//		generateAndSaveRPDPlanPicture(plans);
-//
-//		total_height += line_height;
-//		String plan_position_str = plans.get(0).getPosition().toString();
-//		for (int i = 1; i <= 3; i++) {
-//			ImageIcon im = new ImageIcon("out//picture//" + plan_position_str + "_RPD_design_" + i + ".png");
-//			int src_im_height = im.getIconHeight();
-//			int src_im_width = im.getIconWidth();
-//			double scale_factor = (double) line_height / (double) src_im_height;
-//			double rescale_height = src_im_height * scale_factor;
-//			double rescale_width = src_im_width * scale_factor;
-//			int dest_im_width = (int) rescale_width;
-//			int dest_im_height = (int) rescale_height;
-//			im.setImage(im.getImage().getScaledInstance(dest_im_width, dest_im_height, Image.SCALE_DEFAULT));
-//			JLabel rpd_plan_label = new JLabel();
-//			rpd_plan_label.setSize(dest_im_width, dest_im_height);
-//			rpd_plan_label.setIcon(im);
-//			Border label_border = BorderFactory.createLineBorder(Color.BLACK);
-//			rpd_plan_label.setBorder(label_border);
-//
-//			rpd_plan_panel.add(rpd_plan_label);
-//			total_width += dest_im_width;
-//		}
-//
-//		rpd_plan_panel.setSize(total_width, line_height);
-//		design_dialog.add(rpd_plan_panel);
-//
-//		total_width += 100;
-//		total_height += 20;
-//		rpd_plan_panel.setSize(total_width, total_height);
-//		design_dialog.setSize(total_width, total_height + 40);
-//		design_dialog.setLocationRelativeTo(null);
-//		design_dialog.setVisible(true);
-//	}
+	private void drawPlanExplanation() throws java.io.IOException, exceptions.rpd.RuleException {
+		if ((this.mandibular_rpd_plans == null || this.mandibular_rpd_plans.size() == 0)
+				&& (this.maxillary_rpd_plans == null || this.maxillary_rpd_plans.size() == 0)) {
+			return;
+		}
+
+		JDialog explanation_dialog = new JDialog(this.frame, "可摘局部义齿设计方案简要说明");
+		JPanel rpd_plan_panel = new JPanel(new BorderLayout());
+		int total_height = 0;
+		int total_width = 1250;
+		int line_height = 320;
+
+		if (!(this.mandibular_rpd_plans == null || this.mandibular_rpd_plans.size() == 0)) {
+			JPanel mandibular_plan_panel = new JPanel(new FlowLayout());
+			mandibular_plan_panel.setSize(total_width, line_height);
+			total_height += line_height + 25;
+			for (RPDPlan plan:this.mandibular_rpd_plans) {
+				JTextArea plan_explanation_textarea = new JTextArea(plan.getPlanExplanation());
+				plan_explanation_textarea.setColumns(50);
+				plan_explanation_textarea.setLineWrap(true);
+				plan_explanation_textarea.setWrapStyleWord(true);
+				plan_explanation_textarea.setFont(new Font("微软雅黑",Font.PLAIN,16));
+				int v = ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED;
+				int h = ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED;
+				JScrollPane plan_explanation_scroll_pane = new JScrollPane(plan_explanation_textarea, v, h);
+				plan_explanation_scroll_pane.setPreferredSize(new Dimension(400, line_height));
+				mandibular_plan_panel.add(plan_explanation_scroll_pane);
+			}
+
+			mandibular_plan_panel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(),
+					"下颌设计方案简要说明", TitledBorder.CENTER, TitledBorder.DEFAULT_POSITION,
+					new Font("微软雅黑", Font.BOLD, 20)));
+			rpd_plan_panel.add(mandibular_plan_panel, BorderLayout.CENTER);
+		}
+
+		if (!(this.maxillary_rpd_plans == null || this.maxillary_rpd_plans.size() == 0)) {
+			JPanel maxillary_plan_panel = new JPanel(new FlowLayout());
+			maxillary_plan_panel.setSize(total_width, line_height);
+			total_height += line_height + 25;
+			for (RPDPlan plan:this.maxillary_rpd_plans) {
+				JTextArea plan_explanation_textarea = new JTextArea(plan.getPlanExplanation());
+				plan_explanation_textarea.setColumns(50);
+				plan_explanation_textarea.setLineWrap(true);
+				plan_explanation_textarea.setWrapStyleWord(true);
+				plan_explanation_textarea.setFont(new Font("微软雅黑",Font.PLAIN,16));
+				int v = ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED;
+				int h = ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED;
+				JScrollPane plan_explanation_scroll_pane = new JScrollPane(plan_explanation_textarea, v, h);
+				plan_explanation_scroll_pane.setPreferredSize(new Dimension(400, line_height));
+				maxillary_plan_panel.add(plan_explanation_scroll_pane);
+			}
+
+			maxillary_plan_panel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(),
+					"上颌设计方案简要说明", TitledBorder.CENTER, TitledBorder.DEFAULT_POSITION,
+					new Font("微软雅黑", Font.BOLD, 20)));
+
+			rpd_plan_panel.add(maxillary_plan_panel, BorderLayout.NORTH);
+		}
+
+		JTextField design_rights = new JTextField("北京大学口腔医院和清华大学联合研发");
+		design_rights.setHorizontalAlignment(JTextField.CENTER);
+		design_rights.setHorizontalAlignment(JTextField.CENTER);
+		design_rights.setFont(new Font("宋体", Font.PLAIN, 14));
+		design_rights.setOpaque(false);
+		rpd_plan_panel.add(design_rights, BorderLayout.SOUTH);
+		explanation_dialog.add(rpd_plan_panel);
+
+		total_height += 108;
+		explanation_dialog.setSize(total_width, total_height);
+		explanation_dialog.setLocationRelativeTo(null);
+		explanation_dialog.setVisible(true);
+	}
 
 	private void generateAndSaveRPDPlanPicture(List<RPDPlan> plans, String txt_file_name)
 			throws java.io.IOException, exceptions.rpd.RuleException {
