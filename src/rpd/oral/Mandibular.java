@@ -170,6 +170,10 @@ public class Mandibular {
 		return this.edentulous_spaces;
 	}
 
+	public void setEdentulousSpaces(List<EdentulousSpace> edentulousSpaceList) {
+		this.edentulous_spaces = edentulousSpaceList;
+	}
+
 	public List<Tooth> getExistingTeeth() {
 		List<Tooth> res = new ArrayList<Tooth>();
 		for (Tooth tooth : zone3) {
@@ -315,6 +319,18 @@ public class Mandibular {
 			System.out.println("Error: wrong zone!");
 			return false;
 		}
+	}
+
+	public boolean isMissingFrontTeeth() {
+		boolean flag = false;
+		List<Tooth> missingTeeth = this.getMissingTeeth();
+		for (Tooth tooth:missingTeeth) {
+			if (tooth.getNum() <= 4) {
+				flag = true;
+				break;
+			}
+		}
+		return flag;
 	}
 
 	public void initEdentulousSpaces() throws RuleException {

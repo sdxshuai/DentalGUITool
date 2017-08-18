@@ -411,15 +411,15 @@ public class ClaspRule {
 				return 2;
 			}
 
-			public int getDistanceOppoToothTri(Tooth tooth, Tooth mesialTooth, Tooth distalTooth) {
+			public double getDistanceOppoToothTri(Tooth tooth, Tooth mesialTooth, Tooth distalTooth) {
 				int targetNum = (mesialTooth.getNum() + distalTooth.getNum())/2;
-				return abs(tooth.getNum() - targetNum);
+				return 0.5 + 0.1 * abs(tooth.getNum() - targetNum);
 			}
 
-			public int getDistanceOppoToothRec(Tooth tooth, Tooth mesialTooth, Tooth distalTooth) {
+			public double getDistanceOppoToothRec(Tooth tooth, Tooth mesialTooth, Tooth distalTooth) {
 				int dis1 = abs(tooth.getNum()-mesialTooth.getNum());
 				int dis2 = abs(tooth.getNum()-distalTooth.getNum());
-				return (dis1<dis2)?dis1:dis2;
+				return 0.5 + 0.1 * ((dis1<dis2)?dis1:dis2);
 			}
 
 			public boolean isDisociate(List<EdentulousSpace> edentulousSpaceList) {
@@ -434,11 +434,12 @@ public class ClaspRule {
 			}
 
 			public double scorePlan(RPDPlan plan) throws RuleException {
+
 				double score = 0.0;
 				double canine_weight = 0.0;
 				double premolar_weight = 0.0;
 				double distomolar_weight = 0.0;
-				int distance = 0;
+				double distance = 0.0;
 
 				Set<Tooth> abutment_teeth = plan.getAbutmentTeeth();
 				ArrayList<Tooth> abutment_missing_teeth = new ArrayList<>(abutment_teeth);
@@ -481,7 +482,7 @@ public class ClaspRule {
 					if (plan.getPosition() == Position.Mandibular) {
 						if (mouth.getMandibular().isZoneNoMissing(tooth.getZone())) {
 							canine_weight = 2.2;
-							premolar_weight = 0.5;
+							premolar_weight = 0.0;
 							distomolar_weight = 0.0;
 							if (isDisociate(mouth.getMandibular().getEdentulousSpaces())) {
 								if (tooth.getZone() == 3) {
@@ -505,8 +506,8 @@ public class ClaspRule {
 							}
 
 						} else {
-							canine_weight = 0.8;
-							premolar_weight = 0.5;
+							canine_weight = 0.2;
+							premolar_weight = 0.1;
 							distomolar_weight = 0.0;
 							Map<String, Object> info = plan.getNearestEdentulous(tooth);
 							distance = (Integer) info.get("distance");
@@ -514,7 +515,7 @@ public class ClaspRule {
 					} else {
 						if (mouth.getMaxillary().isZoneNoMissing(tooth.getZone())) {
 							canine_weight = 2.2;
-							premolar_weight = 0.5;
+							premolar_weight = 0.0;
 							distomolar_weight = 0.0;
 
 							if (isDisociate(mouth.getMaxillary().getEdentulousSpaces())) {
@@ -538,8 +539,8 @@ public class ClaspRule {
 								}
 							}
 						} else {
-							canine_weight = 0.8;
-							premolar_weight = 0.5;
+							canine_weight = 0.2;
+							premolar_weight = 0.1;
 							distomolar_weight = 0.0;
 							Map<String, Object> info = plan.getNearestEdentulous(tooth);
 							distance = (Integer) info.get("distance");
@@ -574,7 +575,23 @@ public class ClaspRule {
 					}
 
 					if (component.getClass() == CombinedClasp.class || component.getClass() == EmbrasureClasp.class) {
-						score -= 5;
+						if (plan.getPosition() == Position.Mandibular) {
+							if (mouth.getMandibular().isZoneNoMissing(component.getToothPos().get(0).getZone())) {
+								score -= 0.1;
+							}
+							else {
+								score -= 10;
+							}
+						}
+						else {
+							if (mouth.getMaxillary().isZoneNoMissing(component.getToothPos().get(0).getZone())) {
+								score -= 0.1;
+							}
+							else {
+								score -= 10;
+							}
+						}
+//						score -= 10;
 					}
 				}
 				return score;

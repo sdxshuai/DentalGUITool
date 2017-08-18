@@ -701,7 +701,8 @@ public class LabelTool {
 					if (mandibular_rpd_plans != null) plans_buffer.addAll(mandibular_rpd_plans);
 					if (maxillary_rpd_plans != null) plans_buffer.addAll(maxillary_rpd_plans);
 					drawRPDPlans();
-					drawPlanExplanation();
+//					drawPlanExplanation();
+
 //					drawRPDPlans(mandibular_rpd_plans);
 //					drawRPDPlans(maxillary_rpd_plans);
 //					showRPDPlans();

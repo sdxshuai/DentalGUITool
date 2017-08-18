@@ -142,7 +142,7 @@ public class IndirectRetainerRule {
 								explanation.append(tooth.toString());
 							}
 							explanation.append("：");
-							explanation.append("游离缺失，转动轴前侧无间接固位体，增设间接固位体\n");
+							explanation.append("游离缺失，缺失侧转动轴前侧无间接固位体，增设间接固位体\n");
 							new_plan.appendPlanExplanation(explanation.toString());
 						}
 						return new_plan;

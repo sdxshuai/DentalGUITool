@@ -95,7 +95,7 @@ public class ChooseAbutmentRule {
 		choose_abutment_rules.add(new ChooseAbutmentRule() {
 
 			public String getExplaination() {
-				return "如果不是一侧除切牙外全部缺牙，不能全部在同一个zone";
+				return "如果不是一侧除切牙外全部缺牙，或不需要大连接体（后牙非游离缺失，前牙不缺，且每侧最多缺失一颗），不能全部在同一个zone";
 			}
 
 			public String toString() {
@@ -111,7 +111,8 @@ public class ChooseAbutmentRule {
 					return rpd_plans;
 				}
 				List<RPDPlan> res = new ArrayList<>();
-				if (isOneSideAllMissingExceptIncisor(mouth, rpd_plans.get(0).getPosition())) {
+				if (isOneSideAllMissingExceptIncisor(mouth, rpd_plans.get(0).getPosition())
+						|| !needMajorConnector(rpd_plans.get(0).getPosition())) {
 					res.addAll(rpd_plans);
 				} else {
 					for (RPDPlan plan : rpd_plans) {
@@ -121,6 +122,37 @@ public class ChooseAbutmentRule {
 					}
 				}
 				return res;
+			}
+
+			public boolean needMajorConnector(Position planPosition) {
+				boolean flag = false;
+				List<EdentulousSpace> edentulousSpaceList = null;
+				boolean isMissingFrontTeeth;
+				if (planPosition == Position.Mandibular) {
+					edentulousSpaceList = mouth.getMandibular().getEdentulousSpaces();
+					isMissingFrontTeeth = mouth.getMandibular().isMissingFrontTeeth();
+				}
+				else {
+					edentulousSpaceList = mouth.getMaxillary().getEdentulousSpaces();
+					isMissingFrontTeeth = mouth.getMaxillary().isMissingFrontTeeth();
+				}
+
+				if (isMissingFrontTeeth) {
+					return true;
+				}
+
+				for (EdentulousSpace edentulousSpace:edentulousSpaceList) {
+					if (edentulousSpace.getEdentulousType() == EdentulousType.PosteriorExtension) {
+						flag = true;
+						break;
+					}
+					if (edentulousSpace.getLeftMost().getZone() != edentulousSpace.getRightMost().getZone()
+							|| edentulousSpace.getLeftMost().getNum() != edentulousSpace.getRightMost().getNum()) {
+						flag = true;
+						break;
+					}
+				}
+				return flag;
 			}
 		});
 

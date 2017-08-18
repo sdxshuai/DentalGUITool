@@ -3,8 +3,10 @@ package rpd.rules;
 import exceptions.rpd.ClaspAssemblyException;
 import exceptions.rpd.RuleException;
 import exceptions.rpd.ToothPosException;
+import org.apache.poi.ss.formula.functions.T;
 import rpd.RPDPlan;
 import rpd.components.*;
+import rpd.conceptions.EdentulousType;
 import rpd.conceptions.KennedyType;
 import rpd.conceptions.Position;
 import rpd.conceptions.ToothPosition;
@@ -31,7 +33,7 @@ public class MajorConnectorRule {
 		major_connector_rules.add(new MajorConnectorRule() {
 
 			public String getExplaination() {
-				return "初始化生成大连接体方案";
+				return "生成大连接体方案";
 			}
 
 			public String toString() {
@@ -57,7 +59,12 @@ public class MajorConnectorRule {
 				if (isBadCondition(plan.getAbutmentTeeth())) {
 					explanation.append("有口底浅或前牙舌侧倾斜或骨突情况，选择舌板大连接体\n");
 					return new LingualPlateConnector(plan.getAbutmentTeeth(), mouth.getMandibular());
-				} else {
+				}
+				else if (isMissingTooMuchOnMandibular()) {
+					explanation.append("双侧缺失大于等于7颗，或后牙双侧缺失大于等于5颗，选择舌板大连接体\n");
+					return new LingualPlateConnector(plan.getAbutmentTeeth(), mouth.getMandibular());
+				}
+				else {
 					explanation.append("无特殊情况，选择舌杆大连接体\n");
 					return new LingualBarConnector(plan.getAbutmentTeeth(), mouth.getMandibular());
 				}
@@ -65,8 +72,9 @@ public class MajorConnectorRule {
 
 			public MajorConnector chooseMajorConnectorOnMaxillary(RPDPlan plan, StringBuilder explanation) {
 				explanation.append("上颌大连接体：");
-				if (isDislocateWithMoreThanFiveMissing(mouth, plan.getPosition())) {
-					explanation.append("后牙大部分缺失，选择上颌全腭板大连接体\n");
+//				if (isDislocateWithMoreThanFiveMissing(mouth, plan.getPosition()))
+				if (isMissingTooMuchOnMaxillary()) {
+					explanation.append("大部分缺失，选择上颌全腭板大连接体\n");
 					return new FullPalatalPlateConnector(plan.getAbutmentTeeth(), mouth.getMaxillary());
 				} else {
 					KennedyType kennedyType = getKennedyType(mouth, plan.getPosition());
@@ -98,6 +106,49 @@ public class MajorConnectorRule {
 					}
 				}
 				return flag;
+			}
+
+			public boolean isMissingTooMuchOnMandibular() {
+				List<Tooth> missingTeeth = mouth.getMandibular().getMissingTeeth();
+				if (missingTeeth.size() >= 7) {
+					return true;
+				}
+
+				int countBackteeth = 0;
+				for (Tooth tooth:missingTeeth) {
+					if (tooth.getNum() >= 4) {
+						countBackteeth++;
+					}
+				}
+				if (countBackteeth >= 5) {
+					return true;
+				}
+
+				return false;
+			}
+
+			public boolean isMissingTooMuchOnMaxillary() {
+				List<Tooth> missingTeeth = mouth.getMaxillary().getMissingTeeth();
+				if (missingTeeth.size() >= 7) {
+					return true;
+				}
+
+				int countLeftMissing = 0;
+				int countRightMissing = 0;
+				for (Tooth tooth:missingTeeth) {
+					if (tooth.getZone() == 1) {
+						countLeftMissing++;
+					}
+					else if (tooth.getZone() == 2) {
+						countRightMissing++;
+					}
+				}
+
+				if (countLeftMissing >=5 || countRightMissing >=5) {
+					return true;
+				}
+
+				return false;
 			}
 
 //			public boolean isToothSupportPlan(List<EdentulousSpace> edentulousSpaces, Set<Tooth> abutment_teeth) {
@@ -212,14 +263,56 @@ public class MajorConnectorRule {
 				return flag;
 			}
 
+			public boolean needMajorConnector(Position planPosition) {
+				boolean flag = false;
+				List<EdentulousSpace> edentulousSpaceList = null;
+				boolean isMissingFrontTeeth;
+				if (planPosition == Position.Mandibular) {
+					edentulousSpaceList = mouth.getMandibular().getEdentulousSpaces();
+					isMissingFrontTeeth = mouth.getMandibular().isMissingFrontTeeth();
+				}
+				else {
+					edentulousSpaceList = mouth.getMaxillary().getEdentulousSpaces();
+					isMissingFrontTeeth = mouth.getMaxillary().isMissingFrontTeeth();
+				}
+
+				if (isMissingFrontTeeth) {
+					return true;
+				}
+
+				for (EdentulousSpace edentulousSpace:edentulousSpaceList) {
+					if (edentulousSpace.getEdentulousType() == EdentulousType.PosteriorExtension) {
+						flag = true;
+						break;
+					}
+					if (edentulousSpace.getLeftMost().getZone() != edentulousSpace.getRightMost().getZone()
+							|| edentulousSpace.getLeftMost().getNum() != edentulousSpace.getRightMost().getNum()) {
+						flag = true;
+						break;
+					}
+				}
+				return flag;
+			}
+
 			public List<RPDPlan> apply(List<RPDPlan> rpd_plans) throws RuleException {
+				if (rpd_plans == null || rpd_plans.size() == 0) {
+					return null;
+				}
+
 				List<RPDPlan> res = new ArrayList<>();
-				for (RPDPlan plan : rpd_plans) {
-					StringBuilder explanation = new StringBuilder();
-					MajorConnector majorConnector = chooseMajorConnector(plan, explanation);
-					if (majorConnector != null) {
-						plan.addComponent(majorConnector);
-						plan.appendPlanExplanation(explanation.toString());
+
+				//后牙非游离缺失，且前牙不缺失，且每侧最多缺一颗时，不用大连接体(遍历缺隙，判断缺隙大小是否都为1，是否都为游离缺失)
+				Position planPosition = rpd_plans.get(0).getPosition();
+
+				if (needMajorConnector(planPosition)) {
+					for (RPDPlan plan : rpd_plans) {
+
+						StringBuilder explanation = new StringBuilder();
+						MajorConnector majorConnector = chooseMajorConnector(plan, explanation);
+						if (majorConnector != null) {
+							plan.addComponent(majorConnector);
+							plan.appendPlanExplanation(explanation.toString());
+						}
 					}
 				}
 
@@ -227,6 +320,8 @@ public class MajorConnectorRule {
 				return res;
 			}
 		});
+
+
 	}
 
 	public List<RPDPlan> apply(List<RPDPlan> rpd_plan) throws RuleException, ClaspAssemblyException, ToothPosException {

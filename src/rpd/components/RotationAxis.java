@@ -23,9 +23,24 @@ public class RotationAxis {
 
 	public boolean needIndirectRetainer(RPDPlan rpd_plan, EdentulousSpace edentulous_space) throws EdentulousTypeException {
 		boolean res = true;
-		for (Component component : rpd_plan.getComponents())
-			if (this.canBeIndirectRetainer(component))
-				res = false;
+		int edentulousZone = 0;
+		if (edentulous_space.getLeftMost().getNum() == 7) {
+			edentulousZone = edentulous_space.getLeftMost().getZone();
+		}
+		else {
+			edentulousZone = edentulous_space.getRightMost().getZone();
+		}
+
+		for (Component component:rpd_plan.getComponents()) {
+			if (component.getToothPos().get(0).getZone() == edentulousZone) {
+				if (this.canBePosteriorIndirectRetainer(component)) {
+					res = false;
+				}
+			}
+		}
+//		for (Component component : rpd_plan.getComponents())
+//			if (this.canBeIndirectRetainer(component))
+//				res = false;
 		return res;
 	}
 
@@ -34,43 +49,125 @@ public class RotationAxis {
 		int zone = -1, oppisite_zone = -1;
 		EdentulousType edentulous_type = edentulous_space.getEdentulousType();
 		if (edentulous_type.equals(EdentulousType.PosteriorExtension)) {
-
-			int left_num = left_indirect_retainer.getToothPos().get(0).getNum();
-			int right_num = right_indirect_retainer.getToothPos().get(0).getNum();
-			if (left_num < right_num) {
-				if (mandibular_or_maxillary.equals(Position.Mandibular)) {
+//			int left_num = left_indirect_retainer.getToothPos().get(0).getNum();
+//			int right_num = right_indirect_retainer.getToothPos().get(0).getNum();
+			if (mandibular_or_maxillary.equals(Position.Mandibular)) {
+				if (edentulous_space.getRightMost().getNum() == 7) {
 					zone = 3;
 					oppisite_zone = 4;
-				} else if (mandibular_or_maxillary.equals(Position.Maxillary)) {
+				} else if (edentulous_space.getLeftMost().getNum() == 7) {
+					zone = 4;
+					oppisite_zone = 3;
+				} else {
+					return null;
+
+				}
+			} else if (mandibular_or_maxillary.equals(Position.Maxillary)) {
+				if (edentulous_space.getLeftMost().getNum() == 7) {
+					zone = 1;
+					oppisite_zone = 2;
+				} else if (edentulous_space.getRightMost().getNum() == 7) {
 					zone = 2;
 					oppisite_zone = 1;
 				} else {
-				}
-			} else if (left_num >= right_num) {
-				if (mandibular_or_maxillary.equals(Position.Mandibular)) {
-					zone = 4;
-					oppisite_zone = 3;
-				} else if (mandibular_or_maxillary.equals(Position.Maxillary)) {
-					zone = 1;
-					oppisite_zone = 2;
-				} else {
+					return null;
 				}
 			} else {
+				return null;
 			}
 
-			if (!mouth.getTooth(zone, 4).isMissing())
-				return new OcclusalRest(mouth.getTooth(zone, 4), Position.Mesial);
-			else if (!mouth.getTooth(zone, 3).isMissing())
-				return new LingualRest(mouth.getTooth(zone, 3));
-			else if (!mouth.getTooth(oppisite_zone, 4).isMissing())
-				return new OcclusalRest(mouth.getTooth(oppisite_zone, 4), Position.Mesial);
-			else if (!mouth.getTooth(oppisite_zone, 3).isMissing())
-				return new LingualRest(mouth.getTooth(oppisite_zone, 3));
-			else
+			if (zone == 1 || zone == 4) {
+				if (!mouth.getTooth(zone, 4).isMissing()
+						&& this.left_indirect_retainer.getToothPos().get(0).getNum() > 4) {
+					return new OcclusalRest(mouth.getTooth(zone, 4), Position.Mesial);
+				}
+				else if (!mouth.getTooth(zone, 3).isMissing()
+						&& this.left_indirect_retainer.getToothPos().get(0).getNum() > 3) {
+					return new LingualRest(mouth.getTooth(zone, 3));
+				}
+				else if (!mouth.getTooth(oppisite_zone, 4).isMissing()
+						&& this.right_indirect_retainer.getToothPos().get(0).getNum() > 4) {
+					return new OcclusalRest(mouth.getTooth(oppisite_zone, 4), Position.Mesial);
+				}
+				else if (!mouth.getTooth(oppisite_zone, 3).isMissing()
+						&& this.right_indirect_retainer.getToothPos().get(0).getNum() > 3) {
+					return new LingualRest(mouth.getTooth(oppisite_zone, 3));
+				}
+			}
+			else if (zone == 2 || zone == 3) {
+				if (!mouth.getTooth(zone, 4).isMissing()
+						&& this.right_indirect_retainer.getToothPos().get(0).getNum() > 4) {
+					return new OcclusalRest(mouth.getTooth(zone, 4), Position.Mesial);
+				}
+				else if (!mouth.getTooth(zone, 3).isMissing()
+						&& this.right_indirect_retainer.getToothPos().get(0).getNum() > 3) {
+					return new LingualRest(mouth.getTooth(zone, 3));
+				}
+				else if (!mouth.getTooth(oppisite_zone, 4).isMissing()
+						&& this.left_indirect_retainer.getToothPos().get(0).getNum() > 4) {
+					return new OcclusalRest(mouth.getTooth(oppisite_zone, 4), Position.Mesial);
+				}
+				else if (!mouth.getTooth(oppisite_zone, 3).isMissing()
+						&& this.left_indirect_retainer.getToothPos().get(0).getNum() > 3) {
+					return new LingualRest(mouth.getTooth(oppisite_zone, 3));
+				}
+			}
+			else {
 				return null;
-		} else
+			}
+
+//			if (!mouth.getTooth(zone, 4).isMissing()) {
+//				return new OcclusalRest(mouth.getTooth(zone, 4), Position.Mesial);
+//			}
+//			else if (!mouth.getTooth(zone, 3).isMissing())
+//				return new LingualRest(mouth.getTooth(zone, 3));
+//			else if (!mouth.getTooth(oppisite_zone, 4).isMissing()					)
+//				return new OcclusalRest(mouth.getTooth(oppisite_zone, 4), Position.Mesial);
+//			else if (!mouth.getTooth(oppisite_zone, 3).isMissing())
+//				return new LingualRest(mouth.getTooth(oppisite_zone, 3));
+//			else
+//				return null;
+		} else {
 			return null;
+		}
+		return null;
 	}
+
+
+//			if (left_num < right_num) {
+//				if (mandibular_or_maxillary.equals(Position.Mandibular)) {
+//					zone = 3;
+//					oppisite_zone = 4;
+//				} else if (mandibular_or_maxillary.equals(Position.Maxillary)) {
+//					zone = 2;
+//					oppisite_zone = 1;
+//				} else {
+//				}
+//			} else if (left_num >= right_num) {
+//				if (mandibular_or_maxillary.equals(Position.Mandibular)) {
+//					zone = 4;
+//					oppisite_zone = 3;
+//				} else if (mandibular_or_maxillary.equals(Position.Maxillary)) {
+//					zone = 1;
+//					oppisite_zone = 2;
+//				} else {
+//				}
+//			} else {
+//			}
+//
+//			if (!mouth.getTooth(zone, 4).isMissing())
+//				return new OcclusalRest(mouth.getTooth(zone, 4), Position.Mesial);
+//			else if (!mouth.getTooth(zone, 3).isMissing())
+//				return new LingualRest(mouth.getTooth(zone, 3));
+//			else if (!mouth.getTooth(oppisite_zone, 4).isMissing())
+//				return new OcclusalRest(mouth.getTooth(oppisite_zone, 4), Position.Mesial);
+//			else if (!mouth.getTooth(oppisite_zone, 3).isMissing())
+//				return new LingualRest(mouth.getTooth(oppisite_zone, 3));
+//			else
+//				return null;
+//		} else
+//			return null;
+//	}
 
 	public boolean canBeIndirectRetainer(Component component) throws EdentulousTypeException {
 
@@ -93,20 +190,27 @@ public class RotationAxis {
 		int component_zone = component.getToothPos().get(0).getZone();
 		int component_num = component.getToothPos().get(0).getNum();
 
-		if (axis_left_num == axis_right_num)
+		if (axis_left_num == axis_right_num) {
 			if (component_num < axis_left_num && component_num <= 4)
 				return true;
 			else
 				return false;
-		else if (axis_left_num < axis_right_num)
+		}
+		else if (axis_left_num < axis_right_num) {
 			if ((component_zone == 2 || component_zone == 3) && component_num < axis_right_num && component_num <= 4)
 				return true;
 			else
 				return false;
-		else if ((component_zone == 1 || component_zone == 4) && component_num < axis_left_num && component_num <= 4)
-			return true;
-		else
+		}
+		else if (axis_left_num > axis_right_num) {
+			if ((component_zone == 1 || component_zone == 4) && component_num < axis_left_num && component_num <= 4)
+				return true;
+			else
+				return false;
+		}
+		else {
 			return false;
+		}
 	}
 
 	public boolean canBeAnteriorIndirectRetainer(Component component) {

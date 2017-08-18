@@ -10,6 +10,7 @@ import rpd.oral.*;
 import rpd.rules.*;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 //生成设计方案
@@ -38,6 +39,7 @@ public class SearchRPDPlan {
 	public static List<RPDPlan> searchMandibular(Mouth mouth) throws RuleException, ClaspAssemblyException, ToothPosException, EdentulousTypeException {
 
 		Mandibular mandibular = mouth.getMandibular();
+		List<EdentulousSpace> edentulousSpaceList = mandibular.getEdentulousSpaces();
 
 		if (noMissing(mandibular))
 			return null;
@@ -54,6 +56,21 @@ public class SearchRPDPlan {
 		ClaspRule.initRules(mouth);
 		IndirectRetainerRule.initRules(mouth);
 		MajorConnectorRule.initRules(mouth);
+
+		List<EdentulousSpace> curEdentulousSpaces = new ArrayList<>();
+		curEdentulousSpaces.addAll(edentulousSpaceList);
+		Iterator<EdentulousSpace> iterator = curEdentulousSpaces.iterator();
+		while (iterator.hasNext()) {
+			EdentulousSpace edentulousSpace = iterator.next();
+			if (edentulousSpace.getLeftMost().getNum() == 7 && edentulousSpace.getRightMost().getNum() == 7) {
+				int edentulousZone = edentulousSpace.getLeftMost().getZone();
+				if (mouth.getMaxillary().getTooth(5-edentulousZone, 7).isMissing()
+						&& !mouth.getMaxillary().getTooth(5-edentulousZone, 6).isMissing()) {
+					iterator.remove();
+				}
+			}
+		}
+		mandibular.setEdentulousSpaces(curEdentulousSpaces);
 
 		List<RPDPlan> res = new ArrayList<RPDPlan>();
 		RPDPlan empty_plan = new RPDPlan(mouth, Position.Mandibular);
@@ -110,6 +127,7 @@ public class SearchRPDPlan {
 				res.remove(0);
 		}
 
+		mandibular.setEdentulousSpaces(edentulousSpaceList);
 		for (EdentulousSpace edentulous_space : mandibular.getEdentulousSpaces()) {
 			ArrayList<Tooth> denture_base_tooth_pos = new ArrayList<>();
 			denture_base_tooth_pos.add(edentulous_space.getLeftMost());
@@ -133,6 +151,7 @@ public class SearchRPDPlan {
 	public static List<RPDPlan> searchMaxillary(Mouth mouth) throws RuleException, ClaspAssemblyException, ToothPosException, EdentulousTypeException {
 
 		Maxillary maxillary = mouth.getMaxillary();
+		List<EdentulousSpace> edentulousSpaceList = maxillary.getEdentulousSpaces();
 
 		if (noMissing(maxillary))
 			return null;
@@ -149,6 +168,21 @@ public class SearchRPDPlan {
 		ClaspRule.initRules(mouth);
 		IndirectRetainerRule.initRules(mouth);
 		MajorConnectorRule.initRules(mouth);
+
+		List<EdentulousSpace> curEdentulousSpaces = new ArrayList<>();
+		curEdentulousSpaces.addAll(edentulousSpaceList);
+		Iterator<EdentulousSpace> iterator = curEdentulousSpaces.iterator();
+		while (iterator.hasNext()) {
+			EdentulousSpace edentulousSpace = iterator.next();
+			if (edentulousSpace.getLeftMost().getNum() == 7 && edentulousSpace.getRightMost().getNum() == 7) {
+				int edentulousZone = edentulousSpace.getLeftMost().getZone();
+				if (mouth.getMandibular().getTooth(5-edentulousZone, 7).isMissing()
+						&& !mouth.getMandibular().getTooth(5-edentulousZone, 6).isMissing()) {
+					iterator.remove();
+				}
+			}
+		}
+		maxillary.setEdentulousSpaces(curEdentulousSpaces);
 
 		List<RPDPlan> res = new ArrayList<RPDPlan>();
 		RPDPlan empty_plan = new RPDPlan(mouth, Position.Maxillary);
@@ -205,6 +239,7 @@ public class SearchRPDPlan {
 				res.remove(0);
 		}
 
+		maxillary.setEdentulousSpaces(edentulousSpaceList);
 		for (EdentulousSpace edentulous_space : maxillary.getEdentulousSpaces()) {
 			ArrayList<Tooth> denture_base_tooth_pos = new ArrayList<>();
 			denture_base_tooth_pos.add(edentulous_space.getLeftMost());
