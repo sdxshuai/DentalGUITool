@@ -434,7 +434,6 @@ public class ClaspRule {
 			}
 
 			public double scorePlan(RPDPlan plan) throws RuleException {
-
 				double score = 0.0;
 				double canine_weight = 0.0;
 				double premolar_weight = 0.0;
@@ -447,6 +446,10 @@ public class ClaspRule {
 				ArrayList<Tooth> sorted_zone2 = new ArrayList<>();
 				ArrayList<Tooth> sorted_zone3 = new ArrayList<>();
 				ArrayList<Tooth> sorted_zone4 = new ArrayList<>();
+				if (abutment_missing_teeth.get(0).getZone() == 4 && abutment_missing_teeth.get(0).getNum() == 5
+						&& abutment_missing_teeth.get(1).getZone() == 4 && abutment_missing_teeth.get(1).getNum() == 7) {
+					int lll = 0;
+				}
 
 				if (plan.getPosition() == Position.Mandibular) {
 					List<Tooth> missing_teeth = mouth.getMandibular().getMissingTeeth();
@@ -585,7 +588,7 @@ public class ClaspRule {
 						}
 						else {
 							if (mouth.getMaxillary().isZoneNoMissing(component.getToothPos().get(0).getZone())) {
-								score -= 0.1;
+								score -= 0.5;
 							}
 							else {
 								score -= 10;

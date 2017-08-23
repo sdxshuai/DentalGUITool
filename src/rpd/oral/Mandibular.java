@@ -222,6 +222,14 @@ public class Mandibular {
 		}
 	}
 
+	public List<Tooth> getZone3() {
+		return zone3;
+	}
+
+	public void setZone3(List<Tooth> toothList) {
+		this.zone3 = toothList;
+	}
+
 	private void initZone4(OntModel dental_ont) {
 
 		zone4.add(null);
@@ -232,6 +240,14 @@ public class Mandibular {
 			this.readToothInfo(tooth_obj, dental_ont, tooth_ind);
 			zone4.add(tooth_obj);
 		}
+	}
+
+	public List<Tooth> getZone4() {
+		return zone4;
+	}
+
+	public void setZone4(List<Tooth> toothList) {
+		this.zone4 = toothList;
 	}
 
 	public boolean isZone3AllMissing() {

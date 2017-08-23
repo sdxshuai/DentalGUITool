@@ -164,6 +164,14 @@ public class Maxillary {
 		}
 	}
 
+	public List<Tooth> getZone1() {
+		return zone1;
+	}
+
+	public void setZone1(List<Tooth> zone1) {
+		this.zone1 = zone1;
+	}
+
 	private void initZone2(OntModel dental_ont) {
 		zone2.add(null);
 		String tooth_class_uri = OntFunc.prefix + "tooth";
@@ -173,6 +181,14 @@ public class Maxillary {
 			this.readToothInfo(tooth_obj, dental_ont, tooth_ind);
 			zone2.add(tooth_obj);
 		}
+	}
+
+	public List<Tooth> getZone2() {
+		return zone2;
+	}
+
+	public void setZone2(List<Tooth> zone2) {
+		this.zone2 = zone2;
 	}
 
 	public boolean isZone1AllMissing() {
