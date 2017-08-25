@@ -110,7 +110,7 @@ public class MajorConnectorRule {
 
 			public boolean isMissingTooMuchOnMandibular() {
 				List<Tooth> missingTeeth = mouth.getMandibular().getMissingTeeth();
-				if (missingTeeth.size() >= 7) {
+				if (missingTeeth.size() >= 6) {
 					return true;
 				}
 

@@ -59,6 +59,7 @@ public class SearchRPDPlan {
 		ChooseAbutmentRule.initRules(mouth);
 		ClaspRule.initRules(mouth);
 		IndirectRetainerRule.initRules(mouth);
+		ScoreRule.initRules(mouth);
 		MajorConnectorRule.initRules(mouth);
 
 		List<EdentulousSpace> curEdentulousSpaces = new ArrayList<>();
@@ -138,8 +139,19 @@ public class SearchRPDPlan {
 			indirect_retainer_plans_buffer.clear();
 		}
 
+		List<RPDPlan> score_plans = new ArrayList<RPDPlan>();
+		score_plans.addAll(indirect_retainer_plans);
+		for (ScoreRule rule : ScoreRule.score_rules) {
+			List<RPDPlan> plans = rule.apply(score_plans);
+			score_plans.clear();
+			score_plans.addAll(plans);
+		}
+		if (score_plans.size() == 0) {
+			return null;
+		}
+
 		List<RPDPlan> major_connector_plans = new ArrayList<RPDPlan>();
-		major_connector_plans.addAll(indirect_retainer_plans);
+		major_connector_plans.addAll(score_plans);
 		for (MajorConnectorRule rule : MajorConnectorRule.major_connector_rules) {
 			List<RPDPlan> plans = rule.apply(major_connector_plans);
 			major_connector_plans.clear();
@@ -151,15 +163,6 @@ public class SearchRPDPlan {
 			RPDPlan plan = res.get(0);
 			if (plan.isEmptyPlan())
 				res.remove(0);
-		}
-
-		//复原对合牙位7缺失属性
-		mandibular.setEdentulousSpaces(edentulousSpaceList);
-		if (tooth37Changed) {
-			mandibular.getZone3().get(7).setMissing(true);
-		}
-		if (tooth47Changed) {
-			mandibular.getZone4().get(7).setMissing(true);
 		}
 
 		for (EdentulousSpace edentulous_space : mandibular.getEdentulousSpaces()) {
@@ -174,6 +177,15 @@ public class SearchRPDPlan {
 			for (RPDPlan plan : res) {
 				plan.addComponent(dentureBase);
 			}
+		}
+
+		//复原对合牙位7缺失属性
+		mandibular.setEdentulousSpaces(edentulousSpaceList);
+		if (tooth37Changed) {
+			mandibular.getZone3().get(7).setMissing(true);
+		}
+		if (tooth47Changed) {
+			mandibular.getZone4().get(7).setMissing(true);
 		}
 
 		if (res.size()==0) {
@@ -203,6 +215,7 @@ public class SearchRPDPlan {
 		ChooseAbutmentRule.initRules(mouth);
 		ClaspRule.initRules(mouth);
 		IndirectRetainerRule.initRules(mouth);
+		ScoreRule.initRules(mouth);
 		MajorConnectorRule.initRules(mouth);
 
 		List<EdentulousSpace> curEdentulousSpaces = new ArrayList<>();
@@ -281,8 +294,19 @@ public class SearchRPDPlan {
 			indirect_retainer_plans_buffer.clear();
 		}
 
+		List<RPDPlan> score_plans = new ArrayList<RPDPlan>();
+		score_plans.addAll(indirect_retainer_plans);
+		for (ScoreRule rule : ScoreRule.score_rules) {
+			List<RPDPlan> plans = rule.apply(score_plans);
+			score_plans.clear();
+			score_plans.addAll(plans);
+		}
+		if (score_plans.size() == 0) {
+			return null;
+		}
+
 		List<RPDPlan> major_connector_plans = new ArrayList<RPDPlan>();
-		major_connector_plans.addAll(indirect_retainer_plans);
+		major_connector_plans.addAll(score_plans);
 		for (MajorConnectorRule rule : MajorConnectorRule.major_connector_rules) {
 			List<RPDPlan> plans = rule.apply(major_connector_plans);
 			major_connector_plans.clear();
@@ -296,13 +320,6 @@ public class SearchRPDPlan {
 				res.remove(0);
 		}
 
-		maxillary.setEdentulousSpaces(edentulousSpaceList);
-		if (tooth17Changed) {
-			maxillary.getZone1().get(7).setMissing(true);
-		}
-		if (tooth27Changed) {
-			maxillary.getZone2().get(7).setMissing(true);
-		}
 
 		for (EdentulousSpace edentulous_space : maxillary.getEdentulousSpaces()) {
 			ArrayList<Tooth> denture_base_tooth_pos = new ArrayList<>();
@@ -315,6 +332,14 @@ public class SearchRPDPlan {
 			for (RPDPlan plan : res) {
 				plan.addComponent(dentureBase);
 			}
+		}
+
+		maxillary.setEdentulousSpaces(edentulousSpaceList);
+		if (tooth17Changed) {
+			maxillary.getZone1().get(7).setMissing(true);
+		}
+		if (tooth27Changed) {
+			maxillary.getZone2().get(7).setMissing(true);
 		}
 
 		if (res.size()==0) {

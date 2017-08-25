@@ -38,6 +38,7 @@ public class RotationAxis {
 					if (component.getToothPos().get(0).getZone() == edentulousZone) {
 						if (this.canBePosteriorIndirectRetainer(component)) {
 							res = false;
+							break;
 						}
 					}
 				}
@@ -46,6 +47,7 @@ public class RotationAxis {
 				for (Component component:rpd_plan.getComponents()) {
 					if (this.canBePosteriorIndirectRetainer(component)) {
 						res = false;
+						break;
 					}
 				}
 			}
@@ -56,6 +58,7 @@ public class RotationAxis {
 					if (component.getToothPos().get(0).getZone() == edentulousZone) {
 						if (this.canBePosteriorIndirectRetainer(component)) {
 							res = false;
+							break;
 						}
 					}
 				}
@@ -64,26 +67,27 @@ public class RotationAxis {
 				for (Component component:rpd_plan.getComponents()) {
 					if (this.canBePosteriorIndirectRetainer(component)) {
 						res = false;
+						break;
 					}
 				}
 			}
 		}
 
-		for (Component component:rpd_plan.getComponents()) {
-
-			if (component.getToothPos().get(0).getZone() == edentulousZone) {
-				if (this.canBePosteriorIndirectRetainer(component)) {
-					res = false;
-				}
-			}
-		}
+//		for (Component component:rpd_plan.getComponents()) {
+//
+//			if (component.getToothPos().get(0).getZone() == edentulousZone) {
+//				if (this.canBePosteriorIndirectRetainer(component)) {
+//					res = false;
+//				}
+//			}
+//		}
 //		for (Component component : rpd_plan.getComponents())
 //			if (this.canBeIndirectRetainer(component))
 //				res = false;
 		return res;
 	}
 
-	public Component properIndirectRetainet(Mouth mouth, Position mandibular_or_maxillary) throws ToothPosException {
+	public Component properIndirectRetainet(Mouth mouth, RPDPlan plan) throws ToothPosException {
 
 		int zone = -1, oppisite_zone = -1;
 		EdentulousType edentulous_type = edentulous_space.getEdentulousType();
@@ -132,37 +136,49 @@ public class RotationAxis {
 
 			if (zone == 1 || zone == 4) {
 				if (!mouth.getTooth(zone, 4).isMissing()
-						&& this.left_indirect_retainer.getToothPos().get(0).getNum() > 4) {
+						&& this.left_indirect_retainer.getToothPos().get(0).getNum() > 4
+						&& !plan.getAbutmentTeeth().contains(mouth.getTooth(zone, 4))) {
 					return new OcclusalRest(mouth.getTooth(zone, 4), Position.Mesial);
 				}
 				else if (!mouth.getTooth(zone, 3).isMissing()
-						&& this.left_indirect_retainer.getToothPos().get(0).getNum() > 3) {
+						&& this.left_indirect_retainer.getToothPos().get(0).getNum() > 3
+						&& !plan.getAbutmentTeeth().contains(mouth.getTooth(zone, 3))) {
 					return new LingualRest(mouth.getTooth(zone, 3));
 				}
 				else if (!mouth.getTooth(oppisite_zone, 4).isMissing()
-						&& this.right_indirect_retainer.getToothPos().get(0).getNum() > 4) {
+						&& this.right_indirect_retainer.getToothPos().get(0).getNum() > 4
+						&& this.left_indirect_retainer.getToothPos().get(0).getNum() > 4
+						&& !plan.getAbutmentTeeth().contains(mouth.getTooth(oppisite_zone, 4))) {
 					return new OcclusalRest(mouth.getTooth(oppisite_zone, 4), Position.Mesial);
 				}
 				else if (!mouth.getTooth(oppisite_zone, 3).isMissing()
-						&& this.right_indirect_retainer.getToothPos().get(0).getNum() > 3) {
+						&& this.right_indirect_retainer.getToothPos().get(0).getNum() > 3
+						&& this.left_indirect_retainer.getToothPos().get(0).getNum() > 3
+						&& !plan.getAbutmentTeeth().contains(mouth.getTooth(oppisite_zone, 3))) {
 					return new LingualRest(mouth.getTooth(oppisite_zone, 3));
 				}
 			}
 			else if (zone == 2 || zone == 3) {
 				if (!mouth.getTooth(zone, 4).isMissing()
-						&& this.right_indirect_retainer.getToothPos().get(0).getNum() > 4) {
+						&& this.right_indirect_retainer.getToothPos().get(0).getNum() > 4
+						&& !plan.getAbutmentTeeth().contains(mouth.getTooth(zone, 4))) {
 					return new OcclusalRest(mouth.getTooth(zone, 4), Position.Mesial);
 				}
 				else if (!mouth.getTooth(zone, 3).isMissing()
-						&& this.right_indirect_retainer.getToothPos().get(0).getNum() > 3) {
+						&& this.right_indirect_retainer.getToothPos().get(0).getNum() > 3
+						&& !plan.getAbutmentTeeth().contains(mouth.getTooth(zone, 3))) {
 					return new LingualRest(mouth.getTooth(zone, 3));
 				}
 				else if (!mouth.getTooth(oppisite_zone, 4).isMissing()
-						&& this.left_indirect_retainer.getToothPos().get(0).getNum() > 4) {
+						&& this.left_indirect_retainer.getToothPos().get(0).getNum() > 4
+						&& this.right_indirect_retainer.getToothPos().get(0).getNum() > 4
+						&& !plan.getAbutmentTeeth().contains(mouth.getTooth(oppisite_zone, 4))) {
 					return new OcclusalRest(mouth.getTooth(oppisite_zone, 4), Position.Mesial);
 				}
 				else if (!mouth.getTooth(oppisite_zone, 3).isMissing()
-						&& this.left_indirect_retainer.getToothPos().get(0).getNum() > 3) {
+						&& this.left_indirect_retainer.getToothPos().get(0).getNum() > 3
+						&& this.right_indirect_retainer.getToothPos().get(0).getNum() >3
+						&& !plan.getAbutmentTeeth().contains(mouth.getTooth(oppisite_zone, 3))) {
 					return new LingualRest(mouth.getTooth(oppisite_zone, 3));
 				}
 			}

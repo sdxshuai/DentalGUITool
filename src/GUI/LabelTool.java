@@ -870,6 +870,7 @@ public class LabelTool {
 		int gang_index = input_file_path.lastIndexOf("\\");
 		String txt_file_name = input_file_path.substring(gang_index+1, dot_index);
 
+		int mandibular_width = 0;
 		if (!(this.mandibular_rpd_plans == null || this.mandibular_rpd_plans.size() == 0)) {
 
 			generateAndSaveRPDPlanPicture(this.mandibular_rpd_plans, txt_file_name);
@@ -948,7 +949,7 @@ public class LabelTool {
 				cur_plan_panel.add(rpd_plan_label, BorderLayout.NORTH);
 				cur_plan_panel.add(print_button, BorderLayout.SOUTH);
 				mandibular_plan_panel.add(cur_plan_panel);
-				total_width += dest_im_width;
+				mandibular_width += dest_im_width;
 			}
 
 			mandibular_plan_panel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(),
@@ -977,6 +978,7 @@ public class LabelTool {
 //			design_dialog.add(rpd_plan_panel);
 		}
 
+		int maxillary_width = 0;
 		if (!(this.maxillary_rpd_plans == null || this.maxillary_rpd_plans.size() == 0)) {
 			generateAndSaveRPDPlanPicture(this.maxillary_rpd_plans, txt_file_name);
 			JPanel maxillary_plan_panel = new JPanel(new FlowLayout());
@@ -1051,7 +1053,7 @@ public class LabelTool {
 				cur_plan_panel.add(rpd_plan_label, BorderLayout.NORTH);
 				cur_plan_panel.add(print_button, BorderLayout.SOUTH);
 				maxillary_plan_panel.add(cur_plan_panel);
-				total_width += dest_im_width;
+				maxillary_width += dest_im_width;
 			}
 			maxillary_plan_panel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(),
 					"上颌设计方案图示", TitledBorder.CENTER, TitledBorder.DEFAULT_POSITION,
@@ -1086,6 +1088,7 @@ public class LabelTool {
 		rpd_plan_panel.add(design_rights, BorderLayout.SOUTH);
 		design_dialog.add(rpd_plan_panel);
 
+		total_width = (mandibular_width > maxillary_width) ? mandibular_width : maxillary_width;
 		total_width += 750;
 		total_height += 108;
 //		rpd_plan_panel.setSize(total_width, total_height);

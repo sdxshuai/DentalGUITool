@@ -26,6 +26,31 @@ public class ChooseAbutmentRule {
 		choose_abutment_rules.add(new ChooseAbutmentRule() {
 
 			public String getExplaination() {
+				return "处理特例，仅游离缺失一颗时（牙位7），设置基牙为5,6";
+			}
+
+			public String toString() {
+				return this.getExplaination();
+			}
+
+			public int getRuleNum() {
+				return 0;
+			}
+
+			public List<RPDPlan> apply(List<RPDPlan> rpd_plans) throws RuleException {
+				List<RPDPlan> res = new ArrayList<>();
+				for (RPDPlan plan : rpd_plans) {
+					if (getMaxSuccessiveAbutmentNum(plan) <= 2) {
+						res.add(plan);
+					}
+				}
+				return res;
+			}
+		});
+
+		choose_abutment_rules.add(new ChooseAbutmentRule() {
+
+			public String getExplaination() {
 				return "初始化搜索树，遍历选择2-4颗基牙";
 			}
 
@@ -205,69 +230,6 @@ public class ChooseAbutmentRule {
 				return res;
 			}
 		});
-//        choose_abutment_rules.add(new ChooseAbutmentRule() {
-//
-//            public String getExplaination() {
-//                return "排序剪枝，每种数量的基牙选择3种，同时保留有连续基牙的方案，后续处理";
-//            }
-//
-//            public String toString() {
-//                return this.getExplaination();
-//            }
-//
-//            public int getRuleNum() {
-//                return 6;
-//            }
-//
-//            public List<RPDPlan> apply(List<RPDPlan> rpd_plans) throws RuleException {
-//                List<RPDPlan> res = new ArrayList<>();
-//                Map<RPDPlan, Double> score_map = new HashMap<RPDPlan, Double>();
-//                for (RPDPlan plan:rpd_plans) {
-//                    double score = scorePlan(plan);
-//                    score_map.put(plan, score);
-//                }
-//                List<Map.Entry<RPDPlan, Double>> list = new ArrayList<Map.Entry<RPDPlan, Double>>(score_map.entrySet());
-//                // 通过比较器实现比较排序
-//                Collections.sort(list, new Comparator<Map.Entry<RPDPlan, Double>>() {
-//                    public int compare(Map.Entry<RPDPlan, Double> mapping1, Map.Entry<RPDPlan, Double> mapping2) {
-//                        return mapping1.getValue().compareTo(mapping2.getValue());
-//                    }
-//                });
-//
-//                int total_count = 10;
-//                int count_2 = 1;
-//                int count_3 = 1;
-//                int count_4 = 1;
-//                for (Map.Entry<RPDPlan, Double> cur_map:list) {
-//                    ArrayList<Tooth> abutment_teeth = new ArrayList<>();
-//                    abutment_teeth.addAll(cur_map.getKey().getAbutmentTeeth());
-//                    Collections.sort(abutment_teeth);
-//                	if (hasSuccessiveAbutment(abutment_teeth)) {
-//                	    res.add(cur_map.getKey());
-//                	    continue;
-//                    }
-//                    if (cur_map.getKey().getAbutmentTeeth().size() == 2) {
-//                        if (count_2 <= total_count) {
-//                            res.add(cur_map.getKey());
-//                            count_2++;
-//                        }
-//                    }
-//                    if (cur_map.getKey().getAbutmentTeeth().size() == 3) {
-//                        if (count_3 <= total_count) {
-//                            res.add(cur_map.getKey());
-//                            count_3++;
-//                        }
-//                    }
-//                    if (cur_map.getKey().getAbutmentTeeth().size() == 4) {
-//                        if (count_4 <= total_count) {
-//                            res.add(cur_map.getKey());
-//                            count_4++;
-//                        }
-//                    }
-//                }
-//                return res;
-//            }
-//        });
 	}
 
 	public List<RPDPlan> apply(List<RPDPlan> rpd_plans) throws RuleException, ClaspAssemblyException, ToothPosException {
