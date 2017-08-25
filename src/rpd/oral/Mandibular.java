@@ -341,7 +341,7 @@ public class Mandibular {
 		boolean flag = false;
 		List<Tooth> missingTeeth = this.getMissingTeeth();
 		for (Tooth tooth:missingTeeth) {
-			if (tooth.getNum() <= 4) {
+			if (tooth.getNum() <= 3) {
 				flag = true;
 				break;
 			}

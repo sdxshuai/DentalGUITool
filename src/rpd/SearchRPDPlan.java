@@ -4,7 +4,9 @@ import exceptions.rpd.ClaspAssemblyException;
 import exceptions.rpd.EdentulousTypeException;
 import exceptions.rpd.RuleException;
 import exceptions.rpd.ToothPosException;
+import rpd.components.AkerClasp;
 import rpd.components.DentureBase;
+import rpd.components.LingualPlateConnector;
 import rpd.conceptions.Position;
 import rpd.oral.*;
 import rpd.rules.*;
@@ -36,6 +38,60 @@ public class SearchRPDPlan {
 		return no_missing;
 	}
 
+	public static boolean isSpecialCase(Mandibular mandibular) throws ToothPosException {
+		boolean flag = false;
+		List<Tooth> missingTeeth = mandibular.getMissingTeeth();
+		if (missingTeeth.size() == 1) {
+			Tooth missingTooth = missingTeeth.get(0);
+			if (missingTooth.getNum() == 7 && mandibular.getTooth(missingTooth.getZone(), 8).isMissing()) {
+				flag = true;
+			}
+		}
+		return flag;
+	}
+
+	public static boolean isSpecialCase(Maxillary maxillary) throws ToothPosException {
+		boolean flag = false;
+		List<Tooth> missingTeeth = maxillary.getMissingTeeth();
+		if (missingTeeth.size() == 1) {
+			Tooth missingTooth = missingTeeth.get(0);
+			if (missingTooth.getNum() == 7 && maxillary.getTooth(missingTooth.getZone(), 8).isMissing()) {
+				flag = true;
+			}
+		}
+		return flag;
+	}
+
+	public static RPDPlan getSpecialCasePlan(Mouth mouth, Position mandibularOrMaxillary) {
+		RPDPlan plan = new RPDPlan(mouth, mandibularOrMaxillary);
+		List<Tooth> missingTeeth;
+		Tooth missingTooth;
+		Tooth abutmentToothAt6;
+		Tooth abutmentToothAt5;
+		int missingZone;
+		if (mandibularOrMaxillary == Position.Mandibular) {
+			missingTeeth = mouth.getMandibular().getMissingTeeth();
+			missingTooth = missingTeeth.get(0);
+			missingZone = missingTooth.getZone();
+			abutmentToothAt6 = mouth.getMandibular().getTooth(missingZone, 6);
+			abutmentToothAt5 = mouth.getMandibular().getTooth(missingZone, 5);
+		}
+		else {
+			missingTeeth = mouth.getMaxillary().getMissingTeeth();
+			missingTooth = missingTeeth.get(0);
+			missingZone = missingTooth.getZone();
+			abutmentToothAt6 = mouth.getMaxillary().getTooth(missingZone, 6);
+			abutmentToothAt5 = mouth.getMaxillary().getTooth(missingZone, 5);
+		}
+
+		plan.addAbutmentTeeth(abutmentToothAt6);
+		plan.addAbutmentTeeth(abutmentToothAt5);
+		plan.addComponent(new AkerClasp(abutmentToothAt6, Position.Mesial));
+		plan.addComponent(new AkerClasp(abutmentToothAt5, Position.Distal));
+		plan.addComponent(new DentureBase(missingTooth));
+		return plan;
+	}
+
 	public static List<RPDPlan> searchMandibular(Mouth mouth) throws RuleException, ClaspAssemblyException, ToothPosException, EdentulousTypeException {
 
 		Mandibular mandibular = mouth.getMandibular();
@@ -45,8 +101,15 @@ public class SearchRPDPlan {
 		boolean tooth37Changed = false;
 		boolean tooth47Changed = false;
 
-		if (noMissing(mandibular))
+		if (noMissing(mandibular)) {
 			return null;
+		}
+		if (isSpecialCase(mandibular)) {
+			List<RPDPlan> res = new ArrayList<RPDPlan>();
+			RPDPlan plan = getSpecialCasePlan(mouth, Position.Mandibular);
+			res.add(plan);
+			return res;
+		}
 
 //        EdentulousTypeRule.initRules();
 //        AssemblyRule.initRules(mouth);
@@ -201,8 +264,15 @@ public class SearchRPDPlan {
 		boolean tooth17Changed = false;
 		boolean tooth27Changed = false;
 
-		if (noMissing(maxillary))
+		if (noMissing(maxillary)) {
 			return null;
+		}
+		if (isSpecialCase(maxillary)) {
+			List<RPDPlan> res = new ArrayList<RPDPlan>();
+			RPDPlan plan = getSpecialCasePlan(mouth, Position.Maxillary);
+			res.add(plan);
+			return res;
+		}
 
 //        EdentulousTypeRule.initRules();
 //        AssemblyRule.initRules(mouth);

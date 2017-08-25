@@ -44,13 +44,18 @@ public class ScoreRule {
 
             public double getDistanceOppoToothTri(Tooth tooth, Tooth mesialTooth, Tooth distalTooth) {
                 int targetNum = (mesialTooth.getNum() + distalTooth.getNum())/2;
-                return 0.5 + 0.1 * abs(tooth.getNum() - targetNum);
+                return 0.1 + 0.1 * abs(tooth.getNum() - targetNum);
             }
 
             public double getDistanceOppoToothRec(Tooth tooth, Tooth mesialTooth, Tooth distalTooth) {
-                int dis1 = abs(tooth.getNum()-mesialTooth.getNum());
-                int dis2 = abs(tooth.getNum()-distalTooth.getNum());
-                return 0.5 + 0.1 * ((dis1<dis2)?dis1:dis2);
+                int mesialNum = mesialTooth.getNum();
+                int distalNum = distalTooth.getNum();
+                if (mesialTooth.getNum() <= 3) {
+                    mesialNum = 4;
+                }
+                int dis1 = abs(tooth.getNum()-mesialNum);
+                int dis2 = abs(tooth.getNum()-distalNum);
+                return 0.1 + 0.1 * ((dis1<dis2)?dis1:dis2);
             }
 
             public boolean isDisociate(List<EdentulousSpace> edentulousSpaceList) {
@@ -77,10 +82,6 @@ public class ScoreRule {
                 ArrayList<Tooth> sorted_zone2 = new ArrayList<>();
                 ArrayList<Tooth> sorted_zone3 = new ArrayList<>();
                 ArrayList<Tooth> sorted_zone4 = new ArrayList<>();
-                if (abutment_missing_teeth.get(0).getZone() == 4 && abutment_missing_teeth.get(0).getNum() == 5
-                        && abutment_missing_teeth.get(1).getZone() == 4 && abutment_missing_teeth.get(1).getNum() == 7) {
-                    int lll = 0;
-                }
 
                 if (plan.getPosition() == Position.Mandibular) {
                     List<Tooth> missing_teeth = mouth.getMandibular().getMissingTeeth();
@@ -111,14 +112,23 @@ public class ScoreRule {
                     Collections.sort(sorted_zone2);
                 }
 
+                ArrayList<Tooth> abutment_teeth_without_rest = new ArrayList<>();
+                for (Component component:plan.getComponents()) {
+                    if (!component.isRest()) {
+                        abutment_teeth_without_rest.addAll(component.getToothPos());
+                    }
+                }
 
-                for (Tooth tooth : abutment_teeth) {
+                boolean recPenaltyFlag = false;
+                for (Tooth tooth : abutment_teeth_without_rest) {
                     if (plan.getPosition() == Position.Mandibular) {
                         if (mouth.getMandibular().isZoneNoMissing(tooth.getZone())) {
                             canine_weight = 2.2;
-                            premolar_weight = 0.0;
-                            distomolar_weight = 0.0;
+                            premolar_weight = 0.02;
+                            distomolar_weight = 0.01;
                             if (isDisociate(mouth.getMandibular().getEdentulousSpaces())) {
+                                //如果当前未惩罚对侧四边形布局，则惩罚
+                                recPenaltyFlag = !recPenaltyFlag;
                                 if (tooth.getZone() == 3) {
                                     distance = getDistanceOppoToothRec(
                                             tooth, sorted_zone4.get(0), sorted_zone4.get(sorted_zone4.size()-1));
@@ -140,19 +150,20 @@ public class ScoreRule {
                             }
 
                         } else {
-                            canine_weight = 0.2;
-                            premolar_weight = 0.1;
-                            distomolar_weight = 0.0;
+                            canine_weight = 0.3;
+                            premolar_weight = 0.2;
+                            distomolar_weight = 0.1;
                             Map<String, Object> info = plan.getNearestEdentulous(tooth);
                             distance = (Integer) info.get("distance");
                         }
                     } else {
                         if (mouth.getMaxillary().isZoneNoMissing(tooth.getZone())) {
                             canine_weight = 2.2;
-                            premolar_weight = 0.0;
-                            distomolar_weight = 0.0;
+                            premolar_weight = 0.02;
+                            distomolar_weight = 0.01;
 
                             if (isDisociate(mouth.getMaxillary().getEdentulousSpaces())) {
+                                recPenaltyFlag = !recPenaltyFlag;
                                 if (tooth.getZone() == 1) {
                                     distance = getDistanceOppoToothRec(
                                             tooth, sorted_zone2.get(0), sorted_zone2.get(sorted_zone2.size()-1));
@@ -173,9 +184,9 @@ public class ScoreRule {
                                 }
                             }
                         } else {
-                            canine_weight = 0.2;
-                            premolar_weight = 0.1;
-                            distomolar_weight = 0.0;
+                            canine_weight = 0.3;
+                            premolar_weight = 0.2;
+                            distomolar_weight = 0.1;
                             Map<String, Object> info = plan.getNearestEdentulous(tooth);
                             distance = (Integer) info.get("distance");
                         }
@@ -183,6 +194,7 @@ public class ScoreRule {
 
 //					Map<String, Object> info = plan.getNearestEdentulous(tooth);
 //					distance = (Integer) info.get("distance");
+
                     if (tooth.getToothType() == ToothType.Canine) {
                         score += distance + canine_weight;
                     } else if (tooth.getToothType() == ToothType.Premolar) {
@@ -191,7 +203,9 @@ public class ScoreRule {
                         score += distance + distomolar_weight;
                     }
                 }
-
+                if (recPenaltyFlag) {
+                    score += 10;
+                }
                 for (Component component : plan.getComponents()) {
                     if (plan.getPosition() == Position.Mandibular) {
                         Tooth cur_tooth = component.getToothPos().get(0);
@@ -219,7 +233,7 @@ public class ScoreRule {
                         }
                         else {
                             if (mouth.getMaxillary().isZoneNoMissing(component.getToothPos().get(0).getZone())) {
-                                score -= 0.5;
+                                score -= 0.1;
                             }
                             else {
                                 score -= 10;
@@ -235,6 +249,12 @@ public class ScoreRule {
                 List<RPDPlan> res = new ArrayList<>();
                 Map<RPDPlan, Double> score_map = new HashMap<RPDPlan, Double>();
                 for (RPDPlan plan : rpd_plans) {
+                    if (plan.getAbutmentTeeth().contains(mouth.getTooth(1, 7))
+                            && plan.getAbutmentTeeth().contains(mouth.getTooth(2, 6))
+                            && plan.getAbutmentTeeth().contains(mouth.getTooth(1, 5))
+                            && plan.getAbutmentTeeth().contains(mouth.getTooth(2, 5))) {
+                        int temp = 0;
+                    }
                     double score = scorePlan(plan);
                     score_map.put(plan, score);
                 }
@@ -254,19 +274,26 @@ public class ScoreRule {
                     ArrayList<Tooth> abutment_teeth = new ArrayList<>();
                     abutment_teeth.addAll(cur_map.getKey().getAbutmentTeeth());
                     Collections.sort(abutment_teeth);
-                    if (cur_map.getKey().getAbutmentTeeth().size() == 2) {
+                    int abutmentSize = cur_map.getKey().getAbutmentTeeth().size();
+                    for (Component component:cur_map.getKey().getComponents()) {
+                        if (component.isRest()) {
+                            abutmentSize = abutmentSize - 1;
+                        }
+                    }
+
+                    if (abutmentSize == 2) {
                         if (count_2 <= total_count) {
                             res.add(cur_map.getKey());
                             count_2++;
                         }
                     }
-                    if (cur_map.getKey().getAbutmentTeeth().size() == 3) {
+                    if (abutmentSize == 3) {
                         if (count_3 <= total_count) {
                             res.add(cur_map.getKey());
                             count_3++;
                         }
                     }
-                    if (cur_map.getKey().getAbutmentTeeth().size() == 4) {
+                    if (abutmentSize == 4) {
                         if (count_4 <= total_count) {
                             res.add(cur_map.getKey());
                             count_4++;

@@ -26,31 +26,6 @@ public class ChooseAbutmentRule {
 		choose_abutment_rules.add(new ChooseAbutmentRule() {
 
 			public String getExplaination() {
-				return "处理特例，仅游离缺失一颗时（牙位7），设置基牙为5,6";
-			}
-
-			public String toString() {
-				return this.getExplaination();
-			}
-
-			public int getRuleNum() {
-				return 0;
-			}
-
-			public List<RPDPlan> apply(List<RPDPlan> rpd_plans) throws RuleException {
-				List<RPDPlan> res = new ArrayList<>();
-				for (RPDPlan plan : rpd_plans) {
-					if (getMaxSuccessiveAbutmentNum(plan) <= 2) {
-						res.add(plan);
-					}
-				}
-				return res;
-			}
-		});
-
-		choose_abutment_rules.add(new ChooseAbutmentRule() {
-
-			public String getExplaination() {
 				return "初始化搜索树，遍历选择2-4颗基牙";
 			}
 
@@ -120,7 +95,55 @@ public class ChooseAbutmentRule {
 		choose_abutment_rules.add(new ChooseAbutmentRule() {
 
 			public String getExplaination() {
-				return "如果不是一侧除切牙外全部缺牙，或不需要大连接体（后牙非游离缺失，前牙不缺，且每侧最多缺失一颗），不能全部在同一个zone";
+				return "如果不需要大连接体，且单侧缺失，基牙只在缺失侧选择";
+			}
+
+			public String toString() {
+				return this.getExplaination();
+			}
+
+			public int getRuleNum() {
+				return 3;
+			}
+
+			public List<RPDPlan> apply(List<RPDPlan> rpd_plans) throws RuleException {
+				if (rpd_plans.size() == 0 || rpd_plans == null) {
+					return rpd_plans;
+				}
+				List<RPDPlan> res = new ArrayList<>();
+				Position position = rpd_plans.get(0).getPosition();
+				if (!needMajorConnector(position) && isOneSideMissing(mouth, position)){
+					for (RPDPlan plan:rpd_plans) {
+						if (isSingleZone(plan.getAbutmentTeeth())) {
+							ArrayList<Tooth> abutmentTeeth = new ArrayList<>(plan.getAbutmentTeeth());
+							int abutmentZone = abutmentTeeth.get(0).getZone();
+							int missingZone;
+							if (position == Position.Mandibular) {
+								missingZone = mouth.getMandibular().getMissingTeeth().get(0).getZone();
+							}
+							else {
+								missingZone = mouth.getMaxillary().getMissingTeeth().get(0).getZone();
+							}
+							if (missingZone == abutmentZone) {
+								res.add(plan);
+							}
+						}
+					}
+
+				}
+				else {
+					res.addAll(rpd_plans);
+				}
+				return res;
+			}
+
+
+		});
+
+		choose_abutment_rules.add(new ChooseAbutmentRule() {
+
+			public String getExplaination() {
+				return "如果非（一侧除切牙外全部缺牙，或不需要大连接体），不能全部在同一个zone";
 			}
 
 			public String toString() {
@@ -149,36 +172,7 @@ public class ChooseAbutmentRule {
 				return res;
 			}
 
-			public boolean needMajorConnector(Position planPosition) {
-				boolean flag = false;
-				List<EdentulousSpace> edentulousSpaceList = null;
-				boolean isMissingFrontTeeth;
-				if (planPosition == Position.Mandibular) {
-					edentulousSpaceList = mouth.getMandibular().getEdentulousSpaces();
-					isMissingFrontTeeth = mouth.getMandibular().isMissingFrontTeeth();
-				}
-				else {
-					edentulousSpaceList = mouth.getMaxillary().getEdentulousSpaces();
-					isMissingFrontTeeth = mouth.getMaxillary().isMissingFrontTeeth();
-				}
 
-				if (isMissingFrontTeeth) {
-					return true;
-				}
-
-				for (EdentulousSpace edentulousSpace:edentulousSpaceList) {
-					if (edentulousSpace.getEdentulousType() == EdentulousType.PosteriorExtension) {
-						flag = true;
-						break;
-					}
-					if (edentulousSpace.getLeftMost().getZone() != edentulousSpace.getRightMost().getZone()
-							|| edentulousSpace.getLeftMost().getNum() != edentulousSpace.getRightMost().getNum()) {
-						flag = true;
-						break;
-					}
-				}
-				return flag;
-			}
 		});
 
 		choose_abutment_rules.add(new ChooseAbutmentRule() {
@@ -321,6 +315,31 @@ public class ChooseAbutmentRule {
 			if (mouth.getMaxillary().isZone1AllMissingExceptIncisor()
 					|| mouth.getMaxillary().isZone2AllMissingExceptIncisor()) {
 				flag = true;
+			}
+		}
+		return flag;
+	}
+
+	public boolean isOneSideMissing(Mouth mouth, Position position) {
+		boolean flag = true;
+		if (position == Position.Mandibular) {
+			List<Tooth> missingTeeth = mouth.getMandibular().getMissingTeeth();
+			int curMissingZone = missingTeeth.get(0).getZone();
+			for (Tooth tooth:missingTeeth) {
+				if (tooth.getZone() != curMissingZone) {
+					flag = false;
+					break;
+				}
+			}
+		}
+		else if (position == Position.Maxillary) {
+			List<Tooth> missingTeeth = mouth.getMaxillary().getMissingTeeth();
+			int curMissingZone = missingTeeth.get(0).getZone();
+			for (Tooth tooth:missingTeeth) {
+				if (tooth.getZone() != curMissingZone) {
+					flag = false;
+					break;
+				}
 			}
 		}
 		return flag;
@@ -494,5 +513,67 @@ public class ChooseAbutmentRule {
 			last_num = tooth_num;
 		}
 		return false;
+	}
+
+	public boolean needMajorConnector(Position planPosition) {
+		boolean flag = false;
+		List<EdentulousSpace> edentulousSpaceList;
+		List<Tooth> missingTeeth;
+		boolean isMissingFrontTeeth;
+		if (planPosition == Position.Mandibular) {
+			edentulousSpaceList = mouth.getMandibular().getEdentulousSpaces();
+			isMissingFrontTeeth = mouth.getMandibular().isMissingFrontTeeth();
+			missingTeeth = mouth.getMandibular().getMissingTeeth();
+		}
+		else {
+			edentulousSpaceList = mouth.getMaxillary().getEdentulousSpaces();
+			isMissingFrontTeeth = mouth.getMaxillary().isMissingFrontTeeth();
+			missingTeeth = mouth.getMaxillary().getMissingTeeth();
+		}
+
+		if (isMissingFrontTeeth) {
+			return true;
+		}
+
+		//缺隙必须为非游离缺失
+		for (EdentulousSpace edentulousSpace:edentulousSpaceList) {
+			if (edentulousSpace.getEdentulousType() == EdentulousType.PosteriorExtension) {
+			    return true;
+			}
+//
+//			if (edentulousSpace.getLeftMost().getZone() != edentulousSpace.getRightMost().getZone()
+//					|| edentulousSpace.getLeftMost().getNum() != edentulousSpace.getRightMost().getNum()) {
+//				flag = true;
+//				break;
+//			}
+		}
+
+		if (isOneSideMissing(mouth, planPosition)) {
+			if (missingTeeth.size() == 2) {
+				if (missingTeeth.get(0).getNum() - missingTeeth.get(1).getNum() > 2) {
+					return true;
+				}
+			}
+		}
+		else {
+			int countLeft = 0;
+			int countRight = 0;
+			for (Tooth tooth:missingTeeth) {
+				if (tooth.getZone() == 1 || tooth.getZone() == 4) {
+					countLeft++;
+					if (countLeft > 1) {
+						return true;
+					}
+				}
+				else {
+					countRight++;
+					if (countRight > 1) {
+						return true;
+					}
+				}
+			}
+		}
+
+		return flag;
 	}
 }

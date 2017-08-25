@@ -9,10 +9,7 @@ import rpd.conceptions.Position;
 import rpd.oral.Maxillary;
 import rpd.oral.Tooth;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class FullPalatalPlateConnector extends MajorConnector {
 
@@ -41,6 +38,13 @@ public class FullPalatalPlateConnector extends MajorConnector {
 		Collections.sort(sorted_zone2);
 		this.tooth_pos.add(sorted_zone1.get(sorted_zone1.size() - 1));
 		this.tooth_pos.add(sorted_zone2.get(sorted_zone2.size() - 1));
+
+		this.lingual_confrontation = new HashSet<>();
+		for (Tooth tooth:abutment_teeth) {
+			if (tooth.getNum() == 3) {
+				super.addLingualConfrontation(tooth);
+			}
+		}
 		this.mandibular_or_maxillary = Position.Maxillary;
 	}
 
@@ -53,7 +57,7 @@ public class FullPalatalPlateConnector extends MajorConnector {
 		StringBuilder s = new StringBuilder();
 		s.append(super.toString());
 		s.append("上颌全腭板（Full Palatal Plate）");
-		if (this.lingual_confrontation != null) {
+		if (this.lingual_confrontation != null && this.lingual_confrontation.size() != 0) {
 			s.append("，舌侧对抗（");
 			for (Tooth tooth : this.lingual_confrontation) {
 				s.append(" ");

@@ -130,7 +130,7 @@ public class IndirectRetainerRule {
 					if (rotation_axis == null)
 						return null;
 
-					if (rotation_axis.needIndirectRetainer(rpd_plan, edentulous_space)) {
+					if (rotation_axis.needIndirectRetainer(rpd_plan, edentulous_space, mouth)) {
 
 						RPDPlan new_plan = new RPDPlan(rpd_plan);
 						Component indirect_retainer = rotation_axis.properIndirectRetainet(mouth, rpd_plan);

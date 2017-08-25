@@ -21,7 +21,8 @@ public class RotationAxis {
 		this.edentulous_space = edentulous_space;
 	}
 
-	public boolean needIndirectRetainer(RPDPlan rpd_plan, EdentulousSpace edentulous_space) throws EdentulousTypeException {
+	public boolean needIndirectRetainer(RPDPlan rpd_plan, EdentulousSpace edentulous_space, Mouth mouth)
+			throws EdentulousTypeException {
 		boolean res = true;
 		int edentulousZone = 0;
 		if (edentulous_space.getLeftMost().getNum() == 7) {
@@ -34,11 +35,27 @@ public class RotationAxis {
 
 		if (edentulousZone == 1 || edentulousZone == 4) {
 			if (this.left_indirect_retainer.getToothPos().get(0).getNum() > 3) {
+				//判断同侧是否有间接固位体
 				for (Component component:rpd_plan.getComponents()) {
 					if (component.getToothPos().get(0).getZone() == edentulousZone) {
 						if (this.canBePosteriorIndirectRetainer(component)) {
-							res = false;
-							break;
+							return false;
+						}
+					}
+				}
+				//如果同侧没有，且同侧3,4位置missing，无法放置支托，判断对侧是否有间接固位体
+				if (
+						(edentulousZone == 1
+								&& mouth.getMaxillary().getTooth(1, 3).isMissing()
+								&& mouth.getMaxillary().getTooth(1, 4).isMissing())
+						|| (edentulousZone == 4
+								&& mouth.getMandibular().getTooth(4, 3).isMissing()
+								&& mouth.getMandibular().getTooth(4, 4).isMissing())) {
+					for (Component component : rpd_plan.getComponents()) {
+						if (component.getToothPos().get(0).getZone() != edentulousZone) {
+							if (this.canBePosteriorIndirectRetainer(component)) {
+								return false;
+							}
 						}
 					}
 				}
@@ -46,8 +63,7 @@ public class RotationAxis {
 			else {
 				for (Component component:rpd_plan.getComponents()) {
 					if (this.canBePosteriorIndirectRetainer(component)) {
-						res = false;
-						break;
+						return false;
 					}
 				}
 			}
@@ -57,8 +73,22 @@ public class RotationAxis {
 				for (Component component:rpd_plan.getComponents()) {
 					if (component.getToothPos().get(0).getZone() == edentulousZone) {
 						if (this.canBePosteriorIndirectRetainer(component)) {
-							res = false;
-							break;
+							return false;
+						}
+					}
+				}
+				if (
+						(edentulousZone == 2
+								&& mouth.getMaxillary().getTooth(2, 3).isMissing()
+								&& mouth.getMaxillary().getTooth(2, 4).isMissing())
+						|| (edentulousZone == 3
+								&& mouth.getMandibular().getTooth(3, 3).isMissing()
+								&& mouth.getMandibular().getTooth(3, 4).isMissing())) {
+					for (Component component : rpd_plan.getComponents()) {
+						if (component.getToothPos().get(0).getZone() != edentulousZone) {
+							if (this.canBePosteriorIndirectRetainer(component)) {
+								return false;
+							}
 						}
 					}
 				}
@@ -66,8 +96,7 @@ public class RotationAxis {
 			else {
 				for (Component component:rpd_plan.getComponents()) {
 					if (this.canBePosteriorIndirectRetainer(component)) {
-						res = false;
-						break;
+						return false;
 					}
 				}
 			}

@@ -9,10 +9,7 @@ import rpd.conceptions.Position;
 import rpd.oral.Maxillary;
 import rpd.oral.Tooth;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class ModifiedPalatalPlateConnector extends MajorConnector {
 
@@ -28,6 +25,7 @@ public class ModifiedPalatalPlateConnector extends MajorConnector {
 		abutment_missing_teeth.addAll(missing_teeth);
 
 		this.tooth_pos = new ArrayList<>();
+		this.lingual_confrontation = new HashSet<>();
 		ArrayList<Tooth> sorted_zone1 = new ArrayList<>();
 		ArrayList<Tooth> sorted_zone2 = new ArrayList<>();
 		for (Tooth tooth : abutment_missing_teeth) {
@@ -39,10 +37,27 @@ public class ModifiedPalatalPlateConnector extends MajorConnector {
 		}
 		Collections.sort(sorted_zone1);
 		Collections.sort(sorted_zone2);
-		this.tooth_pos.add(sorted_zone1.get(sorted_zone1.size() - 1));
-		this.tooth_pos.add(sorted_zone1.get(0));
-		this.tooth_pos.add(sorted_zone2.get(0));
-		this.tooth_pos.add(sorted_zone2.get(sorted_zone2.size() - 1));
+		Tooth curTooth = null;
+		curTooth = sorted_zone1.get(sorted_zone1.size() - 1);
+		if (curTooth.getNum() == 3 && abutment_teeth.contains(curTooth)) {
+			super.addLingualConfrontation(curTooth);
+		}
+		this.tooth_pos.add(curTooth);
+		curTooth = sorted_zone1.get(0);
+		if (curTooth.getNum() == 3 && abutment_teeth.contains(curTooth)) {
+			super.addLingualConfrontation(curTooth);
+		}
+		this.tooth_pos.add(curTooth);
+		curTooth = sorted_zone2.get(0);
+		if (curTooth.getNum() == 3 && abutment_teeth.contains(curTooth)) {
+			super.addLingualConfrontation(curTooth);
+		}
+		this.tooth_pos.add(curTooth);
+		curTooth = sorted_zone2.get(sorted_zone2.size() - 1);
+		if (curTooth.getNum() == 3 && abutment_teeth.contains(curTooth)) {
+			super.addLingualConfrontation(curTooth);
+		}
+		this.tooth_pos.add(curTooth);
 //		if (sorted_zone1.size() > 1) {
 //			this.tooth_pos.add(sorted_zone1.get(sorted_zone1.size() - 1));
 //			this.tooth_pos.add(sorted_zone1.get(0));
@@ -84,7 +99,7 @@ public class ModifiedPalatalPlateConnector extends MajorConnector {
 		StringBuilder s = new StringBuilder();
 		s.append(super.toString());
 		s.append("上颌变异腭板（Modified Palatal Plate）");
-		if (this.lingual_confrontation != null) {
+		if (this.lingual_confrontation != null && this.lingual_confrontation.size() != 0) {
 			s.append("，舌侧对抗（");
 			for (Tooth tooth : this.lingual_confrontation) {
 				s.append(" ");

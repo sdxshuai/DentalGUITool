@@ -10,10 +10,7 @@ import rpd.oral.EdentulousSpace;
 import rpd.oral.Mandibular;
 import rpd.oral.Tooth;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class LingualPlateConnector extends MajorConnector {
 
@@ -65,6 +62,14 @@ public class LingualPlateConnector extends MajorConnector {
 				System.out.println("There are no teeth left!");
 			}
 		}
+
+
+		this.lingual_confrontation = new HashSet<>();
+		for (Tooth tooth:abutment_teeth) {
+			if (tooth.getNum() == 3) {
+				super.addLingualConfrontation(tooth);
+			}
+		}
 		this.mandibular_or_maxillary = Position.Mandibular;
 	}
 
@@ -77,7 +82,7 @@ public class LingualPlateConnector extends MajorConnector {
 		StringBuilder s = new StringBuilder();
 		s.append(super.toString());
 		s.append("下颌舌板（Lingual Plate）");
-		if (this.lingual_confrontation != null) {
+		if (this.lingual_confrontation != null && this.lingual_confrontation.size() != 0) {
 			s.append("，舌侧对抗（");
 			for (Tooth tooth : this.lingual_confrontation) {
 				s.append(" ");

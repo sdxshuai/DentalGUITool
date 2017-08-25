@@ -8,10 +8,12 @@ import rpd.conceptions.Position;
 import rpd.oral.Tooth;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 public abstract class MajorConnector implements Component {
 	protected ArrayList<Tooth> tooth_pos = null;
-	protected ArrayList<Tooth> lingual_confrontation = null;
+	protected HashSet<Tooth> lingual_confrontation = null;
 	protected Position mandibular_or_maxillary = null;
 
 	protected String rule_explanation = null;
@@ -39,6 +41,10 @@ public abstract class MajorConnector implements Component {
 
 	public void addLingualConfrontation(ArrayList<Tooth> tooth_list) {
 		this.lingual_confrontation.addAll(tooth_list);
+	}
+
+	public HashSet<Tooth> getLingualConfrontation() {
+		return lingual_confrontation;
 	}
 
 	@Override

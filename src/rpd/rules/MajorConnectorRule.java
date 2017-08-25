@@ -263,32 +263,112 @@ public class MajorConnectorRule {
 				return flag;
 			}
 
-			public boolean needMajorConnector(Position planPosition) {
+//			public boolean needMajorConnector(Position planPosition) {
+//				boolean flag = false;
+//				List<EdentulousSpace> edentulousSpaceList = null;
+//				boolean isMissingFrontTeeth;
+//				if (planPosition == Position.Mandibular) {
+//					edentulousSpaceList = mouth.getMandibular().getEdentulousSpaces();
+//					isMissingFrontTeeth = mouth.getMandibular().isMissingFrontTeeth();
+//				}
+//				else {
+//					edentulousSpaceList = mouth.getMaxillary().getEdentulousSpaces();
+//					isMissingFrontTeeth = mouth.getMaxillary().isMissingFrontTeeth();
+//				}
+//
+//				if (isMissingFrontTeeth) {
+//					return true;
+//				}
+//
+//				for (EdentulousSpace edentulousSpace:edentulousSpaceList) {
+//					if (edentulousSpace.getEdentulousType() == EdentulousType.PosteriorExtension) {
+//						flag = true;
+//						break;
+//					}
+//					if (edentulousSpace.getLeftMost().getZone() != edentulousSpace.getRightMost().getZone()
+//							|| edentulousSpace.getLeftMost().getNum() != edentulousSpace.getRightMost().getNum()) {
+//						flag = true;
+//						break;
+//					}
+//				}
+//				return flag;
+//			}
+
+			public boolean isOneSideMissing(Mouth mouth, Position position) {
+				boolean flag = true;
+				if (position == Position.Mandibular) {
+					List<Tooth> missingTeeth = mouth.getMandibular().getMissingTeeth();
+					int curMissingZone = missingTeeth.get(0).getZone();
+					for (Tooth tooth:missingTeeth) {
+						if (tooth.getZone() != curMissingZone) {
+							flag = false;
+							break;
+						}
+					}
+				}
+				else if (position == Position.Maxillary) {
+					List<Tooth> missingTeeth = mouth.getMaxillary().getMissingTeeth();
+					int curMissingZone = missingTeeth.get(0).getZone();
+					for (Tooth tooth:missingTeeth) {
+						if (tooth.getZone() != curMissingZone) {
+							flag = false;
+							break;
+						}
+					}
+				}
+				return flag;
+			}
+
+            public boolean needMajorConnector(Position planPosition) {
 				boolean flag = false;
-				List<EdentulousSpace> edentulousSpaceList = null;
+				List<EdentulousSpace> edentulousSpaceList;
+				List<Tooth> missingTeeth;
 				boolean isMissingFrontTeeth;
 				if (planPosition == Position.Mandibular) {
 					edentulousSpaceList = mouth.getMandibular().getEdentulousSpaces();
 					isMissingFrontTeeth = mouth.getMandibular().isMissingFrontTeeth();
+					missingTeeth = mouth.getMandibular().getMissingTeeth();
 				}
 				else {
 					edentulousSpaceList = mouth.getMaxillary().getEdentulousSpaces();
 					isMissingFrontTeeth = mouth.getMaxillary().isMissingFrontTeeth();
+					missingTeeth = mouth.getMaxillary().getMissingTeeth();
 				}
 
 				if (isMissingFrontTeeth) {
 					return true;
 				}
 
+		//缺隙必须为非游离缺失
 				for (EdentulousSpace edentulousSpace:edentulousSpaceList) {
 					if (edentulousSpace.getEdentulousType() == EdentulousType.PosteriorExtension) {
-						flag = true;
-						break;
+			    		return true;
 					}
-					if (edentulousSpace.getLeftMost().getZone() != edentulousSpace.getRightMost().getZone()
-							|| edentulousSpace.getLeftMost().getNum() != edentulousSpace.getRightMost().getNum()) {
-						flag = true;
-						break;
+				}
+
+				if (isOneSideMissing(mouth, planPosition)) {
+					if (missingTeeth.size() == 2) {
+						if (missingTeeth.get(0).getNum() - missingTeeth.get(1).getNum() > 2) {
+							return true;
+						}
+					}
+				}
+				else {
+					int countLeft = 0;
+					int countRight = 0;
+					for (Tooth tooth:missingTeeth) {
+						if (tooth.getZone() == 1 || tooth.getZone() == 4) {
+							countLeft++;
+							if (countLeft > 1) {
+								return true;
+							}
+						}
+						else {
+							countRight++;
+							if (countRight > 1) {
+								return true;
+							}
+						}
 					}
 				}
 				return flag;

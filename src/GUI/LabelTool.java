@@ -2693,6 +2693,8 @@ public class LabelTool {
 		OntClass palatalPlateConnectorClass = model.getOntClass(NS + "palatal_plate");
 		Individual indPalatalPlateConnector = model.createIndividual(NS + indCount, palatalPlateConnectorClass);
 		setComponentToothPos(model, indPalatalPlateConnector, palatalPlateConnector.getToothPos(), NS);
+		setMajorConnectorLingualConfrontation(
+				model, indPalatalPlateConnector, palatalPlateConnector.getLingualConfrontation(), NS);
 		return;
 	}
 
@@ -2704,6 +2706,8 @@ public class LabelTool {
 		Individual indFullPalatalPlateConnector
 				= model.createIndividual(NS + indCount, fullPalatalPlateConnectorClass);
 		setComponentToothPos(model, indFullPalatalPlateConnector, fullPalatalPlateConnector.getToothPos(), NS);
+		setMajorConnectorLingualConfrontation(
+				model, indFullPalatalPlateConnector, fullPalatalPlateConnector.getLingualConfrontation(), NS);
 		return;
 	}
 
@@ -2715,6 +2719,8 @@ public class LabelTool {
 		Individual indModifiedPalatalPlateConnector
 				= model.createIndividual(NS + indCount, modifiedPalatalPlateConnectorClass);
 		setComponentToothPos(model, indModifiedPalatalPlateConnector, modifiedPalatalPlateConnector.getToothPos(), NS);
+		setMajorConnectorLingualConfrontation(
+				model, indModifiedPalatalPlateConnector, modifiedPalatalPlateConnector.getLingualConfrontation(), NS);
 		return;
 	}
 
@@ -2735,6 +2741,8 @@ public class LabelTool {
 		OntClass lingualPlateConnectorClass = model.getOntClass(NS + "lingual_plate");
 		Individual indLingualPlateConnector = model.createIndividual(NS + indCount, lingualPlateConnectorClass);
 		setComponentToothPos(model, indLingualPlateConnector, lingualPlateConnector.getToothPos(), NS);
+		setMajorConnectorLingualConfrontation(
+				model, indLingualPlateConnector, lingualPlateConnector.getLingualConfrontation(), NS);
 		return;
 	}
 
@@ -2773,6 +2781,14 @@ public class LabelTool {
 		OntProperty component_position = model.getObjectProperty(NS + "component_position");
 		for (Tooth tooth : tooth_pos) {
 			indComponent.addProperty(component_position, model.getIndividual(NS + tooth.toString()));
+		}
+	}
+
+	public void setMajorConnectorLingualConfrontation(
+			OntModel model, Individual indMajorConnector, HashSet<Tooth> lingualConfrontation, String NS) {
+		OntProperty lingual_confrontation = model.getObjectProperty(NS + "lingual_confrontation");
+		for (Tooth tooth:lingualConfrontation) {
+			indMajorConnector.addProperty(lingual_confrontation, model.getIndividual(NS + tooth.toString()));
 		}
 	}
 }
