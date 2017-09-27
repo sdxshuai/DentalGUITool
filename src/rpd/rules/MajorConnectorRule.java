@@ -15,6 +15,7 @@ import rpd.oral.Mouth;
 import rpd.oral.Tooth;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -391,6 +392,23 @@ public class MajorConnectorRule {
 						MajorConnector majorConnector = chooseMajorConnector(plan, explanation);
 						if (majorConnector != null) {
 							plan.addComponent(majorConnector);
+							HashSet<Tooth> lingualConfrontation = majorConnector.getLingualConfrontation();
+							if (lingualConfrontation != null) {
+								for (Tooth tooth : lingualConfrontation) {
+									if (tooth.getNum() == 3) {
+										for (Component component : plan.getComponents()) {
+											int comZone = component.getToothPos().get(0).getZone();
+											int comNum = component.getToothPos().get(0).getNum();
+											if (comZone == tooth.getZone() && comNum == tooth.getNum()) {
+												if (component.getClass().getName().equals("rpd.components.LingualRest")) {
+													plan.removeComponent(component);
+												}
+												break;
+											}
+										}
+									}
+								}
+							}
 							plan.appendPlanExplanation(explanation.toString());
 						}
 					}

@@ -10,20 +10,6 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://E:/opencv/build/java/opencv-320.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <NATIVE>
-          <root url="file://E:/opencv/build/java/x64" />
-        </NATIVE>
-        <SOURCES>
-          <root url="jar://E:/opencv/build/java/opencv-320.jar!/" />
-        </SOURCES>
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library>
-        <CLASSES>
           <root url="file://D:/lib/DentalGUI" />
         </CLASSES>
         <JAVADOC />
@@ -59,6 +45,28 @@
         <JAVADOC />
         <SOURCES />
         <jarDirectory url="file://D:/lib/DentalEMRParser" recursive="false" />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://E:/opencv/build/java/opencv-330.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES>
+          <root url="jar://E:/opencv/build/java/opencv-330.jar!/" />
+        </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="library" name="lib" level="project" />
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES />
+        <JAVADOC />
+        <NATIVE>
+          <root url="file://E:/opencv/build/java/x64" />
+        </NATIVE>
+        <SOURCES />
       </library>
     </orderEntry>
   </component>

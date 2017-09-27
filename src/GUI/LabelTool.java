@@ -75,7 +75,7 @@ public class LabelTool {
 
 	static {
 		System.loadLibrary("RpdDesignLib");
-		System.loadLibrary("opencv_java320");
+		System.loadLibrary("opencv_java330");
 	}
 
 	private OntModel dental_ont = null;

@@ -7,7 +7,9 @@
     <NATIVE>
       <root url="file://$PROJECT_DIR$/../RPD-Design/x64/Release" />
     </NATIVE>
-    <SOURCES />
+    <SOURCES>
+      <root url="jar://E:/opencv/build/java/opencv-330.jar!/" />
+    </SOURCES>
     <jarDirectory url="file://$PROJECT_DIR$/lib" recursive="false" />
   </library>
 </component>
