@@ -29,16 +29,6 @@
     </orderEntry>
     <orderEntry type="module-library">
       <library>
-        <CLASSES />
-        <JAVADOC />
-        <NATIVE>
-          <root url="file://$MODULE_DIR$/../RPD-Design/x64/Release" />
-        </NATIVE>
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library>
         <CLASSES>
           <root url="file://D:/lib/DentalEMRParser" />
         </CLASSES>
@@ -47,26 +37,31 @@
         <jarDirectory url="file://D:/lib/DentalEMRParser" recursive="false" />
       </library>
     </orderEntry>
-    <orderEntry type="module-library">
-      <library>
-        <CLASSES>
-          <root url="jar://E:/opencv/build/java/opencv-330.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES>
-          <root url="jar://E:/opencv/build/java/opencv-330.jar!/" />
-        </SOURCES>
-      </library>
-    </orderEntry>
     <orderEntry type="library" name="lib" level="project" />
     <orderEntry type="module-library">
       <library>
         <CLASSES />
         <JAVADOC />
         <NATIVE>
-          <root url="file://E:/opencv/build/java/x64" />
+          <root url="file://D:/lib/RpdDesignLib" />
         </NATIVE>
         <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="file://D:/lib/opencv" />
+        </CLASSES>
+        <JAVADOC />
+        <NATIVE>
+          <root url="file://D:/lib/opencv" />
+        </NATIVE>
+        <SOURCES>
+          <root url="file://D:/lib/opencv" />
+        </SOURCES>
+        <jarDirectory url="file://D:/lib/opencv" recursive="false" />
+        <jarDirectory url="file://D:/lib/opencv" recursive="false" type="SOURCES" />
       </library>
     </orderEntry>
   </component>

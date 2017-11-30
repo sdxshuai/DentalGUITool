@@ -64,7 +64,7 @@ public class RPAClasp extends Clasp {
 		else {
 		}
 
-		s.append("卡环臂尖朝向远中");
+		s.append("卡环臂尖朝向近中");
 		return s.toString();
 	}
 
