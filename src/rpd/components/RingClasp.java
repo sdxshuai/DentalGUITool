@@ -106,6 +106,22 @@ public class RingClasp extends Clasp {
 		return s.toString();
 	}
 
+	public String[] addComponents() {
+
+		String s[] = new String[2];
+		//s.append(super.toString());
+		s[0] = "圈形（Ring）卡环";
+
+		if (this.getMaterial().equals(ClaspMaterial.WW))
+			s[1] = "弯制材料";
+		else if (this.getMaterial().equals(ClaspMaterial.Cast))
+			s[1] = "铸造材料";
+		else {
+		}
+
+		return s;
+	}
+
 	public String toString() {
 		return this.print();
 	}

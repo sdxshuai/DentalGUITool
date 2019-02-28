@@ -59,6 +59,21 @@ public class IncisalRest extends Rest {
 		return s.toString();
 	}
 
+	public String[] addComponents() {
+
+		String s[] = new String[3];
+		//s.append(super.toString());
+
+		if (mesial_or_distal.equals(Position.Mesial))
+			s[1] = "近中";
+		else if (mesial_or_distal.equals(Position.Distal))
+			s[1] = "远中";
+		else {
+		}
+		s[0] = "切支托";
+		return s;
+	}
+
 	public String toString() {
 		return this.print();
 	}

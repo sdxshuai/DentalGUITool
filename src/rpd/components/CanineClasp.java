@@ -74,6 +74,29 @@ public class CanineClasp extends Clasp {
 		return s.toString();
 	}
 
+	public String[] addComponents() {
+
+		String s[] = new String[3];
+		//s.append(super.toString());
+		s[0] = "尖牙(Canine)卡环";
+
+		if (this.getMaterial().equals(ClaspMaterial.WW))
+			s[1] = "弯制材料";
+		else if (this.getMaterial().equals(ClaspMaterial.Cast))
+			s[1] = "铸造材料";
+		else {
+		}
+
+		if (this.getTipDirection().equals(Position.Mesial))
+			s[2] = "卡环臂尖朝向近中";
+		else if (this.getTipDirection().equals(Position.Distal))
+			s[2] = "卡环臂尖朝向远中";
+		else {
+		}
+
+		return s;
+	}
+
 	public String toString() {
 		return this.print();
 	}

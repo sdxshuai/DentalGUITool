@@ -72,6 +72,19 @@ public class GuidingPlate implements Component {
 		return s.toString();
 	}
 
+	public String[] addComponents() {
+
+		String s[] = new String[1];
+		if (mesial_or_distal.equals(Position.Mesial))
+			s[0] = ("近中导平面板");
+		else if (mesial_or_distal.equals(Position.Distal))
+			s[0] = ("远中导平面板");
+		else {
+		}
+		//throw new ComponentException("illegal guiding plate direction: " + mesial_or_distal.name());
+		return s;
+	}
+
 	public String toString() {
 		return this.print();
 	}

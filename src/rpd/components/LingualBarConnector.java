@@ -88,6 +88,23 @@ public class LingualBarConnector extends MajorConnector {
 		return s.toString();
 	}
 
+	public String[] addComponents() {
+
+		String s[] = new String[10];
+		StringBuilder s1 = new StringBuilder();
+		int i = 3;
+		s[0] = "下颌舌杆（Lingual Bar）";
+		if (this.lingual_confrontation != null) {
+			for (Tooth tooth : this.lingual_confrontation) {
+				s1.append("舌侧对抗（");
+				s1.append(tooth.toString());
+				s1.append("）");
+				s[i++] = s1.toString();
+			}
+
+		}
+		return s;
+	}
 	public String toString() {
 		return this.print();
 	}

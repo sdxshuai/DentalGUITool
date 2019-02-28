@@ -116,6 +116,23 @@ public class CombinedClasp extends Clasp {
 		return s.toString();
 	}
 
+	public String[] addComponents() {
+
+		String s[] = new String[3];
+		//s.append(super.toString());
+		s[0] = "联合（Combined）卡环";
+
+
+		if (this.getMaterial().equals(ClaspMaterial.WW))
+			s[1] = ("弯制材料");
+		else if (this.getMaterial().equals(ClaspMaterial.Cast))
+			s[1] = ("铸造材料");
+		else {
+		}
+
+		return s;
+	}
+
 	public String toString() {
 		return this.print();
 	}

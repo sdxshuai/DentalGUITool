@@ -65,6 +65,15 @@ public class EmbrasureClasp extends Clasp {
 		return s.toString();
 	}
 
+	public String[] addComponents() {
+
+		String s[] = new String[2];
+		s[0] = "间隙（Embrasure）卡环";
+		s[1] = "弯制材料";
+		return s;
+	}
+
+
 	public String toString() {
 		return this.print();
 	}

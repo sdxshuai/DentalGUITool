@@ -68,6 +68,12 @@ public class DentureBase implements Component {
 		return s.toString();
 	}
 
+	public String[] addComponents() {
+		String s[] = new String[1];
+		s[0] = "基托（Denture Base）";
+		return s;
+	}
+
 	public String toString() {
 		return this.print();
 	}

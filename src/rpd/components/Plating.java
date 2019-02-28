@@ -58,6 +58,14 @@ public class Plating implements Component {
 		return s.toString();
 	}
 
+	public String[] addComponents() {
+
+		String s[] = new String[1];
+		s[0] = "舌板覆盖";
+		return s;
+	}
+
+
 	public String toString() {
 		return this.print();
 	}

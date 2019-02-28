@@ -42,7 +42,7 @@ public class FullPalatalPlateConnector extends MajorConnector {
 		this.lingual_confrontation = new HashSet<>();
 		for (Tooth tooth:abutment_teeth) {
 			if (tooth.getNum() == 3) {
-				super.addLingualConfrontation(tooth);
+					super.addLingualConfrontation(tooth);
 			}
 		}
 		this.mandibular_or_maxillary = Position.Maxillary;
@@ -67,6 +67,39 @@ public class FullPalatalPlateConnector extends MajorConnector {
 		}
 
 		return s.toString();
+	}
+//
+//	public String[] addComponents() {
+//
+//		String s[] = new String[4];
+//		StringBuilder s1 = new StringBuilder();
+//		//s.append(super.toString());
+//		if (this.lingual_confrontation != null && this.lingual_confrontation.size() != 0) {
+//			s1.append("舌侧对抗（");
+//			for (Tooth tooth : this.lingual_confrontation) {
+//				s1.append(" ");
+//				s1.append(tooth.toString());
+//			}
+//			s1.append("）");
+//		}
+//		s[3] = s1.toString();
+//
+//		return s;
+//	}
+	public String[] addComponents() {
+		String s[] = new String[10];
+		s[0] = "上颌全腭板（Full Palatal Plate）";
+		int i = 3;
+		if (this.lingual_confrontation != null) {
+			for (Tooth tooth : this.lingual_confrontation) {
+				StringBuilder s1 = new StringBuilder();
+				s1.append("舌侧对抗（");
+				s1.append(tooth.toString());
+				s1.append("）");
+				s[i++] = s1.toString();
+			}
+		}
+		return s;
 	}
 
 	public String toString() {

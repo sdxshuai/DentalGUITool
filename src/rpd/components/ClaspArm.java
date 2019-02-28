@@ -112,6 +112,37 @@ public class ClaspArm implements Component {
 		return s.toString();
 	}
 
+	public String[] addComponents() {
+
+		String s[] = new String[4];
+		//s.append(super.toString());
+		s[0] = "卡环臂（Clasp Arm）";
+
+		//s.append(this.tooth_pos.toString() + ":");
+		if (buccal_or_lingual.equals(Position.Buccal))
+			s[1] = "颊侧";
+		else if (buccal_or_lingual.equals(Position.Lingual))
+			s[1] = "舌侧";
+		else {
+		}
+
+		if (material.equals(ClaspMaterial.WW))
+			s[2] = "弯制卡环";
+		else if (material.equals(ClaspMaterial.Cast))
+			s[2] = "铸造卡环";
+		else {
+		}
+
+		if (tip_direction.equals(Position.Mesial))
+			s[3] = "卡环臂尖朝向近中";
+		else if (tip_direction.equals(Position.Distal))
+			s[3] = "卡环臂尖朝向远中";
+		else {
+		}
+
+		return s;
+	}
+
 	public String toString() {
 		return this.print();
 	}

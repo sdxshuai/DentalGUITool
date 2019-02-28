@@ -11,15 +11,14 @@ import exceptions.rpd.RuleException;
 import exceptions.rpd.ToothPosException;
 import misc.PrintTestFile;
 import misc.ToothMap;
-import misc.PrintImage;
 import ontologies.*;
 import ontologies.Descriptions.PropertyDescription;
+import org.apache.commons.lang3.ArrayUtils;
 import org.apache.jena.ontology.*;
 import org.apache.jena.rdf.model.ModelFactory;
 import org.apache.jena.riot.RDFDataMgr;
 import org.apache.jena.riot.RDFFormat;
 import org.apache.jena.vocabulary.XSD;
-import org.apache.poi.ss.formula.functions.T;
 import org.opencv.core.Mat;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -30,19 +29,17 @@ import rpd.SearchRPDPlan;
 import rpd.components.*;
 import rpd.conceptions.ClaspMaterial;
 import rpd.conceptions.Position;
-import rpd.oral.EdentulousSpace;
-import rpd.oral.Instantialize;
-import rpd.oral.Mouth;
+import rpd.oral.*;
 import rpd.oral.Tooth;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.Border;
-import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
+import javax.swing.event.CellEditorListener;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
-import javax.swing.table.DefaultTableModel;
+import javax.swing.table.*;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.DefaultStyledDocument;
 import javax.swing.text.SimpleAttributeSet;
@@ -60,6 +57,7 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import java.awt.*;
+import java.awt.Component;
 import java.awt.Dialog.ModalityType;
 import java.awt.event.*;
 import java.awt.image.BufferedImage;
@@ -69,9 +67,12 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
 import static org.opencv.imgcodecs.Imgcodecs.imwrite;
+import static rpd.conceptions.Position.Mesial;
 
 public class LabelTool {
+
 
 	static {
 		System.loadLibrary("RpdDesignLib");
@@ -114,7 +115,14 @@ public class LabelTool {
 	private JPopupMenu rpd_plan_menu = null;
 	private JPopupMenu mandibular_plan_menu = null;
 	private JPopupMenu maxillary_plan_menu = null;
-
+	private JFrame modifyFrame = new JFrame("可摘局部义齿设计方案");
+	private boolean flagCreateModifyPlan = false;
+	private boolean flagOriginalMaxilaryPlan = true;
+	private boolean flagOriginalMandibulayPlan = true;
+	public List<RPDPlan> maxillaryPlanBackup = new ArrayList<>();
+	public List<RPDPlan> mandibularPlanBackup = new ArrayList<>();
+//	private List<RPDPlan> maxillaryPlanBackup = new ArrayList<>();
+//	private List<RPDPlan> mandibularPlanBackup = new ArrayList<>();
 	//private ToothMap is_missing_map = null;
 	private JPopupMenu tooth_menu = null;
 	private JPopupMenu component_menu = null;
@@ -145,14 +153,8 @@ public class LabelTool {
 	/**
 	 * Launch the application.
 	 *
-	 * @throws IOException
-	 * @throws PropertyValueException
 	 */
-	public static void main(String[] args)
-			throws IOException, PropertyValueException,
-			javax.xml.parsers.ParserConfigurationException,
-			javax.xml.transform.TransformerException,
-			emrpaser.exceptions.PropertyValueException {
+	public static void main(String[] args) {
 
 
 		File owl_file = new File("res//base_template.owl");
@@ -169,6 +171,92 @@ public class LabelTool {
 			}
 		});
 	}
+
+	class EachRowEditor implements TableCellEditor {
+		protected Hashtable editors;
+
+		protected TableCellEditor editor, defaultEditor;
+
+		JTable table;
+
+		/**
+		 * Constructs a EachRowEditor. create default editor
+		 *
+		 * @see TableCellEditor
+		 * @see DefaultCellEditor
+		 */
+		public EachRowEditor(JTable table) {
+			this.table = table;
+			editors = new Hashtable();
+			defaultEditor = new DefaultCellEditor(new JTextField());
+		}
+
+		/**
+		 * @param row
+		 *            table row
+		 * @param editor
+		 *            table cell editor
+		 */
+
+		public void setEditorAt(int row, TableCellEditor editor) {
+			editors.put(new Integer(row), editor);
+		}
+
+		public Component getTableCellEditorComponent(JTable table, Object value,
+													 boolean isSelected, int row, int column) {
+			//editor = (TableCellEditor)editors.get(new Integer(row));
+			//if (editor == null) {
+			//  editor = defaultEditor;
+			//}
+			return editor.getTableCellEditorComponent(table, value, isSelected,
+					row, column);
+		}
+
+		public Object getCellEditorValue() {
+			return editor.getCellEditorValue();
+		}
+
+		public boolean stopCellEditing() {
+			return editor.stopCellEditing();
+		}
+
+		public void cancelCellEditing() {
+			editor.cancelCellEditing();
+		}
+
+		public boolean isCellEditable(EventObject anEvent) {
+			selectEditor((MouseEvent) anEvent);
+			return editor.isCellEditable(anEvent);
+		}
+
+		public void addCellEditorListener(CellEditorListener l) {
+			editor.addCellEditorListener(l);
+		}
+
+		public void removeCellEditorListener(CellEditorListener l) {
+			editor.removeCellEditorListener(l);
+		}
+
+		public boolean shouldSelectCell(EventObject anEvent) {
+			selectEditor((MouseEvent) anEvent);
+			return editor.shouldSelectCell(anEvent);
+		}
+
+		protected void selectEditor(MouseEvent e) {
+			int row;
+			if (e == null) {
+				row = table.getSelectionModel().getAnchorSelectionIndex();
+			} else {
+				row = table.rowAtPoint(e.getPoint());
+			}
+			editor = (TableCellEditor) editors.get(new Integer(row));
+			if (editor == null) {
+				editor = defaultEditor;
+			}
+		}
+	}
+
+
 
 	private static List<ToothMap> locateToothMaps(String content_str, int content_start) {
 
@@ -193,11 +281,7 @@ public class LabelTool {
 	 *
 	 * @throws PropertyValueException
 	 */
-	private void initialize() throws PropertyValueException,
-			javax.xml.parsers.ParserConfigurationException,
-			javax.xml.transform.TransformerException,
-			emrpaser.exceptions.PropertyValueException,
-			java.io.IOException {
+	private void initialize() throws PropertyValueException {
 
 		frame = new JFrame();
 		frame.setBounds(100, 100, 861, 688);
@@ -550,10 +634,8 @@ public class LabelTool {
 
 		JButton save = new JButton("保存");
 		save.addMouseListener(new MouseAdapter() {
-
 			@Override
 			public void mouseClicked(MouseEvent e) {
-
 				try {
 					File file = choosed_file;
 					if (file == null)
@@ -627,12 +709,9 @@ public class LabelTool {
 						File owl_file = new File("res//base_template.owl");
 						File modifier_file = new File("res//label_modifier_description.txt");
 						File res_dir = new File("res");
-						File data_dir = new File("data");
 						File excel_file = new File(res_dir.getCanonicalPath() + "\\ontology_definition_1209.xlsx");
 						File rule_file = new File(res_dir.getCanonicalPath() + "\\rules_all_with_value_20170116.txt");
 						File general_regex_file = new File(res_dir.getCanonicalPath() + "\\general_regex_with_value.txt");
-						File all_sen_file = new File(data_dir.getCanonicalPath() + "\\all_sen_checking.txt");
-						File unmatched_file = new File(data_dir.getCanonicalPath() + "\\emr_data_ummatched.txt");
 						ruleParserWithStats p = new ruleParserWithStats(rule_file, general_regex_file, owl_file, modifier_file, excel_file);
 						p.parseFile(choosed_file, xml_file);
 						xml_file = new File(xml_file_path);
@@ -841,7 +920,7 @@ public class LabelTool {
 		});
 	}
 
-	public BufferedImage addTextToImage(BufferedImage image, String text) throws java.io.IOException {
+	public BufferedImage addTextToImage(BufferedImage image, String text) {
 
 		Graphics g = image.getGraphics();
 		g.setFont(new Font("微软雅黑", Font.PLAIN, 30));
@@ -971,8 +1050,9 @@ public class LabelTool {
 			int h = ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED;
 			JScrollPane mandibular_scroll_pane = new JScrollPane(showMandibularPlans(), v, h);
 			mandibular_scroll_pane.setPreferredSize(new Dimension(670, line_height));
+//			mandibular_scroll_pane.setMinimumSize(new Dimension(670, line_height));
+//			mandibular_all_panel.add(showMandibularPlans(), BorderLayout.EAST);
 			mandibular_all_panel.add(mandibular_scroll_pane, BorderLayout.EAST);
-
 //			rpd_plan_panel.setSize(total_width, line_height);
 			rpd_plan_panel.add(mandibular_all_panel, BorderLayout.CENTER);
 //			design_dialog.add(rpd_plan_panel);
@@ -1080,12 +1160,26 @@ public class LabelTool {
 			rpd_plan_panel.add(maxillary_all_panel, BorderLayout.NORTH);
 //			design_dialog.add(rpd_plan_panel);
 		}
+
+
 		JTextField design_rights = new JTextField("北京大学口腔医院和清华大学联合研发");
 		design_rights.setHorizontalAlignment(JTextField.CENTER);
 		design_rights.setHorizontalAlignment(JTextField.CENTER);
 		design_rights.setFont(new Font("宋体", Font.PLAIN, 14));
 		design_rights.setOpaque(false);
-		rpd_plan_panel.add(design_rights, BorderLayout.SOUTH);
+//		rpd_plan_panel.add(design_rights, BorderLayout.SOUTH);
+
+		JButton modifyPlan = new JButton("修改方案");
+
+		modifyPlan.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				modifyPlan();
+			}
+		});
+		JPanel buttomPane = new JPanel(new FlowLayout(FlowLayout.CENTER));
+		buttomPane.add(modifyPlan);
+		buttomPane.add(design_rights);
+		rpd_plan_panel.add(buttomPane, BorderLayout.SOUTH);
 		design_dialog.add(rpd_plan_panel);
 
 		total_width = (mandibular_width > maxillary_width) ? mandibular_width : maxillary_width;
@@ -1097,7 +1191,286 @@ public class LabelTool {
 		design_dialog.setVisible(true);
 	}
 
-	private void drawPlanExplanation() throws java.io.IOException, exceptions.rpd.RuleException {
+
+	private void modifyPlan() {
+
+//		JScrollPane MaxillaryPlans = new JPanel(new BorderLayout());
+//		JDialog modifyDialog = new JDialog(this.frame, "可摘局部义齿设计方案");
+
+		GridLayout layout= new GridLayout(0,1);
+		layout.setVgap(15);
+		modifyFrame.setLayout(layout);
+		modifyFrame.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+
+		if(flagCreateModifyPlan == true && modifyFrame.getComponentCount()>0 ){
+			try {
+				modifyFrame.getContentPane().removeAll();
+//				modifyFrame.repaint();
+			} catch (NumberFormatException a) {
+				a.printStackTrace();
+			}
+		}
+
+		if(this.maxillary_rpd_plans != null && this.maxillary_rpd_plans.size() != 0){
+			try {
+				JScrollPane MaxillaryPlans = new JScrollPane(showMaxillaryPlansAsTable());
+				MaxillaryPlans.createHorizontalScrollBar();
+				MaxillaryPlans.createVerticalScrollBar();
+				modifyFrame.add(MaxillaryPlans);
+				flagCreateModifyPlan = true;
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+
+		if(this.mandibular_rpd_plans != null && this.mandibular_rpd_plans.size() != 0){
+			try {
+				JScrollPane MandibularPlans = new JScrollPane(showMandibularPlansAsTable());
+//				JScrollPane MandibularPlans = showMandibularPlansAsTable();
+				MandibularPlans.createHorizontalScrollBar();
+				MandibularPlans.createVerticalScrollBar();
+				modifyFrame.add(MandibularPlans);
+				flagCreateModifyPlan = true;
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+
+		modifyFrame.setSize(1690,1000);
+		modifyFrame.setLocationRelativeTo(null);
+		modifyFrame.setVisible(true);
+
+	}
+
+
+	private void drawNewMandibularRPDPlans() throws java.io.IOException, exceptions.rpd.RuleException {
+		if ((this.mandibular_rpd_plans == null || this.mandibular_rpd_plans.size() == 0))
+			return;
+		JFrame design_dialog = new JFrame("可摘局部义齿设计方案-下颌");
+		design_dialog.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+		JPanel rpd_plan_panel = new JPanel(new BorderLayout());
+		int total_height = 0;
+		int total_width = 0;
+		int line_height = 400;
+		int print_height = 50;
+
+		String input_file_path = choosed_file.getCanonicalPath();
+		int dot_index = input_file_path.lastIndexOf(".");
+		int gang_index = input_file_path.lastIndexOf("\\");
+		String txt_file_name = input_file_path.substring(gang_index+1, dot_index);
+
+		int mandibular_width = 0;
+		if (!(this.mandibular_rpd_plans == null || this.mandibular_rpd_plans.size() == 0)) {
+
+			generateAndSaveRPDPlanPicture(this.mandibular_rpd_plans, txt_file_name);
+			JPanel mandibular_plan_panel = new JPanel(new FlowLayout());
+			total_height += line_height + print_height;
+			for (int i = 1; i <= 3; i++) {
+				String picture_name = "out//picture//" + txt_file_name + "_mandibular_RPD_design_" + i + ".png";
+				ImageIcon im = new ImageIcon(picture_name);
+				if (im.getIconWidth() == -1) {
+					continue;
+				}
+
+				BufferedImage buffered_pic = new BufferedImage(
+						im.getIconWidth(),
+						im.getIconHeight(),
+						BufferedImage.TYPE_INT_RGB
+				);
+				Graphics g_pic = buffered_pic.createGraphics();
+				im.paintIcon(null, g_pic, 0,0);
+				g_pic.dispose();
+
+				ImageIcon base = new ImageIcon("res//base.png");
+				BufferedImage buffered_base = new BufferedImage(
+						base.getIconWidth(),
+						base.getIconHeight(),
+						BufferedImage.TYPE_INT_RGB
+				);
+				Graphics g_base = buffered_base.createGraphics();
+				base.paintIcon(null, g_base, 0, 0);
+				g_base.dispose();
+
+				BufferedImage im_print = addTextToImage(buffered_pic, txt_file_name);
+				BufferedImage base_print = addTextToImage(buffered_base, txt_file_name);
+				String im_print_name = "out//picture//" + txt_file_name + "_mandibular_RPD_design_" + i + "_print.png";
+				String base_print_name = "res//base_print.png";
+
+				File im_print_file = new File(im_print_name);
+				File base_print_file = new File(base_print_name);
+				ImageIO.write(im_print, "png", im_print_file);
+				ImageIO.write(base_print, "png", base_print_file);
+
+				int src_im_height = im.getIconHeight();
+				int src_im_width = im.getIconWidth();
+				double scale_factor = (double) line_height / (double) src_im_height;
+				double rescale_height = src_im_height * scale_factor;
+				double rescale_width = src_im_width * scale_factor;
+				int dest_im_width = (int) rescale_width;
+				int dest_im_height = (int) rescale_height;
+				im.setImage(im.getImage().getScaledInstance(dest_im_width, dest_im_height, Image.SCALE_DEFAULT));
+
+
+				JLabel rpd_plan_label = new JLabel();
+				rpd_plan_label.setSize(dest_im_width, dest_im_height);
+				rpd_plan_label.setIcon(im);
+				Border label_border = BorderFactory.createLineBorder(Color.BLACK);
+				rpd_plan_label.setBorder(label_border);
+
+				JButton print_button = new JButton("打印");
+				print_button.addMouseListener(new MouseAdapter() {
+					@Override
+					public void mouseReleased(MouseEvent arg0) {
+//						String[] imgFileNameList = {im_print_name, base_print_name};
+//						new PrintImage().drawImage(fileNameList, 1);
+						try {
+							new PrintTestFile().print(choosed_file, im_print_name, base_print_name, txt_file_name, 1);
+						}
+						catch (IOException ie) {
+							ie.printStackTrace();
+						}
+
+					}
+				});
+
+				JPanel cur_plan_panel = new JPanel(new BorderLayout());
+				cur_plan_panel.add(rpd_plan_label, BorderLayout.NORTH);
+				cur_plan_panel.add(print_button, BorderLayout.SOUTH);
+				mandibular_plan_panel.add(cur_plan_panel);
+				mandibular_width += dest_im_width;
+			}
+
+			mandibular_plan_panel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(),
+					"下颌设计方案图示", TitledBorder.CENTER, TitledBorder.DEFAULT_POSITION,
+					new Font("微软雅黑", Font.BOLD, 20)));
+			JPanel mandibular_all_panel = new JPanel(new BorderLayout());
+			mandibular_all_panel.add(mandibular_plan_panel, BorderLayout.CENTER);
+			rpd_plan_panel.add(mandibular_all_panel, BorderLayout.CENTER);
+		}
+		total_width = mandibular_width;
+		total_width += 750;
+		total_height += 108;
+//		rpd_plan_panel.setSize(total_width, total_height);
+		design_dialog.add(rpd_plan_panel);
+		design_dialog.setSize(total_width, total_height);
+		design_dialog.setLocationRelativeTo(null);
+		design_dialog.setVisible(true);
+	}
+
+
+	private void drawNewMaxillaryRPDPlans()throws java.io.IOException, exceptions.rpd.RuleException {
+		if ((this.maxillary_rpd_plans == null || this.maxillary_rpd_plans.size() == 0))
+			return;
+		JFrame design_dialog = new JFrame("可摘局部义齿设计方案-上颌");
+		design_dialog.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+		JPanel rpd_plan_panel = new JPanel(new BorderLayout());
+		int total_height = 0;
+		int total_width = 0;
+		int line_height = 400;
+		int print_height = 50;
+
+		String input_file_path = choosed_file.getCanonicalPath();
+		int dot_index = input_file_path.lastIndexOf(".");
+		int gang_index = input_file_path.lastIndexOf("\\");
+		String txt_file_name = input_file_path.substring(gang_index+1, dot_index);
+		int maxillary_width = 0;
+		if (!(this.maxillary_rpd_plans == null || this.maxillary_rpd_plans.size() == 0)) {
+			generateAndSaveRPDPlanPicture(this.maxillary_rpd_plans, txt_file_name);
+			JPanel maxillary_plan_panel = new JPanel(new FlowLayout());
+
+			total_height += line_height + print_height;
+			total_width = 0;
+			for (int i = 1; i <= 3; i++) {
+				String picture_name = "out//picture//" + txt_file_name + "_maxillary_RPD_design_" + i + ".png";
+				ImageIcon im = new ImageIcon(picture_name);
+				if (im.getIconWidth() == -1) {
+					continue;
+				}
+
+				BufferedImage buffered_pic = new BufferedImage(
+						im.getIconWidth(),
+						im.getIconHeight(),
+						BufferedImage.TYPE_INT_RGB
+				);
+				Graphics g_pic = buffered_pic.createGraphics();
+				im.paintIcon(null, g_pic, 0,0);
+				g_pic.dispose();
+
+				ImageIcon base = new ImageIcon("res//base.png");
+				BufferedImage buffered_base = new BufferedImage(
+						base.getIconWidth(),
+						base.getIconHeight(),
+						BufferedImage.TYPE_INT_RGB
+				);
+				Graphics g_base = buffered_base.createGraphics();
+				base.paintIcon(null, g_base, 0, 0);
+				g_base.dispose();
+
+				BufferedImage im_print = addTextToImage(buffered_pic, txt_file_name);
+				BufferedImage base_print = addTextToImage(buffered_base, txt_file_name);
+				String im_print_name = "out//picture//" + txt_file_name + "_maxillary_RPD_design_" + i + "_print.png";
+				String base_print_name = "res//base_print.png";
+
+				File im_print_file = new File(im_print_name);
+				File base_print_file = new File(base_print_name);
+				ImageIO.write(im_print, "png", im_print_file);
+				ImageIO.write(base_print, "png", base_print_file);
+				int src_im_height = im.getIconHeight();
+				int src_im_width = im.getIconWidth();
+				double scale_factor = (double) line_height / (double) src_im_height;
+				double rescale_height = src_im_height * scale_factor;
+				double rescale_width = src_im_width * scale_factor;
+				int dest_im_width = (int) rescale_width;
+				int dest_im_height = (int) rescale_height;
+				im.setImage(im.getImage().getScaledInstance(dest_im_width, dest_im_height, Image.SCALE_DEFAULT));
+				JLabel rpd_plan_label = new JLabel();
+				rpd_plan_label.setSize(dest_im_width, dest_im_height);
+				rpd_plan_label.setIcon(im);
+				Border label_border = BorderFactory.createLineBorder(Color.BLACK);
+				rpd_plan_label.setBorder(label_border);
+
+				JButton print_button = new JButton("打印");
+				print_button.addMouseListener(new MouseAdapter() {
+					@Override
+					public void mouseReleased(MouseEvent arg0) {
+//						String[] imgFileNameList = {im_print_name, base_print_name};
+//						new PrintImage().drawImage(fileNameList, 1);
+						try {
+							new PrintTestFile().print(choosed_file, im_print_name, base_print_name, txt_file_name, 1);
+						}
+						catch (IOException ie) {
+							ie.printStackTrace();
+						}
+					}
+				});
+
+				JPanel cur_plan_panel = new JPanel(new BorderLayout());
+				cur_plan_panel.add(rpd_plan_label, BorderLayout.NORTH);
+				cur_plan_panel.add(print_button, BorderLayout.SOUTH);
+				maxillary_plan_panel.add(cur_plan_panel);
+				maxillary_width += dest_im_width;
+			}
+			maxillary_plan_panel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(),
+					"上颌设计方案图示", TitledBorder.CENTER, TitledBorder.DEFAULT_POSITION,
+					new Font("微软雅黑", Font.BOLD, 20)));
+
+			JPanel maxillary_all_panel = new JPanel(new BorderLayout());
+			maxillary_all_panel.add(maxillary_plan_panel, BorderLayout.CENTER);
+			rpd_plan_panel.add(maxillary_all_panel, BorderLayout.NORTH);
+		}
+
+		total_width = maxillary_width;
+		total_width += 750;
+		total_height += 108;
+//		rpd_plan_panel.setSize(total_width, total_height);
+		design_dialog.add(rpd_plan_panel);
+		design_dialog.setSize(total_width, total_height);
+		design_dialog.setLocationRelativeTo(null);
+		design_dialog.setVisible(true);
+	}
+
+
+	private void drawPlanExplanation() {
 		if ((this.mandibular_rpd_plans == null || this.mandibular_rpd_plans.size() == 0)
 				&& (this.maxillary_rpd_plans == null || this.maxillary_rpd_plans.size() == 0)) {
 			return;
@@ -1213,26 +1586,205 @@ public class LabelTool {
 			file_dir.mkdirs();
 			file.createNewFile();
 		}
-
 	}
 
+
+	private JPanel showMandibularPlansAsTable() throws IOException{
+		if (this.mandibular_rpd_plans == null || this.mandibular_rpd_plans.size() == 0) {
+			return null;
+		}
+		int plan_count = 0;
+		List<JTable> mandibularPlanTableList = new ArrayList<>();
+
+		JTable mandibularPlanTable;
+
+		for (RPDPlan plan:mandibular_rpd_plans) { //遍历Plan
+			mandibularPlanTable = buildEachPlanTable(plan, plan_count);
+			mandibularPlanTableList.add(mandibularPlanTable);
+			plan_count++;
+		}
+
+		if(flagOriginalMandibulayPlan == true){
+			mandibularPlanBackup  = savePlan(mandibularPlanTableList,mandibular_rpd_plans);
+			System.out.print("mandibularPlanBackup!\t\n");
+			flagOriginalMandibulayPlan = false;
+		}
+
+		JButton buttonSava = new JButton("保存当前下颌方案");
+		buttonSava.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				List<RPDPlan> mandibular_rpd_plans_new = savePlan(mandibularPlanTableList,mandibular_rpd_plans);
+				mandibular_rpd_plans.clear();
+				for(RPDPlan plan:mandibular_rpd_plans_new){
+					mandibular_rpd_plans.add(plan);
+//					System.out.print("plan = \t\n" + plan + "\t\n");
+				}
+			}
+		});
+
+		JButton buttonReset = new JButton("重置数据");
+		buttonReset.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+//				if(mandibularPlanBackup == mandibular_rpd_plans)
+//					System.out.print("mandibularPlanBackup == mandibular_rpd_plans \t\n");
+//				else
+//					System.out.print("mandibularPlanBackup != mandibular_rpd_plans \t\n");
+				mandibular_rpd_plans.clear();
+				int i = 0;
+				for (RPDPlan plan:mandibularPlanBackup){ //遍历Plan
+//					System.out.print("reset mandibularPlanBackup = \t\n" + plan + "\t\n");
+					mandibular_rpd_plans.add(plan);
+					JTable mandibularPlanTable = buildEachPlanTable(plan, i);
+					mandibularPlanTableList.add(mandibularPlanTable);
+					i++;
+				}
+				modifyFrame.dispose();
+				modifyPlan();
+			}
+		});
+
+		JButton buttonDrawPlan = new JButton("绘制草图");
+		buttonDrawPlan.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					drawNewMandibularRPDPlans();
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				} catch (RuleException e1) {
+					e1.printStackTrace();
+				}
+			}
+		});
+
+		JPanel mandibularPaneAll = new JPanel(new BorderLayout());
+		mandibularPaneAll.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(),
+				"下颌设计方案文本", TitledBorder.CENTER, TitledBorder.DEFAULT_POSITION,
+				new Font("微软雅黑", Font.BOLD, 20)));
+		JPanel mandibularTextPane = new JPanel(new GridLayout(0,1));
+		JPanel mandibularButtonPane = new JPanel(new FlowLayout(FlowLayout.LEFT));
+		mandibularButtonPane.add(buttonReset);
+		mandibularButtonPane.add(buttonSava);
+		mandibularButtonPane.add(buttonDrawPlan);
+
+		int i = 1;
+		for (JTable table:mandibularPlanTableList)  //遍历Plan
+			mandibularTextPane.add(buildPlanTablePanel(table,Position.Mandibular,i++));
+
+//		JScrollPane mandibularTextSP = new JScrollPane(mandibularTextPane);
+
+		mandibularPaneAll.add(mandibularButtonPane,BorderLayout.NORTH);
+		mandibularPaneAll.add(mandibularTextPane,BorderLayout.CENTER);
+		return mandibularPaneAll;
+	}
+
+
+	private JPanel showMaxillaryPlansAsTable() throws IOException{
+		if (this.maxillary_rpd_plans == null || this.maxillary_rpd_plans.size() == 0) {
+			return null;
+		}
+		int plan_count = 0;
+		List<JTable> maxillaryPlanTableList = new ArrayList<>();
+		JTable maxillaryPlanTable;
+
+		for (RPDPlan plan:maxillary_rpd_plans) { //遍历Plan
+			maxillaryPlanTable = buildEachPlanTable(plan, plan_count);
+			maxillaryPlanTableList.add(maxillaryPlanTable);
+			plan_count++;
+		}
+
+		if(flagOriginalMaxilaryPlan == true){
+			maxillaryPlanBackup = savePlan(maxillaryPlanTableList,maxillary_rpd_plans);
+			flagOriginalMaxilaryPlan = false;
+		}
+
+		JButton buttonSava = new JButton("保存当前上颌方案");
+		buttonSava.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				List<RPDPlan> maxillary_rpd_plans_new = savePlan(maxillaryPlanTableList,maxillary_rpd_plans);
+
+				maxillary_rpd_plans.clear();
+				for(RPDPlan plan:maxillary_rpd_plans_new){
+					maxillary_rpd_plans.add(plan);
+					System.out.print("plan = " + plan + "\t\n");
+				}
+			}
+		});
+
+		JButton buttonReset = new JButton("重置数据");
+		buttonReset.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+//			if(maxillaryPlanBackup == maxillary_rpd_plans)
+//				System.out.print("maxillary_rpd_plans_new == maxillary_rpd_plans\t\n");
+//			else
+//				System.out.print("maxillary_rpd_plans_new != maxillary_rpd_plans\t\n");
+
+				maxillary_rpd_plans.clear();
+				int i = 0;
+				for (RPDPlan plan:maxillaryPlanBackup){ //遍历Plan
+//					System.out.print("reset maxillaryPlanBackup = \t\n" + plan + "\t\n");
+					maxillary_rpd_plans.add(plan);
+					JTable maxillaryPlanTable = buildEachPlanTable(plan, i);
+					maxillaryPlanTableList.add(maxillaryPlanTable);
+					i++;
+				}
+				modifyFrame.dispose();
+				modifyPlan();
+			}
+		});
+
+
+		JButton buttonDrawPlan = new JButton("绘制草图");
+		buttonDrawPlan.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					drawNewMaxillaryRPDPlans();
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				} catch (RuleException e1) {
+					e1.printStackTrace();
+				}
+			}
+		});
+
+		JPanel maxillaryPaneAll = new JPanel(new BorderLayout());
+		maxillaryPaneAll.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(),
+				"上颌设计方案文本", TitledBorder.CENTER, TitledBorder.DEFAULT_POSITION,
+				new Font("微软雅黑", Font.BOLD, 20)));
+		JPanel maxillaryTextPane = new JPanel(new GridLayout(0,1));
+		JPanel maxillaryButtonPane = new JPanel(new FlowLayout(FlowLayout.LEFT));
+		maxillaryButtonPane.add(buttonReset);
+		maxillaryButtonPane.add(buttonSava);
+		maxillaryButtonPane.add(buttonDrawPlan);
+		int i = 1 ;
+		for (JTable table:maxillaryPlanTableList)  //遍历Plan
+			maxillaryTextPane.add(buildPlanTablePanel(table,Position.Maxillary,i++));
+
+		maxillaryPaneAll.add(maxillaryButtonPane,BorderLayout.NORTH);
+		maxillaryPaneAll.add(maxillaryTextPane,BorderLayout.CENTER);
+		return maxillaryPaneAll;
+	}
+
+	//	origin
 	private JPanel showMandibularPlans() throws IOException {
 		if (mandibular_rpd_plans == null || mandibular_rpd_plans.size() == 0) {
 			return null;
 		}
 		JPanel design_panel = new JPanel(new BorderLayout());
-		mandibular_plan_tree = buildMandibularPlanTree();
+
+		mandibular_plan_tree = buildMandibularPlanTree();//Build the table
 		for (int i=0; i<mandibular_plan_tree.getRowCount();i++) {
-			mandibular_plan_tree.expandRow(i);
+			mandibular_plan_tree.expandRow(i);//add in every line
 		}
-		design_panel.add(mandibular_plan_tree, BorderLayout.CENTER);
+		design_panel.add(mandibular_plan_tree, BorderLayout.CENTER); //show the table
+
 		design_panel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(),
-					"下颌设计方案文本", TitledBorder.CENTER, TitledBorder.DEFAULT_POSITION,
-					new Font("微软雅黑", Font.BOLD, 20)));
+				"下颌设计方案文本", TitledBorder.CENTER, TitledBorder.DEFAULT_POSITION,
+				new Font("微软雅黑", Font.BOLD, 20)));
 		return design_panel;
 	}
 
-	private JPanel showMaxillaryPlans() throws IOException {
+	private JPanel showMaxillaryPlans() {
 		if (maxillary_rpd_plans == null || maxillary_rpd_plans.size() == 0) {
 			return null;
 		}
@@ -1243,86 +1795,720 @@ public class LabelTool {
 		}
 		design_panel.add(maxillary_plan_tree, BorderLayout.CENTER);
 		design_panel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(),
-					"上颌设计方案文本", TitledBorder.CENTER, TitledBorder.DEFAULT_POSITION,
-					new Font("微软雅黑", Font.BOLD, 20)));
+				"上颌设计方案文本", TitledBorder.CENTER, TitledBorder.DEFAULT_POSITION,
+				new Font("微软雅黑", Font.BOLD, 20)));
 		return design_panel;
 	}
 
-	private void showRPDPlans() throws IOException {
+//	private void showRPDPlans() {
+//
+//		if (mandibular_rpd_plans == null || mandibular_rpd_plans.size() == 0)
+//			return;
+//
+//		JDialog design_dialog = new JDialog(this.frame, "可摘局部义齿设计方案");
+//		JPanel rpd_plan_panel = new JPanel(new BorderLayout());
+//		design_dialog.add(rpd_plan_panel);
+//
+//		rpd_plan_tree = new JTree();
+//		rpd_plan_tree.addMouseListener(new MouseAdapter() {
+//
+//			public void mouseClicked(MouseEvent e) {
+//
+//				if (e.getClickCount() == 1 && e.getButton() == MouseEvent.BUTTON3 && rpd_plan_tree.isEnabled()) {
+//
+//					TreePath path = rpd_plan_tree.getPathForLocation(e.getX(), e.getY());
+//					if (path != null) {
+//
+//						rpd_plan_tree.setSelectionPath(path);
+//						DefaultMutableTreeNode selected_node = (DefaultMutableTreeNode) path.getLastPathComponent();
+//						Object user_obj = selected_node.getUserObject();
+//						if (user_obj.getClass().equals(String.class)) {
+//							String node_str = (String) user_obj;
+//							if (node_str.startsWith("方案"))
+//								rpd_plan_menu.show(rpd_plan_tree, e.getX(), e.getY());
+//						} else if (user_obj.getClass().equals(Tooth.class)) {
+//							tooth_menu.show(rpd_plan_tree, e.getX(), e.getY());
+//						} else if (rpd.components.Component.class.isInstance(user_obj)) {
+//							component_menu.show(rpd_plan_tree, e.getX(), e.getY());
+//						} else {
+//						}
+//					}
+//				}
+//			}
+//		});
+//		rpd_plan_tree.setFont(new Font("微软雅黑", Font.PLAIN, 18));
+//
+//		Vector<Integer> plan_index = new Vector<Integer>();
+//		for (int i = 0; i < mandibular_rpd_plans.size(); i++)
+//			plan_index.addElement(i);
+//		plan_choice = new JComboBox<Integer>(plan_index);
+//		rpd_plan_panel.add(plan_choice, BorderLayout.NORTH);
+//		rpd_plan_panel.add(rpd_plan_tree, BorderLayout.CENTER);
+//		plan_choice.addActionListener(new ActionListener() {
+//
+//			@Override
+//			public void actionPerformed(ActionEvent arg0) {
+//				if (plan_choice.getSelectedItem() != null) {
+//					int plan_index = (Integer) (plan_choice.getSelectedItem());
+//					RPDPlan rpd_plan = mandibular_rpd_plans.get(plan_index);
+//					current_rpd_plan = rpd_plan;
+//					JTree new_rpd_plan_tree = buildRPDPlanTree(rpd_plan, plan_index);
+//					if (new_rpd_plan_tree != null) {
+//						rpd_plan_tree.setModel(new_rpd_plan_tree.getModel());
+//						TreeNode root = (TreeNode) rpd_plan_tree.getModel().getRoot();
+//						expandAll(rpd_plan_tree, new TreePath(root), true);
+//					}
+//				}
+//			}
+//		});
+//
+//		design_dialog.setSize(1000, 1000);
+//		design_dialog.setLocationRelativeTo(null);
+//		design_dialog.setVisible(true);
+//	}
 
-		if (mandibular_rpd_plans == null || mandibular_rpd_plans.size() == 0)
-			return;
+//	private JTree buildMandibularPlanTree() {
+//		if (mandibular_rpd_plans == null || mandibular_rpd_plans.size() == 0) {
+//			return null;
+//		}//no Mandibular Plan
+//		DefaultMutableTreeNode top_node = new DefaultMutableTreeNode("下颌设计方案");//root of plan
+//		JTree mandibular_plan_Tree = new JTree(top_node);
+//		mandibular_plan_Tree.setEnabled(true);
+//		mandibular_plan_Tree.setFont(new Font("微软雅黑", Font.PLAIN, 18));
+//
+//		int plan_count = 0;
+//		for (RPDPlan plan:mandibular_rpd_plans) { //遍历Plan
+//			plan_count++;
+//			DefaultMutableTreeNode plan_node = new DefaultMutableTreeNode("方案" + plan_count);
+//			top_node.add(plan_node);
+//			Map<ArrayList<Tooth>, Set<rpd.components.Component>> tooth_components = plan.getToothComponents();//read;use
+//			ArrayList<ArrayList<Tooth>> plan_teeth = new ArrayList<>(tooth_components.keySet());//sort
+//			Collections.sort(plan_teeth, new Comparator<ArrayList<Tooth>>() {
+//				public int compare(ArrayList<Tooth> left, ArrayList<Tooth> right) {
+//					return left.get(0).compareTo(right.get(0));
+//				}
+//			});
+//			for (ArrayList<Tooth> tooth : plan_teeth) {
+//				Set<rpd.components.Component> components = tooth_components.get(tooth);
+//				for (rpd.components.Component component : components) {
+//					DefaultMutableTreeNode component_node = new DefaultMutableTreeNode(component);
+//					plan_node.add(component_node);
+//				}
+//			}
+//		}
+//		return mandibular_plan_Tree;
+//	}
+	private JPanel buildPlanTablePanel(final JTable table, Position pos, int count){
 
-		JDialog design_dialog = new JDialog(this.frame, "可摘局部义齿设计方案");
-		JPanel rpd_plan_panel = new JPanel(new BorderLayout());
-		design_dialog.add(rpd_plan_panel);
+		JComboBox comMandibularComponentsName = new JComboBox(CString.mandibularComponentsName);
+		JComboBox comMaxillaryComponentsName = new JComboBox(CString.maxillaryComponentsName);
+		JComboBox comClaspMaterial = new JComboBox(CString.cClaspMaterial);
+		JComboBox comClaspPosition = new JComboBox(CString.cClaspPosition);
+		JComboBox comRestPosition = new JComboBox(CString.cRestPosition);
+		JComboBox comClaspOrRestPosition = new JComboBox(CString.cClaspOrRestPosition);
+		JComboBox comClaspComponentName = new JComboBox(CString.classClaspComponentName);
+		JComboBox comRestComponentName = new JComboBox(CString.classRestComponentName);
+		JComboBox comBaseComponentName = new JComboBox(CString.classBaseComponentName);
+		JComboBox comMandibularConnecterComponentName = new JComboBox(CString.classMandibularConnecterComponentName);
+		JComboBox comMaxillaryConnecterComponentName = new JComboBox(CString.classMaxillaryConnecterComponentName);
+		JComboBox comMaxillaryConnecterToothPosition = new JComboBox(CString.cMaxillaryConnecterToothPosition);
+		JComboBox comMandibularConnecterToothPosition = new JComboBox(CString.cMandibularConnecterToothPosition);
+		JComboBox comNull = new JComboBox(CString.stringnull);
 
-		rpd_plan_tree = new JTree();
-		rpd_plan_tree.addMouseListener(new MouseAdapter() {
 
-			public void mouseClicked(MouseEvent e) {
-
-				if (e.getClickCount() == 1 && e.getButton() == MouseEvent.BUTTON3 && rpd_plan_tree.isEnabled()) {
-
-					TreePath path = rpd_plan_tree.getPathForLocation(e.getX(), e.getY());
-					if (path != null) {
-
-						rpd_plan_tree.setSelectionPath(path);
-						DefaultMutableTreeNode selected_node = (DefaultMutableTreeNode) path.getLastPathComponent();
-						Object user_obj = selected_node.getUserObject();
-						if (user_obj.getClass().equals(String.class)) {
-							String node_str = (String) user_obj;
-							if (node_str.startsWith("方案"))
-								rpd_plan_menu.show(rpd_plan_tree, e.getX(), e.getY());
-						} else if (user_obj.getClass().equals(Tooth.class)) {
-							tooth_menu.show(rpd_plan_tree, e.getX(), e.getY());
-						} else if (rpd.components.Component.class.isInstance(user_obj)) {
-							component_menu.show(rpd_plan_tree, e.getX(), e.getY());
-						} else {
+		comNull.addComponentListener(new ComponentAdapter() {
+			@Override
+			public void componentShown(ComponentEvent e) {
+				final JComponent c = (JComponent) e.getSource();
+				SwingUtilities.invokeLater(new Runnable() {
+					@Override
+					public void run() {
+						c.requestFocus();
+						System.out.println(c);
+						if (c instanceof JComboBox) {
+							System.out.println("a");
 						}
 					}
-				}
+				});
 			}
 		});
-		rpd_plan_tree.setFont(new Font("微软雅黑", Font.PLAIN, 18));
 
-		Vector<Integer> plan_index = new Vector<Integer>();
-		for (int i = 0; i < mandibular_rpd_plans.size(); i++)
-			plan_index.addElement(i);
-		plan_choice = new JComboBox<Integer>(plan_index);
-		rpd_plan_panel.add(plan_choice, BorderLayout.NORTH);
-		rpd_plan_panel.add(rpd_plan_tree, BorderLayout.CENTER);
-		plan_choice.addActionListener(new ActionListener() {
-
+		comMandibularComponentsName.addComponentListener(new ComponentAdapter() {
 			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				if (plan_choice.getSelectedItem() != null) {
-					int plan_index = (Integer) (plan_choice.getSelectedItem());
-					RPDPlan rpd_plan = mandibular_rpd_plans.get(plan_index);
-					current_rpd_plan = rpd_plan;
-					JTree new_rpd_plan_tree = buildRPDPlanTree(rpd_plan, plan_index);
-					if (new_rpd_plan_tree != null) {
-						rpd_plan_tree.setModel(new_rpd_plan_tree.getModel());
-						TreeNode root = (TreeNode) rpd_plan_tree.getModel().getRoot();
-						expandAll(rpd_plan_tree, new TreePath(root), true);
+			public void componentShown(ComponentEvent e) {
+				final JComponent c = (JComponent) e.getSource();
+				SwingUtilities.invokeLater(new Runnable() {
+					@Override
+					public void run() {
+						c.requestFocus();
+						System.out.println(c);
+						if (c instanceof JComboBox) {
+							System.out.println("a");
+						}
+					}
+				});
+			}
+		});
+
+		comMaxillaryComponentsName.addComponentListener(new ComponentAdapter() {
+			@Override
+			public void componentShown(ComponentEvent e) {
+				final JComponent c = (JComponent) e.getSource();
+				SwingUtilities.invokeLater(new Runnable() {
+					@Override
+					public void run() {
+						c.requestFocus();
+						System.out.println(c);
+						if (c instanceof JComboBox) {
+							System.out.println("a");
+						}
+					}
+				});
+			}
+		});
+
+		comClaspMaterial.addComponentListener(new ComponentAdapter() {
+			@Override
+			public void componentShown(ComponentEvent e) {
+				final JComponent c = (JComponent) e.getSource();
+				SwingUtilities.invokeLater(new Runnable() {
+					@Override
+					public void run() {
+						c.requestFocus();
+						System.out.println(c);
+						if (c instanceof JComboBox) {
+							System.out.println("a");
+						}
+					}
+				});
+			}
+		});
+
+		comClaspPosition.addComponentListener(new ComponentAdapter() {
+			@Override
+			public void componentShown(ComponentEvent e) {
+				final JComponent c = (JComponent) e.getSource();
+				SwingUtilities.invokeLater(new Runnable() {
+					@Override
+					public void run() {
+						c.requestFocus();
+						System.out.println(c);
+						if (c instanceof JComboBox) {
+							System.out.println("a");
+						}
+					}
+				});
+			}
+		});
+
+		comRestPosition.addComponentListener(new ComponentAdapter() {
+			@Override
+			public void componentShown(ComponentEvent e) {
+				final JComponent c = (JComponent) e.getSource();
+				SwingUtilities.invokeLater(new Runnable() {
+					@Override
+					public void run() {
+						c.requestFocus();
+						System.out.println(c);
+						if (c instanceof JComboBox) {
+							System.out.println("a");
+						}
+					}
+				});
+			}
+		});
+
+		comMandibularConnecterToothPosition.addComponentListener(new ComponentAdapter() {
+			@Override
+			public void componentShown(ComponentEvent e) {
+				final JComponent c = (JComponent) e.getSource();
+				SwingUtilities.invokeLater(new Runnable() {
+					@Override
+					public void run() {
+						c.requestFocus();
+						System.out.println(c);
+						if (c instanceof JComboBox) {
+							System.out.println("a");
+						}
+					}
+				});
+			}
+		});
+
+		comClaspComponentName.addComponentListener(new ComponentAdapter() {
+			@Override
+			public void componentShown(ComponentEvent e) {
+				final JComponent c = (JComponent) e.getSource();
+				SwingUtilities.invokeLater(new Runnable() {
+					@Override
+					public void run() {
+						c.requestFocus();
+						System.out.println(c);
+						if (c instanceof JComboBox) {
+							System.out.println("a");
+						}
+					}
+				});
+			}
+		});
+
+		comRestComponentName.addComponentListener(new ComponentAdapter() {
+			@Override
+			public void componentShown(ComponentEvent e) {
+				final JComponent c = (JComponent) e.getSource();
+				SwingUtilities.invokeLater(new Runnable() {
+					@Override
+					public void run() {
+						c.requestFocus();
+						System.out.println(c);
+						if (c instanceof JComboBox) {
+							System.out.println("a");
+						}
+					}
+				});
+			}
+		});
+
+		comMandibularConnecterComponentName.addComponentListener(new ComponentAdapter() {
+			@Override
+			public void componentShown(ComponentEvent e) {
+				final JComponent c = (JComponent) e.getSource();
+				SwingUtilities.invokeLater(new Runnable() {
+					@Override
+					public void run() {
+						c.requestFocus();
+						System.out.println(c);
+						if (c instanceof JComboBox) {
+							System.out.println("a");
+						}
+					}
+				});
+			}
+		});
+
+		comBaseComponentName.addComponentListener(new ComponentAdapter() {
+			@Override
+			public void componentShown(ComponentEvent e) {
+				final JComponent c = (JComponent) e.getSource();
+				SwingUtilities.invokeLater(new Runnable() {
+					@Override
+					public void run() {
+						c.requestFocus();
+						System.out.println(c);
+						if (c instanceof JComboBox) {
+							System.out.println("a");
+						}
+					}
+				});
+			}
+		});
+
+		comMaxillaryConnecterToothPosition.addComponentListener(new ComponentAdapter() {
+			@Override
+			public void componentShown(ComponentEvent e) {
+				final JComponent c = (JComponent) e.getSource();
+				SwingUtilities.invokeLater(new Runnable() {
+					@Override
+					public void run() {
+						c.requestFocus();
+						System.out.println(c);
+						if (c instanceof JComboBox) {
+							System.out.println("a");
+						}
+					}
+				});
+			}
+		});
+
+
+		comMaxillaryConnecterComponentName.addComponentListener(new ComponentAdapter() {
+			@Override
+			public void componentShown(ComponentEvent e) {
+				final JComponent c = (JComponent) e.getSource();
+				SwingUtilities.invokeLater(new Runnable() {
+					@Override
+					public void run() {
+						c.requestFocus();
+						System.out.println(c);
+						if (c instanceof JComboBox) {
+							System.out.println("a");
+						}
+					}
+				});
+			}
+		});
+
+
+		EachRowEditor rowEditor1 = new EachRowEditor(table);
+		EachRowEditor rowEditor2 = new EachRowEditor(table);
+		EachRowEditor rowEditor3 = new EachRowEditor(table);
+		EachRowEditor rowEditor4 = new EachRowEditor(table);
+		EachRowEditor rowEditor5 = new EachRowEditor(table);
+		DefaultTableModel model = (DefaultTableModel) table.getModel();
+
+		JButton buttonRemove = new JButton("移除选中行数据");
+		buttonRemove.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String classname;
+				int count[]=table.getSelectedRows();
+				if (count.length<=0) {
+					return;
+				}
+				else {
+					for (int i = count.length; i > 0; i--) {
+						model.removeRow(table.getSelectedRow());
+					}
+				}
+				for(int rowNum = 0;rowNum < table.getModel().getRowCount();rowNum++){
+					if (model.getValueAt(rowNum,2) != null)
+						classname = model.getValueAt(rowNum,2).toString();
+					else
+						break;
+					switch (classname) {
+						case "rpd.components.AkerClasp":
+						case "rpd.components.WroughtWireClasp":
+						case "rpd.components.CombinationClasp":
+						case "rpd.components.CanineClasp":
+						case "rpd.components.CanineAkerClasp":
+						case "rpd.components.HalfHalfClasp":
+						case "rpd.components.BackActionClasp":
+						case "rpd.components.ReverseBackActionClasp":
+						case "rpd.components.RingClasp":
+						case "rpd.components.CombinedClasp":
+						case "rpd.components.EmbrasureClasp":
+						case "rpd.components.ContinuousClasp":
+						case "rpd.components.RPAClasp":
+							rowEditor1.setEditorAt(rowNum, new DefaultCellEditor(comClaspMaterial));
+							table.getColumn("属性1").setCellEditor(rowEditor1);
+							rowEditor2.setEditorAt(rowNum, new DefaultCellEditor(comClaspPosition));
+							table.getColumn("属性2").setCellEditor(rowEditor2);
+							rowEditor5.setEditorAt(rowNum, new DefaultCellEditor(comClaspComponentName));
+							table.getColumn("组件名称").setCellEditor(rowEditor5);
+							rowEditor3.setEditorAt(rowNum, new DefaultCellEditor(comNull));
+							table.getColumn("舌侧对抗#1").setCellEditor(rowEditor3);
+							table.getColumn("舌侧对抗#2").setCellEditor(rowEditor3);
+							break;
+						case "rpd.components.OcclusalRest":
+						case "rpd.components.LingualRest":
+							rowEditor2.setEditorAt(rowNum, new DefaultCellEditor(comRestPosition));
+							table.getColumn("属性2").setCellEditor(rowEditor2);
+							rowEditor5.setEditorAt(rowNum, new DefaultCellEditor(comRestComponentName));
+							table.getColumn("组件名称").setCellEditor(rowEditor5);
+							rowEditor3.setEditorAt(rowNum, new DefaultCellEditor(comNull));
+							table.getColumn("属性1").setCellEditor(rowEditor3);
+							table.getColumn("舌侧对抗#1").setCellEditor(rowEditor3);
+							table.getColumn("舌侧对抗#2").setCellEditor(rowEditor3);
+							break;
+						case "rpd.components.LingualBarConnector":
+						case "rpd.components.LingualPlateConnector":
+							rowEditor3.setEditorAt(rowNum, new DefaultCellEditor(comMandibularConnecterToothPosition));
+							table.getColumn("舌侧对抗#1").setCellEditor(rowEditor3);
+							rowEditor4.setEditorAt(rowNum, new DefaultCellEditor(comMandibularConnecterToothPosition));
+							table.getColumn("舌侧对抗#2").setCellEditor(rowEditor4);
+							rowEditor5.setEditorAt(rowNum, new DefaultCellEditor(comMandibularConnecterComponentName));
+							table.getColumn("组件名称").setCellEditor(rowEditor5);
+							rowEditor1.setEditorAt(rowNum, new DefaultCellEditor(comNull));
+							table.getColumn("属性1").setCellEditor(rowEditor1);
+							table.getColumn("属性2").setCellEditor(rowEditor1);
+							break;
+						case "rpd.components.SinglePalatalStrapConnector":
+						case "rpd.components.CombinationAnteriorPosteriorPalatalStrapConnector":
+						case "rpd.components.PalatalPlateConnector":
+						case "rpd.components.FullPalatalPlateConnector":
+						case "rpd.components.ModifiedPalatalPlateConnector":
+							rowEditor3.setEditorAt(rowNum, new DefaultCellEditor(comMaxillaryConnecterToothPosition));
+							table.getColumn("舌侧对抗#1").setCellEditor(rowEditor3);
+							rowEditor4.setEditorAt(rowNum, new DefaultCellEditor(comMaxillaryConnecterToothPosition));
+							table.getColumn("舌侧对抗#2").setCellEditor(rowEditor4);
+							rowEditor5.setEditorAt(rowNum, new DefaultCellEditor(comMaxillaryConnecterComponentName));
+							table.getColumn("组件名称").setCellEditor(rowEditor5);
+							rowEditor1.setEditorAt(rowNum, new DefaultCellEditor(comNull));
+							table.getColumn("属性1").setCellEditor(rowEditor1);
+							table.getColumn("属性2").setCellEditor(rowEditor1);
+							break;
+						case "rpd.components.DentureBase":
+							rowEditor5.setEditorAt(rowNum, new DefaultCellEditor(comBaseComponentName));
+							table.getColumn("组件名称").setCellEditor(rowEditor5);
+							rowEditor3.setEditorAt(rowNum, new DefaultCellEditor(comNull));
+							table.getColumn("舌侧对抗#1").setCellEditor(rowEditor3);
+							table.getColumn("舌侧对抗#2").setCellEditor(rowEditor3);
+							table.getColumn("属性1").setCellEditor(rowEditor3);
+							table.getColumn("属性2").setCellEditor(rowEditor3);
+							break;
 					}
 				}
 			}
 		});
 
-		design_dialog.setSize(1000, 1000);
-		design_dialog.setLocationRelativeTo(null);
-		design_dialog.setVisible(true);
+		JButton buttonAddColumn = new JButton("新增舌侧对抗");
+		buttonAddColumn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				final int col = table.getColumnCount();
+				int row = table.getModel().getRowCount();
+				String connecter;
+				model.addColumn("舌侧对抗#"+(col-5));
+				for(int i = 0; i<row; i++){
+					if(model.getValueAt(i,3).toString()!= null)
+						connecter = model.getValueAt(i,3).toString();
+					else
+						break;
+					if(connecter == "上颌腭带（Single Palatal Strap）"
+							|| connecter == "上颌前后腭带（Combination Anterior and Posterior Palatal Strap）"
+							|| connecter == "上颌腭板（Palatal Plate）"
+							|| connecter == "上颌全腭板（Full Palatal Plate）"
+							|| connecter == "上颌变异腭板（Modified Palatal Plate）"){
+						rowEditor1.setEditorAt(i, new DefaultCellEditor(comMaxillaryConnecterToothPosition));
+						table.getColumn("舌侧对抗#"+(col-5)).setCellEditor(rowEditor1);
+					}
+					else if(connecter == "下颌舌板（Lingual Plate）"){
+						rowEditor1.setEditorAt(i, new DefaultCellEditor(comMandibularConnecterToothPosition));
+						table.getColumn("舌侧对抗#"+(col-5)).setCellEditor(rowEditor1);
+					}
+				}
+				String classname;
+				hideTableColumn(table,0);
+				hideTableColumn(table,2);
+
+				for(int rowNum =0;rowNum<table.getModel().getRowCount();rowNum++){
+						if (model.getValueAt(rowNum,2) != null)
+							classname = model.getValueAt(rowNum,2).toString();
+						else
+							break;
+					switch (classname) {
+						case "rpd.components.AkerClasp":
+						case "rpd.components.WroughtWireClasp":
+						case "rpd.components.CombinationClasp":
+						case "rpd.components.CanineClasp":
+						case "rpd.components.CanineAkerClasp":
+						case "rpd.components.HalfHalfClasp":
+						case "rpd.components.BackActionClasp":
+						case "rpd.components.ReverseBackActionClasp":
+						case "rpd.components.RingClasp":
+						case "rpd.components.CombinedClasp":
+						case "rpd.components.EmbrasureClasp":
+						case "rpd.components.ContinuousClasp":
+						case "rpd.components.RPAClasp":
+							rowEditor1.setEditorAt(rowNum, new DefaultCellEditor(comClaspMaterial));
+							table.getColumn("属性1").setCellEditor(rowEditor1);
+							rowEditor2.setEditorAt(rowNum, new DefaultCellEditor(comClaspPosition));
+							table.getColumn("属性2").setCellEditor(rowEditor2);
+							rowEditor5.setEditorAt(rowNum, new DefaultCellEditor(comClaspComponentName));
+							table.getColumn("组件名称").setCellEditor(rowEditor5);
+							break;
+						case "rpd.components.OcclusalRest":
+						case "rpd.components.LingualRest":
+							rowEditor2.setEditorAt(rowNum, new DefaultCellEditor(comRestPosition));
+							table.getColumn("属性2").setCellEditor(rowEditor2);
+							rowEditor5.setEditorAt(rowNum, new DefaultCellEditor(comRestComponentName));
+							table.getColumn("组件名称").setCellEditor(rowEditor5);
+							break;
+						case "rpd.components.LingualBarConnector":
+						case "rpd.components.LingualPlateConnector":
+							rowEditor3.setEditorAt(rowNum, new DefaultCellEditor(comMandibularConnecterToothPosition));
+							table.getColumn("舌侧对抗#1").setCellEditor(rowEditor3);
+							rowEditor4.setEditorAt(rowNum, new DefaultCellEditor(comMandibularConnecterToothPosition));
+							table.getColumn("舌侧对抗#2").setCellEditor(rowEditor4);
+							rowEditor5.setEditorAt(rowNum, new DefaultCellEditor(comMandibularConnecterComponentName));
+							table.getColumn("组件名称").setCellEditor(rowEditor5);
+							break;
+						case "rpd.components.SinglePalatalStrapConnector":
+						case "rpd.components.CombinationAnteriorPosteriorPalatalStrapConnector":
+						case "rpd.components.PalatalPlateConnector":
+						case "rpd.components.FullPalatalPlateConnector":
+						case "rpd.components.ModifiedPalatalPlateConnector":
+							rowEditor3.setEditorAt(rowNum, new DefaultCellEditor(comMaxillaryConnecterToothPosition));
+							table.getColumn("舌侧对抗#1").setCellEditor(rowEditor3);
+							rowEditor4.setEditorAt(rowNum, new DefaultCellEditor(comMaxillaryConnecterToothPosition));
+							table.getColumn("舌侧对抗#2").setCellEditor(rowEditor4);
+							rowEditor5.setEditorAt(rowNum, new DefaultCellEditor(comMaxillaryConnecterComponentName));
+							table.getColumn("组件名称").setCellEditor(rowEditor5);
+							break;
+						case "rpd.components.DentureBase":
+							rowEditor5.setEditorAt(rowNum, new DefaultCellEditor(comBaseComponentName));
+							table.getColumn("组件名称").setCellEditor(rowEditor5);
+							break;
+					}
+				}
+			}
+		});
+
+		JButton buttonAdd = new JButton("新增组件");
+		buttonAdd.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int selectedRow = table.getModel().getRowCount();
+				int col  = table.getColumnCount();
+				String[] arrTemp = new String[20];
+//				arrTemp[0] = model.getValueAt(selectedRow - 1, 0).toString();
+				model.insertRow(selectedRow, arrTemp);
+				if(pos == Position.Mandibular){
+					rowEditor5.setEditorAt(selectedRow, new DefaultCellEditor(comMandibularComponentsName));
+					rowEditor4.setEditorAt(selectedRow, new DefaultCellEditor(comMandibularConnecterToothPosition));
+					rowEditor3.setEditorAt(selectedRow, new DefaultCellEditor(comMandibularConnecterToothPosition));
+				}
+				else{
+					rowEditor5.setEditorAt(selectedRow, new DefaultCellEditor(comMaxillaryComponentsName));
+					rowEditor4.setEditorAt(selectedRow, new DefaultCellEditor(comMaxillaryConnecterToothPosition));
+					rowEditor3.setEditorAt(selectedRow, new DefaultCellEditor(comMaxillaryConnecterToothPosition));
+				}
+				rowEditor1.setEditorAt(selectedRow, new DefaultCellEditor(comClaspMaterial));
+				rowEditor2.setEditorAt(selectedRow, new DefaultCellEditor(comClaspOrRestPosition));
+				table.getColumn("组件名称").setCellEditor(rowEditor5);
+				table.getColumn("属性1").setCellEditor(rowEditor1);
+				table.getColumn("属性2").setCellEditor(rowEditor2);
+//				table.getColumn("舌侧对抗#1").setCellEditor(rowEditor3);
+//				table.getColumn("舌侧对抗#2").setCellEditor(rowEditor4);
+				for(int i = 6; i<col; i ++){
+					table.getColumn("舌侧对抗#"+(i-5)).setCellEditor(rowEditor3);
+				}
+//				table.updateUI();
+				String classname;
+				for(int rowNum = 0;rowNum < table.getModel().getRowCount();rowNum++){
+					if (model.getValueAt(rowNum,2) != null)
+						classname = model.getValueAt(rowNum,2).toString();
+					else
+						break;
+					switch (classname) {
+						case "rpd.components.AkerClasp":
+						case "rpd.components.WroughtWireClasp":
+						case "rpd.components.CombinationClasp":
+						case "rpd.components.CanineClasp":
+						case "rpd.components.CanineAkerClasp":
+						case "rpd.components.HalfHalfClasp":
+						case "rpd.components.BackActionClasp":
+						case "rpd.components.ReverseBackActionClasp":
+						case "rpd.components.RingClasp":
+						case "rpd.components.CombinedClasp":
+						case "rpd.components.EmbrasureClasp":
+						case "rpd.components.ContinuousClasp":
+						case "rpd.components.RPAClasp":
+							rowEditor1.setEditorAt(rowNum, new DefaultCellEditor(comClaspMaterial));
+							table.getColumn("属性1").setCellEditor(rowEditor1);
+							rowEditor2.setEditorAt(rowNum, new DefaultCellEditor(comClaspPosition));
+							table.getColumn("属性2").setCellEditor(rowEditor2);
+							rowEditor5.setEditorAt(rowNum, new DefaultCellEditor(comClaspComponentName));
+							table.getColumn("组件名称").setCellEditor(rowEditor5);
+							break;
+						case "rpd.components.OcclusalRest":
+						case "rpd.components.LingualRest":
+							rowEditor2.setEditorAt(rowNum, new DefaultCellEditor(comRestPosition));
+							table.getColumn("属性2").setCellEditor(rowEditor2);
+							rowEditor5.setEditorAt(rowNum, new DefaultCellEditor(comRestComponentName));
+							table.getColumn("组件名称").setCellEditor(rowEditor5);
+							break;
+						case "rpd.components.LingualBarConnector":
+						case "rpd.components.LingualPlateConnector":
+							rowEditor3.setEditorAt(rowNum, new DefaultCellEditor(comMandibularConnecterToothPosition));
+							table.getColumn("舌侧对抗#1").setCellEditor(rowEditor3);
+							rowEditor4.setEditorAt(rowNum, new DefaultCellEditor(comMandibularConnecterToothPosition));
+							table.getColumn("舌侧对抗#2").setCellEditor(rowEditor4);
+							rowEditor5.setEditorAt(rowNum, new DefaultCellEditor(comMandibularConnecterComponentName));
+							table.getColumn("组件名称").setCellEditor(rowEditor5);
+							break;
+						case "rpd.components.SinglePalatalStrapConnector":
+						case "rpd.components.CombinationAnteriorPosteriorPalatalStrapConnector":
+						case "rpd.components.PalatalPlateConnector":
+						case "rpd.components.FullPalatalPlateConnector":
+						case "rpd.components.ModifiedPalatalPlateConnector":
+							rowEditor3.setEditorAt(rowNum, new DefaultCellEditor(comMaxillaryConnecterToothPosition));
+							table.getColumn("舌侧对抗#1").setCellEditor(rowEditor3);
+							rowEditor4.setEditorAt(rowNum, new DefaultCellEditor(comMaxillaryConnecterToothPosition));
+							table.getColumn("舌侧对抗#2").setCellEditor(rowEditor4);
+							rowEditor5.setEditorAt(rowNum, new DefaultCellEditor(comMaxillaryConnecterComponentName));
+							table.getColumn("组件名称").setCellEditor(rowEditor5);
+							break;
+						case "rpd.components.DentureBase":
+							rowEditor5.setEditorAt(rowNum, new DefaultCellEditor(comBaseComponentName));
+							table.getColumn("组件名称").setCellEditor(rowEditor5);
+							break;
+					}
+				}
+				hideTableColumn(table,0);
+				hideTableColumn(table,2);
+			}
+		});
+
+
+		JScrollPane tablePanel = new JScrollPane(table);
+//		String title;
+//		if(pos == Position.Maxillary)
+//			title = "上颌设计方案文本";
+//		else
+//			title = "下颌设计方案文本";
+//		tablePanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(),
+//				"方案"+count, TitledBorder.LEFT, TitledBorder.DEFAULT_POSITION,
+//				new Font("微软雅黑", Font.BOLD, 20)));
+		tablePanel.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		tablePanel.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+
+		table.setRowHeight(30);
+		int preferredHight = model.getRowCount() * 30;
+		int preferredWidth = model.getColumnCount() * 200;
+		table.setBackground(Color.white);
+		table.setFont(new Font("微软雅黑", Font.PLAIN, 18));
+//		maxillary_plan_table.getColumnModel().getColumn(0).setMaxWidth(0);
+		table.getColumnModel().getColumn(1).setMinWidth(200);
+//		maxillary_plan_table.getColumnModel().getColumn(2).setPreferredWidth(200);
+		table.getColumnModel().getColumn(3).setMinWidth(200);
+		table.getColumnModel().getColumn(4).setMinWidth(200);
+		table.getColumnModel().getColumn(5).setMinWidth(200);
+		table.getColumnModel().getColumn(6).setMinWidth(200);
+		table.getColumnModel().getColumn(7).setMinWidth(200);
+		table.setPreferredScrollableViewportSize(new Dimension(preferredWidth, preferredHight));
+		table.setMaximumSize(new Dimension(preferredWidth, preferredHight));
+		hideTableColumn(table,0);
+		hideTableColumn(table,2);
+
+		JPanel Pane = new JPanel(new BorderLayout());//right!
+		Pane.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(),
+				"方案"+count, TitledBorder.LEFT, TitledBorder.DEFAULT_POSITION,
+				new Font("微软雅黑", Font.BOLD, 20)));
+		JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+		buttonPanel.setPreferredSize(new Dimension(160, 50));
+
+		buttonPanel.add(buttonAdd);
+		buttonPanel.add(buttonRemove);
+		buttonPanel.add(buttonAddColumn);
+		Pane.add(buttonPanel,BorderLayout.NORTH);
+		Pane.add(tablePanel,BorderLayout.CENTER);
+		return Pane;
 	}
+
+	private JTable buildEachPlanTable(RPDPlan plan, int plan_count) {
+	if (plan == null) {
+		return null;
+	}
+	DefaultTableModel defaultTableModel = new DefaultTableModel(CString.col, 0);
+	JTable table = new JTable(defaultTableModel);
+
+	table = setRowEditors(plan, table, plan_count);
+
+	DefaultTableModel model = (DefaultTableModel)table.getModel();
+	int preferredHight = model.getRowCount() * 30;
+	table.setRowHeight(30);
+	table.setBackground(Color.white);
+	table.setFont(new Font("微软雅黑", Font.PLAIN, 18));
+	hideTableColumn(table, 0);
+	table.getColumnModel().getColumn(1).setPreferredWidth(200);
+	hideTableColumn(table, 2);
+	table.getColumnModel().getColumn(3).setPreferredWidth(200);
+	table.getColumnModel().getColumn(4).setPreferredWidth(200);
+	table.getColumnModel().getColumn(5).setPreferredWidth(200);
+	table.getColumnModel().getColumn(6).setPreferredWidth(200);
+	table.getColumnModel().getColumn(7).setPreferredWidth(200);
+	table.setPreferredScrollableViewportSize(new Dimension(1200, preferredHight));
+
+	return table;
+}
+
 
 	private JTree buildMandibularPlanTree() {
 		if (mandibular_rpd_plans == null || mandibular_rpd_plans.size() == 0) {
 			return null;
 		}
 		DefaultMutableTreeNode top_node = new DefaultMutableTreeNode("下颌设计方案");
-		JTree mandibular_plan_Tree = new JTree(top_node);
-		mandibular_plan_Tree.setEnabled(true);
-		mandibular_plan_Tree.setFont(new Font("微软雅黑", Font.PLAIN, 18));
+		JTree mandibular_plan_tree = new JTree(top_node);
+		mandibular_plan_tree.setEnabled(true);
+		mandibular_plan_tree.setFont(new Font("微软雅黑", Font.PLAIN, 18));
 
 		int plan_count = 0;
 		for (RPDPlan plan:mandibular_rpd_plans) {
@@ -1344,7 +2530,7 @@ public class LabelTool {
 				}
 			}
 		}
-		return mandibular_plan_Tree;
+		return mandibular_plan_tree;
 	}
 
 	private JTree buildMaxillaryPlanTree() {
@@ -2387,7 +3573,7 @@ public class LabelTool {
 		}
 	}
 
-	public void planToOwl(RPDPlan plan, OntModel resOnt) throws exceptions.rpd.RuleException, java.io.IOException {
+	public void planToOwl(RPDPlan plan, OntModel resOnt) throws exceptions.rpd.RuleException {
 //		FileWriter out = new FileWriter("instance_model.owl");
 //		template_model.write(out);
 //		File instance_model_file = new File("instance_model.owl");
@@ -2400,6 +3586,8 @@ public class LabelTool {
 		Map<ArrayList<Tooth>, Set<rpd.components.Component>> tooth_components = plan.getToothComponents();
 		for (ArrayList<Tooth> tooth_pos : tooth_components.keySet())
 			for (rpd.components.Component component : tooth_components.get(tooth_pos)) {
+//			System.out.println("component = " + component + "\t\n");
+//			System.out.println("tooth_pos = " + tooth_pos + "\t\n");
 				indCount++;
 				String className = component.getClass().getName();
 				switch (className) {
@@ -2749,7 +3937,7 @@ public class LabelTool {
 	public void setClaspTipDirection(OntModel model, Individual indClasp, Position tip_direction, String NS) {
 
 		OntProperty clasp_tip_direction = model.getOntProperty(NS + "clasp_tip_direction");
-		if (tip_direction == Position.Mesial) {
+		if (tip_direction == Mesial) {
 			indClasp.addProperty(clasp_tip_direction, model.createTypedLiteral(0));
 		} else if (tip_direction == Position.Distal) {
 			indClasp.addProperty(clasp_tip_direction, model.createTypedLiteral(1));
@@ -2769,7 +3957,7 @@ public class LabelTool {
 	public void setRestMesialOrDistal(OntModel model, Individual indRest, Position mesial_or_distal, String NS) {
 
 		OntProperty rest_mesial_or_distal = model.getOntProperty(NS + "rest_mesial_or_distal");
-		if (mesial_or_distal == Position.Mesial) {
+		if (mesial_or_distal == Mesial) {
 			indRest.addProperty(rest_mesial_or_distal, model.createTypedLiteral(0));
 		} else if (mesial_or_distal == Position.Distal) {
 			indRest.addProperty(rest_mesial_or_distal, model.createTypedLiteral(1));
@@ -2791,4 +3979,1230 @@ public class LabelTool {
 			indMajorConnector.addProperty(lingual_confrontation, model.getIndividual(NS + tooth.toString()));
 		}
 	}
+
+	/**************************************************************************************************************************/
+
+	public rpd.components.AkerClasp modifyAkerClasp(String toothPosition ,Position tip_direction , ClaspMaterial material) {
+		int[] strtoToothList = getToothList(toothPosition);
+		Tooth toothList = new Tooth(strtoToothList[1], strtoToothList[0]);
+		rpd.components.AkerClasp akerClasp = new AkerClasp(toothList, tip_direction, material);
+		return akerClasp;
+	}
+
+	public rpd.components.AkerClasp modifyAkerClasp(String toothPosition ,Position tip_direction) {
+		int[] strtoToothList = getToothList(toothPosition);
+		Tooth toothList = new Tooth(strtoToothList[1], strtoToothList[0]);
+		rpd.components.AkerClasp akerClasp = new AkerClasp(toothList, tip_direction);
+		return akerClasp;
+	}
+
+	public rpd.components.EmbrasureClasp modifyEmbrasureClasp(String toothPosition) {
+		int[] strtoToothArrayList = getToothArrayList(toothPosition);
+		Tooth toothListDB1 = new Tooth(strtoToothArrayList[1],strtoToothArrayList[0]);
+		Tooth toothListDB2 = new Tooth(strtoToothArrayList[3],strtoToothArrayList[2]);
+		ArrayList<Tooth> toothListDB = new ArrayList<Tooth>(){{add(toothListDB2); add(toothListDB1);}};
+		rpd.components.EmbrasureClasp embrasureClasp = new EmbrasureClasp(toothListDB);
+		return embrasureClasp;
+	}
+
+	public rpd.components.ContinuousClasp modifyContinuousClasp(String toothPosition , ClaspMaterial material) {
+		int[] strtoToothArrayList = getToothArrayList(toothPosition);
+		Tooth toothListDB1 = new Tooth(strtoToothArrayList[1],strtoToothArrayList[0]);
+		Tooth toothListDB2 = new Tooth(strtoToothArrayList[3],strtoToothArrayList[2]);
+		ArrayList<Tooth> toothListDB = new ArrayList<Tooth>(){{add(toothListDB2); add(toothListDB1);}};
+		rpd.components.ContinuousClasp continuousClasp = new ContinuousClasp(toothListDB,material);
+		return continuousClasp;
+	}
+
+	public rpd.components.ContinuousClasp modifyContinuousClasp(String toothPosition) {
+		int[] strtoToothArrayList = getToothArrayList(toothPosition);
+		Tooth toothListDB1 = new Tooth(strtoToothArrayList[1],strtoToothArrayList[0]);
+		Tooth toothListDB2 = new Tooth(strtoToothArrayList[3],strtoToothArrayList[2]);
+		ArrayList<Tooth> toothListDB = new ArrayList<Tooth>(){{add(toothListDB2); add(toothListDB1);}};
+		rpd.components.ContinuousClasp continuousClasp = new ContinuousClasp(toothListDB);
+		return continuousClasp;
+	}
+
+	public rpd.components.WroughtWireClasp modifyWroughtWireClasp(String toothPosition ,Position tip_direction) {
+		int[] strtoToothList = getToothList(toothPosition);
+		Tooth toothList = new Tooth(strtoToothList[1], strtoToothList[0]);
+		rpd.components.WroughtWireClasp wroughtWireClasp = new WroughtWireClasp(toothList, tip_direction);
+		return wroughtWireClasp;
+	}
+	public rpd.components.OcclusalRest modifyOcclusalRest(String toothPosition ,Position mesial_or_distal) {
+		int[] strtoToothList = getToothList(toothPosition);
+		Tooth toothList = new Tooth(strtoToothList[1], strtoToothList[0]);
+		rpd.components.OcclusalRest occlusalRest = new OcclusalRest(toothList, mesial_or_distal);
+		return occlusalRest;
+	}
+
+	public rpd.components.CombinationClasp modifyCombinationClasp(String toothPosition ,Position tip_direction) {
+		int[] strtoToothList = getToothList(toothPosition);
+		Tooth toothList = new Tooth(strtoToothList[1], strtoToothList[0]);
+		rpd.components.CombinationClasp combinationClasp = new CombinationClasp(toothList, tip_direction);
+		return combinationClasp;
+	}
+
+	public rpd.components.CombinationClasp modifyCombinationClasp(String toothPosition) {
+		int[] strtoToothList = getToothList(toothPosition);
+		Tooth toothList = new Tooth(strtoToothList[1], strtoToothList[0]);
+		rpd.components.CombinationClasp combinationClasp = new CombinationClasp(toothList);
+		return combinationClasp;
+	}
+
+	public rpd.components.CanineClasp modifyCanineClasp(String toothPosition ,ClaspMaterial material) {
+		int[] strtoToothList = getToothList(toothPosition);
+		Tooth toothList = new Tooth(strtoToothList[1], strtoToothList[0]);
+		rpd.components.CanineClasp canineClasp = new CanineClasp(toothList, material);
+		return canineClasp;
+	}
+
+	public rpd.components.CanineClasp modifyCanineClasp(String toothPosition) {
+		int[] strtoToothList = getToothList(toothPosition);
+		Tooth toothList = new Tooth(strtoToothList[1], strtoToothList[0]);
+		rpd.components.CanineClasp canineClasp = new CanineClasp(toothList);
+		return canineClasp;
+	}
+
+	public rpd.components.CanineAkerClasp modifyCanineAkerClasp(String toothPosition ,Position tip_direction , ClaspMaterial material) {
+		int[] strtoToothList = getToothList(toothPosition);
+		Tooth toothList = new Tooth(strtoToothList[1], strtoToothList[0]);
+		rpd.components.CanineAkerClasp canineAkerClasp = new CanineAkerClasp(toothList, tip_direction, material);
+		return canineAkerClasp;
+	}
+
+	public rpd.components.CanineAkerClasp modifyCanineAkerClasp(String toothPosition ,Position tip_direction) {
+		int[] strtoToothList = getToothList(toothPosition);
+		Tooth toothList = new Tooth(strtoToothList[1], strtoToothList[0]);
+		rpd.components.CanineAkerClasp canineAkerClasp = new CanineAkerClasp(toothList, tip_direction);
+		return canineAkerClasp;
+	}
+
+	public rpd.components.HalfHalfClasp modifyHalfHalfClasp(String toothPosition ,ClaspMaterial material) {
+		int[] strtoToothList = getToothList(toothPosition);
+		Tooth toothList = new Tooth(strtoToothList[1], strtoToothList[0]);
+		rpd.components.HalfHalfClasp halfHalfClasp = new HalfHalfClasp(toothList, material);
+		return halfHalfClasp;
+	}
+
+	public rpd.components.HalfHalfClasp modifyHalfHalfClasp(String toothPosition) {
+		int[] strtoToothList = getToothList(toothPosition);
+		Tooth toothList = new Tooth(strtoToothList[1], strtoToothList[0]);
+		rpd.components.HalfHalfClasp halfHalfClasp = new HalfHalfClasp(toothList);
+		return halfHalfClasp;
+	}
+
+	public rpd.components.BackActionClasp modifyBackActionClasp(String toothPosition ,ClaspMaterial material) {
+		int[] strtoToothList = getToothList(toothPosition);
+		Tooth toothList = new Tooth(strtoToothList[1], strtoToothList[0]);
+		rpd.components.BackActionClasp backActionClasp = new BackActionClasp(toothList, material);
+		return backActionClasp;
+	}
+
+	public rpd.components.BackActionClasp modifyBackActionClasp(String toothPosition) {
+		int[] strtoToothList = getToothList(toothPosition);
+		Tooth toothList = new Tooth(strtoToothList[1], strtoToothList[0]);
+		rpd.components.BackActionClasp backActionClasp = new BackActionClasp(toothList);
+		return backActionClasp;
+	}
+
+	public rpd.components.ReverseBackActionClasp modifyReverseBackActionClasp(String toothPosition ,ClaspMaterial material) {
+		int[] strtoToothList = getToothList(toothPosition);
+		Tooth toothList = new Tooth(strtoToothList[1], strtoToothList[0]);
+		rpd.components.ReverseBackActionClasp reverseBackActionClasp = new ReverseBackActionClasp(toothList, material);
+		return reverseBackActionClasp;
+	}
+
+	public rpd.components.ReverseBackActionClasp modifyReverseBackActionClasp(String toothPosition) {
+		int[] strtoToothList = getToothList(toothPosition);
+		Tooth toothList = new Tooth(strtoToothList[1], strtoToothList[0]);
+		rpd.components.ReverseBackActionClasp reverseBackActionClasp = new ReverseBackActionClasp(toothList);
+		return reverseBackActionClasp;
+	}
+
+	public rpd.components.RingClasp modifyRingClasp(String toothPosition ,ClaspMaterial material) {
+		int[] strtoToothList = getToothList(toothPosition);
+		Tooth toothList = new Tooth(strtoToothList[1], strtoToothList[0]);
+		rpd.components.RingClasp ringClasp = new RingClasp(toothList, material);
+		return ringClasp;
+	}
+
+	public rpd.components.RingClasp modifyRingClasp(String toothPosition) {
+		int[] strtoToothList = getToothList(toothPosition);
+		Tooth toothList = new Tooth(strtoToothList[1], strtoToothList[0]);
+		rpd.components.RingClasp ringClasp = new RingClasp(toothList);
+		return ringClasp;
+	}
+
+	public rpd.components.CombinedClasp modifyCombinedClasp(String toothPosition ,ClaspMaterial material) {
+		int[] strtoToothArrayList = getToothArrayList(toothPosition);
+		Tooth toothListDB1 = new Tooth(strtoToothArrayList[1],strtoToothArrayList[0]);
+		Tooth toothListDB2 = new Tooth(strtoToothArrayList[3],strtoToothArrayList[2]);
+		ArrayList<Tooth> toothListDB = new ArrayList<Tooth>(){{add(toothListDB2); add(toothListDB1);}};
+		rpd.components.CombinedClasp combinedClasp =new CombinedClasp(toothListDB ,material);
+		return combinedClasp;
+	}
+
+	public rpd.components.CombinedClasp modifyCombinedClasp(String toothPosition) {
+		int[] strtoToothArrayList = getToothArrayList(toothPosition);
+		Tooth toothListDB1 = new Tooth(strtoToothArrayList[1],strtoToothArrayList[0]);
+		Tooth toothListDB2 = new Tooth(strtoToothArrayList[3],strtoToothArrayList[2]);
+		ArrayList<Tooth> toothListDB = new ArrayList<Tooth>(){{add(toothListDB2); add(toothListDB1);}};
+		rpd.components.CombinedClasp combinedClasp =new CombinedClasp(toothListDB);
+		return combinedClasp;
+	}
+
+	public rpd.components.RPAClasp modifyRPAClasp(String toothPosition ,ClaspMaterial material) {
+		int[] strtoToothList = getToothList(toothPosition);
+		Tooth toothList = new Tooth(strtoToothList[1], strtoToothList[0]);
+		rpd.components.RPAClasp rPAClasp = new RPAClasp(toothList, material);
+		return rPAClasp;
+	}
+
+	public rpd.components.RPAClasp modifyRPAClasp(String toothPosition) {
+		int[] strtoToothList = getToothList(toothPosition);
+		Tooth toothList = new Tooth(strtoToothList[1], strtoToothList[0]);
+		rpd.components.RPAClasp rPAClasp = new RPAClasp(toothList);
+		return rPAClasp;
+	}
+
+	public rpd.components.LingualRest modifyLingualRest(String toothPosition) {
+		int[] strtoToothList = getToothList(toothPosition);
+		Tooth toothList = new Tooth(strtoToothList[1], strtoToothList[0]);
+		rpd.components.LingualRest lingualRest = new LingualRest(toothList);
+		return lingualRest;
+	}
+	/**********************************************************		SinglePalatalStrapConnector		***********************************************************************/
+
+	public rpd.components.SinglePalatalStrapConnector modifySinglePalatalStrapConnector(String toothPosition, Maxillary maxillary) {
+//		int[] strtoToothArrayList = getToothArrayList(toothPosition);
+//		Tooth toothListDB1 = new Tooth(strtoToothArrayList[1],strtoToothArrayList[0]);
+//		Tooth toothListDB2 = new Tooth(strtoToothArrayList[3],strtoToothArrayList[2]);
+//		Set<Tooth> toothListDB = new HashSet<Tooth>();
+//		toothListDB.add(toothListDB2);
+//		toothListDB.add(toothListDB1);
+		int[] strtoToothArrayList = getToothArrayListEight(toothPosition);
+		Set<Tooth> toothListDB = new HashSet<Tooth>();
+
+		Tooth toothListDB1 = new Tooth(strtoToothArrayList[1],strtoToothArrayList[0]);
+		Tooth toothListDB2 = new Tooth(strtoToothArrayList[3],strtoToothArrayList[2]);
+		Tooth toothListDB3 = new Tooth(strtoToothArrayList[5],strtoToothArrayList[4]);
+		Tooth toothListDB4 = new Tooth(strtoToothArrayList[7],strtoToothArrayList[6]);
+
+		toothListDB.add(toothListDB4);
+		toothListDB.add(toothListDB3);
+		toothListDB.add(toothListDB2);
+		toothListDB.add(toothListDB1);
+		rpd.components.SinglePalatalStrapConnector singlePalatalStrapConnector =new SinglePalatalStrapConnector(toothListDB, maxillary);
+		return singlePalatalStrapConnector;
+	}
+
+	public rpd.components.SinglePalatalStrapConnector modifySinglePalatalStrapConnector(String toothPosition, Maxillary maxillary, String lingualConfrontation) {
+		rpd.components.SinglePalatalStrapConnector singlePalatalStrapConnector = modifySinglePalatalStrapConnector(toothPosition, maxillary);
+		int[] strtoToothList = getToothList(lingualConfrontation);
+		HashSet<Tooth> toothListTemp = singlePalatalStrapConnector.getLingualConfrontation();
+		ArrayList<Tooth> removedLingualConfrontation = new ArrayList(toothListTemp);
+		singlePalatalStrapConnector.removeLingualConfrontation(removedLingualConfrontation);
+		Tooth toothList = new Tooth(strtoToothList[1], strtoToothList[0]);
+		singlePalatalStrapConnector.addLingualConfrontation(toothList);
+		return singlePalatalStrapConnector;
+	}
+
+	public rpd.components.SinglePalatalStrapConnector modifySinglePalatalStrapConnector(String toothPosition, Maxillary maxillary, List<String> lingualConfrontation, int num) {
+		rpd.components.SinglePalatalStrapConnector singlePalatalStrapConnector = modifySinglePalatalStrapConnector(toothPosition, maxillary);
+
+		int[] strtoToothArrayList = getToothArrayListUnsigned(lingualConfrontation,num);
+		ArrayList<Tooth> toothList = new ArrayList<>();
+		for(int i = 0;i < num *2; i+=2 ){
+			Tooth tooth = new Tooth(strtoToothArrayList[i+1],strtoToothArrayList[i]);
+			toothList.add(tooth);
+		}
+
+		if( singlePalatalStrapConnector.getLingualConfrontation()!=null ){
+			HashSet<Tooth> toothListTemp = singlePalatalStrapConnector.getLingualConfrontation();
+			ArrayList<Tooth> removedLingualConfrontation = new ArrayList(toothListTemp);
+			singlePalatalStrapConnector.removeLingualConfrontation(removedLingualConfrontation);
+		}
+		if(toothList!=null){
+			System.out.print("toothList = "+ toothList + "\t\n");
+			try {
+				singlePalatalStrapConnector.addLingualConfrontation(toothList);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return singlePalatalStrapConnector;
+	}
+	/***********************************************************		PalatalPlateConnector		************************************************************************/
+
+	public rpd.components.PalatalPlateConnector modifyPalatalPlateConnector(String toothPosition, Maxillary maxillary) {
+
+		int[] strtoToothArrayList = getToothArrayListEight(toothPosition);
+		Set<Tooth> toothListDB = new HashSet<Tooth>();
+
+		Tooth toothListDB1 = new Tooth(strtoToothArrayList[1],strtoToothArrayList[0]);
+		Tooth toothListDB2 = new Tooth(strtoToothArrayList[3],strtoToothArrayList[2]);
+		Tooth toothListDB3 = new Tooth(strtoToothArrayList[5],strtoToothArrayList[4]);
+		Tooth toothListDB4 = new Tooth(strtoToothArrayList[7],strtoToothArrayList[6]);
+
+		toothListDB.add(toothListDB4);
+		toothListDB.add(toothListDB3);
+		toothListDB.add(toothListDB2);
+		toothListDB.add(toothListDB1);
+		rpd.components.PalatalPlateConnector palatalPlateConnector =new PalatalPlateConnector(toothListDB, maxillary);
+		return palatalPlateConnector;
+	}
+
+	public rpd.components.PalatalPlateConnector modifyPalatalPlateConnector(String toothPosition, Maxillary maxillary, String lingualConfrontation) {
+		rpd.components.PalatalPlateConnector palatalPlateConnector = modifyPalatalPlateConnector(toothPosition, maxillary);
+		int[] strtoToothList = getToothList(lingualConfrontation);
+		HashSet<Tooth> toothListTemp = palatalPlateConnector.getLingualConfrontation();
+		ArrayList<Tooth> removedLingualConfrontation = new ArrayList(toothListTemp);
+		palatalPlateConnector.removeLingualConfrontation(removedLingualConfrontation);
+		Tooth toothList = new Tooth(strtoToothList[1], strtoToothList[0]);
+		palatalPlateConnector.addLingualConfrontation(toothList);
+		return palatalPlateConnector;
+	}
+
+	public rpd.components.PalatalPlateConnector modifyPalatalPlateConnector(String toothPosition, Maxillary maxillary, List<String> lingualConfrontation, int num) {
+		rpd.components.PalatalPlateConnector palatalPlateConnector = modifyPalatalPlateConnector(toothPosition, maxillary);
+
+		int[] strtoToothArrayList = getToothArrayListUnsigned(lingualConfrontation,num);
+		ArrayList<Tooth> toothList = new ArrayList<>();
+		for(int i = 0;i < num *2; i+=2 ){
+			Tooth tooth = new Tooth(strtoToothArrayList[i+1],strtoToothArrayList[i]);
+			toothList.add(tooth);
+		}
+
+		HashSet<Tooth> toothListTemp = palatalPlateConnector.getLingualConfrontation();
+		ArrayList<Tooth> removedLingualConfrontation = new ArrayList(toothListTemp);
+		palatalPlateConnector.removeLingualConfrontation(removedLingualConfrontation);
+		palatalPlateConnector.addLingualConfrontation(toothList);
+		return palatalPlateConnector;
+	}
+	/***********************************************************		FullPalatalPlateConnector		************************************************************************/
+
+
+	public rpd.components.FullPalatalPlateConnector modifyFullPalatalPlateConnector(String toothPosition, Maxillary maxillary) {
+		int[] strtoToothArrayList = getToothArrayList(toothPosition);
+		Tooth toothListDB1 = new Tooth(strtoToothArrayList[1],strtoToothArrayList[0]);
+		Tooth toothListDB2 = new Tooth(strtoToothArrayList[3],strtoToothArrayList[2]);
+		Set<Tooth> toothListDB = new HashSet<Tooth>();
+		toothListDB.add(toothListDB2);
+		toothListDB.add(toothListDB1);
+		rpd.components.FullPalatalPlateConnector fullPalatalPlateConnector =new FullPalatalPlateConnector(toothListDB, maxillary);
+		return fullPalatalPlateConnector;
+	}
+
+	public rpd.components.FullPalatalPlateConnector modifyFullPalatalPlateConnector(String toothPosition, Maxillary maxillary, String lingualConfrontation) {
+		rpd.components.FullPalatalPlateConnector fullPalatalPlateConnector = modifyFullPalatalPlateConnector(toothPosition, maxillary);
+		int[] strtoToothList = getToothList(lingualConfrontation);
+		HashSet<Tooth> toothListTemp = fullPalatalPlateConnector.getLingualConfrontation();
+		ArrayList<Tooth> removedLingualConfrontation = new ArrayList(toothListTemp);
+		fullPalatalPlateConnector.removeLingualConfrontation(removedLingualConfrontation);
+		Tooth toothList = new Tooth(strtoToothList[1], strtoToothList[0]);
+		fullPalatalPlateConnector.addLingualConfrontation(toothList);
+		return fullPalatalPlateConnector;
+	}
+
+	public rpd.components.FullPalatalPlateConnector modifyFullPalatalPlateConnector(String toothPosition, Maxillary maxillary, List<String> lingualConfrontation, int num) {
+		rpd.components.FullPalatalPlateConnector fullPalatalPlateConnector = modifyFullPalatalPlateConnector(toothPosition, maxillary);
+
+		int[] strtoToothArrayList = getToothArrayListUnsigned(lingualConfrontation,num);
+		ArrayList<Tooth> toothList = new ArrayList<>();
+		for(int i = 0;i < num *2; i+=2 ){
+			Tooth tooth = new Tooth(strtoToothArrayList[i+1],strtoToothArrayList[i]);
+			toothList.add(tooth);
+		}
+
+		HashSet<Tooth> toothListTemp = fullPalatalPlateConnector.getLingualConfrontation();
+		ArrayList<Tooth> removedLingualConfrontation = new ArrayList(toothListTemp);
+		fullPalatalPlateConnector.removeLingualConfrontation(removedLingualConfrontation);
+		fullPalatalPlateConnector.addLingualConfrontation(toothList);
+		return fullPalatalPlateConnector;
+	}
+	/***********************************************************		CombinationAnteriorPosteriorPalatalStrapConnector		************************************************************************/
+
+	public rpd.components.CombinationAnteriorPosteriorPalatalStrapConnector modifyCombinationAnteriorPosteriorPalatalStrapConnector(String toothPosition, Maxillary maxillary) {
+//		int[] strtoToothArrayList = getToothArrayList(toothPosition);
+//		Tooth toothListDB1 = new Tooth(strtoToothArrayList[1],strtoToothArrayList[0]);
+//		Tooth toothListDB2 = new Tooth(strtoToothArrayList[3],strtoToothArrayList[2]);
+//		Set<Tooth> toothListDB = new HashSet<Tooth>();
+//		toothListDB.add(toothListDB2);
+//		toothListDB.add(toothListDB1);
+		int[] strtoToothArrayList = getToothArrayListEight(toothPosition);
+		Set<Tooth> toothListDB = new HashSet<Tooth>();
+
+		Tooth toothListDB1 = new Tooth(strtoToothArrayList[1],strtoToothArrayList[0]);
+		Tooth toothListDB2 = new Tooth(strtoToothArrayList[3],strtoToothArrayList[2]);
+		Tooth toothListDB3 = new Tooth(strtoToothArrayList[5],strtoToothArrayList[4]);
+		Tooth toothListDB4 = new Tooth(strtoToothArrayList[7],strtoToothArrayList[6]);
+
+		toothListDB.add(toothListDB4);
+		toothListDB.add(toothListDB3);
+		toothListDB.add(toothListDB2);
+		toothListDB.add(toothListDB1);
+		rpd.components.CombinationAnteriorPosteriorPalatalStrapConnector combinationAnteriorPosteriorPalatalStrapConnector =new CombinationAnteriorPosteriorPalatalStrapConnector(toothListDB, maxillary);
+		return combinationAnteriorPosteriorPalatalStrapConnector;
+	}
+
+	public rpd.components.CombinationAnteriorPosteriorPalatalStrapConnector modifyCombinationAnteriorPosteriorPalatalStrapConnector(String toothPosition, Maxillary maxillary, String lingualConfrontation) {
+		rpd.components.CombinationAnteriorPosteriorPalatalStrapConnector combinationAnteriorPosteriorPalatalStrapConnector = modifyCombinationAnteriorPosteriorPalatalStrapConnector(toothPosition, maxillary);
+		int[] strtoToothList = getToothList(lingualConfrontation);
+		HashSet<Tooth> toothListTemp = combinationAnteriorPosteriorPalatalStrapConnector.getLingualConfrontation();
+		ArrayList<Tooth> removedLingualConfrontation = new ArrayList(toothListTemp);
+		combinationAnteriorPosteriorPalatalStrapConnector.removeLingualConfrontation(removedLingualConfrontation);
+		Tooth toothList = new Tooth(strtoToothList[1], strtoToothList[0]);
+		combinationAnteriorPosteriorPalatalStrapConnector.addLingualConfrontation(toothList);
+		return combinationAnteriorPosteriorPalatalStrapConnector;
+	}
+
+	public rpd.components.CombinationAnteriorPosteriorPalatalStrapConnector modifyCombinationAnteriorPosteriorPalatalStrapConnector(String toothPosition, Maxillary maxillary,  List<String> lingualConfrontation, int num) {
+		rpd.components.CombinationAnteriorPosteriorPalatalStrapConnector combinationAnteriorPosteriorPalatalStrapConnector = modifyCombinationAnteriorPosteriorPalatalStrapConnector(toothPosition, maxillary);
+
+		int[] strtoToothArrayList = getToothArrayListUnsigned(lingualConfrontation,num);
+		ArrayList<Tooth> toothList = new ArrayList<>();
+		for(int i = 0;i < num *2; i+=2 ){
+			Tooth tooth = new Tooth(strtoToothArrayList[i+1],strtoToothArrayList[i]);
+			toothList.add(tooth);
+		}
+
+		HashSet<Tooth> toothListTemp = combinationAnteriorPosteriorPalatalStrapConnector.getLingualConfrontation();
+		ArrayList<Tooth> removedLingualConfrontation = new ArrayList(toothListTemp);
+		combinationAnteriorPosteriorPalatalStrapConnector.removeLingualConfrontation(removedLingualConfrontation);
+		combinationAnteriorPosteriorPalatalStrapConnector.addLingualConfrontation(toothList);
+		return combinationAnteriorPosteriorPalatalStrapConnector;
+	}
+	/***********************************************************		ModifiedPalatalPlateConnector		************************************************************************/
+
+	public rpd.components.ModifiedPalatalPlateConnector modifyModifiedPalatalPlateConnector(String toothPosition, Maxillary maxillary) {
+		int[] strtoToothArrayList = getToothArrayListEight(toothPosition);
+		Set<Tooth> toothListDB = new HashSet<Tooth>();
+
+		Tooth toothListDB1 = new Tooth(strtoToothArrayList[1],strtoToothArrayList[0]);
+		Tooth toothListDB2 = new Tooth(strtoToothArrayList[3],strtoToothArrayList[2]);
+		Tooth toothListDB3 = new Tooth(strtoToothArrayList[5],strtoToothArrayList[4]);
+		Tooth toothListDB4 = new Tooth(strtoToothArrayList[7],strtoToothArrayList[6]);
+
+		toothListDB.add(toothListDB4);
+		toothListDB.add(toothListDB3);
+		toothListDB.add(toothListDB2);
+		toothListDB.add(toothListDB1);
+		rpd.components.ModifiedPalatalPlateConnector modifiedPalatalPlateConnector =new ModifiedPalatalPlateConnector(toothListDB, maxillary);
+		return modifiedPalatalPlateConnector;
+	}
+	public rpd.components.ModifiedPalatalPlateConnector modifyModifiedPalatalPlateConnector(String toothPosition, Maxillary maxillary, String lingualConfrontation) {
+		rpd.components.ModifiedPalatalPlateConnector modifiedPalatalPlateConnector = modifyModifiedPalatalPlateConnector(toothPosition, maxillary);
+		int[] strtoToothList = getToothList(lingualConfrontation);
+		HashSet<Tooth> toothListTemp = modifiedPalatalPlateConnector.getLingualConfrontation();
+		ArrayList<Tooth> removedLingualConfrontation = new ArrayList(toothListTemp);
+		modifiedPalatalPlateConnector.removeLingualConfrontation(removedLingualConfrontation);
+		Tooth toothList = new Tooth(strtoToothList[1], strtoToothList[0]);
+		modifiedPalatalPlateConnector.addLingualConfrontation(toothList);
+		return modifiedPalatalPlateConnector;
+	}
+
+	public rpd.components.ModifiedPalatalPlateConnector modifyModifiedPalatalPlateConnector(String toothPosition, Maxillary maxillary,  List<String> lingualConfrontation, int num) {
+		rpd.components.ModifiedPalatalPlateConnector modifiedPalatalPlateConnector = modifyModifiedPalatalPlateConnector(toothPosition, maxillary);
+
+		int[] strtoToothArrayList = getToothArrayListUnsigned(lingualConfrontation,num);
+		ArrayList<Tooth> toothList = new ArrayList<>();
+		for(int i = 0;i < num *2; i+=2 ){
+			Tooth tooth = new Tooth(strtoToothArrayList[i+1],strtoToothArrayList[i]);
+			toothList.add(tooth);
+		}
+
+		HashSet<Tooth> toothListTemp = modifiedPalatalPlateConnector.getLingualConfrontation();
+		ArrayList<Tooth> removedLingualConfrontation = new ArrayList(toothListTemp);
+		modifiedPalatalPlateConnector.removeLingualConfrontation(removedLingualConfrontation);
+		modifiedPalatalPlateConnector.addLingualConfrontation(toothList);
+		return modifiedPalatalPlateConnector;
+	}
+	/***********************************************************		LingualBarConnector		************************************************************************/
+
+	public rpd.components.LingualBarConnector modifyLingualBarConnector(String toothPosition , Mandibular mandibular) {
+		int[] strtoToothArrayList = getToothArrayList(toothPosition);
+		Tooth toothListDB1 = new Tooth(strtoToothArrayList[1],strtoToothArrayList[0]);
+		Tooth toothListDB2 = new Tooth(strtoToothArrayList[3],strtoToothArrayList[2]);
+		Set<Tooth> toothListDB = new HashSet<Tooth>();
+		toothListDB.add(toothListDB2);
+		toothListDB.add(toothListDB1);
+		rpd.components.LingualBarConnector lingualBarConnector =new LingualBarConnector(toothListDB, mandibular);
+		return lingualBarConnector;
+	}
+
+	public rpd.components.LingualBarConnector modifyLingualBarConnector(String toothPosition, Mandibular mandibular, String lingualConfrontation) {
+
+		rpd.components.LingualBarConnector lingualBarConnector = modifyLingualBarConnector(toothPosition, mandibular);
+		int[] strtoToothList = getToothList(lingualConfrontation);
+		HashSet<Tooth> toothListTemp = lingualBarConnector.getLingualConfrontation();
+		if(toothListTemp != null){
+			ArrayList<Tooth> removedLingualConfrontation = new ArrayList(toothListTemp);
+			lingualBarConnector.removeLingualConfrontation(removedLingualConfrontation);
+		}
+		Tooth toothList = new Tooth(strtoToothList[1], strtoToothList[0]);
+		if (toothList != null)
+			try {
+				lingualBarConnector.addLingualConfrontation(toothList);
+			}catch (NullPointerException e){
+				e.printStackTrace();
+			}
+		return lingualBarConnector;
+	}
+
+	public rpd.components.LingualBarConnector modifyLingualBarConnector(String toothPosition, Mandibular mandibular,  List<String> lingualConfrontation, int num) {
+		rpd.components.LingualBarConnector lingualBarConnector = modifyLingualBarConnector(toothPosition, mandibular);
+
+
+		int[] strtoToothArrayList = getToothArrayListUnsigned(lingualConfrontation,num);
+		ArrayList<Tooth> toothList = new ArrayList<>();
+		for(int i = 0;i < num *2; i+=2 ){
+			Tooth tooth = new Tooth(strtoToothArrayList[i+1],strtoToothArrayList[i]);
+			toothList.add(tooth);
+		}
+
+		HashSet<Tooth> toothListTemp = lingualBarConnector.getLingualConfrontation();
+		if(toothListTemp != null) {
+			ArrayList<Tooth> removedLingualConfrontation = new ArrayList(toothListTemp);
+			lingualBarConnector.removeLingualConfrontation(removedLingualConfrontation);
+		}
+		try {
+			lingualBarConnector.addLingualConfrontation(toothList);
+		}catch(NullPointerException e){
+			e.printStackTrace();
+		}
+		return lingualBarConnector;
+	}
+	/***********************************************************		LingualPlateConnector		************************************************************************/
+
+	public rpd.components.LingualPlateConnector modifyLingualPlateConnector(String toothPosition, Mandibular mandibular) {
+		int[] strtoToothArrayList = getToothArrayList(toothPosition);
+		Tooth toothListDB1 = new Tooth(strtoToothArrayList[1],strtoToothArrayList[0]);
+		Tooth toothListDB2 = new Tooth(strtoToothArrayList[3],strtoToothArrayList[2]);
+		Set<Tooth> toothListDB = new HashSet<Tooth>();
+		toothListDB.add(toothListDB2);
+		toothListDB.add(toothListDB1);
+		rpd.components.LingualPlateConnector lingualPlateConnector =new LingualPlateConnector(toothListDB, mandibular);
+		return lingualPlateConnector;
+	}
+
+	public rpd.components.LingualPlateConnector modifyLingualPlateConnector(String toothPosition, Mandibular mandibular, String lingualConfrontation) {
+
+		rpd.components.LingualPlateConnector lingualPlateConnector = modifyLingualPlateConnector(toothPosition, mandibular);
+		int[] strtoToothList = getToothList(lingualConfrontation);
+		HashSet<Tooth> toothListTemp = lingualPlateConnector.getLingualConfrontation();
+
+		if(toothListTemp != null) {
+			ArrayList<Tooth> removedLingualConfrontation = new ArrayList(toothListTemp);
+			lingualPlateConnector.removeLingualConfrontation(removedLingualConfrontation);
+		}
+		Tooth toothList = new Tooth(strtoToothList[1], strtoToothList[0]);
+		try {
+			lingualPlateConnector.addLingualConfrontation(toothList);
+		}catch(NullPointerException e){
+			e.printStackTrace();
+		}
+		return lingualPlateConnector;
+	}
+
+	public rpd.components.LingualPlateConnector modifyLingualPlateConnector(String toothPosition, Mandibular mandibular, List<String> lingualConfrontation, int num) {
+		rpd.components.LingualPlateConnector lingualPlateConnector = modifyLingualPlateConnector(toothPosition, mandibular);
+
+		int[] strtoToothArrayList = getToothArrayListUnsigned(lingualConfrontation,num);
+		ArrayList<Tooth> toothList = new ArrayList<>();
+		for(int i = 0;i < num *2; i+=2 ){
+			Tooth tooth = new Tooth(strtoToothArrayList[i+1],strtoToothArrayList[i]);
+			toothList.add(tooth);
+		}
+
+		HashSet<Tooth> toothListTemp = lingualPlateConnector.getLingualConfrontation();
+//		ArrayList<Tooth> removedLingualConfrontation = new ArrayList(toothListTemp);
+//		lingualPlateConnector.removeLingualConfrontation(removedLingualConfrontation);
+//		lingualPlateConnector.addLingualConfrontation(toothList);
+		if(toothListTemp != null) {
+			ArrayList<Tooth> removedLingualConfrontation = new ArrayList(toothListTemp);
+			lingualPlateConnector.removeLingualConfrontation(removedLingualConfrontation);
+		}
+		try {
+			lingualPlateConnector.addLingualConfrontation(toothList);
+		}catch(NullPointerException e){
+			e.printStackTrace();
+		}
+		return lingualPlateConnector;
+	}
+
+	/***********************************************************************************************************************************/
+
+	public rpd.components.DentureBase modifyDentureBase(String toothPosition) {
+		int count = 0;
+		for(int i =0 ;i<toothPosition.length();i++)
+				if(toothPosition.charAt(i)>=48 && toothPosition.charAt(i)<=57)
+					count++;
+		if (count == 2)
+			toothPosition += toothPosition;
+		int[] strtoToothArrayList = getToothArrayList(toothPosition);
+		Tooth toothListDB1 = new Tooth(strtoToothArrayList[1],strtoToothArrayList[0]);
+		Tooth toothListDB2 = new Tooth(strtoToothArrayList[3],strtoToothArrayList[2]);
+		ArrayList<Tooth> toothListDB = new ArrayList<Tooth>(){{add(toothListDB2); add(toothListDB1);}};
+		rpd.components.DentureBase dentureBase =new DentureBase(toothListDB);
+		return dentureBase;
+	}
+
+	/*********************************************************************************************************************************/
+
+	public List<RPDPlan> savePlan(List<JTable> planTableList, List<RPDPlan> planList) {
+		int planIndex = 0;
+		List<RPDPlan> planListNew = buildNewDentalPlan(planList);
+		Set<rpd.components.Component> component_new = new HashSet<>();
+		for (JTable plan_table : planTableList) {
+			DefaultTableModel model = (DefaultTableModel) plan_table.getModel();
+			int row = model.getRowCount();
+			int col = model.getColumnCount();
+			for (int i = 0; i < row; i++) {
+				if (model.getValueAt(i, 3) != null
+						&& !model.getValueAt(i, 3).toString().isEmpty()
+						&& model.getValueAt(i, 1) != null) {
+					String toothPositionStr = null;//col 1
+					String componentName = null;// col 3
+					ClaspMaterial material = null;//col 4
+					Position tip_direction = null; //col 5
+					List<String> lingualConfrontation = new ArrayList<String>();// col 6~
+					if (model.getValueAt(i, 1) != null)
+						toothPositionStr = model.getValueAt(i, 1).toString();
+					if (model.getValueAt(i, 3) != null)
+						componentName = (String) model.getValueAt(i, 3);//component name
+					if (model.getValueAt(i, 4) != null)
+						switch (model.getValueAt(i, 4).toString()) {
+							case "弯制材料":
+								material = ClaspMaterial.WW;
+								break;
+							case "铸造材料":
+								material = ClaspMaterial.Cast;
+								break;
+						}
+					if (model.getValueAt(i, 5) != null)
+						switch (model.getValueAt(i, 5).toString()) {
+							case "卡环臂尖朝向近中":
+							case "近中":
+								tip_direction = Position.Mesial;
+								break;
+							case "卡环臂尖朝向远中":
+							case "远中":
+								tip_direction = Position.Distal;
+								break;
+						}
+					for (int j = 6; j < col; j++) {
+						if (model.getValueAt(i, j) != null && model.getValueAt(i, j).toString().contains("tooth"))
+							lingualConfrontation.add(model.getValueAt(i, j).toString());
+					}
+					switch (componentName) {
+						case "Aker卡环":
+							if (material == null)
+								component_new.add(modifyAkerClasp(toothPositionStr, tip_direction));
+							else
+								component_new.add(modifyAkerClasp(toothPositionStr, tip_direction, material));
+							break;
+						case "间隙（Embrasure）卡环":
+							component_new.add(modifyEmbrasureClasp(toothPositionStr));
+							break;
+						case "连续（Continuous）卡环":
+							if (material == null)
+								component_new.add(modifyContinuousClasp(toothPositionStr));
+							else
+								component_new.add(modifyContinuousClasp(toothPositionStr, material));
+							break;
+						case "弯制Aker（Wrought Wire Aker）卡环":
+							component_new.add(modifyWroughtWireClasp(toothPositionStr, tip_direction));
+							break;
+						case "结合（Combination）卡环":
+							if (tip_direction != null)
+								component_new.add(modifyCombinationClasp(toothPositionStr, tip_direction));
+							else
+								component_new.add(modifyCombinationClasp(toothPositionStr));
+							break;
+						case "尖牙(Canine)卡环":
+							if (material == null)
+								component_new.add(modifyCanineClasp(toothPositionStr));
+							else
+								component_new.add(modifyCanineClasp(toothPositionStr, material));
+							break;
+						case "尖牙Aker（Canine Aker）卡环":
+							if (material == null)
+								component_new.add(modifyCanineAkerClasp(toothPositionStr, tip_direction));
+							else
+								component_new.add(modifyCanineAkerClasp(toothPositionStr, tip_direction, material));
+							break;
+						case "对半（Half and Half）卡环":
+							if (material == null)
+								component_new.add(modifyHalfHalfClasp(toothPositionStr));
+							else
+								component_new.add(modifyHalfHalfClasp(toothPositionStr, material));
+							break;
+						case "回力（Back Action）卡环":
+							if (material == null)
+								component_new.add(modifyBackActionClasp(toothPositionStr));
+							else
+								component_new.add(modifyBackActionClasp(toothPositionStr, material));
+							break;
+						case "反回力（Reverse Back Action）卡环":
+							if (material == null)
+								component_new.add(modifyReverseBackActionClasp(toothPositionStr));
+							else
+								component_new.add(modifyReverseBackActionClasp(toothPositionStr, material));
+							break;
+						case "圈形（Ring）卡环":
+							if (material == null)
+								component_new.add(modifyRingClasp(toothPositionStr));
+							else
+								component_new.add(modifyRingClasp(toothPositionStr, material));
+							break;
+						case "联合（Combined）卡环":
+							if (material == null)
+								component_new.add(modifyCombinedClasp(toothPositionStr));
+							else
+								component_new.add(modifyCombinedClasp(toothPositionStr, material));
+							break;
+						case "RPA卡环":
+							component_new.add(modifyRPAClasp(toothPositionStr, material));
+							break;
+						case "合支托":
+							component_new.add(modifyOcclusalRest(toothPositionStr, tip_direction));
+							break;
+						case "舌支托":
+							component_new.add(modifyLingualRest(toothPositionStr));
+							break;
+						case"上颌腭带（Single Palatal Strap）":
+							if(lingualConfrontation.size() > 1)//more than one tooth
+								component_new.add(modifySinglePalatalStrapConnector(toothPositionStr, mouth.getMaxillary(),lingualConfrontation,lingualConfrontation.size()));
+							else if(lingualConfrontation.size() == 1)//one tooth
+								component_new.add(modifySinglePalatalStrapConnector(toothPositionStr, mouth.getMaxillary(),lingualConfrontation.get(0)));
+							else//none tooth
+								component_new.add(modifySinglePalatalStrapConnector(toothPositionStr, mouth.getMaxillary()));
+							break;
+						case"上颌前后腭带（Combination Anterior and Posterior Palatal Strap）":
+							if(lingualConfrontation.size() > 1)//more than one tooth
+								component_new.add(modifyCombinationAnteriorPosteriorPalatalStrapConnector(toothPositionStr, mouth.getMaxillary(),lingualConfrontation,lingualConfrontation.size()));
+							else if(lingualConfrontation.size() == 1)//one tooth
+								component_new.add(modifyCombinationAnteriorPosteriorPalatalStrapConnector(toothPositionStr, mouth.getMaxillary(),lingualConfrontation.get(0)));
+							else
+								component_new.add(modifyCombinationAnteriorPosteriorPalatalStrapConnector(toothPositionStr, mouth.getMaxillary()));
+							break;
+						case"上颌腭板（Palatal Plate）":
+							if(lingualConfrontation.size() > 1)//more than one tooth
+								component_new.add(modifyPalatalPlateConnector(toothPositionStr, mouth.getMaxillary(),lingualConfrontation,lingualConfrontation.size()));
+							else if(lingualConfrontation.size() == 1)//one tooth
+								component_new.add(modifyPalatalPlateConnector(toothPositionStr, mouth.getMaxillary(),lingualConfrontation.get(0)));
+							else
+								component_new.add(modifyPalatalPlateConnector(toothPositionStr, mouth.getMaxillary()));
+							break;
+						case"上颌全腭板（Full Palatal Plate）":
+							if(lingualConfrontation.size() > 1)//more than one tooth
+								component_new.add(modifyFullPalatalPlateConnector(toothPositionStr, mouth.getMaxillary(),lingualConfrontation,lingualConfrontation.size()));
+							else if(lingualConfrontation.size() == 1)//one tooth
+								component_new.add(modifyFullPalatalPlateConnector(toothPositionStr, mouth.getMaxillary(),lingualConfrontation.get(0)));
+							else
+								component_new.add(modifyFullPalatalPlateConnector(toothPositionStr, mouth.getMaxillary()));
+							break;
+						case"上颌变异腭板（Modified Palatal Plate）":
+							if(lingualConfrontation.size() > 1)//more than one tooth
+								component_new.add(modifyModifiedPalatalPlateConnector(toothPositionStr, mouth.getMaxillary(),lingualConfrontation,lingualConfrontation.size()));
+							else if(lingualConfrontation.size() == 1)//one tooth
+								component_new.add(modifyModifiedPalatalPlateConnector(toothPositionStr, mouth.getMaxillary(),lingualConfrontation.get(0)));
+							else
+								component_new.add(modifyModifiedPalatalPlateConnector(toothPositionStr, mouth.getMaxillary()));
+							break;
+
+						case "下颌舌杆（Lingual Bar）":
+//							if (lingualConfrontation.size() > 1)//more than one tooth
+//								component_new.add(modifyLingualBarConnector(toothPositionStr, mouth.getMandibular(), lingualConfrontation, lingualConfrontation.size()));
+//							else if (lingualConfrontation.size() == 1)//one tooth
+//								component_new.add(modifyLingualBarConnector(toothPositionStr, mouth.getMandibular(), lingualConfrontation.get(0)));
+//							else
+								component_new.add(modifyLingualBarConnector(toothPositionStr, mouth.getMandibular()));
+							break;
+						case "下颌舌板（Lingual Plate）":
+							if (lingualConfrontation.size() > 1)//more than one tooth
+								component_new.add(modifyLingualPlateConnector(toothPositionStr, mouth.getMandibular(), lingualConfrontation, lingualConfrontation.size()));
+							else if (lingualConfrontation.size() == 1)//one tooth
+								component_new.add(modifyLingualPlateConnector(toothPositionStr, mouth.getMandibular(), lingualConfrontation.get(0)));
+							else
+								component_new.add(modifyLingualPlateConnector(toothPositionStr, mouth.getMandibular()));
+							break;
+						case "基托（Denture Base）":
+							component_new.add(modifyDentureBase(toothPositionStr));
+							break;
+						default:
+							break;
+					}
+				}
+				else {
+					JOptionPane.showMessageDialog(null, "在方案" + (planIndex + 1) + "第" + (i + 1) + "行，请选择组件并输入牙位", "数据缺失", JOptionPane.ERROR_MESSAGE);
+				}
+			}//end of this plan
+			for (rpd.components.Component comAdd : component_new) {
+//						System.out.print("comAdd = " + comAdd + "\t\n");
+				if (comAdd.getToothPos() != null){
+					planListNew.get(planIndex).addComponent(comAdd);
+//							System.out.print("mandibular_rpd_plans_new = " + mandibular_rpd_plans_new + "\t\n");
+				}
+			}
+			component_new.clear();
+			planIndex++;
+		}
+		return planListNew;
+	}
+
+
+	/*********************************************************************************************************************************/
+
+	public List<RPDPlan> buildNewDentalPlan(List<RPDPlan> rpd_plans) {
+		int planIndex = 0;
+		List<RPDPlan> rpd_plans_new = new ArrayList<>();
+//		for(int i =0;i<3;i++)
+//			if(rpd_plans.get(i) != null)
+//				rpd_plans_new.add(rpd_plans.get(i));
+		for (RPDPlan plan : rpd_plans)
+			rpd_plans_new.add(plan);
+//			rpd_plans_new.add(rpd_plans.get(1));
+//			rpd_plans_new.add(rpd_plans.get(2));
+		for (RPDPlan plan : rpd_plans) {
+			Map<ArrayList<Tooth>, Set<rpd.components.Component>> tooth_components = plan.getToothComponents();
+			ArrayList<ArrayList<Tooth>> plan_teeth = new ArrayList<>(tooth_components.keySet());
+			for (ArrayList<Tooth> tooth : plan_teeth) {
+				Set<rpd.components.Component> components = tooth_components.get(tooth);
+				for (rpd.components.Component component : components)
+					if (component != null)
+						rpd_plans_new.get(planIndex).removeComponent(component);
+
+			}
+			planIndex++;
+		}
+		return  rpd_plans_new;
+	}
+
+
+
+	public JTable setRowEditors(RPDPlan plan, JTable table , int plan_count) {
+		JComboBox comComponentsName = new JComboBox(CString.mandibularComponentsName);
+		JComboBox comClaspMaterial = new JComboBox(CString.cClaspMaterial);
+		JComboBox comClaspPosition = new JComboBox(CString.cClaspPosition);
+		JComboBox comRestPosition = new JComboBox(CString.cRestPosition);
+		JComboBox comMandibularConnecterToothPosition = new JComboBox(CString.cMandibularConnecterToothPosition);
+		JComboBox comClaspComponentName = new JComboBox(CString.classClaspComponentName);
+		JComboBox comRestComponentName = new JComboBox(CString.classRestComponentName);
+		JComboBox comMandibularConnecterComponentName = new JComboBox(CString.classMandibularConnecterComponentName);
+		JComboBox comBaseComponentName = new JComboBox(CString.classBaseComponentName);
+		JComboBox comMaxillaryConnecterComponentName = new JComboBox(CString.classMaxillaryConnecterComponentName);
+		JComboBox comMaxillaryConnecterToothPosition = new JComboBox(CString.cMaxillaryConnecterToothPosition);
+		JComboBox comNull = new JComboBox(CString.stringnull);
+
+		comNull.addComponentListener(new ComponentAdapter() {
+			@Override
+			public void componentShown(ComponentEvent e) {
+				final JComponent c = (JComponent) e.getSource();
+				SwingUtilities.invokeLater(new Runnable() {
+					@Override
+					public void run() {
+						c.requestFocus();
+						System.out.println(c);
+						if (c instanceof JComboBox) {
+							System.out.println("a");
+						}
+					}
+				});
+			}
+		});
+		comComponentsName.addComponentListener(new ComponentAdapter() {
+			@Override
+			public void componentShown(ComponentEvent e) {
+				final JComponent c = (JComponent) e.getSource();
+				SwingUtilities.invokeLater(new Runnable() {
+					@Override
+					public void run() {
+						c.requestFocus();
+						System.out.println(c);
+						if (c instanceof JComboBox) {
+							System.out.println("a");
+						}
+					}
+				});
+			}
+		});
+
+		comClaspMaterial.addComponentListener(new ComponentAdapter() {
+			@Override
+			public void componentShown(ComponentEvent e) {
+				final JComponent c = (JComponent) e.getSource();
+				SwingUtilities.invokeLater(new Runnable() {
+					@Override
+					public void run() {
+						c.requestFocus();
+						System.out.println(c);
+						if (c instanceof JComboBox) {
+							System.out.println("a");
+						}
+					}
+				});
+			}
+		});
+
+		comClaspPosition.addComponentListener(new ComponentAdapter() {
+			@Override
+			public void componentShown(ComponentEvent e) {
+				final JComponent c = (JComponent) e.getSource();
+				SwingUtilities.invokeLater(new Runnable() {
+					@Override
+					public void run() {
+						c.requestFocus();
+						System.out.println(c);
+						if (c instanceof JComboBox) {
+							System.out.println("a");
+						}
+					}
+				});
+			}
+		});
+
+		comRestPosition.addComponentListener(new ComponentAdapter() {
+			@Override
+			public void componentShown(ComponentEvent e) {
+				final JComponent c = (JComponent) e.getSource();
+				SwingUtilities.invokeLater(new Runnable() {
+					@Override
+					public void run() {
+						c.requestFocus();
+						System.out.println(c);
+						if (c instanceof JComboBox) {
+							System.out.println("a");
+						}
+					}
+				});
+			}
+		});
+
+		comMandibularConnecterToothPosition.addComponentListener(new ComponentAdapter() {
+			@Override
+			public void componentShown(ComponentEvent e) {
+				final JComponent c = (JComponent) e.getSource();
+				SwingUtilities.invokeLater(new Runnable() {
+					@Override
+					public void run() {
+						c.requestFocus();
+						System.out.println(c);
+						if (c instanceof JComboBox) {
+							System.out.println("a");
+						}
+					}
+				});
+			}
+		});
+
+		comClaspComponentName.addComponentListener(new ComponentAdapter() {
+			@Override
+			public void componentShown(ComponentEvent e) {
+				final JComponent c = (JComponent) e.getSource();
+				SwingUtilities.invokeLater(new Runnable() {
+					@Override
+					public void run() {
+						c.requestFocus();
+						System.out.println(c);
+						if (c instanceof JComboBox) {
+							System.out.println("a");
+						}
+					}
+				});
+			}
+		});
+
+		comRestComponentName.addComponentListener(new ComponentAdapter() {
+			@Override
+			public void componentShown(ComponentEvent e) {
+				final JComponent c = (JComponent) e.getSource();
+				SwingUtilities.invokeLater(new Runnable() {
+					@Override
+					public void run() {
+						c.requestFocus();
+						System.out.println(c);
+						if (c instanceof JComboBox) {
+							System.out.println("a");
+						}
+					}
+				});
+			}
+		});
+
+		comMandibularConnecterComponentName.addComponentListener(new ComponentAdapter() {
+			@Override
+			public void componentShown(ComponentEvent e) {
+				final JComponent c = (JComponent) e.getSource();
+				SwingUtilities.invokeLater(new Runnable() {
+					@Override
+					public void run() {
+						c.requestFocus();
+						System.out.println(c);
+						if (c instanceof JComboBox) {
+							System.out.println("a");
+						}
+					}
+				});
+			}
+		});
+
+		comBaseComponentName.addComponentListener(new ComponentAdapter() {
+			@Override
+			public void componentShown(ComponentEvent e) {
+				final JComponent c = (JComponent) e.getSource();
+				SwingUtilities.invokeLater(new Runnable() {
+					@Override
+					public void run() {
+						c.requestFocus();
+						System.out.println(c);
+						if (c instanceof JComboBox) {
+							System.out.println("a");
+						}
+					}
+				});
+			}
+		});
+
+		comMaxillaryConnecterToothPosition.addComponentListener(new ComponentAdapter() {
+			@Override
+			public void componentShown(ComponentEvent e) {
+				final JComponent c = (JComponent) e.getSource();
+				SwingUtilities.invokeLater(new Runnable() {
+					@Override
+					public void run() {
+						c.requestFocus();
+						System.out.println(c);
+						if (c instanceof JComboBox) {
+							System.out.println("a");
+						}
+					}
+				});
+			}
+		});
+
+
+		comMaxillaryConnecterComponentName.addComponentListener(new ComponentAdapter() {
+			@Override
+			public void componentShown(ComponentEvent e) {
+				final JComponent c = (JComponent) e.getSource();
+				SwingUtilities.invokeLater(new Runnable() {
+					@Override
+					public void run() {
+						c.requestFocus();
+						System.out.println(c);
+						if (c instanceof JComboBox) {
+							System.out.println("a");
+						}
+					}
+				});
+			}
+		});
+
+		EachRowEditor rowEditor1 = new EachRowEditor(table);
+		EachRowEditor rowEditor2 = new EachRowEditor(table);
+		EachRowEditor rowEditor3 = new EachRowEditor(table);
+		EachRowEditor rowEditor4 = new EachRowEditor(table);
+		EachRowEditor rowEditor5 = new EachRowEditor(table);
+		DefaultTableModel model = (DefaultTableModel) table.getModel();
+		Map<ArrayList<Tooth>, Set<rpd.components.Component>> tooth_components = plan.getToothComponents();
+		ArrayList<ArrayList<Tooth>> plan_teeth = new ArrayList<>(tooth_components.keySet());
+		Collections.sort(plan_teeth, new Comparator<ArrayList<Tooth>>() {
+			public int compare(ArrayList<Tooth> left, ArrayList<Tooth> right) {
+				return left.get(0).compareTo(right.get(0));
+			}
+		});
+
+		int rowNum = model.getRowCount();
+		for (ArrayList<Tooth> tooth : plan_teeth) {
+			Set<rpd.components.Component> components = tooth_components.get(tooth);
+			for (rpd.components.Component component : components) {
+				String[] arrComponents;
+				String[] arr1 = new String[3];
+				String[] arr2;
+				try {
+					arr1[0] = Integer.toString(plan_count);
+					arr1[1] = component.getToothPos().toString();
+					arr1[2] = component.getClass().getName();
+					arr2 = component.addComponents();
+					arrComponents = ArrayUtils.addAll(arr1, arr2);
+					model.addRow(arrComponents);
+					String className = component.getClass().getName();
+					switch (className) {
+						case "rpd.components.AkerClasp":
+						case "rpd.components.WroughtWireClasp":
+						case "rpd.components.CombinationClasp":
+						case "rpd.components.CanineClasp":
+						case "rpd.components.CanineAkerClasp":
+						case "rpd.components.HalfHalfClasp":
+						case "rpd.components.BackActionClasp":
+						case "rpd.components.ReverseBackActionClasp":
+						case "rpd.components.RingClasp":
+						case "rpd.components.CombinedClasp":
+						case "rpd.components.EmbrasureClasp":
+						case "rpd.components.ContinuousClasp":
+						case "rpd.components.RPAClasp":
+							rowEditor1.setEditorAt(rowNum, new DefaultCellEditor(comClaspMaterial));
+							table.getColumn("属性1").setCellEditor(rowEditor1);
+							rowEditor2.setEditorAt(rowNum, new DefaultCellEditor(comClaspPosition));
+							table.getColumn("属性2").setCellEditor(rowEditor2);
+							rowEditor5.setEditorAt(rowNum, new DefaultCellEditor(comClaspComponentName));
+							table.getColumn("组件名称").setCellEditor(rowEditor5);
+							break;
+						case "rpd.components.OcclusalRest":
+						case "rpd.components.LingualRest":
+							rowEditor2.setEditorAt(rowNum, new DefaultCellEditor(comRestPosition));
+							table.getColumn("属性2").setCellEditor(rowEditor2);
+							rowEditor5.setEditorAt(rowNum, new DefaultCellEditor(comRestComponentName));
+							table.getColumn("组件名称").setCellEditor(rowEditor5);
+							break;
+						case "rpd.components.LingualBarConnector":
+//							rowEditor5.setEditorAt(rowNum, new DefaultCellEditor(comMandibularConnecterComponentName));
+//							table.getColumn("组件名称").setCellEditor(rowEditor5);
+//							break;
+						case "rpd.components.LingualPlateConnector":
+							rowEditor3.setEditorAt(rowNum, new DefaultCellEditor(comMandibularConnecterToothPosition));
+							table.getColumn("舌侧对抗#1").setCellEditor(rowEditor3);
+							rowEditor4.setEditorAt(rowNum, new DefaultCellEditor(comMandibularConnecterToothPosition));
+							table.getColumn("舌侧对抗#2").setCellEditor(rowEditor4);
+							rowEditor5.setEditorAt(rowNum, new DefaultCellEditor(comMandibularConnecterComponentName));
+							table.getColumn("组件名称").setCellEditor(rowEditor5);
+							break;
+						case "rpd.components.SinglePalatalStrapConnector":
+						case "rpd.components.CombinationAnteriorPosteriorPalatalStrapConnector":
+						case "rpd.components.PalatalPlateConnector":
+						case "rpd.components.FullPalatalPlateConnector":
+						case "rpd.components.ModifiedPalatalPlateConnector":
+							rowEditor3.setEditorAt(rowNum, new DefaultCellEditor(comMaxillaryConnecterToothPosition));
+							table.getColumn("舌侧对抗#1").setCellEditor(rowEditor3);
+							rowEditor4.setEditorAt(rowNum, new DefaultCellEditor(comMaxillaryConnecterToothPosition));
+							table.getColumn("舌侧对抗#2").setCellEditor(rowEditor4);
+							rowEditor5.setEditorAt(rowNum, new DefaultCellEditor(comMaxillaryConnecterComponentName));
+							table.getColumn("组件名称").setCellEditor(rowEditor5);
+							break;
+						case "rpd.components.DentureBase":
+							rowEditor5.setEditorAt(rowNum, new DefaultCellEditor(comBaseComponentName));
+							table.getColumn("组件名称").setCellEditor(rowEditor5);
+							break;
+					}
+				} catch (Exception e) {
+					System.out.println("Got a Exception：" + e.getMessage());
+					e.printStackTrace();
+				}
+//				rowNum = model.getRowCount();
+				rowNum++;
+//					mandibular_plan_table.invalidate();
+			}
+		}
+		return  table;
+	}
+
+	public int[] getToothList (String toothPosition){
+		int[] digitList = new int[2];
+		String digitString = "";
+
+		if(toothPosition != null && !"".equals(toothPosition)){
+			for(int i =0 ;i<toothPosition.length();i++){
+				if(toothPosition.charAt(i)>=48 && toothPosition.charAt(i)<=57){
+					digitString += toothPosition.charAt(i);
+				}
+			}
+		}
+		int temp = Integer.parseInt(digitString);
+		digitList[0] = temp % 10 ;
+		digitList[1] = temp / 10 ;
+
+		return digitList;
+	}
+
+	public int[] getToothArrayList (String toothPosition) {
+		int[] digitList = new int[4];
+		String digitString = "";
+
+		if(toothPosition != null && !"".equals(toothPosition)){
+			for(int i =0 ;i<toothPosition.length();i++){
+				if(toothPosition.charAt(i)>=48 && toothPosition.charAt(i)<=57){
+					digitString += toothPosition.charAt(i);
+				}
+			}
+		}
+		int temp = Integer.parseInt(digitString);
+		for(int i = 0;temp>0;i++){
+			digitList[i] = temp % 10 ;
+			temp /= 10;
+		}
+		return digitList;
+	}
+
+
+	public int[] getToothArrayListEight (String toothPosition) {
+		int[] digitList = new int[8];
+		String digitString = "";
+
+		if(toothPosition != null && !"".equals(toothPosition)){
+			for(int i =0 ;i<toothPosition.length();i++){
+				if(toothPosition.charAt(i)>=48 && toothPosition.charAt(i)<=57){
+					digitString += toothPosition.charAt(i);
+				}
+			}
+		}
+		int temp = Integer.parseInt(digitString);
+		for(int i = 0;temp>0;i++){
+			digitList[i] = temp % 10 ;
+			temp /= 10;
+		}
+		return digitList;
+	}
+
+	public int[] getToothArrayListUnsigned (List<String> lingualConfrontation, int size) {
+		int[] digitList = new int[size*2];
+		String digitString = "";
+
+		for(String toothPosition:lingualConfrontation){
+			if(toothPosition != null && !"".equals(toothPosition)){
+				for(int i =0 ;i<toothPosition.length();i++){
+					if(toothPosition.charAt(i)>=48 && toothPosition.charAt(i)<=57){
+						digitString += toothPosition.charAt(i);
+					}
+				}
+			}
+		}
+
+		int temp = Integer.parseInt(digitString);
+//		System.out.print("getToothArrayListUnsigned = " + digitString + " temp = "+temp+" digitList = ");
+
+		for(int i = 0; temp >0;i++){
+			digitList[i] = temp % 10 ;
+			temp /= 10;
+//			System.out.print(digitList[i]);
+		}
+//		System.out.print("\t\n");
+		return digitList;
+	}
+
+	public boolean includeDigit(String content) {
+		boolean flag = false;
+		Pattern p = Pattern.compile(".*\\d+.*");
+		Matcher m = p.matcher(content);
+		if (m.matches()) {
+			flag = true;
+		}
+		return flag;
+	}
+
+	private static void hideTableColumn(JTable table, int column)
+	{
+		TableColumn tc = table.getColumnModel().getColumn(column);
+		tc.setMinWidth(0);
+		tc.setMaxWidth(0);
+	}
+	private static void showTableColumn(JTable table, int column)
+	{
+		TableColumn tc = table.getColumnModel().getColumn(column);
+		tc.setMinWidth(200);
+		tc.setMaxWidth(200);
+	}
+
 }

@@ -59,6 +59,14 @@ public class LingualRest extends Rest {
 		return s.toString();
 	}
 
+	public String[] addComponents() {
+
+		String s[] = new String[1];
+	//	s.append(super.toString());
+		s[0] = ("舌支托");
+		return s;
+	}
+
 	public String toString() {
 		return this.print();
 	}

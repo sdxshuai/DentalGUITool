@@ -23,4 +23,6 @@ public interface Component {
 	public boolean isPlating();
 
 	public boolean isIndirectRetainer();
+
+	public String[] addComponents();
 }

@@ -111,6 +111,14 @@ public class RPDPlan {
 		this.tooth_components.get(tooth_pos).add(component);
 	}
 
+	public void addComponent(RPDPlan plan, rpd.components.Component component) {
+		plan.components.add(component);
+		ArrayList<Tooth> tooth_pos = component.getToothPos();
+		if (!plan.tooth_components.containsKey(tooth_pos))
+			plan.tooth_components.put(tooth_pos, new HashSet<rpd.components.Component>());
+		plan.tooth_components.get(tooth_pos).add(component);
+	}
+
 	public Set<Tooth> getAbutmentTeeth() {
 		return this.abutment_teeth;
 	}
@@ -266,7 +274,7 @@ public class RPDPlan {
 			s.append(plan_text + "\n");
 		return s.toString();
 	}
-	
+
 	/*public String toString() {
 		
 		StringBuilder s = new StringBuilder();

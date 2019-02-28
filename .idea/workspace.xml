@@ -5,125 +5,204 @@
       <artifact name="DentalGUITool:jar" />
     </artifacts-to-build>
   </component>
+  <component name="BookmarkManager">
+    <bookmark url="file://$PROJECT_DIR$/src/GUI/LabelTool.java" line="1194" />
+    <bookmark url="file://$PROJECT_DIR$/src/GUI/LabelTool.java" />
+    <bookmark url="file://$PROJECT_DIR$/src/GUI/LabelTool.java" line="714" />
+    <bookmark url="file://$PROJECT_DIR$/src/GUI/ServerForPresent.java" />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="9efcce7d-9cdf-4ffc-a888-c6d36f3be804" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/artifacts/DentalGUITool_jar.xml" afterPath="$PROJECT_DIR$/.idea/artifacts/DentalGUITool_jar.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/lib.xml" afterPath="$PROJECT_DIR$/.idea/libraries/lib.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/DentalGUITool.iml" afterPath="$PROJECT_DIR$/DentalGUITool.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/META-INF/MANIFEST.MF" afterPath="$PROJECT_DIR$/src/META-INF/MANIFEST.MF" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rpd/components/RPAClasp.java" afterPath="$PROJECT_DIR$/src/rpd/components/RPAClasp.java" />
+    <list default="true" id="ee2f1d7f-9d4a-4891-8cec-d807570523e9" name="Default" comment="">
+      <change afterPath="$PROJECT_DIR$/src/GUI/LabelTool_forPresent.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/GUI/ServerForPresent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/artifacts/DentalGUITool_jar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/artifacts/DentalGUITool_jar.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/codeStyleSettings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/kotlinc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/lib.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/lib.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DentalGUITool.iml" beforeDir="false" afterPath="$PROJECT_DIR$/DentalGUITool.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$10.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$10.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$11.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$11.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$12.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$12.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$13.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$13.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$14.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$14.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$15.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$15.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$16.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$16.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$17.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$17.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$18.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$18.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$19.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$19.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$20.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$20.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$21.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$21.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$22.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$22.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$23.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$23.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$24.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$24.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$4.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$5.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$6.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$6.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$7.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$7.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$8.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$8.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$9.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$9.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/DentalGUITool/rpd/RPDPlan.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/DentalGUITool/rpd/RPDPlan.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/DentalGUITool/rpd/components/AkerClasp.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/DentalGUITool/rpd/components/AkerClasp.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/DentalGUITool/rpd/components/ClaspArm.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/DentalGUITool/rpd/components/ClaspArm.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/DentalGUITool/rpd/components/Component.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/DentalGUITool/rpd/components/Component.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/DentalGUITool/rpd/components/GuidingPlate.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/DentalGUITool/rpd/components/GuidingPlate.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/DentalGUITool/rpd/components/LingualRest.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/DentalGUITool/rpd/components/LingualRest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/DentalGUITool/rpd/components/OcclusalRest.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/DentalGUITool/rpd/components/OcclusalRest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/DentalGUITool/rpd/components/Plating.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/DentalGUITool/rpd/components/Plating.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/DentalGUITool/rpd/components/RingClasp.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/DentalGUITool/rpd/components/RingClasp.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/catalog-v001.xml" beforeDir="false" afterPath="$PROJECT_DIR$/res/catalog-v001.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GUI/LabelTool.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/LabelTool.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/META-INF/MANIFEST.MF" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/rpd/RPDPlan.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/rpd/RPDPlan.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/rpd/components/AkerClasp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/rpd/components/AkerClasp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/rpd/components/BackActionClasp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/rpd/components/BackActionClasp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/rpd/components/CanineAkerClasp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/rpd/components/CanineAkerClasp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/rpd/components/CanineClasp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/rpd/components/CanineClasp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/rpd/components/ClaspArm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/rpd/components/ClaspArm.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/rpd/components/CombinationAnteriorPosteriorPalatalStrapConnector.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/rpd/components/CombinationAnteriorPosteriorPalatalStrapConnector.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/rpd/components/CombinationClasp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/rpd/components/CombinationClasp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/rpd/components/CombinedClasp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/rpd/components/CombinedClasp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/rpd/components/Component.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/rpd/components/Component.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/rpd/components/ContinuousClasp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/rpd/components/ContinuousClasp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/rpd/components/DentureBase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/rpd/components/DentureBase.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/rpd/components/EmbrasureClasp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/rpd/components/EmbrasureClasp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/rpd/components/ExtensionClasp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/rpd/components/ExtensionClasp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/rpd/components/FullPalatalPlateConnector.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/rpd/components/FullPalatalPlateConnector.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/rpd/components/GuidingPlate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/rpd/components/GuidingPlate.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/rpd/components/HalfHalfClasp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/rpd/components/HalfHalfClasp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/rpd/components/IncisalRest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/rpd/components/IncisalRest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/rpd/components/LingualBarConnector.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/rpd/components/LingualBarConnector.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/rpd/components/LingualPlateConnector.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/rpd/components/LingualPlateConnector.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/rpd/components/LingualRest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/rpd/components/LingualRest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/rpd/components/MajorConnector.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/rpd/components/MajorConnector.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/rpd/components/ModifiedPalatalPlateConnector.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/rpd/components/ModifiedPalatalPlateConnector.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/rpd/components/OcclusalRest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/rpd/components/OcclusalRest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/rpd/components/PalatalPlateConnector.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/rpd/components/PalatalPlateConnector.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/rpd/components/Plating.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/rpd/components/Plating.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/rpd/components/RPAClasp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/rpd/components/RPAClasp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/rpd/components/RPIClasp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/rpd/components/RPIClasp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/rpd/components/ReverseBackActionClasp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/rpd/components/ReverseBackActionClasp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/rpd/components/ReverseHookClasp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/rpd/components/ReverseHookClasp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/rpd/components/RingClasp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/rpd/components/RingClasp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/rpd/components/SinglePalatalStrapConnector.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/rpd/components/SinglePalatalStrapConnector.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/rpd/components/WroughtWireClasp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/rpd/components/WroughtWireClasp.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
-    <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/DentalGUITool$LabelTool.coverage" NAME="LabelTool Coverage Results" MODIFIED="1499933760017" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+    <SUITE FILE_PATH="coverage/DentalGUITool_zhangben$LabelTool.ic" NAME="LabelTool Coverage Results" MODIFIED="1540792346735" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/DentalGUITool_zhangben$ServerForPresent.ic" NAME="ServerForPresent Coverage Results" MODIFIED="1540792368032" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>GUI.*</FILTER>
     </SUITE>
   </component>
-  <component name="CreatePatchCommitExecutor">
-    <option name="PATCH_PATH" value="" />
-  </component>
-  <component name="DatabaseView">
-    <option name="SHOW_INTERMEDIATE" value="true" />
-    <option name="GROUP_SCHEMA" value="true" />
-    <option name="GROUP_CONTENTS" value="false" />
-    <option name="SORT_POSITIONED" value="false" />
-    <option name="SHOW_TABLE_DETAILS" value="true" />
-    <option name="SHOW_EMPTY_GROUPS" value="false" />
-    <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
-  </component>
-  <component name="FavoritesManager">
-    <favorites_list name="DentalGUITool" />
+  <component name="CoverageViewManager">
+    <option name="myElementSize" value="241" />
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="SearchRPDPlan.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/rpd/SearchRPDPlan.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="4216">
-              <caret line="261" column="0" lean-forward="false" selection-start-line="261" selection-start-column="0" selection-end-line="261" selection-end-column="0" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="IndirectRetainerRule.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/rpd/rules/IndirectRetainerRule.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1938">
-              <caret line="132" column="87" lean-forward="false" selection-start-line="132" selection-start-column="87" selection-end-line="132" selection-end-column="87" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="MajorConnectorRule.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/rpd/rules/MajorConnectorRule.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1139">
-              <caret line="90" column="27" lean-forward="false" selection-start-line="90" selection-start-column="27" selection-end-line="90" selection-end-column="27" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="LabelTool.java" pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/GUI/LabelTool.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="17">
-              <caret line="109" column="38" lean-forward="false" selection-start-line="109" selection-start-column="38" selection-end-line="109" selection-end-column="38" />
+            <state relative-caret-position="377">
+              <caret line="2358" column="68" lean-forward="true" selection-start-line="2358" selection-start-column="68" selection-end-line="2358" selection-end-column="68" />
               <folding>
-                <marker date="1506502214555" expanded="true" signature="17873:18085" ph="//..." />
+                <element signature="imports" expanded="true" />
+                <element signature="e#184938#184946#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="RPAClasp.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/rpd/components/RPAClasp.java">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/GUI/CString.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="665">
-              <caret line="66" column="26" lean-forward="false" selection-start-line="66" selection-start-column="26" selection-end-line="66" selection-end-column="26" />
-              <folding />
+            <state relative-caret-position="153">
+              <caret line="9" column="67" selection-start-line="9" selection-start-column="67" selection-end-line="9" selection-end-column="67" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ChooseAbutmentRule.java" pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/ontologies/BooleanPropertyValue.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="527">
+              <caret line="35" column="1" selection-start-line="35" selection-start-column="1" selection-end-line="35" selection-end-column="1" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/ontologies/DentalClass.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1258">
+              <caret line="74" column="1" selection-start-line="74" selection-start-column="1" selection-end-line="74" selection-end-column="1" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/ontologies/DentalProperty.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1700">
+              <caret line="100" column="1" selection-start-line="100" selection-start-column="1" selection-end-line="100" selection-end-column="1" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/ontologies/Descriptions.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="4794">
+              <caret line="302" column="1" selection-start-line="302" selection-start-column="1" selection-end-line="302" selection-end-column="1" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/ontologies/DoublePropertyValue.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="493">
+              <caret line="33" column="1" selection-start-line="33" selection-start-column="1" selection-end-line="33" selection-end-column="1" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/rpd/rules/ChooseAbutmentRule.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1445">
-              <caret line="112" column="0" lean-forward="false" selection-start-line="112" selection-start-column="0" selection-end-line="112" selection-end-column="0" />
-              <folding />
+            <state relative-caret-position="9061">
+              <caret line="578" column="1" selection-start-line="578" selection-start-column="1" selection-end-line="578" selection-end-column="1" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="LingualPlateConnector.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/rpd/components/LingualPlateConnector.java">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/rpd/conceptions/ClassificationOfSurveyLineOnBuccalSurface.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1020">
-              <caret line="66" column="52" lean-forward="false" selection-start-line="66" selection-start-column="52" selection-end-line="66" selection-end-column="52" />
-              <folding />
+            <state relative-caret-position="85">
+              <caret line="5" column="12" selection-start-line="5" selection-start-column="12" selection-end-line="5" selection-end-column="12" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ModifiedPalatalPlateConnector.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/rpd/components/ModifiedPalatalPlateConnector.java">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/rpd/components/CombinationClasp.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1598">
-              <caret line="101" column="88" lean-forward="false" selection-start-line="101" selection-start-column="88" selection-end-line="101" selection-end-column="88" />
-              <folding />
+            <state relative-caret-position="1343">
+              <caret line="88" column="1" selection-start-line="88" selection-start-column="1" selection-end-line="88" selection-end-column="1" />
             </state>
           </provider>
         </entry>
@@ -133,153 +212,85 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Enum" />
         <option value="Class" />
       </list>
     </option>
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>clasp_rules</find>
-      <find>Beam</find>
-      <find>Collection</find>
-      <find>属性值</find>
-      <find>label_table_headers</find>
-      <find>readLabelsFromXml</find>
-      <find>ToothMap</find>
-      <find>BeamS</find>
-      <find>aker_clasp</find>
-      <find>cingulum_value</find>
-      <find>cingulum</find>
-      <find>GingivalRecession</find>
-      <find>CrownRootRatio</find>
-      <find>alveolar_absorption</find>
-      <find>rpd_plans</find>
-      <find>crown_root_ratio</find>
-      <find>Mobility</find>
-      <find>Inderect</find>
-      <find>Bar</find>
-      <find>LingualPlate</find>
-      <find>Single</find>
-      <find>SinglePalatalStrap</find>
-      <find>Palatal</find>
-      <find>AkerClasp</find>
-      <find>Aker</find>
-      <find>component, resOnt</find>
-      <find>resOnt</find>
-      <find>log4j</find>
-      <find>stringBuilder</find>
-      <find>choose_abutment</find>
+      <find>修改</find>
+      <find>mandibular_width</find>
+      <find>mandibular</find>
+      <find>舌侧对抗</find>
+      <find>PalatalPlateConnector</find>
+      <find>Mandibular</find>
+      <find>modifyLingualPlateConnector</find>
+      <find>保存</find>
+      <find>mandibular_plan_table.getColumn</find>
+      <find>rowEditor2)</find>
+      <find>rowEditor4)</find>
+      <find>rowEditor1.setEditorAt</find>
+      <find>rowEditor5.setEditorAt</find>
+      <find>rowEditor2.get(plan_count))</find>
+      <find>GridLayout</find>
+      <find>model.get(plan_count)</find>
+      <find>modelDegault</find>
+      <find>Grid</find>
+      <find>mandibular_plan_table.get(plan_count)</find>
+      <find>.get(plan_count)</find>
+      <find>xml</find>
+      <find>RpdDesignLib</find>
+      <find>descri</find>
+      <find>modifyOcclusalRest</find>
+      <find>远中</find>
+      <find>卡环臂尖朝向近中</find>
+      <find>rowEditor5</find>
+      <find>保存当前上颌</find>
+      <find>合支托</find>
+      <find>新增</find>
     </findStrings>
     <replaceStrings>
-      <replace>fullPalatalPlateConnector</replace>
-      <replace>modifiedPalatalPlateConnector</replace>
-      <replace>lingualBarConnector</replace>
-      <replace>lingualPlateConnector</replace>
-      <replace>WroughtWireClasp</replace>
-      <replace>CombinationClasp</replace>
-      <replace>CanineClasp</replace>
-      <replace>CanineAkerClasp</replace>
-      <replace>HalfHalfClasp</replace>
-      <replace>BackActionClasp</replace>
-      <replace>ReverseBackActionClasp</replace>
-      <replace>RingClasp</replace>
-      <replace>CombinedClasp</replace>
-      <replace>EmbrasureClasp</replace>
-      <replace>ContinuousClasp</replace>
-      <replace>RPAClasp</replace>
-      <replace>OcclusalRest</replace>
-      <replace>LingualRest</replace>
-      <replace>SinglePalatalStrapConnector</replace>
-      <replace>CombinationAnteriorPosteriorPalatalStrapConnector</replace>
-      <replace>PalatalPlateConnector</replace>
-      <replace>FullPalatalPlateConnector</replace>
-      <replace>ModifiedPalatalPlateConnector</replace>
-      <replace>LingualBarConnector</replace>
-      <replace>LingualPlateConnector</replace>
-      <replace>combination</replace>
-      <replace>Combination</replace>
-      <replace>component, resOnt, NS, indCount</replace>
-      <replace>explanation</replace>
-      <replace>score</replace>
+      <replace>mandibular_plan_table.get(plan_count).getColumn</replace>
+      <replace>rowEditor2.get(plan_count))</replace>
+      <replace>rowEditor4.get(plan_count))</replace>
+      <replace>rowEditor1.get(plan_count).setEditorAt</replace>
+      <replace>rowEditor5.get(plan_count).setEditorAt</replace>
+      <replace>modelDegault</replace>
+      <replace>model.get(plan_count)</replace>
+      <replace>mandibularPlanTable</replace>
+      <replace />
     </replaceStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GradleLocalSettings">
-    <option name="externalProjectsViewState">
-      <projects_view />
-    </option>
-  </component>
-  <component name="HierarchyBrowserManager">
-    <option name="IS_AUTOSCROLL_TO_SOURCE" value="true" />
-  </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/rpd/components/ContinuousClasp.java" />
-        <option value="$PROJECT_DIR$/src/rpd/conceptions/KennedyType.java" />
-        <option value="$PROJECT_DIR$/src/rpd/components/Component.java" />
-        <option value="$PROJECT_DIR$/src/rpd/components/EmbrasureClasp.java" />
-        <option value="$PROJECT_DIR$/src/rpd/components/DentureBase.java" />
-        <option value="$PROJECT_DIR$/src/misc/ToothMap.java" />
-        <option value="D:/lib/DentalEMRParser/DentalEMRParser.jar!/emrpaser/rule/ruleParserWithStats.class" />
-        <option value="$PROJECT_DIR$/src/rpd/components/CombinationAnteriorPosteriorPalatalStrapConnector.java" />
-        <option value="$PROJECT_DIR$/src/rpd/components/SinglePalatalStrapConnector.java" />
-        <option value="$PROJECT_DIR$/src/misc/PrintPlan.java" />
-        <option value="$PROJECT_DIR$/src/rpd/components/AkerClasp.java" />
-        <option value="$PROJECT_DIR$/src/rpd/components/BackActionClasp.java" />
-        <option value="$PROJECT_DIR$/src/rpd/components/CanineAkerClasp.java" />
-        <option value="$PROJECT_DIR$/src/rpd/components/CanineClasp.java" />
-        <option value="$PROJECT_DIR$/src/rpd/components/CombinationClasp.java" />
-        <option value="$PROJECT_DIR$/src/rpd/components/ExtensionClasp.java" />
-        <option value="$PROJECT_DIR$/src/rpd/components/HalfHalfClasp.java" />
-        <option value="$PROJECT_DIR$/src/rpd/components/IncisalRest.java" />
-        <option value="$PROJECT_DIR$/src/rpd/components/Clasp.java" />
-        <option value="$PROJECT_DIR$/src/rpd/components/Rest.java" />
-        <option value="$PROJECT_DIR$/src/rpd/components/LingualRest.java" />
-        <option value="$PROJECT_DIR$/src/rpd/components/OcclusalRest.java" />
-        <option value="$PROJECT_DIR$/src/rpd/components/ReverseBackActionClasp.java" />
-        <option value="$PROJECT_DIR$/src/rpd/components/ReverseHookClasp.java" />
-        <option value="$PROJECT_DIR$/src/rpd/components/RingClasp.java" />
-        <option value="$PROJECT_DIR$/src/rpd/components/RPIClasp.java" />
-        <option value="$PROJECT_DIR$/src/rpd/components/WroughtWireClasp.java" />
-        <option value="$PROJECT_DIR$/src/rpd/oral/EdentulousSpace.java" />
-        <option value="$PROJECT_DIR$/src/rpd/components/LingualBarConnector.java" />
-        <option value="$PROJECT_DIR$/src/misc/PrintImage.java" />
-        <option value="$PROJECT_DIR$/src/misc/PrintTxtFile.java" />
-        <option value="$PROJECT_DIR$/src/misc/PrintTestFile.java" />
         <option value="$PROJECT_DIR$/src/rpd/RPDPlan.java" />
-        <option value="$PROJECT_DIR$/src/rpd/rules/ClaspRule.java" />
+        <option value="$PROJECT_DIR$/src/rpd/components/AkerClasp.java" />
+        <option value="$PROJECT_DIR$/src/rpd/components/CombinationClasp.java" />
+        <option value="$PROJECT_DIR$/src/rpd/components/OcclusalRest.java" />
+        <option value="$PROJECT_DIR$/src/rpd/components/LingualBarConnector.java" />
         <option value="$PROJECT_DIR$/src/rpd/components/MajorConnector.java" />
-        <option value="$PROJECT_DIR$/src/rpd/SearchRPDPlan.java" />
         <option value="$PROJECT_DIR$/src/rpd/components/LingualPlateConnector.java" />
-        <option value="$PROJECT_DIR$/src/rpd/components/FullPalatalPlateConnector.java" />
-        <option value="$PROJECT_DIR$/src/rpd/components/ModifiedPalatalPlateConnector.java" />
+        <option value="$PROJECT_DIR$/src/rpd/components/SinglePalatalStrapConnector.java" />
+        <option value="$PROJECT_DIR$/src/rpd/components/CombinationAnteriorPosteriorPalatalStrapConnector.java" />
         <option value="$PROJECT_DIR$/src/rpd/components/PalatalPlateConnector.java" />
-        <option value="$PROJECT_DIR$/src/rpd/rules/ChooseAbutmentRule.java" />
-        <option value="$PROJECT_DIR$/src/rpd/rules/IndirectRetainerRule.java" />
-        <option value="$PROJECT_DIR$/src/rpd/components/RotationAxis.java" />
-        <option value="$PROJECT_DIR$/src/rpd/rules/ScoreRule.java" />
-        <option value="$PROJECT_DIR$/src/rpd/oral/Maxillary.java" />
-        <option value="$PROJECT_DIR$/src/rpd/oral/Mandibular.java" />
+        <option value="$PROJECT_DIR$/src/rpd/components/ModifiedPalatalPlateConnector.java" />
+        <option value="$PROJECT_DIR$/src/rpd/components/WroughtWireClasp.java" />
+        <option value="$PROJECT_DIR$/LabelTool_backup0720.java" />
+        <option value="$PROJECT_DIR$/src/ShowResults.java" />
+        <option value="$PROJECT_DIR$/src/ResultsForShow.java" />
+        <option value="$PROJECT_DIR$/src/GUI/ResultsForShow.java" />
+        <option value="$PROJECT_DIR$/src/GUI/LabelTool_bak.java" />
+        <option value="$PROJECT_DIR$/src/GUI/ServerForPresent.java" />
+        <option value="$PROJECT_DIR$/src/rpd/components/FullPalatalPlateConnector.java" />
+        <option value="$PROJECT_DIR$/src/GUI/LabelTool_forPresent.java" />
+        <option value="$PROJECT_DIR$/src/GUI/CString.java" />
         <option value="$PROJECT_DIR$/src/GUI/LabelTool.java" />
-        <option value="$PROJECT_DIR$/DentalGUITool.iml" />
-        <option value="$PROJECT_DIR$/src/rpd/rules/MajorConnectorRule.java" />
-        <option value="$PROJECT_DIR$/src/META-INF/MANIFEST.MF" />
-        <option value="$PROJECT_DIR$/src/rpd/components/RPAClasp.java" />
       </list>
     </option>
-  </component>
-  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
-  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
-  <component name="JsGulpfileManager">
-    <detection-done>true</detection-done>
-    <sorting>DEFINITION_ORDER</sorting>
-  </component>
-  <component name="MavenProjectNavigator">
-    <treeState />
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="-8" />
@@ -287,121 +298,83 @@
     <option name="width" value="1924" />
     <option name="height" value="1056" />
   </component>
-  <component name="ProjectLevelVcsManager">
-    <ConfirmationsSetting value="2" id="Add" />
-  </component>
   <component name="ProjectView">
-    <navigator currentView="ProjectPane" proportions="" version="1">
-      <flattenPackages />
-      <showMembers />
-      <showModules />
-      <showLibraryContents />
-      <hideEmptyPackages />
-      <abbreviatePackageNames />
-      <autoscrollToSource />
-      <autoscrollFromSource />
-      <sortByType />
-      <manualOrder />
+    <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
             <path>
-              <item name="DentalGUITool" type="b2602c69:ProjectViewProjectNode" />
-              <item name="DentalGUITool" type="462c0819:PsiDirectoryNode" />
+              <item name="DentalGUITool_zhangben" type="b2602c69:ProjectViewProjectNode" />
+              <item name="DentalGUITool_zhangben" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="DentalGUITool" type="b2602c69:ProjectViewProjectNode" />
-              <item name="DentalGUITool" type="462c0819:PsiDirectoryNode" />
+              <item name="DentalGUITool_zhangben" type="b2602c69:ProjectViewProjectNode" />
+              <item name="DentalGUITool_zhangben" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="DentalGUITool" type="b2602c69:ProjectViewProjectNode" />
-              <item name="DentalGUITool" type="462c0819:PsiDirectoryNode" />
+              <item name="DentalGUITool_zhangben" type="b2602c69:ProjectViewProjectNode" />
+              <item name="DentalGUITool_zhangben" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="META-INF" type="462c0819:PsiDirectoryNode" />
+              <item name="GUI" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="DentalGUITool" type="b2602c69:ProjectViewProjectNode" />
-              <item name="DentalGUITool" type="462c0819:PsiDirectoryNode" />
+              <item name="DentalGUITool_zhangben" type="b2602c69:ProjectViewProjectNode" />
+              <item name="DentalGUITool_zhangben" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="misc" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="DentalGUITool_zhangben" type="b2602c69:ProjectViewProjectNode" />
+              <item name="DentalGUITool_zhangben" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="rpd" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="DentalGUITool" type="b2602c69:ProjectViewProjectNode" />
-              <item name="DentalGUITool" type="462c0819:PsiDirectoryNode" />
+              <item name="DentalGUITool_zhangben" type="b2602c69:ProjectViewProjectNode" />
+              <item name="DentalGUITool_zhangben" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="rpd" type="462c0819:PsiDirectoryNode" />
               <item name="components" type="462c0819:PsiDirectoryNode" />
             </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
-      <pane id="PackagesPane">
-        <subPane>
-          <expand>
             <path>
-              <item name="DentalGUITool" type="58d84e3e:PackageViewProjectNode" />
-              <item name="DentalGUITool" type="616d4139:PackageViewModuleNode" />
+              <item name="DentalGUITool_zhangben" type="b2602c69:ProjectViewProjectNode" />
+              <item name="DentalGUITool_zhangben" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="rpd" type="462c0819:PsiDirectoryNode" />
+              <item name="conceptions" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="DentalGUITool" type="58d84e3e:PackageViewProjectNode" />
-              <item name="DentalGUITool" type="616d4139:PackageViewModuleNode" />
-              <item name="GUI" type="1f31426a:PackageElementNode" />
-            </path>
-            <path>
-              <item name="DentalGUITool" type="58d84e3e:PackageViewProjectNode" />
-              <item name="DentalGUITool" type="616d4139:PackageViewModuleNode" />
-              <item name="rpd" type="1f31426a:PackageElementNode" />
+              <item name="DentalGUITool_zhangben" type="b2602c69:ProjectViewProjectNode" />
+              <item name="DentalGUITool_zhangben" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="rpd" type="462c0819:PsiDirectoryNode" />
+              <item name="oral" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="AndroidView" />
-      <pane id="Scope">
-        <subPane subId="Default">
-          <expand>
-            <path>
-              <item name="Root" type="cbb8eebc:String" user="Root" />
-              <item name="DentalGUITool" type="cbb8eebc:String" user="DentalGUITool" />
-            </path>
-            <path>
-              <item name="Root" type="cbb8eebc:String" user="Root" />
-              <item name="DentalGUITool" type="cbb8eebc:String" user="DentalGUITool" />
-              <item name=".idea" type="cbb8eebc:String" user=".idea" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
-      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
+    <property name="GenerateAntBuildDialog.backupFiles" value="true" />
+    <property name="GenerateAntBuildDialog.enableUiFormCompile" value="true" />
+    <property name="GenerateAntBuildDialog.forceTargetJdk" value="true" />
+    <property name="GenerateAntBuildDialog.outputFileNameProperty" value="dentalguitool" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/out/artifacts/DentalGUITool_jar" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1551334328190" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../DentalGUITool" />
     <property name="project.structure.last.edited" value="Artifacts" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="nodejs_interpreter_path" value="C:/Program Files (x86)/nodejs/node" />
-    <property name="js.eslint.eslintPackage" value="" />
-    <property name="js-jscs-nodeInterpreter" value="C:\Program Files (x86)\nodejs\node.exe" />
-    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
-    <property name="GenerateAntBuildDialog.enableUiFormCompile" value="true" />
-    <property name="GenerateAntBuildDialog.forceTargetJdk" value="true" />
-    <property name="GenerateAntBuildDialog.backupFiles" value="true" />
-    <property name="GenerateAntBuildDialog.outputFileNameProperty" value="dentalguitool" />
-    <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
-  </component>
-  <component name="RecentsManager">
-    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
-      <recent name="rpd" />
-    </key>
+    <property name="settings.editor.selected.configurable" value="reference.settings.deploy.options" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -417,1477 +390,481 @@
   </component>
   <component name="RunManager" selected="Application.LabelTool">
     <configuration name="LabelTool" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
+      <option name="MAIN_CLASS_NAME" value="GUI.LabelTool" />
+      <module name="DentalGUITool" />
+      <option name="VM_PARAMETERS" value="-Djava.library.path=/lib/RpdDesignLib;/lib/opencv;" />
+      <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
+      <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="GUI.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="MAIN_CLASS_NAME" value="GUI.LabelTool" />
-      <option name="VM_PARAMETERS" />
-      <option name="PROGRAM_PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="ENABLE_SWING_INSPECTOR" value="false" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <module name="DentalGUITool" />
-      <envs />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
     </configuration>
-    <configuration name="PrintImage" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
+    <configuration name="LabelTool_forPresent" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="GUI.LabelTool_forPresent" />
+      <module name="DentalGUITool" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ServerForPresent" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="GUI.ServerForPresent" />
+      <module name="DentalGUITool" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="misc.*" />
+          <option name="PATTERN" value="GUI.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="MAIN_CLASS_NAME" value="misc.PrintImage" />
-      <option name="VM_PARAMETERS" />
-      <option name="PROGRAM_PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="ENABLE_SWING_INSPECTOR" value="false" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <module name="DentalGUITool" />
-      <envs />
-    </configuration>
-    <configuration default="true" type="Applet" factoryName="Applet">
-      <option name="HTML_USED" value="false" />
-      <option name="WIDTH" value="400" />
-      <option name="HEIGHT" value="300" />
-      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
-      <module />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="VM_PARAMETERS" />
-      <option name="PROGRAM_PARAMETERS" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="ENABLE_SWING_INSPECTOR" value="false" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <module name="" />
-      <envs />
-    </configuration>
-    <configuration default="true" type="GrailsRunConfigurationType" factoryName="Grails">
-      <setting name="vmparams" value="" />
-      <setting name="cmdLine" value="run-app" />
-      <setting name="passParentEnv" value="true" />
-      <setting name="launchBrowser" value="true" />
-      <setting name="launchBrowserUrl" value="" />
-      <setting name="depsClasspath" value="false" />
-    </configuration>
-    <configuration default="true" type="js.build_tools.gulp" factoryName="Gulp.js">
-      <node-interpreter>project</node-interpreter>
-      <node-options />
-      <gulpfile />
-      <tasks />
-      <arguments />
-      <envs />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
     </configuration>
     <configuration default="true" type="JUnit" factoryName="JUnit">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <module name="" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="METHOD_NAME" />
       <option name="TEST_OBJECT" value="class" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="singleModule" />
-      </option>
-      <envs />
-      <patterns />
+      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
     </configuration>
-    <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin">
-      <module name="" />
-      <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -XX:MaxPermSize=250m -ea" />
-      <option name="PROGRAM_PARAMETERS" />
-      <predefined_log_file id="idea.log" enabled="true" />
-    </configuration>
-    <configuration default="true" type="Remote" factoryName="Remote">
-      <option name="USE_SOCKET_TRANSPORT" value="true" />
-      <option name="SERVER_MODE" value="false" />
-      <option name="SHMEM_ADDRESS" value="javadebug" />
-      <option name="HOST" value="localhost" />
-      <option name="PORT" value="5005" />
-    </configuration>
-    <configuration default="true" type="TestNG" factoryName="TestNG">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <module name="" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="SUITE_NAME" />
-      <option name="PACKAGE_NAME" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="METHOD_NAME" />
-      <option name="GROUP_NAME" />
-      <option name="TEST_OBJECT" value="CLASS" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
-      <option name="OUTPUT_DIRECTORY" />
-      <option name="ANNOTATION_TYPE" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="singleModule" />
-      </option>
-      <option name="USE_DEFAULT_REPORTERS" value="false" />
-      <option name="PROPERTIES_FILE" />
-      <envs />
+    <configuration default="true" type="TestNG">
+      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
       <properties />
       <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
     </configuration>
-    <configuration default="true" type="AndroidRunConfigurationType" factoryName="Android App">
-      <module name="" />
-      <option name="DEPLOY" value="true" />
-      <option name="ARTIFACT_NAME" value="" />
-      <option name="PM_INSTALL_OPTIONS" value="" />
-      <option name="ACTIVITY_EXTRA_FLAGS" value="" />
-      <option name="MODE" value="default_activity" />
-      <option name="TARGET_SELECTION_MODE" value="SHOW_DIALOG" />
-      <option name="PREFERRED_AVD" value="" />
-      <option name="CLEAR_LOGCAT" value="false" />
-      <option name="SHOW_LOGCAT_AUTOMATICALLY" value="false" />
-      <option name="SKIP_NOOP_APK_INSTALLATIONS" value="true" />
-      <option name="FORCE_STOP_RUNNING_APP" value="true" />
-      <option name="DEBUGGER_TYPE" value="Java" />
-      <option name="USE_LAST_SELECTED_DEVICE" value="false" />
-      <option name="PREFERRED_AVD" value="" />
-      <Java />
-      <Profilers>
-        <option name="ENABLE_ADVANCED_PROFILING" value="true" />
-        <option name="GAPID_ENABLED" value="false" />
-        <option name="GAPID_DISABLE_PCS" value="false" />
-        <option name="SUPPORT_LIB_ENABLED" value="true" />
-        <option name="INSTRUMENTATION_ENABLED" value="true" />
-      </Profilers>
-      <option name="DEEP_LINK" value="" />
-      <option name="ACTIVITY_CLASS" value="" />
-      <method />
-    </configuration>
-    <configuration default="true" type="AndroidTestRunConfigurationType" factoryName="Android Tests">
-      <module name="" />
-      <option name="TESTING_TYPE" value="0" />
-      <option name="INSTRUMENTATION_RUNNER_CLASS" value="" />
-      <option name="METHOD_NAME" value="" />
-      <option name="CLASS_NAME" value="" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="EXTRA_OPTIONS" value="" />
-      <option name="TARGET_SELECTION_MODE" value="SHOW_DIALOG" />
-      <option name="PREFERRED_AVD" value="" />
-      <option name="CLEAR_LOGCAT" value="false" />
-      <option name="SHOW_LOGCAT_AUTOMATICALLY" value="false" />
-      <option name="SKIP_NOOP_APK_INSTALLATIONS" value="true" />
-      <option name="FORCE_STOP_RUNNING_APP" value="true" />
-      <option name="DEBUGGER_TYPE" value="Java" />
-      <option name="USE_LAST_SELECTED_DEVICE" value="false" />
-      <option name="PREFERRED_AVD" value="" />
-      <Java />
-      <Profilers>
-        <option name="ENABLE_ADVANCED_PROFILING" value="true" />
-        <option name="GAPID_ENABLED" value="false" />
-        <option name="GAPID_DISABLE_PCS" value="false" />
-        <option name="SUPPORT_LIB_ENABLED" value="true" />
-        <option name="INSTRUMENTATION_ENABLED" value="true" />
-      </Profilers>
-      <method />
-    </configuration>
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <module name="" />
-      <option name="arquillianRunConfiguration">
-        <value>
-          <option name="containerStateName" value="" />
-        </value>
-      </option>
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="METHOD_NAME" />
-      <option name="TEST_OBJECT" value="class" />
-      <option name="VM_PARAMETERS" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="singleModule" />
-      </option>
-      <envs />
-      <patterns />
-      <method />
-    </configuration>
-    <configuration default="true" type="ArquillianTestNG" factoryName="">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <module name="" />
-      <option name="arquillianRunConfiguration">
-        <value>
-          <option name="containerStateName" value="" />
-        </value>
-      </option>
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="SUITE_NAME" />
-      <option name="PACKAGE_NAME" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="METHOD_NAME" />
-      <option name="GROUP_NAME" />
-      <option name="TEST_OBJECT" value="CLASS" />
-      <option name="VM_PARAMETERS" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" />
-      <option name="OUTPUT_DIRECTORY" />
-      <option name="ANNOTATION_TYPE" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="singleModule" />
-      </option>
-      <option name="USE_DEFAULT_REPORTERS" value="false" />
-      <option name="PROPERTIES_FILE" />
-      <envs />
-      <properties />
-      <listeners />
-      <method />
-    </configuration>
-    <configuration default="true" type="Cold Fusion runner description" factoryName="Cold Fusion" custom_browser="" web_path="">
-      <method />
-    </configuration>
-    <configuration default="true" type="CucumberJavaRunConfigurationType" factoryName="Cucumber java">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <option name="myFilePath" />
-      <option name="GLUE" />
-      <option name="myNameFilter" />
-      <option name="myGeneratedName" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="VM_PARAMETERS" />
-      <option name="PROGRAM_PARAMETERS" />
-      <option name="WORKING_DIRECTORY" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="ENABLE_SWING_INSPECTOR" value="false" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <module name="" />
-      <envs />
-      <method />
-    </configuration>
-    <configuration default="true" type="FlashRunConfigurationType" factoryName="Flash App">
-      <option name="BCName" value="" />
-      <option name="IOSSimulatorSdkPath" value="" />
-      <option name="adlOptions" value="" />
-      <option name="airProgramParameters" value="" />
-      <option name="appDescriptorForEmulator" value="Android" />
-      <option name="debugTransport" value="USB" />
-      <option name="debuggerSdkRaw" value="BC SDK" />
-      <option name="emulator" value="NexusOne" />
-      <option name="emulatorAdlOptions" value="" />
-      <option name="fastPackaging" value="true" />
-      <option name="fullScreenHeight" value="0" />
-      <option name="fullScreenWidth" value="0" />
-      <option name="launchUrl" value="false" />
-      <option name="launcherParameters">
-        <LauncherParameters>
-          <option name="browser" value="a7bb68e0-33c0-4d6f-a81a-aac1fdb870c8" />
-          <option name="launcherType" value="OSDefault" />
-          <option name="newPlayerInstance" value="false" />
-          <option name="playerPath" value="FlashPlayerDebugger.exe" />
-        </LauncherParameters>
-      </option>
-      <option name="mobileRunTarget" value="Emulator" />
-      <option name="moduleName" value="" />
-      <option name="overriddenMainClass" value="" />
-      <option name="overriddenOutputFileName" value="" />
-      <option name="overrideMainClass" value="false" />
-      <option name="runTrusted" value="true" />
-      <option name="screenDpi" value="0" />
-      <option name="screenHeight" value="0" />
-      <option name="screenWidth" value="0" />
-      <option name="url" value="http://" />
-      <option name="usbDebugPort" value="7936" />
-      <method />
-    </configuration>
-    <configuration default="true" type="FlexUnitRunConfigurationType" factoryName="FlexUnit" appDescriptorForEmulator="Android" class_name="" emulatorAdlOptions="" method_name="" package_name="" scope="Class">
-      <option name="BCName" value="" />
-      <option name="launcherParameters">
-        <LauncherParameters>
-          <option name="browser" value="a7bb68e0-33c0-4d6f-a81a-aac1fdb870c8" />
-          <option name="launcherType" value="OSDefault" />
-          <option name="newPlayerInstance" value="false" />
-          <option name="playerPath" value="FlashPlayerDebugger.exe" />
-        </LauncherParameters>
-      </option>
-      <option name="moduleName" value="" />
-      <option name="trusted" value="true" />
-      <method />
-    </configuration>
-    <configuration default="true" type="GradleRunConfiguration" factoryName="Gradle">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list />
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <method />
-    </configuration>
-    <configuration default="true" type="JarApplication" factoryName="JAR Application">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <envs />
-      <method />
-    </configuration>
-    <configuration default="true" type="Java Scratch" factoryName="Java Scratch">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <option name="SCRATCH_FILE_ID" value="0" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="VM_PARAMETERS" />
-      <option name="PROGRAM_PARAMETERS" />
-      <option name="WORKING_DIRECTORY" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="ENABLE_SWING_INSPECTOR" value="false" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <module name="" />
-      <envs />
-      <method />
-    </configuration>
-    <configuration default="true" type="JavaScriptTestRunnerJest" factoryName="Jest">
-      <node-interpreter value="project" />
-      <working-dir value="" />
-      <envs />
-      <scope-kind value="ALL" />
-      <method />
-    </configuration>
-    <configuration default="true" type="JavaScriptTestRunnerProtractor" factoryName="Protractor">
-      <config-file value="" />
-      <node-interpreter value="project" />
-      <envs />
-      <method />
-    </configuration>
-    <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug">
-      <method />
-    </configuration>
-    <configuration default="true" type="JetRunConfigurationType" factoryName="Kotlin">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="VM_PARAMETERS" />
-      <option name="PROGRAM_PARAMETERS" />
-      <option name="WORKING_DIRECTORY" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <module name="DentalGUITool" />
-      <envs />
-      <method />
-    </configuration>
-    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType" factoryName="Kotlin script">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <option name="filePath" />
-      <option name="vmParameters" />
-      <option name="alternativeJrePath" />
-      <option name="programParameters" />
-      <option name="passParentEnvs" value="true" />
-      <option name="workingDirectory" />
-      <option name="isAlternativeJrePathEnabled" value="false" />
-      <envs />
-      <method />
-    </configuration>
-    <configuration default="true" type="NodeJSConfigurationType" factoryName="Node.js" path-to-node="project" working-dir="">
-      <method />
-    </configuration>
-    <configuration default="true" type="ScalaTestRunConfiguration" factoryName="ScalaTest">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <module name="" />
-      <setting name="path" value="" />
-      <setting name="package" value="" />
-      <setting name="vmparams" value="" />
-      <setting name="params" value="" />
-      <setting name="workingDirectory" value="" />
-      <setting name="searchForTest" value="Across module dependencies" />
-      <setting name="testName" value="" />
-      <setting name="testKind" value="Class" />
-      <setting name="showProgressMessages" value="true" />
-      <setting name="useSbt" value="false" />
-      <setting name="useUiWithSbt" value="false" />
-      <classRegexps />
-      <testRegexps />
-      <envs />
-      <method />
-    </configuration>
-    <configuration default="true" type="Specs2RunConfiguration" factoryName="Specs2">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <module name="" />
-      <setting name="path" value="" />
-      <setting name="package" value="" />
-      <setting name="vmparams" value="" />
-      <setting name="params" value="" />
-      <setting name="workingDirectory" value="" />
-      <setting name="searchForTest" value="Across module dependencies" />
-      <setting name="testName" value="" />
-      <setting name="testKind" value="Class" />
-      <setting name="showProgressMessages" value="true" />
-      <setting name="useSbt" value="false" />
-      <setting name="useUiWithSbt" value="false" />
-      <classRegexps />
-      <testRegexps />
-      <envs />
-      <method />
-    </configuration>
-    <configuration default="true" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <module name="" />
-      <envs />
-      <method />
-    </configuration>
-    <configuration default="true" type="js.build_tools.npm" factoryName="npm">
-      <command value="run" />
-      <scripts />
-      <node-interpreter value="project" />
-      <envs />
-      <method />
-    </configuration>
-    <configuration default="true" type="mocha-javascript-test-runner" factoryName="Mocha">
-      <node-interpreter>project</node-interpreter>
-      <node-options />
-      <working-directory />
-      <pass-parent-env>true</pass-parent-env>
-      <envs />
-      <ui />
-      <extra-mocha-options />
-      <test-kind>DIRECTORY</test-kind>
-      <test-directory />
-      <recursive>false</recursive>
-      <method />
-    </configuration>
-    <configuration default="true" type="osgi.bnd.run" factoryName="Run Launcher">
-      <method />
-    </configuration>
-    <configuration default="true" type="osgi.bnd.run" factoryName="Test Launcher (JUnit)">
-      <method />
-    </configuration>
-    <configuration default="true" type="uTestRunConfiguration" factoryName="utest">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <module name="" />
-      <setting name="path" value="" />
-      <setting name="package" value="" />
-      <setting name="vmparams" value="" />
-      <setting name="params" value="" />
-      <setting name="workingDirectory" value="" />
-      <setting name="searchForTest" value="Across module dependencies" />
-      <setting name="testName" value="" />
-      <setting name="testKind" value="Class" />
-      <setting name="showProgressMessages" value="true" />
-      <setting name="useSbt" value="false" />
-      <setting name="useUiWithSbt" value="false" />
-      <classRegexps />
-      <testRegexps />
-      <envs />
-      <method />
-    </configuration>
-    <list size="2">
-      <item index="0" class="java.lang.String" itemvalue="Application.LabelTool" />
-      <item index="1" class="java.lang.String" itemvalue="Application.PrintImage" />
+    <list>
+      <item itemvalue="Application.LabelTool" />
+      <item itemvalue="Application.LabelTool_forPresent" />
+      <item itemvalue="Application.ServerForPresent" />
     </list>
     <recent_temporary>
-      <list size="2">
-        <item index="0" class="java.lang.String" itemvalue="Application.LabelTool" />
-        <item index="1" class="java.lang.String" itemvalue="Application.PrintImage" />
+      <list>
+        <item itemvalue="Application.LabelTool" />
+        <item itemvalue="Application.ServerForPresent" />
+        <item itemvalue="Application.LabelTool_forPresent" />
       </list>
     </recent_temporary>
-  </component>
-  <component name="SbtLocalSettings">
-    <option name="externalProjectsViewState">
-      <projects_view />
-    </option>
-  </component>
-  <component name="ShelveChangesManager" show_recycled="false">
-    <option name="remove_strategy" value="false" />
   </component>
   <component name="SvnConfiguration">
     <configuration />
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="9efcce7d-9cdf-4ffc-a888-c6d36f3be804" name="Default" comment="" />
-      <created>1486627729732</created>
+      <changelist id="ee2f1d7f-9d4a-4891-8cec-d807570523e9" name="Default" comment="" />
+      <created>1530239412392</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1486627729732</updated>
-      <workItem from="1486627731079" duration="473000" />
-      <workItem from="1486706267948" duration="7000" />
-      <workItem from="1486706286167" duration="3376000" />
-      <workItem from="1486712577781" duration="606000" />
-      <workItem from="1487237122535" duration="616000" />
-      <workItem from="1487556441036" duration="4481000" />
-      <workItem from="1487580520873" duration="1193000" />
-      <workItem from="1488263899013" duration="1343000" />
-      <workItem from="1488269362778" duration="588000" />
-      <workItem from="1488349619016" duration="5941000" />
-      <workItem from="1488678445485" duration="25639000" />
-      <workItem from="1489284198550" duration="32000" />
-      <workItem from="1489284269662" duration="31552000" />
-      <workItem from="1490420253730" duration="20190000" />
-      <workItem from="1490445433111" duration="56000" />
-      <workItem from="1491369142516" duration="695000" />
-      <workItem from="1491370042920" duration="158000" />
-      <workItem from="1491370724177" duration="1138000" />
-      <workItem from="1491374102768" duration="738000" />
-      <workItem from="1491379023794" duration="2749000" />
-      <workItem from="1491549073368" duration="1548000" />
-      <workItem from="1491632139258" duration="16529000" />
-      <workItem from="1491715392421" duration="27337000" />
-      <workItem from="1491792408797" duration="8590000" />
-      <workItem from="1491981437097" duration="1658000" />
-      <workItem from="1491983700488" duration="2744000" />
-      <workItem from="1492069895462" duration="6437000" />
-      <workItem from="1492143912946" duration="662000" />
-      <workItem from="1492144836257" duration="27000" />
-      <workItem from="1492419547014" duration="348000" />
-      <workItem from="1492926558311" duration="4757000" />
-      <workItem from="1493350357738" duration="769000" />
-      <workItem from="1493356785377" duration="604000" />
-      <workItem from="1493443604961" duration="70000" />
-      <workItem from="1493443715880" duration="14000" />
-      <workItem from="1493953674955" duration="12107000" />
-      <workItem from="1494053062318" duration="8142000" />
-      <workItem from="1494139841827" duration="6004000" />
-      <workItem from="1494148192717" duration="3236000" />
-      <workItem from="1494151452232" duration="1240000" />
-      <workItem from="1494208428774" duration="30665000" />
-      <workItem from="1494245285130" duration="2668000" />
-      <workItem from="1494248486890" duration="3169000" />
-      <workItem from="1494298457958" duration="36770000" />
-      <workItem from="1494401274184" duration="2448000" />
-      <workItem from="1494410406957" duration="281000" />
-      <workItem from="1494504222490" duration="291000" />
-      <workItem from="1494558956790" duration="72000" />
-      <workItem from="1494681088648" duration="613000" />
-      <workItem from="1494753661859" duration="1113000" />
-      <workItem from="1495011164140" duration="130000" />
-      <workItem from="1495087245573" duration="75000" />
-      <workItem from="1495090302036" duration="144000" />
-      <workItem from="1495090999256" duration="1983000" />
-      <workItem from="1495093195233" duration="7670000" />
-      <workItem from="1495158431080" duration="2783000" />
-      <workItem from="1495165880216" duration="633000" />
-      <workItem from="1495453041293" duration="2017000" />
-      <workItem from="1495455272185" duration="47000" />
-      <workItem from="1495544994332" duration="663000" />
-      <workItem from="1496284547581" duration="28676000" />
-      <workItem from="1496563869347" duration="155000" />
-      <workItem from="1496652271931" duration="13029000" />
-      <workItem from="1496731907534" duration="2413000" />
-      <workItem from="1498023436236" duration="636000" />
-      <workItem from="1498029297957" duration="25000" />
-      <workItem from="1499220453277" duration="89000" />
-      <workItem from="1499220596310" duration="12156000" />
-      <workItem from="1499244935530" duration="747000" />
-      <workItem from="1499253810086" duration="4556000" />
-      <workItem from="1499258406357" duration="90000" />
-      <workItem from="1499310897753" duration="646000" />
-      <workItem from="1499411477746" duration="8324000" />
-      <workItem from="1499578349826" duration="54000" />
-      <workItem from="1499578748246" duration="7097000" />
-      <workItem from="1499914116711" duration="18445000" />
-      <workItem from="1500256241758" duration="96000" />
-      <workItem from="1502075377161" duration="220000" />
-      <workItem from="1502076197883" duration="2926000" />
-      <workItem from="1502155960559" duration="13610000" />
-      <workItem from="1502245371583" duration="3632000" />
-      <workItem from="1502258528734" duration="7486000" />
-      <workItem from="1502607247986" duration="208000" />
-      <workItem from="1502852005602" duration="58000" />
-      <workItem from="1502852115920" duration="70000" />
-      <workItem from="1502933690083" duration="3423000" />
-      <workItem from="1502948074326" duration="15700000" />
-      <workItem from="1503022090000" duration="16786000" />
-      <workItem from="1503490268961" duration="598000" />
-      <workItem from="1503622667210" duration="32492000" />
-      <workItem from="1505785082012" duration="429000" />
-      <workItem from="1505786228826" duration="370000" />
-      <workItem from="1505885134563" duration="93000" />
-      <workItem from="1506495467807" duration="76000" />
-      <workItem from="1506502105673" duration="2178000" />
-      <workItem from="1506504493582" duration="680000" />
-      <workItem from="1506685237921" duration="2157000" />
-      <workItem from="1506759344873" duration="9000" />
-      <workItem from="1510887445897" duration="2410000" />
-      <workItem from="1512007292651" duration="39000" />
+      <updated>1530239412392</updated>
+      <workItem from="1532326613927" duration="1854000" />
+      <workItem from="1533533076362" duration="543000" />
+      <workItem from="1534049377087" duration="198000" />
+      <workItem from="1534050827760" duration="33000" />
+      <workItem from="1534050880910" duration="273000" />
+      <workItem from="1538988566312" duration="500000" />
+      <workItem from="1538997584135" duration="16000" />
+      <workItem from="1539235781168" duration="1255000" />
+      <workItem from="1539331997181" duration="932000" />
+      <workItem from="1539488500980" duration="7453000" />
+      <workItem from="1540259361182" duration="619000" />
+      <workItem from="1540350191415" duration="132000" />
+      <workItem from="1540438168042" duration="6732000" />
+      <workItem from="1540791030191" duration="1978000" />
+      <workItem from="1540793382719" duration="1307000" />
+      <workItem from="1540875818479" duration="108000" />
+      <workItem from="1540881172980" duration="3495000" />
+      <workItem from="1540974380194" duration="446000" />
+      <workItem from="1540979717926" duration="858000" />
+      <workItem from="1541049233603" duration="5667000" />
+      <workItem from="1541486508284" duration="619000" />
+      <workItem from="1541493856569" duration="613000" />
+      <workItem from="1541999681826" duration="92000" />
+      <workItem from="1542265039372" duration="1205000" />
+      <workItem from="1542356753598" duration="610000" />
+      <workItem from="1542616602290" duration="300000" />
+      <workItem from="1542781508772" duration="1269000" />
+      <workItem from="1543382126556" duration="356000" />
+      <workItem from="1543382663589" duration="642000" />
+      <workItem from="1543384203338" duration="8000" />
+      <workItem from="1548312645828" duration="149000" />
+      <workItem from="1548312956165" duration="2785000" />
+      <workItem from="1551330811458" duration="3437000" />
     </task>
-    <task id="LOCAL-00001" summary="Build the ontology">
-      <created>1488690342848</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1488690342848</updated>
-    </task>
-    <task id="LOCAL-00002" summary="Complete the ontology of clasp">
-      <created>1488706969724</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1488706969724</updated>
-    </task>
-    <task id="LOCAL-00003" summary="Classify the kinds of clasp">
-      <created>1488710341664</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1488710341664</updated>
-    </task>
-    <task id="LOCAL-00004" summary="update definition of componets &amp; initial the new rules">
-      <created>1489294747624</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1489294747624</updated>
-    </task>
-    <task id="LOCAL-00005" summary="complete choose abutment rules">
-      <created>1489313933354</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
-      <option name="project" value="LOCAL" />
-      <updated>1489313933354</updated>
-    </task>
-    <task id="LOCAL-00006" summary="update clasp rules">
-      <created>1489326159272</created>
-      <option name="number" value="00006" />
-      <option name="presentableId" value="LOCAL-00006" />
-      <option name="project" value="LOCAL" />
-      <updated>1489326159272</updated>
-    </task>
-    <task id="LOCAL-00007" summary="Add abutment rules and porperties">
-      <created>1490445475629</created>
-      <option name="number" value="00007" />
-      <option name="presentableId" value="LOCAL-00007" />
-      <option name="project" value="LOCAL" />
-      <updated>1490445475629</updated>
-    </task>
-    <task id="LOCAL-00008" summary="Modify the component classes, add combination clasp">
-      <created>1491638188281</created>
-      <option name="number" value="00008" />
-      <option name="presentableId" value="LOCAL-00008" />
-      <option name="project" value="LOCAL" />
-      <updated>1491638188281</updated>
-    </task>
-    <task id="LOCAL-00009" summary="Modify choose abutment rules to new version">
-      <created>1491658023517</created>
-      <option name="number" value="00009" />
-      <option name="presentableId" value="LOCAL-00009" />
-      <option name="project" value="LOCAL" />
-      <updated>1491658023517</updated>
-    </task>
-    <task id="LOCAL-00010" summary="Complete clasp rule, modify ontology, modify choose abutment rule">
-      <created>1491745891249</created>
-      <option name="number" value="00010" />
-      <option name="presentableId" value="LOCAL-00010" />
-      <option name="project" value="LOCAL" />
-      <updated>1491745891249</updated>
-    </task>
-    <task id="LOCAL-00011" summary="complete indirect retainer rule">
-      <created>1491802957014</created>
-      <option name="number" value="00011" />
-      <option name="presentableId" value="LOCAL-00011" />
-      <option name="project" value="LOCAL" />
-      <updated>1491802957014</updated>
-    </task>
-    <task id="LOCAL-00012" summary="Add classes of major connector">
-      <created>1492934880027</created>
-      <option name="number" value="00012" />
-      <option name="presentableId" value="LOCAL-00012" />
-      <option name="project" value="LOCAL" />
-      <updated>1492934880027</updated>
-    </task>
-    <task id="LOCAL-00013" summary="Complete the design of major connector">
-      <created>1493978303815</created>
-      <option name="number" value="00013" />
-      <option name="presentableId" value="LOCAL-00013" />
-      <option name="project" value="LOCAL" />
-      <updated>1493978303815</updated>
-    </task>
-    <task id="LOCAL-00014" summary="Complete the design of major connector">
-      <created>1494061188057</created>
-      <option name="number" value="00014" />
-      <option name="presentableId" value="LOCAL-00014" />
-      <option name="project" value="LOCAL" />
-      <updated>1494061188057</updated>
-    </task>
-    <task id="LOCAL-00015" summary="combined design-part and draw-part">
-      <created>1494340375075</created>
-      <option name="number" value="00015" />
-      <option name="presentableId" value="LOCAL-00015" />
-      <option name="project" value="LOCAL" />
-      <updated>1494340375075</updated>
-    </task>
-    <task id="LOCAL-00016" summary="combined parser">
-      <created>1495106388512</created>
-      <option name="number" value="00016" />
-      <option name="presentableId" value="LOCAL-00016" />
-      <option name="project" value="LOCAL" />
-      <updated>1495106388512</updated>
-    </task>
-    <task id="LOCAL-00017" summary="delete the unused class file">
-      <created>1495161210172</created>
-      <option name="number" value="00017" />
-      <option name="presentableId" value="LOCAL-00017" />
-      <option name="project" value="LOCAL" />
-      <updated>1495161210172</updated>
-    </task>
-    <task id="LOCAL-00018" summary="fix the bug: major connector with three tooth position">
-      <created>1495545644489</created>
-      <option name="number" value="00018" />
-      <option name="presentableId" value="LOCAL-00018" />
-      <option name="project" value="LOCAL" />
-      <updated>1495545644489</updated>
-    </task>
-    <task id="LOCAL-00019" summary="Refine UI, add printer">
-      <created>1496304755848</created>
-      <option name="number" value="00019" />
-      <option name="presentableId" value="LOCAL-00019" />
-      <option name="project" value="LOCAL" />
-      <updated>1496304755848</updated>
-    </task>
-    <task id="LOCAL-00020" summary="Refine UI">
-      <created>1496321603638</created>
-      <option name="number" value="00020" />
-      <option name="presentableId" value="LOCAL-00020" />
-      <option name="project" value="LOCAL" />
-      <updated>1496321603638</updated>
-    </task>
-    <task id="LOCAL-00021" summary="add logo">
-      <created>1496324081951</created>
-      <option name="number" value="00021" />
-      <option name="presentableId" value="LOCAL-00021" />
-      <option name="project" value="LOCAL" />
-      <updated>1496324081951</updated>
-    </task>
-    <task id="LOCAL-00022" summary="fix some bugs">
-      <created>1496734591647</created>
-      <option name="number" value="00022" />
-      <option name="presentableId" value="LOCAL-00022" />
-      <option name="project" value="LOCAL" />
-      <updated>1496734591647</updated>
-    </task>
-    <task id="LOCAL-00023" summary="fix some bugs">
-      <created>1499233320367</created>
-      <option name="number" value="00023" />
-      <option name="presentableId" value="LOCAL-00023" />
-      <option name="project" value="LOCAL" />
-      <updated>1499233320367</updated>
-    </task>
-    <task id="LOCAL-00024" summary="fix some bugs">
-      <created>1499233365787</created>
-      <option name="number" value="00024" />
-      <option name="presentableId" value="LOCAL-00024" />
-      <option name="project" value="LOCAL" />
-      <updated>1499233365787</updated>
-    </task>
-    <task id="LOCAL-00025" summary="fix some bugs">
-      <created>1499244970818</created>
-      <option name="number" value="00025" />
-      <option name="presentableId" value="LOCAL-00025" />
-      <option name="project" value="LOCAL" />
-      <updated>1499244970818</updated>
-    </task>
-    <task id="LOCAL-00026" summary="fix some bugs">
-      <created>1499245792170</created>
-      <option name="number" value="00026" />
-      <option name="presentableId" value="LOCAL-00026" />
-      <option name="project" value="LOCAL" />
-      <updated>1499245792170</updated>
-    </task>
-    <task id="LOCAL-00027" summary="add medical record number to the printed picture">
-      <created>1499258479598</created>
-      <option name="number" value="00027" />
-      <option name="presentableId" value="LOCAL-00027" />
-      <option name="project" value="LOCAL" />
-      <updated>1499258479598</updated>
-    </task>
-    <task id="LOCAL-00028" summary="optimize the print function for test">
-      <created>1499941269936</created>
-      <option name="number" value="00028" />
-      <option name="presentableId" value="LOCAL-00028" />
-      <option name="project" value="LOCAL" />
-      <updated>1499941269937</updated>
-    </task>
-    <task id="LOCAL-00029" summary="add the plan explanation">
-      <created>1502188873564</created>
-      <option name="number" value="00029" />
-      <option name="presentableId" value="LOCAL-00029" />
-      <option name="project" value="LOCAL" />
-      <updated>1502188873564</updated>
-    </task>
-    <task id="LOCAL-00030" summary="add the plan explanation">
-      <created>1502248870960</created>
-      <option name="number" value="00030" />
-      <option name="presentableId" value="LOCAL-00030" />
-      <option name="project" value="LOCAL" />
-      <updated>1502248870960</updated>
-    </task>
-    <task id="LOCAL-00031" summary="add the GUI of plan explanation">
-      <created>1502269684627</created>
-      <option name="number" value="00031" />
-      <option name="presentableId" value="LOCAL-00031" />
-      <option name="project" value="LOCAL" />
-      <updated>1502269684627</updated>
-    </task>
-    <task id="LOCAL-00032" summary="add some rules of major connector, and handle some bug of scoring and indirect retainer rules">
-      <created>1503024131139</created>
-      <option name="number" value="00032" />
-      <option name="presentableId" value="LOCAL-00032" />
-      <option name="project" value="LOCAL" />
-      <updated>1503024131139</updated>
-    </task>
-    <task id="LOCAL-00033" summary="handle some bugs">
-      <created>1503490376372</created>
-      <option name="number" value="00033" />
-      <option name="presentableId" value="LOCAL-00033" />
-      <option name="project" value="LOCAL" />
-      <updated>1503490376372</updated>
-    </task>
-    <task id="LOCAL-00034" summary="modify major connector rules, handle some bugs, move the score function to a new rule after indirector rule from clasp rule">
-      <created>1503633517125</created>
-      <option name="number" value="00034" />
-      <option name="presentableId" value="LOCAL-00034" />
-      <option name="project" value="LOCAL" />
-      <updated>1503633517125</updated>
-    </task>
-    <task id="LOCAL-00035" summary="modify major connector rules, handle some bugs, move the score function to a new rule after indirector rule from clasp rule">
-      <created>1503670313829</created>
-      <option name="number" value="00035" />
-      <option name="presentableId" value="LOCAL-00035" />
-      <option name="project" value="LOCAL" />
-      <updated>1503670313829</updated>
-    </task>
-    <task id="LOCAL-00036" summary="add the function of drawing half half clasp and embrasure clasp, handle the conflict between lingual rest and major connector">
-      <created>1506504208808</created>
-      <option name="number" value="00036" />
-      <option name="presentableId" value="LOCAL-00036" />
-      <option name="project" value="LOCAL" />
-      <updated>1506504208808</updated>
-    </task>
-    <option name="localTasksCounter" value="37" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="501513000" />
-  </component>
-  <component name="TodoView">
-    <todo-panel id="selected-file">
-      <is-autoscroll-to-source value="true" />
-    </todo-panel>
-    <todo-panel id="all">
-      <are-packages-shown value="true" />
-      <is-autoscroll-to-source value="true" />
-    </todo-panel>
+    <option name="totallyTimeSpent" value="46484000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3295711" sideWeight="0.49570817" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3027933" sideWeight="0.29157782" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32942432" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.15642458" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33966482" sideWeight="0.49570817" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3295711" sideWeight="0.49785408" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.28091684" sideWeight="0.6670429" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3299356" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.21428572" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" x="501" y="180" width="306" height="725" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.21995708" sideWeight="0.33295712" order="6" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.30167598" sideWeight="0.7084222" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Nl-Palette" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.1692872" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Key Promoter" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3039106" sideWeight="0.49785408" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Coverage" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32995737" sideWeight="0.5" order="11" side_tool="true" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32960895" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.74666667" visible="true" weight="0.23454158" />
+      <window_info id="Structure" order="1" sideWeight="0.25333333" side_tool="true" visible="true" weight="0.23454158" />
+      <window_info id="Image Layers" order="2" />
+      <window_info id="Designer" order="3" />
+      <window_info id="Capture Tool" order="4" />
+      <window_info id="Favorites" order="5" side_tool="true" />
+      <window_info id="UI Designer" order="6" />
+      <window_info anchor="bottom" id="Messages" order="0" weight="0.32850778" />
+      <window_info anchor="bottom" id="Message" order="1" />
+      <window_info anchor="bottom" id="Find" order="2" weight="0.33741647" />
+      <window_info anchor="bottom" id="Run" order="3" weight="0.30957684" />
+      <window_info active="true" anchor="bottom" id="Debug" order="4" sideWeight="0.49946696" visible="true" weight="0.33184856" />
+      <window_info anchor="bottom" id="Cvs" order="5" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="6" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="7" />
+      <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Terminal" order="9" weight="0.32922733" />
+      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.50053304" side_tool="true" weight="0.5295429" />
+      <window_info anchor="bottom" id="Version Control" order="11" />
+      <window_info anchor="bottom" id="Docker" order="12" show_stripe_button="false" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Palette" order="3" />
+      <window_info anchor="right" id="Maven Projects" order="4" />
+      <window_info anchor="right" id="Palette&#9;" order="5" />
+      <window_info anchor="right" id="Capture Analysis" order="6" />
+      <window_info anchor="right" id="Theme Preview" order="7" />
+      <window_info anchor="right" id="Database" order="8" />
+      <window_info anchor="right" id="Coverage" order="9" side_tool="true" weight="0.32995737" />
+      <window_info anchor="right" id="Maven" order="10" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
   </component>
-  <component name="Vcs.Log.Tabs.Properties">
-    <option name="TAB_STATES">
-      <map>
-        <entry key="MAIN">
-          <value>
-            <State>
-              <option name="RECENTLY_FILTERED_USER_GROUPS">
-                <collection />
-              </option>
-              <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
-                <collection />
-              </option>
-              <option name="COLUMN_ORDER">
-                <list>
-                  <option value="0" />
-                  <option value="1" />
-                  <option value="2" />
-                  <option value="3" />
-                </list>
-              </option>
-            </State>
-          </value>
-        </entry>
-      </map>
-    </option>
-  </component>
-  <component name="VcsContentAnnotationSettings">
-    <option name="myLimit" value="2678400000" />
-  </component>
-  <component name="VcsManagerConfiguration">
-    <MESSAGE value="complete choose abutment rules" />
-    <MESSAGE value="update clasp rules" />
-    <MESSAGE value="Add abutment rules and porperties" />
-    <MESSAGE value="Modify the component classes, add combination clasp" />
-    <MESSAGE value="Modify choose abutment rules to new version" />
-    <MESSAGE value="Complete clasp rule, modify ontology, modify choose abutment rule" />
-    <MESSAGE value="complete indirect retainer rule" />
-    <MESSAGE value="Add classes of major connector" />
-    <MESSAGE value="Complete the design of major connector" />
-    <MESSAGE value="combined design-part and draw-part" />
-    <MESSAGE value="combined parser" />
-    <MESSAGE value="delete the unused class file" />
-    <MESSAGE value="fix the bug: major connector with three tooth position" />
-    <MESSAGE value="Refine UI, add printer" />
-    <MESSAGE value="Refine UI" />
-    <MESSAGE value="add logo" />
-    <MESSAGE value="fix some bugs" />
-    <MESSAGE value="add medical record number to the printed picture" />
-    <MESSAGE value="optimize the print function for test" />
-    <MESSAGE value="add the plan explanation" />
-    <MESSAGE value="add the GUI of plan explanation" />
-    <MESSAGE value="add some rules of major connector, and handle some bug of scoring and indirect retainer rules" />
-    <MESSAGE value="handle some bugs" />
-    <MESSAGE value="modify major connector rules, handle some bugs, move the score function to a new rule after indirector rule from clasp rule" />
-    <MESSAGE value="add the function of drawing half half clasp and embrasure clasp, handle the conflict between lingual rest and major connector" />
-    <option name="LAST_COMMIT_MESSAGE" value="add the function of drawing half half clasp and embrasure clasp, handle the conflict between lingual rest and major connector" />
-  </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/GUI/LabelTool.java</url>
-          <line>312</line>
-          <properties />
-          <option name="timeStamp" value="212" />
+        <line-breakpoint enabled="true" type="java-method">
+          <url>jar://E:/jdk1.8.0_131/src.zip!/javax/swing/JTable.java</url>
+          <line>3614</line>
+          <properties class="javax.swing.JTable">
+            <option name="EMULATED" value="true" />
+          </properties>
+          <option name="timeStamp" value="3" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/GUI/LabelTool.java</url>
-          <line>2341</line>
+          <line>715</line>
           <properties />
-          <option name="timeStamp" value="221" />
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/GUI/LabelTool_forPresent.java</url>
+          <line>105</line>
+          <properties />
+          <option name="timeStamp" value="16" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/GUI/LabelTool.java</url>
-          <line>2015</line>
+          <line>1705</line>
           <properties />
-          <option name="timeStamp" value="225" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/GUI/LabelTool.java</url>
-          <line>563</line>
-          <properties />
-          <option name="timeStamp" value="229" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>jar://D:/lib/DentalEMRParser/DentalEMRParser.jar!/rule/ruleParserWithStats.class</url>
-          <line>484</line>
-          <properties />
-          <option name="timeStamp" value="243" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/GUI/LabelTool.java</url>
-          <line>454</line>
-          <properties />
-          <option name="timeStamp" value="247" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/GUI/LabelTool.java</url>
-          <line>958</line>
-          <properties />
-          <option name="timeStamp" value="250" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/GUI/LabelTool.java</url>
-          <line>605</line>
-          <properties />
-          <option name="timeStamp" value="252" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>jar://D:/lib/DentalEMRParser/DentalEMRParser.jar!/emrpaser/rule/ruleParserWithStats.class</url>
-          <line>814</line>
-          <properties />
-          <option name="timeStamp" value="315" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/misc/PrintTestFile.java</url>
-          <line>30</line>
-          <properties />
-          <option name="timeStamp" value="334" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/GUI/LabelTool.java</url>
-          <line>1115</line>
-          <properties />
-          <option name="timeStamp" value="346" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/rpd/rules/ClaspRule.java</url>
-          <line>450</line>
-          <properties />
-          <option name="timeStamp" value="384" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/rpd/components/RotationAxis.java</url>
-          <line>204</line>
-          <properties />
-          <option name="timeStamp" value="423" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/GUI/LabelTool.java</url>
-          <line>2460</line>
-          <properties />
-          <option name="timeStamp" value="429" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/rpd/rules/ScoreRule.java</url>
-          <line>167</line>
-          <properties />
-          <option name="timeStamp" value="439" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/rpd/rules/MajorConnectorRule.java</url>
-          <line>403</line>
-          <properties />
-          <option name="timeStamp" value="445" />
+          <option name="timeStamp" value="20" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="446" />
     </breakpoint-manager>
     <watches-manager>
       <configuration name="Application">
-        <watch expression="mouth.getTooth(zone, 4)" language="JAVA" />
-        <watch expression="plan.getAbutmentTeeth().contains(mouth.getTooth(zone,4))" language="JAVA" />
-        <watch expression="java.library.path" language="JAVA" />
+        <watch expression="input_emr.getCanonicalPath()" language="JAVA" />
+        <watch expression="mandibularRpdPlans.get(0).components" />
       </configuration>
     </watches-manager>
   </component>
-  <component name="antWorkspaceConfiguration">
-    <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
-    <option name="FILTER_TARGETS" value="false" />
+  <component name="debuggerHistoryManager">
+    <expressions id="watch">
+      <expression>
+        <expression-string>input_emr.getCanonicalPath()</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+    </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/rpd/components/ReverseBackActionClasp.java">
+    <entry file="file://$PROJECT_DIR$/src/rpd/oral/Maxillary.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="69" column="33" lean-forward="false" selection-start-line="69" selection-start-column="33" selection-end-line="69" selection-end-column="33" />
+        <state relative-caret-position="88">
+          <caret line="13" column="13" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="13" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/rpd/components/ReverseHookClasp.java">
+    <entry file="file://$PROJECT_DIR$/src/rpd/components/RPAClasp.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="287">
-          <caret line="74" column="33" lean-forward="false" selection-start-line="74" selection-start-column="33" selection-end-line="74" selection-end-column="33" />
+        <state relative-caret-position="-540">
+          <caret line="22" column="19" selection-start-line="22" selection-start-column="11" selection-end-line="22" selection-end-column="19" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/rpd/components/RingClasp.java">
+    <entry file="file://$PROJECT_DIR$/src/rpd/oral/EdentulousSpace.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="253">
-          <caret line="95" column="33" lean-forward="false" selection-start-line="95" selection-start-column="33" selection-end-line="95" selection-end-column="33" />
+        <state relative-caret-position="-1210">
+          <caret line="11" column="13" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/rpd/components/RPIClasp.java">
+    <entry file="file://$PROJECT_DIR$/src/rpd/oral/Mandibular.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="372">
-          <caret line="34" column="33" lean-forward="false" selection-start-line="34" selection-start-column="33" selection-end-line="34" selection-end-column="33" />
+        <state relative-caret-position="176">
+          <caret line="18" column="26" selection-start-line="18" selection-start-column="26" selection-end-line="18" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://E:/jdk1.8.0_131/src.zip!/java/lang/Object.java" />
+    <entry file="jar://E:/jdk1.8.0_131/src.zip!/java/lang/Class.java" />
+    <entry file="jar://E:/jdk1.8.0_131/src.zip!/javax/swing/table/DefaultTableModel.java" />
+    <entry file="jar://E:/jdk1.8.0_131/src.zip!/java/util/List.java" />
+    <entry file="file://E:/Z_carry/LabelTool_20180702.java" />
+    <entry file="jar://E:/jdk1.8.0_131/src.zip!/javax/swing/table/TableColumnModel.java" />
+    <entry file="jar://E:/jdk1.8.0_131/src.zip!/javax/swing/DefaultCellEditor.java" />
+    <entry file="file://$PROJECT_DIR$/src/rpd/oral/Mouth.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="726">
+          <caret line="37" column="22" selection-start-line="37" selection-start-column="22" selection-end-line="37" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/rpd/oral/Tooth.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="88">
+          <caret line="27" column="11" selection-start-line="27" selection-start-column="11" selection-end-line="27" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://E:/jdk1.8.0_131/src.zip!/java/util/HashSet.java" />
+    <entry file="file://$PROJECT_DIR$/src/rpd/components/MajorConnector.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="370">
+          <caret line="48" column="59" selection-start-line="48" selection-start-column="43" selection-end-line="48" selection-end-column="59" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://E:/jdk1.8.0_131/src.zip!/javax/swing/plaf/ComponentUI.java" />
+    <entry file="jar://E:/jdk1.8.0_131/src.zip!/javax/swing/JScrollPane.java" />
+    <entry file="file://$PROJECT_DIR$/src/rpd/components/LingualBarConnector.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1552">
+          <caret line="16" column="32" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/rpd/components/LingualPlateConnector.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="19" column="5" selection-start-line="16" selection-start-column="61" selection-end-line="19" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/rpd/components/SinglePalatalStrapConnector.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="330">
+          <caret line="23" column="38" selection-start-line="23" selection-start-column="11" selection-end-line="23" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/rpd/components/CombinationAnteriorPosteriorPalatalStrapConnector.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="144">
+          <caret line="16" column="62" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="62" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/rpd/components/ModifiedPalatalPlateConnector.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="176">
+          <caret line="13" column="42" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="42" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/rpd/components/WroughtWireClasp.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="74" column="33" lean-forward="false" selection-start-line="74" selection-start-column="33" selection-end-line="74" selection-end-column="33" />
+        <state relative-caret-position="384">
+          <caret line="95" selection-start-line="95" selection-end-line="95" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/rpd/conceptions/ClaspMaterial.java">
+    <entry file="jar://E:/jdk1.8.0_131/src.zip!/javax/swing/ScrollPaneConstants.java" />
+    <entry file="file://$PROJECT_DIR$/LabelTool_backup0723.java" />
+    <entry file="jar://E:/jdk1.8.0_131/src.zip!/javax/swing/JTable.java" />
+    <entry file="jar://E:/jdk1.8.0_131/src.zip!/javax/swing/AbstractButton.java" />
+    <entry file="file://$PROJECT_DIR$/LabelTool_backup0723_2.java" />
+    <entry file="file://$PROJECT_DIR$/LabelTool_backup0720.java" />
+    <entry file="file://$PROJECT_DIR$/../DentalGUITool/src/GUI/LabelTool.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="7" column="0" lean-forward="false" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_131/src.zip!/java/awt/image/BufferedImage.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="7837">
-          <caret line="500" column="0" lean-forward="false" selection-start-line="500" selection-start-column="0" selection-end-line="500" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/rpd/components/LingualBarConnector.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="114">
-          <caret line="48" column="8" lean-forward="false" selection-start-line="48" selection-start-column="8" selection-end-line="48" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_131/src.zip!/java/util/regex/Matcher.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="9962">
-          <caret line="621" column="19" lean-forward="false" selection-start-line="621" selection-start-column="19" selection-end-line="621" selection-end-column="19" />
+        <state relative-caret-position="554">
+          <caret line="713" column="57" selection-start-line="713" selection-start-column="44" selection-end-line="713" selection-end-column="57" />
         </state>
       </provider>
     </entry>
     <entry file="jar://D:/lib/DentalEMRParser/DentalEMRParser.jar!/emrpaser/rule/ruleParserWithStats.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="823" column="36" lean-forward="false" selection-start-line="823" selection-start-column="36" selection-end-line="823" selection-end-column="36" />
-          <folding />
+        <state relative-caret-position="120">
+          <caret line="965" selection-start-line="965" selection-end-line="965" />
         </state>
       </provider>
     </entry>
-    <entry file="jar://D:/lib/apache-jena-3.2.0/lib/jena-core-3.2.0.jar!/org/apache/jena/ontology/OntModelSpec.class">
+    <entry file="file://$PROJECT_DIR$/src/GUI/ServerForPresent.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="29" column="13" lean-forward="false" selection-start-line="29" selection-start-column="13" selection-end-line="29" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://D:/lib/apache-jena-3.2.0/lib/jena-core-3.2.0.jar!/org/apache/jena/rdf/model/Bag.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="7" column="17" lean-forward="false" selection-start-line="7" selection-start-column="17" selection-end-line="7" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://D:/lib/apache-jena-3.2.0/lib/jena-core-3.2.0.jar!/org/apache/jena/rdf/model/AnonId.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="782">
-          <caret line="65" column="28" lean-forward="false" selection-start-line="65" selection-start-column="28" selection-end-line="65" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://D:/lib/apache-jena-3.2.0/lib/jena-core-3.2.0.jar!/org/apache/jena/ontology/OntModel.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="22" column="17" lean-forward="false" selection-start-line="22" selection-start-column="17" selection-end-line="22" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://D:/lib/apache-jena-3.2.0/lib/jena-core-3.2.0.jar!/org/apache/jena/rdf/model/ModelFactory.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="578">
-          <caret line="107" column="22" lean-forward="true" selection-start-line="107" selection-start-column="22" selection-end-line="107" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/misc/PrintImage.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="33" column="34" lean-forward="false" selection-start-line="33" selection-start-column="34" selection-end-line="33" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/misc/PrintTestFile.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="493">
-          <caret line="29" column="83" lean-forward="false" selection-start-line="29" selection-start-column="83" selection-end-line="29" selection-end-column="83" />
+        <state relative-caret-position="1054">
+          <caret line="72" column="44" selection-start-line="72" selection-start-column="44" selection-end-line="72" selection-end-column="44" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/rpd/oral/Instantialize.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-8">
-          <caret line="97" column="24" lean-forward="false" selection-start-line="97" selection-start-column="24" selection-end-line="97" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/rpd/components/CombinationClasp.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="576">
-          <caret line="57" column="33" lean-forward="false" selection-start-line="57" selection-start-column="33" selection-end-line="57" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/rpd/components/CombinedClasp.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-238">
-          <caret line="70" column="4" lean-forward="false" selection-start-line="70" selection-start-column="4" selection-end-line="70" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://E:/Program Files/Java/jdk1.8.0_121/src.zip!/java/util/ArrayList.java" />
-    <entry file="file://$PROJECT_DIR$/src/rpd/components/IncisalRest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="349">
-          <caret line="50" column="33" lean-forward="false" selection-start-line="50" selection-start-column="33" selection-end-line="50" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_131/src.zip!/java/util/Collections.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-263">
-          <caret line="79" column="13" lean-forward="false" selection-start-line="79" selection-start-column="13" selection-end-line="79" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/rpd/rules/EdentulousTypeRule.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="918">
-          <caret line="72" column="61" lean-forward="false" selection-start-line="72" selection-start-column="61" selection-end-line="72" selection-end-column="61" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/rpd/oral/EdentulousSpace.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="17" column="23" lean-forward="false" selection-start-line="17" selection-start-column="23" selection-end-line="17" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/rpd/oral/Mouth.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="23" column="36" lean-forward="false" selection-start-line="23" selection-start-column="36" selection-end-line="23" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_131/src.zip!/java/util/ArrayList.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="9163">
-          <caret line="576" column="0" lean-forward="false" selection-start-line="576" selection-start-column="0" selection-end-line="576" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/rpd/components/CanineAkerClasp.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="12" column="55" lean-forward="false" selection-start-line="12" selection-start-column="55" selection-end-line="12" selection-end-column="55" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/rpd/components/Clasp.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="473">
-          <caret line="60" column="4" lean-forward="false" selection-start-line="60" selection-start-column="4" selection-end-line="60" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/rpd/components/Rest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="575">
-          <caret line="58" column="0" lean-forward="false" selection-start-line="58" selection-start-column="0" selection-end-line="58" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/rpd/rules/ClaspRule.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3570">
-          <caret line="216" column="45" lean-forward="false" selection-start-line="216" selection-start-column="45" selection-end-line="216" selection-end-column="45" />
+        <state relative-caret-position="4437">
+          <caret line="279" selection-start-line="279" selection-end-line="279" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/rpd/rules/MajorConnectorRule.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1020">
+          <caret line="83" column="47" selection-start-line="83" selection-start-column="47" selection-end-line="83" selection-end-column="47" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/rpd/components/PalatalPlateConnector.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="833">
+          <caret line="54" column="37" selection-start-line="54" selection-start-column="37" selection-end-line="54" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/GUI/LabelTool_forPresent.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="181">
+          <caret line="27" column="13" selection-start-line="27" selection-start-column="13" selection-end-line="27" selection-end-column="13" />
           <folding>
             <element signature="imports" expanded="true" />
-            <marker date="1503632595676" expanded="false" signature="20219:20236" ph="&lt;~&gt;" />
-            <marker date="1503632595676" expanded="false" signature="20420:20448" ph="&lt;~&gt;" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/rpd/components/FullPalatalPlateConnector.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="408">
-          <caret line="61" column="53" lean-forward="false" selection-start-line="61" selection-start-column="53" selection-end-line="61" selection-end-column="53" />
+        <state relative-caret-position="435">
+          <caret line="43" column="34" selection-start-line="43" selection-start-column="17" selection-end-line="43" selection-end-column="34" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/rpd/components/PalatalPlateConnector.java">
+    <entry file="file://$PROJECT_DIR$/src/misc/ToothPosition.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="364">
-          <caret line="101" column="88" lean-forward="false" selection-start-line="101" selection-start-column="88" selection-end-line="101" selection-end-column="88" />
+        <state relative-caret-position="333">
+          <caret line="454" column="1" lean-forward="true" selection-start-line="454" selection-start-column="1" selection-end-line="454" selection-end-column="1" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/rpd/components/RotationAxis.java">
+    <entry file="file://$PROJECT_DIR$/src/misc/ToothMap.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="85" column="67" lean-forward="false" selection-start-line="85" selection-start-column="67" selection-end-line="85" selection-end-column="67" />
-          <folding />
+        <state relative-caret-position="350">
+          <caret line="108" column="1" lean-forward="true" selection-start-line="108" selection-start-column="1" selection-end-line="108" selection-end-column="1" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/rpd/oral/Maxillary.java">
+    <entry file="file://$PROJECT_DIR$/src/misc/PrintTestFile.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4760">
-          <caret line="299" column="35" lean-forward="false" selection-start-line="299" selection-start-column="35" selection-end-line="299" selection-end-column="35" />
+        <state relative-caret-position="350">
+          <caret line="83" column="1" lean-forward="true" selection-start-line="83" selection-start-column="1" selection-end-line="83" selection-end-column="1" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/rpd/oral/Mandibular.java">
+    <entry file="file://$PROJECT_DIR$/src/misc/PrintImage.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="5491">
-          <caret line="343" column="34" lean-forward="false" selection-start-line="343" selection-start-column="34" selection-end-line="343" selection-end-column="34" />
+        <state relative-caret-position="68">
+          <caret line="37" column="36" selection-start-line="37" selection-start-column="36" selection-end-line="37" selection-end-column="36" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/rpd/components/CombinationAnteriorPosteriorPalatalStrapConnector.java">
+    <entry file="file://$PROJECT_DIR$/src/ontologies/BooleanPropertyValue.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="16" column="13" lean-forward="false" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="13" />
+        <state relative-caret-position="527">
+          <caret line="35" column="1" selection-start-line="35" selection-start-column="1" selection-end-line="35" selection-end-column="1" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/rpd/components/ModifiedPalatalPlateConnector.java">
+    <entry file="file://$PROJECT_DIR$/src/ontologies/DentalClass.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1598">
-          <caret line="101" column="88" lean-forward="false" selection-start-line="101" selection-start-column="88" selection-end-line="101" selection-end-column="88" />
-          <folding />
+        <state relative-caret-position="1258">
+          <caret line="74" column="1" selection-start-line="74" selection-start-column="1" selection-end-line="74" selection-end-column="1" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/DentalGUITool.iml">
+    <entry file="file://$PROJECT_DIR$/src/ontologies/DentalProperty.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="359">
-          <caret line="48" column="16" lean-forward="false" selection-start-line="48" selection-start-column="16" selection-end-line="48" selection-end-column="16" />
+        <state relative-caret-position="1700">
+          <caret line="100" column="1" selection-start-line="100" selection-start-column="1" selection-end-line="100" selection-end-column="1" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/rpd/rules/ScoreRule.java">
+    <entry file="file://$PROJECT_DIR$/src/ontologies/Descriptions.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="207" column="16" lean-forward="false" selection-start-line="207" selection-start-column="16" selection-end-line="207" selection-end-column="16" />
-          <folding>
-            <element signature="e#11329#11346#0" expanded="true" />
-            <element signature="e#11986#12014#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="4794">
+          <caret line="302" column="1" selection-start-line="302" selection-start-column="1" selection-end-line="302" selection-end-column="1" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/rpd/components/LingualPlateConnector.java">
+    <entry file="file://$PROJECT_DIR$/src/ontologies/DoublePropertyValue.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1020">
-          <caret line="66" column="52" lean-forward="false" selection-start-line="66" selection-start-column="52" selection-end-line="66" selection-end-column="52" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/rpd/components/LingualRest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="540">
-          <caret line="58" column="0" lean-forward="false" selection-start-line="58" selection-start-column="0" selection-end-line="58" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/rpd/rules/IndirectRetainerRule.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1938">
-          <caret line="132" column="87" lean-forward="false" selection-start-line="132" selection-start-column="87" selection-end-line="132" selection-end-column="87" />
-          <folding />
+        <state relative-caret-position="493">
+          <caret line="33" column="1" selection-start-line="33" selection-start-column="1" selection-end-line="33" selection-end-column="1" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/rpd/rules/ChooseAbutmentRule.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1445">
-          <caret line="112" column="0" lean-forward="false" selection-start-line="112" selection-start-column="0" selection-end-line="112" selection-end-column="0" />
-          <folding />
+        <state relative-caret-position="9061">
+          <caret line="578" column="1" selection-start-line="578" selection-start-column="1" selection-end-line="578" selection-end-column="1" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/rpd/SearchRPDPlan.java">
+    <entry file="file://$PROJECT_DIR$/src/rpd/conceptions/ClassificationOfSurveyLineOnBuccalSurface.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4216">
-          <caret line="261" column="0" lean-forward="false" selection-start-line="261" selection-start-column="0" selection-end-line="261" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state relative-caret-position="85">
+          <caret line="5" column="12" selection-start-line="5" selection-start-column="12" selection-end-line="5" selection-end-column="12" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/rpd/components/MajorConnector.java">
+    <entry file="file://$PROJECT_DIR$/src/rpd/components/CombinationClasp.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="13" column="59" lean-forward="false" selection-start-line="13" selection-start-column="59" selection-end-line="13" selection-end-column="59" />
+        <state relative-caret-position="1343">
+          <caret line="88" column="1" selection-start-line="88" selection-start-column="1" selection-end-line="88" selection-end-column="1" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/rpd/RPDPlan.java">
+    <entry file="file://$PROJECT_DIR$/src/GUI/CString.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="507">
-          <caret line="134" column="26" lean-forward="false" selection-start-line="134" selection-start-column="26" selection-end-line="134" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/rpd/rules/MajorConnectorRule.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1139">
-          <caret line="90" column="27" lean-forward="false" selection-start-line="90" selection-start-column="27" selection-end-line="90" selection-end-column="27" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/META-INF/MANIFEST.MF">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="17" column="0" lean-forward="false" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
+        <state relative-caret-position="153">
+          <caret line="9" column="67" selection-start-line="9" selection-start-column="67" selection-end-line="9" selection-end-column="67" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/GUI/LabelTool.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="109" column="38" lean-forward="false" selection-start-line="109" selection-start-column="38" selection-end-line="109" selection-end-column="38" />
+        <state relative-caret-position="377">
+          <caret line="2358" column="68" lean-forward="true" selection-start-line="2358" selection-start-column="68" selection-end-line="2358" selection-end-column="68" />
           <folding>
-            <marker date="1506502214555" expanded="true" signature="17873:18085" ph="//..." />
+            <element signature="imports" expanded="true" />
+            <element signature="e#184938#184946#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/rpd/components/RPAClasp.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="665">
-          <caret line="66" column="26" lean-forward="false" selection-start-line="66" selection-start-column="26" selection-end-line="66" selection-end-column="26" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1902,7 +879,7 @@
             <option name="proportions">
               <list>
                 <option value="0.2" />
-                <option value="0.72557473" />
+                <option value="0.5" />
               </list>
             </option>
           </splitter-proportions>
@@ -1955,21 +932,9 @@
           </splitter-proportions>
         </settings>
       </state>
-      <state key="ProjectJDKs.UI">
-        <settings>
-          <last-edited>1.8</last-edited>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
       <state key="ProjectLibrariesConfigurable.UI">
         <settings>
-          <last-edited>lib</last-edited>
+          <last-edited>picture</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>

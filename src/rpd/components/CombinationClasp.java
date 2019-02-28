@@ -67,6 +67,22 @@ public class CombinationClasp extends Clasp {
 		return s.toString();
 	}
 
+	public String[] addComponents() {
+
+		String s[] = new String[3];
+		//s.append(super.toString());
+		s[0] = "结合（Combination）卡环";
+		s[1] = "颊侧铸造材料，舌侧弯制材料";
+		if (this.getTipDirection().equals(Position.Mesial))
+			s[2] = "卡环臂尖朝向近中";
+		else if (this.getTipDirection().equals(Position.Distal))
+			s[2] = "卡环臂尖朝向远中";
+		else {
+		}
+		return s;
+	}
+
+
 	public String toString() {
 		return this.print();
 	}

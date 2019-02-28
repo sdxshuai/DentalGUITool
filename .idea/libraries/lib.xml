@@ -1,9 +1,19 @@
 <component name="libraryTable">
   <library name="lib">
-    <CLASSES />
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/jena-base-3.0.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/xercesImpl-2.11.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/jena-shaded-guava-3.0.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/jgoodies-common-1.7.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/log4j-1.2.17.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/slf4j-log4j12-1.7.12.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/jena-iri-3.0.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/xml-apis-1.4.01.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/jgoodies-forms-1.7.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/jena-core-3.0.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/slf4j-api-1.7.12.jar!/" />
+    </CLASSES>
     <JAVADOC />
-    <SOURCES>
-      <root url="file://D:/lib/apache-jena-3.2.0/src-examples" />
-    </SOURCES>
+    <SOURCES />
   </library>
 </component>

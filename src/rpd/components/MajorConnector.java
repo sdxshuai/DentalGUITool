@@ -38,9 +38,16 @@ public abstract class MajorConnector implements Component {
 	public void addLingualConfrontation(Tooth tooth) {
 		this.lingual_confrontation.add(tooth);
 	}
+	public void removeLingualConfrontation(Tooth tooth) {
+		this.lingual_confrontation.remove(tooth);
+	}
 
 	public void addLingualConfrontation(ArrayList<Tooth> tooth_list) {
 		this.lingual_confrontation.addAll(tooth_list);
+	}
+
+	public void removeLingualConfrontation(ArrayList<Tooth> tooth_list) {
+		this.lingual_confrontation.removeAll(tooth_list);
 	}
 
 	public HashSet<Tooth> getLingualConfrontation() {

@@ -59,6 +59,21 @@ public class OcclusalRest extends Rest {
 		return s.toString();
 	}
 
+	public String[] addComponents() {
+
+		String s[] = new String[3];
+		//s.append(super.toString());
+		if (mesial_or_distal.equals(Position.Mesial))
+			s[2] = "近中";
+		else if (mesial_or_distal.equals(Position.Distal))
+			s[2] = "远中";
+		else {
+		}
+		s[0] = "合支托";
+		s[1] = "";
+		return s;
+	}
+
 	public String toString() {
 		return this.print();
 	}

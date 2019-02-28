@@ -86,6 +86,22 @@ public class HalfHalfClasp extends Clasp {
 		return s.toString();
 	}
 
+	public String[] addComponents() {
+
+		String s[] = new String[2];
+		//s[0] = (super.toString());
+		s[0] = "对半（Half and Half）卡环";
+
+		if (this.getMaterial().equals(ClaspMaterial.WW))
+			s[1] = "弯制材料";
+		else if (this.getMaterial().equals(ClaspMaterial.Cast))
+			s[1] = "铸造材料";
+		else {
+		}
+
+		return s;
+	}
+
 	public String toString() {
 		return this.print();
 	}

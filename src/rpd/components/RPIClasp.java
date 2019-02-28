@@ -38,6 +38,14 @@ public class RPIClasp extends Clasp {
 		return s.toString();
 	}
 
+	public String[] addComponents() {
+
+		String s[] = new String[2];
+		s[0] = ("RPI卡环");
+		s[1] = ("卡环臂尖朝向远中");
+		return s;
+	}
+
 	public String toString() {
 		return this.print();
 	}

@@ -83,6 +83,22 @@ public class ReverseHookClasp extends Clasp {
 		return s.toString();
 	}
 
+	public String[] addComponents() {
+
+		String s[] = new String[2];
+		//s.append(super.toString());
+		s[0] = "倒钩（ReverseHook）卡环";
+
+		if (this.getTipDirection().equals(Position.Mesial))
+			s[1] = "卡环臂尖朝向近中";
+		else if (this.getTipDirection().equals(Position.Distal))
+			s[1] = "卡环臂尖朝向远中";
+		else {
+		}
+
+		return s;
+	}
+
 	public String toString() {
 		return this.print();
 	}
