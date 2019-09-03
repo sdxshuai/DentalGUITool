@@ -115,6 +115,29 @@ public class Maxillary {
 		return edentulous_spaces;
 	}
 
+	public KennedyType getKennedyType() {
+		if (this.isLeftDislocate() && this.isRightDislocate()) {
+			return KennedyType.KENNEDY_TYPE_I;
+		} else if ((this.isLeftDislocate() && !this.isRightDislocate())
+				|| (!this.isLeftDislocate() && this.isRightDislocate())) {
+			return KennedyType.KENNEDY_TYPE_II;
+		} else {
+			List<EdentulousSpace> edentulousSpaces = this.getEdentulousSpaces();
+			if (edentulousSpaces.size() == 1) {
+				EdentulousSpace edentulousSpace = edentulousSpaces.get(0);
+				Tooth left_most = edentulousSpace.getLeftMost();
+				Tooth right_most = edentulousSpace.getRightMost();
+				if (left_most.getZone() != right_most.getZone()) {
+					return KennedyType.KENNEDY_TYPE_IV;
+				} else {
+					return KennedyType.KENNEDY_TYPE_III;
+				}
+			} else {
+				return KennedyType.KENNEDY_TYPE_III;
+			}
+		}
+	}
+
 	public Tooth getTooth(int zone, int num) {
 		if (zone == 1)
 			return this.zone1.get(num);
@@ -145,6 +168,37 @@ public class Maxillary {
 			}
 		}
 		return res;
+	}
+
+	public List<Tooth> getMissingTeeth() {
+		List<Tooth> res = new ArrayList<Tooth>();
+		for (Tooth tooth : zone1) {
+			if (tooth != null && tooth.getNum() != 8) {
+				if (tooth.isMissing()) res.add(tooth);
+			}
+		}
+		for (Tooth tooth : zone2) {
+			if (tooth != null && tooth.getNum() != 8) {
+				if (tooth.isMissing()) res.add(tooth);
+			}
+		}
+		return res;
+	}
+
+	public boolean isLeftDislocate() {
+		boolean flag = false;
+		if (this.getTooth(1, 7).isMissing() && this.getTooth(1, 8).isMissing()) {
+			flag = true;
+		}
+		return flag;
+	}
+
+	public boolean isRightDislocate() {
+		boolean flag = false;
+		if (this.getTooth(2, 7).isMissing() && this.getTooth(2, 8).isMissing()) {
+			flag = true;
+		}
+		return flag;
 	}
 
 	private void init(OntModel dental_ont) throws RuleException {
@@ -278,27 +332,25 @@ public class Maxillary {
 		}
 	}
 
-	public List<Tooth> getMissingTeeth() {
-		List<Tooth> res = new ArrayList<Tooth>();
-		for (Tooth tooth : zone1) {
-			if (tooth != null && tooth.getNum() != 8) {
-				if (tooth.isMissing()) res.add(tooth);
-			}
-		}
-		for (Tooth tooth : zone2) {
-			if (tooth != null && tooth.getNum() != 8) {
-				if (tooth.isMissing()) res.add(tooth);
-			}
-		}
-		return res;
-	}
-
 	public boolean isMissingFrontTeeth() {
 		boolean flag = false;
 		List<Tooth> missingTeeth = this.getMissingTeeth();
 		for (Tooth tooth:missingTeeth) {
 			if (tooth.getNum() <= 3) {
 				flag = true;
+				break;
+			}
+		}
+		return flag;
+	}
+
+	public boolean isOneSideMissing() {
+		boolean flag = true;
+		List<Tooth> missingTeeth = this.getMissingTeeth();
+		int curMissingZone = missingTeeth.get(0).getZone();
+		for (Tooth tooth:missingTeeth) {
+			if (tooth.getZone() != curMissingZone) {
+				flag = false;
 				break;
 			}
 		}

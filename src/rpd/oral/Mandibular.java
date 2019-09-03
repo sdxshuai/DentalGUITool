@@ -157,6 +157,29 @@ public class Mandibular {
 		return edentulous_spaces;
 	}
 
+	public KennedyType getKennedyType() {
+		if (this.isLeftDislocate() && this.isRightDislocate()) {
+			return KennedyType.KENNEDY_TYPE_I;
+		} else if ((this.isLeftDislocate() && !this.isRightDislocate())
+				|| (!this.isLeftDislocate() && this.isRightDislocate())) {
+			return KennedyType.KENNEDY_TYPE_II;
+		} else {
+			List<EdentulousSpace> edentulousSpaces = this.getEdentulousSpaces();
+			if (edentulousSpaces.size() == 1) {
+				EdentulousSpace edentulousSpace = edentulousSpaces.get(0);
+				Tooth left_most = edentulousSpace.getLeftMost();
+				Tooth right_most = edentulousSpace.getRightMost();
+				if (left_most.getZone() != right_most.getZone()) {
+					return KennedyType.KENNEDY_TYPE_IV;
+				} else {
+					return KennedyType.KENNEDY_TYPE_III;
+				}
+			} else {
+				return KennedyType.KENNEDY_TYPE_III;
+			}
+		}
+	}
+
 	public Tooth getTooth(int zone, int num) {
 		if (zone == 3)
 			return this.zone3.get(num);
@@ -202,6 +225,22 @@ public class Mandibular {
 			}
 		}
 		return res;
+	}
+
+	public boolean isLeftDislocate() {
+		boolean flag = false;
+		if (this.getTooth(4, 7).isMissing() && this.getTooth(4, 8).isMissing()) {
+			flag = true;
+		}
+		return flag;
+	}
+
+	public boolean isRightDislocate() {
+		boolean flag = false;
+		if (this.getTooth(3, 7).isMissing() && this.getTooth(3, 8).isMissing()) {
+			flag = true;
+		}
+		return flag;
 	}
 
 	private void init(OntModel dental_ont) throws RuleException {
@@ -343,6 +382,19 @@ public class Mandibular {
 		for (Tooth tooth:missingTeeth) {
 			if (tooth.getNum() <= 3) {
 				flag = true;
+				break;
+			}
+		}
+		return flag;
+	}
+
+	public boolean isOneSideMissing() {
+		boolean flag = true;
+		List<Tooth> missingTeeth = this.getMissingTeeth();
+		int curMissingZone = missingTeeth.get(0).getZone();
+		for (Tooth tooth:missingTeeth) {
+			if (tooth.getZone() != curMissingZone) {
+				flag = false;
 				break;
 			}
 		}

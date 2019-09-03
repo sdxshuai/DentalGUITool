@@ -5,97 +5,17 @@
       <artifact name="DentalGUITool:jar" />
     </artifacts-to-build>
   </component>
-  <component name="BookmarkManager">
-    <bookmark url="file://$PROJECT_DIR$/src/GUI/LabelTool.java" line="1194" />
-    <bookmark url="file://$PROJECT_DIR$/src/GUI/LabelTool.java" />
-    <bookmark url="file://$PROJECT_DIR$/src/GUI/LabelTool.java" line="714" />
-    <bookmark url="file://$PROJECT_DIR$/src/GUI/ServerForPresent.java" />
-  </component>
   <component name="ChangeListManager">
-    <list default="true" id="ee2f1d7f-9d4a-4891-8cec-d807570523e9" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/src/GUI/LabelTool_forPresent.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/GUI/ServerForPresent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/artifacts/DentalGUITool_jar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/artifacts/DentalGUITool_jar.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/codeStyleSettings.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/kotlinc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/lib.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/lib.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+    <list default="true" id="ee2f1d7f-9d4a-4891-8cec-d807570523e9" name="Default" comment="fix bug about adding 舌支托">
+      <change afterPath="$PROJECT_DIR$/src/misc/PrintImageList.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DentalGUITool.iml" beforeDir="false" afterPath="$PROJECT_DIR$/DentalGUITool.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$10.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$10.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$11.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$11.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$12.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$12.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$13.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$13.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$14.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$14.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$15.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$15.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$16.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$16.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$17.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$17.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$18.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$18.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$19.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$19.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$20.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$20.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$21.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$21.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$22.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$22.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$23.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$23.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$24.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$24.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$4.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$5.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$6.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$6.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$7.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$7.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$8.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$8.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$9.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool$9.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/DentalGUITool/GUI/LabelTool.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/DentalGUITool/rpd/RPDPlan.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/DentalGUITool/rpd/RPDPlan.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/DentalGUITool/rpd/components/AkerClasp.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/DentalGUITool/rpd/components/AkerClasp.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/DentalGUITool/rpd/components/ClaspArm.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/DentalGUITool/rpd/components/ClaspArm.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/DentalGUITool/rpd/components/Component.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/DentalGUITool/rpd/components/Component.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/DentalGUITool/rpd/components/GuidingPlate.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/DentalGUITool/rpd/components/GuidingPlate.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/DentalGUITool/rpd/components/LingualRest.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/DentalGUITool/rpd/components/LingualRest.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/DentalGUITool/rpd/components/OcclusalRest.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/DentalGUITool/rpd/components/OcclusalRest.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/DentalGUITool/rpd/components/Plating.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/DentalGUITool/rpd/components/Plating.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/DentalGUITool/rpd/components/RingClasp.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/DentalGUITool/rpd/components/RingClasp.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/catalog-v001.xml" beforeDir="false" afterPath="$PROJECT_DIR$/res/catalog-v001.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GUI/LabelTool.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/LabelTool.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/META-INF/MANIFEST.MF" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/rpd/RPDPlan.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/rpd/RPDPlan.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/rpd/components/AkerClasp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/rpd/components/AkerClasp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/rpd/components/BackActionClasp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/rpd/components/BackActionClasp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/rpd/components/CanineAkerClasp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/rpd/components/CanineAkerClasp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/rpd/components/CanineClasp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/rpd/components/CanineClasp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/rpd/components/ClaspArm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/rpd/components/ClaspArm.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/rpd/components/CombinationAnteriorPosteriorPalatalStrapConnector.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/rpd/components/CombinationAnteriorPosteriorPalatalStrapConnector.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/rpd/components/CombinationClasp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/rpd/components/CombinationClasp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/rpd/components/CombinedClasp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/rpd/components/CombinedClasp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/rpd/components/Component.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/rpd/components/Component.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/rpd/components/ContinuousClasp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/rpd/components/ContinuousClasp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/rpd/components/DentureBase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/rpd/components/DentureBase.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/rpd/components/EmbrasureClasp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/rpd/components/EmbrasureClasp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/rpd/components/ExtensionClasp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/rpd/components/ExtensionClasp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/rpd/components/FullPalatalPlateConnector.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/rpd/components/FullPalatalPlateConnector.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/rpd/components/GuidingPlate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/rpd/components/GuidingPlate.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/rpd/components/HalfHalfClasp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/rpd/components/HalfHalfClasp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/rpd/components/IncisalRest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/rpd/components/IncisalRest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/rpd/components/LingualBarConnector.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/rpd/components/LingualBarConnector.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/rpd/components/LingualPlateConnector.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/rpd/components/LingualPlateConnector.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/rpd/components/LingualRest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/rpd/components/LingualRest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/rpd/components/MajorConnector.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/rpd/components/MajorConnector.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/rpd/components/ModifiedPalatalPlateConnector.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/rpd/components/ModifiedPalatalPlateConnector.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/rpd/components/OcclusalRest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/rpd/components/OcclusalRest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/rpd/components/PalatalPlateConnector.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/rpd/components/PalatalPlateConnector.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/rpd/components/Plating.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/rpd/components/Plating.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/rpd/components/RPAClasp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/rpd/components/RPAClasp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/rpd/components/RPIClasp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/rpd/components/RPIClasp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/rpd/components/ReverseBackActionClasp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/rpd/components/ReverseBackActionClasp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/rpd/components/ReverseHookClasp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/rpd/components/ReverseHookClasp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/rpd/components/RingClasp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/rpd/components/RingClasp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/rpd/components/SinglePalatalStrapConnector.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/rpd/components/SinglePalatalStrapConnector.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/rpd/components/WroughtWireClasp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/rpd/components/WroughtWireClasp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/DentalGUITool/rpd/oral/Mandibular.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/DentalGUITool/rpd/oral/Mandibular.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/DentalGUITool/rpd/oral/Maxillary.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/DentalGUITool/rpd/oral/Maxillary.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/rpd/oral/Mandibular.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/rpd/oral/Mandibular.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/rpd/oral/Maxillary.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/rpd/oral/Maxillary.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/rpd/rules/ClaspRule.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/rpd/rules/ClaspRule.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/rpd/rules/MajorConnectorRule.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/rpd/rules/MajorConnectorRule.java" afterDir="false" />
     </list>
-    <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -111,104 +31,6 @@
   <component name="CoverageViewManager">
     <option name="myElementSize" value="241" />
   </component>
-  <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/GUI/LabelTool.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="377">
-              <caret line="2358" column="68" lean-forward="true" selection-start-line="2358" selection-start-column="68" selection-end-line="2358" selection-end-column="68" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#184938#184946#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/GUI/CString.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="153">
-              <caret line="9" column="67" selection-start-line="9" selection-start-column="67" selection-end-line="9" selection-end-column="67" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/ontologies/BooleanPropertyValue.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="527">
-              <caret line="35" column="1" selection-start-line="35" selection-start-column="1" selection-end-line="35" selection-end-column="1" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/ontologies/DentalClass.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1258">
-              <caret line="74" column="1" selection-start-line="74" selection-start-column="1" selection-end-line="74" selection-end-column="1" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/ontologies/DentalProperty.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1700">
-              <caret line="100" column="1" selection-start-line="100" selection-start-column="1" selection-end-line="100" selection-end-column="1" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/ontologies/Descriptions.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="4794">
-              <caret line="302" column="1" selection-start-line="302" selection-start-column="1" selection-end-line="302" selection-end-column="1" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/ontologies/DoublePropertyValue.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="493">
-              <caret line="33" column="1" selection-start-line="33" selection-start-column="1" selection-end-line="33" selection-end-column="1" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/rpd/rules/ChooseAbutmentRule.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="9061">
-              <caret line="578" column="1" selection-start-line="578" selection-start-column="1" selection-end-line="578" selection-end-column="1" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/rpd/conceptions/ClassificationOfSurveyLineOnBuccalSurface.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="85">
-              <caret line="5" column="12" selection-start-line="5" selection-start-column="12" selection-end-line="5" selection-end-column="12" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/rpd/components/CombinationClasp.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1343">
-              <caret line="88" column="1" selection-start-line="88" selection-start-column="1" selection-end-line="88" selection-end-column="1" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
-  </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
@@ -216,161 +38,29 @@
       </list>
     </option>
   </component>
-  <component name="FindInProjectRecents">
-    <findStrings>
-      <find>修改</find>
-      <find>mandibular_width</find>
-      <find>mandibular</find>
-      <find>舌侧对抗</find>
-      <find>PalatalPlateConnector</find>
-      <find>Mandibular</find>
-      <find>modifyLingualPlateConnector</find>
-      <find>保存</find>
-      <find>mandibular_plan_table.getColumn</find>
-      <find>rowEditor2)</find>
-      <find>rowEditor4)</find>
-      <find>rowEditor1.setEditorAt</find>
-      <find>rowEditor5.setEditorAt</find>
-      <find>rowEditor2.get(plan_count))</find>
-      <find>GridLayout</find>
-      <find>model.get(plan_count)</find>
-      <find>modelDegault</find>
-      <find>Grid</find>
-      <find>mandibular_plan_table.get(plan_count)</find>
-      <find>.get(plan_count)</find>
-      <find>xml</find>
-      <find>RpdDesignLib</find>
-      <find>descri</find>
-      <find>modifyOcclusalRest</find>
-      <find>远中</find>
-      <find>卡环臂尖朝向近中</find>
-      <find>rowEditor5</find>
-      <find>保存当前上颌</find>
-      <find>合支托</find>
-      <find>新增</find>
-    </findStrings>
-    <replaceStrings>
-      <replace>mandibular_plan_table.get(plan_count).getColumn</replace>
-      <replace>rowEditor2.get(plan_count))</replace>
-      <replace>rowEditor4.get(plan_count))</replace>
-      <replace>rowEditor1.get(plan_count).setEditorAt</replace>
-      <replace>rowEditor5.get(plan_count).setEditorAt</replace>
-      <replace>modelDegault</replace>
-      <replace>model.get(plan_count)</replace>
-      <replace>mandibularPlanTable</replace>
-      <replace />
-    </replaceStrings>
-  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="IdeDocumentHistory">
-    <option name="CHANGED_PATHS">
-      <list>
-        <option value="$PROJECT_DIR$/src/rpd/RPDPlan.java" />
-        <option value="$PROJECT_DIR$/src/rpd/components/AkerClasp.java" />
-        <option value="$PROJECT_DIR$/src/rpd/components/CombinationClasp.java" />
-        <option value="$PROJECT_DIR$/src/rpd/components/OcclusalRest.java" />
-        <option value="$PROJECT_DIR$/src/rpd/components/LingualBarConnector.java" />
-        <option value="$PROJECT_DIR$/src/rpd/components/MajorConnector.java" />
-        <option value="$PROJECT_DIR$/src/rpd/components/LingualPlateConnector.java" />
-        <option value="$PROJECT_DIR$/src/rpd/components/SinglePalatalStrapConnector.java" />
-        <option value="$PROJECT_DIR$/src/rpd/components/CombinationAnteriorPosteriorPalatalStrapConnector.java" />
-        <option value="$PROJECT_DIR$/src/rpd/components/PalatalPlateConnector.java" />
-        <option value="$PROJECT_DIR$/src/rpd/components/ModifiedPalatalPlateConnector.java" />
-        <option value="$PROJECT_DIR$/src/rpd/components/WroughtWireClasp.java" />
-        <option value="$PROJECT_DIR$/LabelTool_backup0720.java" />
-        <option value="$PROJECT_DIR$/src/ShowResults.java" />
-        <option value="$PROJECT_DIR$/src/ResultsForShow.java" />
-        <option value="$PROJECT_DIR$/src/GUI/ResultsForShow.java" />
-        <option value="$PROJECT_DIR$/src/GUI/LabelTool_bak.java" />
-        <option value="$PROJECT_DIR$/src/GUI/ServerForPresent.java" />
-        <option value="$PROJECT_DIR$/src/rpd/components/FullPalatalPlateConnector.java" />
-        <option value="$PROJECT_DIR$/src/GUI/LabelTool_forPresent.java" />
-        <option value="$PROJECT_DIR$/src/GUI/CString.java" />
-        <option value="$PROJECT_DIR$/src/GUI/LabelTool.java" />
-      </list>
-    </option>
-  </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-8" />
-    <option name="y" value="-8" />
-    <option name="width" value="1924" />
-    <option name="height" value="1056" />
-  </component>
-  <component name="ProjectView">
-    <navigator proportions="" version="1">
-      <foldersAlwaysOnTop value="true" />
-    </navigator>
-    <panes>
-      <pane id="Scope" />
-      <pane id="PackagesPane" />
-      <pane id="ProjectPane">
-        <subPane>
-          <expand>
-            <path>
-              <item name="DentalGUITool_zhangben" type="b2602c69:ProjectViewProjectNode" />
-              <item name="DentalGUITool_zhangben" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="DentalGUITool_zhangben" type="b2602c69:ProjectViewProjectNode" />
-              <item name="DentalGUITool_zhangben" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="DentalGUITool_zhangben" type="b2602c69:ProjectViewProjectNode" />
-              <item name="DentalGUITool_zhangben" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="GUI" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="DentalGUITool_zhangben" type="b2602c69:ProjectViewProjectNode" />
-              <item name="DentalGUITool_zhangben" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="misc" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="DentalGUITool_zhangben" type="b2602c69:ProjectViewProjectNode" />
-              <item name="DentalGUITool_zhangben" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="rpd" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="DentalGUITool_zhangben" type="b2602c69:ProjectViewProjectNode" />
-              <item name="DentalGUITool_zhangben" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="rpd" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="DentalGUITool_zhangben" type="b2602c69:ProjectViewProjectNode" />
-              <item name="DentalGUITool_zhangben" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="rpd" type="462c0819:PsiDirectoryNode" />
-              <item name="conceptions" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="DentalGUITool_zhangben" type="b2602c69:ProjectViewProjectNode" />
-              <item name="DentalGUITool_zhangben" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="rpd" type="462c0819:PsiDirectoryNode" />
-              <item name="oral" type="462c0819:PsiDirectoryNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
-    </panes>
+  <component name="ProjectId" id="1PML2mPIawA6wYupzBYEsod09sH" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
   </component>
   <component name="PropertiesComponent">
     <property name="GenerateAntBuildDialog.backupFiles" value="true" />
     <property name="GenerateAntBuildDialog.enableUiFormCompile" value="true" />
     <property name="GenerateAntBuildDialog.forceTargetJdk" value="true" />
     <property name="GenerateAntBuildDialog.outputFileNameProperty" value="dentalguitool" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1551334328190" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1553512228463" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../DentalGUITool" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="project.structure.last.edited" value="Artifacts" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
@@ -412,6 +102,20 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="PrintImageList" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="misc.PrintImageList" />
+      <module name="DentalGUITool" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="misc.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="ServerForPresent" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="GUI.ServerForPresent" />
       <module name="DentalGUITool" />
@@ -440,6 +144,7 @@
       </method>
     </configuration>
     <configuration default="true" type="TestNG">
+      <option name="TEST_OBJECT" value="CLASS" />
       <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
       <properties />
       <listeners />
@@ -451,10 +156,12 @@
       <item itemvalue="Application.LabelTool" />
       <item itemvalue="Application.LabelTool_forPresent" />
       <item itemvalue="Application.ServerForPresent" />
+      <item itemvalue="Application.PrintImageList" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="Application.LabelTool" />
+        <item itemvalue="Application.PrintImageList" />
         <item itemvalue="Application.ServerForPresent" />
         <item itemvalue="Application.LabelTool_forPresent" />
       </list>
@@ -502,52 +209,56 @@
       <workItem from="1543384203338" duration="8000" />
       <workItem from="1548312645828" duration="149000" />
       <workItem from="1548312956165" duration="2785000" />
-      <workItem from="1551330811458" duration="3437000" />
+      <workItem from="1551330811458" duration="4356000" />
+      <workItem from="1551591906025" duration="99000" />
+      <workItem from="1551592232073" duration="1297000" />
+      <workItem from="1551593576372" duration="640000" />
+      <workItem from="1553496327404" duration="8357000" />
+      <workItem from="1555559593725" duration="269000" />
+      <workItem from="1556006483019" duration="613000" />
+      <workItem from="1558518873466" duration="85000" />
+      <workItem from="1558519011670" duration="44000" />
+      <workItem from="1561020452806" duration="273000" />
+      <workItem from="1561020849304" duration="2607000" />
+      <workItem from="1561086810237" duration="1172000" />
+      <workItem from="1561345967580" duration="1851000" />
+      <workItem from="1565668671127" duration="91000" />
+      <workItem from="1565668833282" duration="1321000" />
+      <workItem from="1565678819347" duration="41000" />
+      <workItem from="1565678876993" duration="9000" />
+      <workItem from="1567492591051" duration="129000" />
+      <workItem from="1567492789719" duration="1186000" />
+      <workItem from="1567495489085" duration="4154000" />
     </task>
+    <task id="LOCAL-00001" summary="fix bug about adding 舌支托">
+      <created>1551334542146</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1551334542146</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
-  </component>
-  <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="46484000" />
-  </component>
-  <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
-    <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.74666667" visible="true" weight="0.23454158" />
-      <window_info id="Structure" order="1" sideWeight="0.25333333" side_tool="true" visible="true" weight="0.23454158" />
-      <window_info id="Image Layers" order="2" />
-      <window_info id="Designer" order="3" />
-      <window_info id="Capture Tool" order="4" />
-      <window_info id="Favorites" order="5" side_tool="true" />
-      <window_info id="UI Designer" order="6" />
-      <window_info anchor="bottom" id="Messages" order="0" weight="0.32850778" />
-      <window_info anchor="bottom" id="Message" order="1" />
-      <window_info anchor="bottom" id="Find" order="2" weight="0.33741647" />
-      <window_info anchor="bottom" id="Run" order="3" weight="0.30957684" />
-      <window_info active="true" anchor="bottom" id="Debug" order="4" sideWeight="0.49946696" visible="true" weight="0.33184856" />
-      <window_info anchor="bottom" id="Cvs" order="5" weight="0.25" />
-      <window_info anchor="bottom" id="Inspection" order="6" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="7" />
-      <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Terminal" order="9" weight="0.32922733" />
-      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.50053304" side_tool="true" weight="0.5295429" />
-      <window_info anchor="bottom" id="Version Control" order="11" />
-      <window_info anchor="bottom" id="Docker" order="12" show_stripe_button="false" />
-      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
-      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="right" id="Palette" order="3" />
-      <window_info anchor="right" id="Maven Projects" order="4" />
-      <window_info anchor="right" id="Palette&#9;" order="5" />
-      <window_info anchor="right" id="Capture Analysis" order="6" />
-      <window_info anchor="right" id="Theme Preview" order="7" />
-      <window_info anchor="right" id="Database" order="8" />
-      <window_info anchor="right" id="Coverage" order="9" side_tool="true" weight="0.32995737" />
-      <window_info anchor="right" id="Maven" order="10" />
-    </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="fix bug about adding 舌支托" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix bug about adding 舌支托" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -563,20 +274,22 @@
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/GUI/LabelTool.java</url>
           <line>715</line>
-          <properties />
           <option name="timeStamp" value="4" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/GUI/LabelTool_forPresent.java</url>
           <line>105</line>
-          <properties />
           <option name="timeStamp" value="16" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/GUI/LabelTool.java</url>
-          <line>1705</line>
-          <properties />
-          <option name="timeStamp" value="20" />
+          <url>file://$PROJECT_DIR$/src/misc/PrintImageList.java</url>
+          <line>155</line>
+          <option name="timeStamp" value="23" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/misc/PrintImageList.java</url>
+          <line>154</line>
+          <option name="timeStamp" value="27" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
@@ -595,279 +308,6 @@
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
     </expressions>
-  </component>
-  <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/rpd/oral/Maxillary.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="88">
-          <caret line="13" column="13" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/rpd/components/RPAClasp.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-540">
-          <caret line="22" column="19" selection-start-line="22" selection-start-column="11" selection-end-line="22" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/rpd/oral/EdentulousSpace.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1210">
-          <caret line="11" column="13" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/rpd/oral/Mandibular.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="176">
-          <caret line="18" column="26" selection-start-line="18" selection-start-column="26" selection-end-line="18" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://E:/jdk1.8.0_131/src.zip!/java/lang/Object.java" />
-    <entry file="jar://E:/jdk1.8.0_131/src.zip!/java/lang/Class.java" />
-    <entry file="jar://E:/jdk1.8.0_131/src.zip!/javax/swing/table/DefaultTableModel.java" />
-    <entry file="jar://E:/jdk1.8.0_131/src.zip!/java/util/List.java" />
-    <entry file="file://E:/Z_carry/LabelTool_20180702.java" />
-    <entry file="jar://E:/jdk1.8.0_131/src.zip!/javax/swing/table/TableColumnModel.java" />
-    <entry file="jar://E:/jdk1.8.0_131/src.zip!/javax/swing/DefaultCellEditor.java" />
-    <entry file="file://$PROJECT_DIR$/src/rpd/oral/Mouth.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="726">
-          <caret line="37" column="22" selection-start-line="37" selection-start-column="22" selection-end-line="37" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/rpd/oral/Tooth.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="88">
-          <caret line="27" column="11" selection-start-line="27" selection-start-column="11" selection-end-line="27" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://E:/jdk1.8.0_131/src.zip!/java/util/HashSet.java" />
-    <entry file="file://$PROJECT_DIR$/src/rpd/components/MajorConnector.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="370">
-          <caret line="48" column="59" selection-start-line="48" selection-start-column="43" selection-end-line="48" selection-end-column="59" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://E:/jdk1.8.0_131/src.zip!/javax/swing/plaf/ComponentUI.java" />
-    <entry file="jar://E:/jdk1.8.0_131/src.zip!/javax/swing/JScrollPane.java" />
-    <entry file="file://$PROJECT_DIR$/src/rpd/components/LingualBarConnector.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1552">
-          <caret line="16" column="32" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/rpd/components/LingualPlateConnector.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="19" column="5" selection-start-line="16" selection-start-column="61" selection-end-line="19" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/rpd/components/SinglePalatalStrapConnector.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="23" column="38" selection-start-line="23" selection-start-column="11" selection-end-line="23" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/rpd/components/CombinationAnteriorPosteriorPalatalStrapConnector.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="144">
-          <caret line="16" column="62" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="62" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/rpd/components/ModifiedPalatalPlateConnector.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="176">
-          <caret line="13" column="42" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/rpd/components/WroughtWireClasp.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="384">
-          <caret line="95" selection-start-line="95" selection-end-line="95" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://E:/jdk1.8.0_131/src.zip!/javax/swing/ScrollPaneConstants.java" />
-    <entry file="file://$PROJECT_DIR$/LabelTool_backup0723.java" />
-    <entry file="jar://E:/jdk1.8.0_131/src.zip!/javax/swing/JTable.java" />
-    <entry file="jar://E:/jdk1.8.0_131/src.zip!/javax/swing/AbstractButton.java" />
-    <entry file="file://$PROJECT_DIR$/LabelTool_backup0723_2.java" />
-    <entry file="file://$PROJECT_DIR$/LabelTool_backup0720.java" />
-    <entry file="file://$PROJECT_DIR$/../DentalGUITool/src/GUI/LabelTool.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="554">
-          <caret line="713" column="57" selection-start-line="713" selection-start-column="44" selection-end-line="713" selection-end-column="57" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://D:/lib/DentalEMRParser/DentalEMRParser.jar!/emrpaser/rule/ruleParserWithStats.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="965" selection-start-line="965" selection-end-line="965" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/GUI/ServerForPresent.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1054">
-          <caret line="72" column="44" selection-start-line="72" selection-start-column="44" selection-end-line="72" selection-end-column="44" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/rpd/rules/ClaspRule.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4437">
-          <caret line="279" selection-start-line="279" selection-end-line="279" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/rpd/rules/MajorConnectorRule.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1020">
-          <caret line="83" column="47" selection-start-line="83" selection-start-column="47" selection-end-line="83" selection-end-column="47" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/rpd/components/PalatalPlateConnector.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="833">
-          <caret line="54" column="37" selection-start-line="54" selection-start-column="37" selection-end-line="54" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/GUI/LabelTool_forPresent.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="181">
-          <caret line="27" column="13" selection-start-line="27" selection-start-column="13" selection-end-line="27" selection-end-column="13" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/rpd/components/FullPalatalPlateConnector.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="435">
-          <caret line="43" column="34" selection-start-line="43" selection-start-column="17" selection-end-line="43" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/misc/ToothPosition.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="333">
-          <caret line="454" column="1" lean-forward="true" selection-start-line="454" selection-start-column="1" selection-end-line="454" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/misc/ToothMap.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="350">
-          <caret line="108" column="1" lean-forward="true" selection-start-line="108" selection-start-column="1" selection-end-line="108" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/misc/PrintTestFile.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="350">
-          <caret line="83" column="1" lean-forward="true" selection-start-line="83" selection-start-column="1" selection-end-line="83" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/misc/PrintImage.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="37" column="36" selection-start-line="37" selection-start-column="36" selection-end-line="37" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ontologies/BooleanPropertyValue.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="527">
-          <caret line="35" column="1" selection-start-line="35" selection-start-column="1" selection-end-line="35" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ontologies/DentalClass.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1258">
-          <caret line="74" column="1" selection-start-line="74" selection-start-column="1" selection-end-line="74" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ontologies/DentalProperty.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1700">
-          <caret line="100" column="1" selection-start-line="100" selection-start-column="1" selection-end-line="100" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ontologies/Descriptions.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4794">
-          <caret line="302" column="1" selection-start-line="302" selection-start-column="1" selection-end-line="302" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ontologies/DoublePropertyValue.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="493">
-          <caret line="33" column="1" selection-start-line="33" selection-start-column="1" selection-end-line="33" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/rpd/rules/ChooseAbutmentRule.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="9061">
-          <caret line="578" column="1" selection-start-line="578" selection-start-column="1" selection-end-line="578" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/rpd/conceptions/ClassificationOfSurveyLineOnBuccalSurface.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" column="12" selection-start-line="5" selection-start-column="12" selection-end-line="5" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/rpd/components/CombinationClasp.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1343">
-          <caret line="88" column="1" selection-start-line="88" selection-start-column="1" selection-end-line="88" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/GUI/CString.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="9" column="67" selection-start-line="9" selection-start-column="67" selection-end-line="9" selection-end-column="67" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/GUI/LabelTool.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="377">
-          <caret line="2358" column="68" lean-forward="true" selection-start-line="2358" selection-start-column="68" selection-end-line="2358" selection-end-column="68" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#184938#184946#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
   </component>
   <component name="masterDetails">
     <states>
