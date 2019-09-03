@@ -71,30 +71,6 @@ public class MajorConnectorRule {
 				}
 			}
 
-//			public MajorConnector chooseMajorConnectorOnMaxillary(RPDPlan plan, StringBuilder explanation) {
-//				explanation.append("上颌大连接体：");
-//				if (isMissingTooMuchOnMaxillary()) {
-//					explanation.append("大部分缺失，选择上颌全腭板大连接体\n");
-//					return new FullPalatalPlateConnector(plan.getAbutmentTeeth(), mouth.getMaxillary());
-//				} else {
-//					KennedyType kennedyType = getKennedyType(mouth, plan.getPosition());
-//					if (kennedyType == KennedyType.KENNEDY_TYPE_I) {
-//						explanation.append("Kennedy I型可摘局部义齿，选择上颌腭板大连接体\n");
-//						return new PalatalPlateConnector(plan.getAbutmentTeeth(), mouth.getMaxillary());
-//					} else if (kennedyType == KennedyType.KENNEDY_TYPE_II) {
-//						explanation.append("Kennedy II型可摘局部义齿，选择上颌变异腭板大连接体\n");
-//						return new ModifiedPalatalPlateConnector(plan.getAbutmentTeeth(), mouth.getMaxillary());
-//					} else if (kennedyType == KennedyType.KENNEDY_TYPE_III) {
-//						explanation.append("Kennedy III型牙支持式可摘局部义齿，选择上颌颚带大连接体\n");
-//						return new SinglePalatalStrapConnector(plan.getAbutmentTeeth(), mouth.getMaxillary());
-//					} else {
-//						explanation.append("Kennedy IV型或Kennedy III型非牙支持式可摘局部义齿，选择上颌前后颚带大连接体\n");
-//						return new CombinationAnteriorPosteriorPalatalStrapConnector(
-//								plan.getAbutmentTeeth(), mouth.getMaxillary());
-//					}
-//				}
-//			}
-
 			public MajorConnector chooseMajorConnectorOnMaxillary(RPDPlan plan, StringBuilder explanation) {
 				explanation.append("上颌大连接体：");
 				if (isMissingTooMuchOnMaxillary()) {

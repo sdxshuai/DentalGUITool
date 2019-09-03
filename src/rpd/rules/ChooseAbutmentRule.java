@@ -224,6 +224,52 @@ public class ChooseAbutmentRule {
 				return res;
 			}
 		});
+
+		choose_abutment_rules.add(new ChooseAbutmentRule() {
+
+			public String getExplaination() {
+				return "Kennedy IV类，第一前磨牙（不包括第一前磨牙）之前不放置卡环";
+			}
+
+			public String toString() {
+				return this.getExplaination();
+			}
+
+			public int getRuleNum() {
+				return 6;
+			}
+
+			public List<RPDPlan> apply(List<RPDPlan> rpd_plans) throws RuleException {
+				List<RPDPlan> res = new ArrayList<>();
+				for (RPDPlan plan : rpd_plans) {
+					KennedyType kennedyType = null;
+					if (plan.getPosition() == Position.Mandibular) {
+						kennedyType = mouth.getMandibular().getKennedyType();
+					}
+					else {
+						kennedyType = mouth.getMaxillary().getKennedyType();
+					}
+					if (kennedyType == KennedyType.KENNEDY_TYPE_IV) {
+						int tooth_num = 0;
+						boolean wrong_flag = false;
+						for (Tooth tooth : plan.getAbutmentTeeth()) {
+							tooth_num = tooth.getNum();
+							if (tooth_num <= 3) {
+								wrong_flag = true;
+								break;
+							}
+						}
+						if (!wrong_flag) {
+							res.add(plan);
+						}
+					}
+					else {
+						res.add(plan);
+					}
+				}
+				return res;
+			}
+		});
 	}
 
 	public List<RPDPlan> apply(List<RPDPlan> rpd_plans) throws RuleException, ClaspAssemblyException, ToothPosException {
@@ -481,38 +527,6 @@ public class ChooseAbutmentRule {
 			}
 		}
 		return flag;
-	}
-
-//	public double scorePlan(RPDPlan plan) throws RuleException {
-//		double canine_weight = 1.2;
-//		double premolar_weight = 0.5;
-//		double distomolar_weight = 0.0;
-//		double score = 0.0;
-//		for (Tooth tooth : plan.getAbutmentTeeth()) {
-//			Map<String, Object> info = plan.getNearestEdentulous(tooth);
-//			int distance = (Integer) info.get("distance");
-//			if (tooth.getToothType() == ToothType.Canine) {
-//				score += distance + canine_weight;
-//			} else if (tooth.getToothType() == ToothType.Premolar) {
-//				score += distance + premolar_weight;
-//			} else {
-//				score += distance + distomolar_weight;
-//			}
-//		}
-//		return score;
-//	}
-
-	public boolean hasSuccessiveAbutment(ArrayList<Tooth> abutment_teeth) {
-
-		int last_num = 0;
-		for (Tooth tooth : abutment_teeth) {
-			int tooth_num = Integer.parseInt(tooth.toString().substring(5));
-			if (tooth_num - last_num == 1 || last_num - tooth_num == 1) {
-				return true;
-			}
-			last_num = tooth_num;
-		}
-		return false;
 	}
 
 	public boolean needMajorConnector(Position planPosition) {
