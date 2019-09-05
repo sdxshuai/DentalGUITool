@@ -48,7 +48,7 @@ public class ClaspRule {
 				int cur_zone = tooth.getZone();
 				int cur_num = tooth.getNum();
 				for (int num = cur_num + 1; num <= 8; num++) {
-					if (mouth.getTooth(cur_zone, num).isMissing() != true) {
+					if (!mouth.getTooth(cur_zone, num).isMissing()) {
 						flag = false;
 						break;
 					}
@@ -59,37 +59,38 @@ public class ClaspRule {
 			public boolean isIsolate(Tooth tooth) {
 				int cur_num = tooth.getNum();
 				int cur_zone = tooth.getZone();
-				if (mouth.getTooth(cur_zone, cur_num + 1).isMissing() == true
-						&& mouth.getTooth(cur_zone, cur_num - 1).isMissing() == true) {
-					return true;
-				} else {
-					return false;
-				}
+				return mouth.getTooth(cur_zone, cur_num + 1).isMissing()
+						&& mouth.getTooth(cur_zone, cur_num - 1).isMissing();
 			}
 
-			public boolean isBadPeriphery(Tooth tooth) {
-				if (tooth.getMobility() != ToothMobility.No) {
-					return true;
-				}
-				if (tooth.getFurcationInvolvement() != FurcationInvolvement.NO) {
-					return true;
-				}
-				if (tooth.getAlveolarAbsorption() != AlveolarAbsorption.No) {
-					return true;
-				}
-				return false;
-			}
-
-			public boolean isMesialInclination(Tooth tooth) {
-				if (tooth.getClassificationOfSurveyLineOnBuccalSurface() == ClassificationOfSurveyLineOnBuccalSurface.O
-						|| tooth.getToothPosition() == ToothPosition.Mesial) {
-					return true;
-				} else {
+			public boolean isDistalDislocate(Tooth tooth) {
+				// 远中孤立，是指限制于6、7、8牙位，且其后面的牙齿都缺失，且其前缺失大于等于5颗
+				int cur_num = tooth.getNum();
+				int cur_zone = tooth.getZone();
+				if (cur_num <= 5) {
 					return false;
 				}
+				for (int num = cur_num + 1; num <= 8; num++) {
+					if (!mouth.getTooth(cur_zone, num).isMissing()) {
+						return false;
+					}
+				}
+
+				int numBeforeMissing = 0;
+				int opposite_zone = tooth.getOppositeZone();
+				for (int num = 1; num < cur_num; num++) {
+					if (mouth.getTooth(cur_zone, num).isMissing()) {
+						numBeforeMissing += 1;
+					}
+					if (mouth.getTooth(opposite_zone, num).isMissing()) {
+						numBeforeMissing += 1;
+					}
+				}
+				return numBeforeMissing >= 5;
 			}
 
 			public boolean isBothSideMissing(ArrayList<Tooth> teeth) {
+				// 基牙双侧缺失
 				Collections.sort(teeth);
 				Tooth tooth_mesial = teeth.get(0);
 				Tooth tooth_distal = teeth.get(1);
@@ -139,7 +140,7 @@ public class ClaspRule {
 					}
 					ClaspMaterial material = ClaspMaterial.Cast;
 					for (Tooth tooth : teeth) {
-						if (isBadPeriphery(tooth)) {
+						if (tooth.isBadPeriphery()) {
 							material = ClaspMaterial.WW;
 							break;
 						}
@@ -157,6 +158,19 @@ public class ClaspRule {
 						Map<String, Object> info_1 = plan.getNearestEdentulous(teeth.get(1));
 						int distance0 = (Integer) info_0.get("distance");
 						int distance1 = (Integer) info_1.get("distance");
+//						EdentulousSpace nearestEdentulous = null;
+//						if (distance0 <= distance1) {
+//							nearestEdentulous = (EdentulousSpace) info_0.get("edentulous");
+//						} else {
+//							nearestEdentulous = (EdentulousSpace) info_1.get("edentulous");
+//						}
+//						// 若缺隙游离缺失，缺失牙需要大于2颗
+//						if (nearestEdentulous.getEdentulousType() == EdentulousType.PosteriorExtension) {
+//							if (nearestEdentulous.getNumMissingTeeth() <= 2) {
+//								return null;
+//							}
+//						}
+
 						if (distance0 >= 2 && distance1 >= 2) {
 							if (material == ClaspMaterial.WW) {
 								explanation.append("选择间隙（Embrasure）卡环\n");
@@ -197,7 +211,7 @@ public class ClaspRule {
 
 			public Clasp chooseClaspOnCanine(Tooth tooth, RPDPlan plan, StringBuilder explanation) throws RuleException {
 				ClaspMaterial material = ClaspMaterial.Cast;
-				if (isBadPeriphery(tooth)) {
+				if (tooth.isBadPeriphery()) {
 					material = ClaspMaterial.WW;
 					explanation.append("基牙牙周状况不佳，选择弯制材料，");
 				}
@@ -221,7 +235,7 @@ public class ClaspRule {
 
 			public Clasp chooseClaspOnPremolar(Tooth tooth, RPDPlan plan, StringBuilder explanation) throws RuleException {
 				ClaspMaterial material = ClaspMaterial.Cast;
-				if (isBadPeriphery(tooth)) {
+				if (tooth.isBadPeriphery()) {
 					material = ClaspMaterial.WW;
 					explanation.append("基牙牙周状况不佳，选择弯制材料，");
 				}
@@ -229,8 +243,18 @@ public class ClaspRule {
 					explanation.append("基牙牙周状况良好，选择铸造材料，");
 				}
 
-				if (isDislocate(tooth)) {
-					explanation.append("基牙为前磨牙，后牙游离缺失，");
+				if (isIsolate(tooth)) {
+					if (material == ClaspMaterial.WW) {
+						explanation.append("基牙为孤立前磨牙，牙周状况不佳，选择弯制（Wrought Wire）卡环\n");
+						Map<String, Object> info = plan.getNearestEdentulous(tooth);
+						Position tip_direction = (Position) info.get("direction");
+						return new WroughtWireClasp(tooth, tip_direction);
+					} else {
+						explanation.append("基牙为孤立前磨牙，牙周状况良好，选择对半（Half and Half）卡环\n");
+						return new HalfHalfClasp(tooth, material);
+					}
+				} else if (isDislocate(tooth)) {
+					explanation.append("基牙为前磨牙，紧邻游离缺失，");
 					if (tooth.getCrownRootRatio() == CrownRootRatio.SHORT
 							|| tooth.getBuccalSurfaceSlope()
 							|| tooth.getLingualSurfaceSlope()) {
@@ -245,17 +269,30 @@ public class ClaspRule {
 						}
 						explanation.append("选择回力（Back Action）卡环\n");
 						return new BackActionClasp(tooth, material);
-					} else if (isMesialInclination(tooth)) {
+					} else if (tooth.isMesialInclination()) {
 					    explanation.delete(0, explanation.length());
-						explanation.append("基牙为前磨牙，后牙游离缺失，基牙近中倾斜，选择结合（Combination）卡环\n");
-						return new CombinationClasp(tooth);
+						explanation.append("基牙近中倾斜，选择弯制（Wrought Wire）卡环\n");
+						Map<String, Object> info = plan.getNearestEdentulous(tooth);
+						Position tip_direction = (Position) info.get("direction");
+						return new WroughtWireClasp(tooth, tip_direction);
 					} else {
-						explanation.append("基牙为远中游离缺失的末端基牙，选择RPA卡环\n");
+						explanation.append("缺失多颗，选择RPA卡环\n");
 						return new RPAClasp(tooth, material);
+//						Map<String, Object> info = plan.getNearestEdentulous(tooth);
+//						EdentulousSpace nearestEdentulous = (EdentulousSpace) info.get("edentulous");
+//						if (nearestEdentulous.getNumMissingTeeth() == 1) {
+//							explanation.append("缺失单颗，选择Aker卡环\n");
+//							Position tip_direction = (Position) info.get("direction");
+//							if (material == ClaspMaterial.WW) {
+//								return new WroughtWireClasp(tooth, tip_direction);
+//							} else {
+//								return new AkerClasp(tooth, tip_direction);
+//							}
+//						} else {
+//							explanation.append("缺失多颗，选择RPA卡环\n");
+//							return new RPAClasp(tooth, material);
+//						}
 					}
-				} else if (isIsolate(tooth)) {
-					explanation.append("基牙为孤立前磨牙，选择对半（Half and Half）卡环\n");
-					return new HalfHalfClasp(tooth, material);
 				} else {
 					Map<String, Object> info = plan.getNearestEdentulous(tooth);
 					Position tip_direction = (Position) info.get("direction");
@@ -270,7 +307,7 @@ public class ClaspRule {
 
 			public Clasp chooseClaspOnDistomolar(Tooth tooth, RPDPlan plan, StringBuilder explanation) throws RuleException {
 				ClaspMaterial material = ClaspMaterial.Cast;
-				if (isBadPeriphery(tooth)) {
+				if (tooth.isBadPeriphery()) {
 					material = ClaspMaterial.WW;
 					explanation.append("基牙牙周状况不佳，选择弯制材料，");
 				}
@@ -278,22 +315,42 @@ public class ClaspRule {
 					explanation.append("基牙牙周状况良好，选择铸造材料，");
 				}
 
-				if (isDislocate(tooth)) {
-					if (isMesialInclination(tooth)) {
-						explanation.delete(0, explanation.length());
-						explanation.append("基牙为后磨牙，后牙游离缺失，基牙近中倾斜，选择结合（Combination）卡环\n");
-						return new CombinationClasp(tooth);
+				if (isDistalDislocate(tooth)) {
+					if (material == ClaspMaterial.WW) {
+						explanation.append("基牙为远中孤立后磨牙，牙周状况不佳，选择弯制（Wrought Wire）卡环\n");
+						Position tip_direction;
+						if (tooth.getNum() == 8
+								|| (tooth.getNum() == 7 && mouth.getTooth(tooth.getZone(), 8).isMissing())) {
+							tip_direction = Position.Mesial;
+						} else {
+							Map<String, Object> info = plan.getNearestEdentulous(tooth);
+							tip_direction = (Position) info.get("direction");
+						}
+						return new WroughtWireClasp(tooth, tip_direction);
 					} else {
-						explanation.append("基牙为后磨牙，后牙游离缺失，基牙为远中游离缺失的末端基牙，选择RPA卡环\n");
-						return new RPAClasp(tooth, material);
+						explanation.append("基牙为远中孤立后磨牙，牙周状况良好，选择圈形（Ring）卡环\n");
+						return new RingClasp(tooth, material);
 					}
-				} else if (isIsolate(tooth)) {
-					explanation.append("基牙为孤立后磨牙，选择圈形（Ring）卡环\n");
-					return new RingClasp(tooth, material);
+				} else if (isDislocate(tooth)) {
+					explanation.append("基牙为后磨牙，紧邻游离缺失，");
+					if (tooth.isMesialInclination()) {
+						explanation.delete(0, explanation.length());
+						explanation.append("基牙近中倾斜，选择弯制（Wrought Wire）卡环\n");
+						Position tip_direction = Position.Mesial;
+						return new WroughtWireClasp(tooth, tip_direction);
+					} else {
+						explanation.append("缺失单颗，选择Aker卡环\n");
+						Position tip_direction = Position.Mesial;
+						if (material == ClaspMaterial.WW) {
+							return new WroughtWireClasp(tooth, tip_direction);
+						} else {
+							return new AkerClasp(tooth, tip_direction);
+						}
+					}
 				} else {
 					Map<String, Object> info = plan.getNearestEdentulous(tooth);
 					Position tip_direction = (Position) info.get("direction");
-					explanation.append("基牙无其他特殊情况，选择Aker卡环\n");
+					explanation.append("基牙无其他特殊状况，选择Aker卡环\n");
 					if (material == ClaspMaterial.WW) {
 						return new WroughtWireClasp(tooth, tip_direction);
 					} else {

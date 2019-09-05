@@ -110,6 +110,14 @@ public class EdentulousSpace {
 		return this.right_most;
 	}
 
+	public int getNumMissingTeeth() {
+		if (this.left_most.getZone() == this.right_most.getZone()){
+			return Math.abs(this.left_most.getNum() - this.right_most.getNum()) + 1;
+		} else {
+			return this.left_most.getNum() + this.right_most.getNum();
+		}
+	}
+
 	private void computeType() throws RuleException {
 
 		List<EdentulousType> types = new ArrayList<EdentulousType>();

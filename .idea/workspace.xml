@@ -6,10 +6,13 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ee2f1d7f-9d4a-4891-8cec-d807570523e9" name="Default" comment="重构Kennedy类型判断逻辑，移入口腔类中。">
+    <list default="true" id="ee2f1d7f-9d4a-4891-8cec-d807570523e9" name="Default" comment="添加基牙选择规则，Kennedy IV时，不选择切牙和尖牙">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/rpd/rules/ChooseAbutmentRule.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/rpd/rules/ChooseAbutmentRule.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/rpd/rules/MajorConnectorRule.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/rpd/rules/MajorConnectorRule.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/DentalGUITool/rpd/oral/EdentulousSpace.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/DentalGUITool/rpd/oral/EdentulousSpace.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/DentalGUITool/rpd/oral/Tooth.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/DentalGUITool/rpd/oral/Tooth.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/rpd/oral/EdentulousSpace.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/rpd/oral/EdentulousSpace.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/rpd/oral/Tooth.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/rpd/oral/Tooth.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/rpd/rules/ClaspRule.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/rpd/rules/ClaspRule.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -228,7 +231,8 @@
       <workItem from="1567492591051" duration="129000" />
       <workItem from="1567492789719" duration="1186000" />
       <workItem from="1567495489085" duration="5109000" />
-      <workItem from="1567501712711" duration="4832000" />
+      <workItem from="1567501712711" duration="6159000" />
+      <workItem from="1567567901959" duration="22374000" />
     </task>
     <task id="LOCAL-00001" summary="fix bug about adding 舌支托">
       <created>1551334542146</created>
@@ -244,7 +248,14 @@
       <option name="project" value="LOCAL" />
       <updated>1567500810478</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="添加基牙选择规则，Kennedy IV时，不选择切牙和尖牙">
+      <created>1567514197179</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1567514197179</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -266,7 +277,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="fix bug about adding 舌支托" />
     <MESSAGE value="重构Kennedy类型判断逻辑，移入口腔类中。" />
-    <option name="LAST_COMMIT_MESSAGE" value="重构Kennedy类型判断逻辑，移入口腔类中。" />
+    <MESSAGE value="添加基牙选择规则，Kennedy IV时，不选择切牙和尖牙" />
+    <option name="LAST_COMMIT_MESSAGE" value="添加基牙选择规则，Kennedy IV时，不选择切牙和尖牙" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -278,14 +290,6 @@
             <option name="EMULATED" value="true" />
           </properties>
           <option name="timeStamp" value="3" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/src/rpd/rules/ChooseAbutmentRule.java</url>
-          <line>20</line>
-          <properties class="rpd.rules.ChooseAbutmentRule" method="initRules">
-            <option name="EMULATED" value="true" />
-          </properties>
-          <option name="timeStamp" value="28" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/GUI/LabelTool.java</url>

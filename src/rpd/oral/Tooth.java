@@ -158,6 +158,20 @@ public class Tooth implements Comparable<Tooth> {
 		return this.zone;
 	}
 
+	public int getOppositeZone() {
+		if (this.zone == 1) {
+			return 2;
+		} else if (this.zone == 2) {
+			return 1;
+		} else if (this.zone == 3) {
+			return 4;
+		} else if (this.zone == 4) {
+			return 3;
+		} else {
+			return 0;
+		}
+	}
+
 	public int getNum() {
 		return this.num;
 	}
@@ -189,6 +203,17 @@ public class Tooth implements Comparable<Tooth> {
 			return -2;
 		}
 		return res;
+	}
+
+	public boolean isBadPeriphery() {
+		return this.getMobility() != ToothMobility.No
+				|| this.getFurcationInvolvement() != FurcationInvolvement.NO
+				|| this.getAlveolarAbsorption() != AlveolarAbsorption.No;
+	}
+
+	public boolean isMesialInclination() {
+		return this.getClassificationOfSurveyLineOnBuccalSurface() == ClassificationOfSurveyLineOnBuccalSurface.O
+				|| this.getToothPosition() == ToothPosition.Mesial;
 	}
 
 	@Override
