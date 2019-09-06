@@ -158,6 +158,7 @@ public class Tooth implements Comparable<Tooth> {
 		return this.zone;
 	}
 
+	// 相对牙区
 	public int getOppositeZone() {
 		if (this.zone == 1) {
 			return 2;
@@ -167,6 +168,21 @@ public class Tooth implements Comparable<Tooth> {
 			return 4;
 		} else if (this.zone == 4) {
 			return 3;
+		} else {
+			return 0;
+		}
+	}
+
+	// 对合牙区
+	public int getOcclusalZone() {
+		if (this.zone == 1) {
+			return 4;
+		} else if (this.zone == 2) {
+			return 3;
+		} else if (this.zone == 3) {
+			return 2;
+		} else if (this.zone == 4) {
+			return 1;
 		} else {
 			return 0;
 		}

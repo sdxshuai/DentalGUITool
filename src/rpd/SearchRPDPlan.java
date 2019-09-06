@@ -130,10 +130,12 @@ public class SearchRPDPlan {
 		Iterator<EdentulousSpace> iterator = curEdentulousSpaces.iterator();
 		while (iterator.hasNext()) {
 			EdentulousSpace edentulousSpace = iterator.next();
-			if (edentulousSpace.getLeftMost().getNum() == 7 && edentulousSpace.getRightMost().getNum() == 7) {
+			if (edentulousSpace.getLeftMost().getNum() == 7 || edentulousSpace.getRightMost().getNum() == 7) {
 				int edentulousZone = edentulousSpace.getLeftMost().getZone();
 				if (mouth.getMaxillary().getTooth(5-edentulousZone, 7).isMissing()
-						&& !mouth.getMaxillary().getTooth(5-edentulousZone, 6).isMissing()
+						&& mouth.getMaxillary().getTooth(5-edentulousZone, 8).isMissing()
+//						&& (!mouth.getMaxillary().getTooth(5-edentulousZone, 6).isMissing()
+//						|| !mouth.getMandibular().getTooth(edentulousZone, 6).isMissing())
 						&& mouth.getMandibular().getTooth(edentulousZone, 8).isMissing()) {
 					iterator.remove();
 					if (edentulousZone == 3) {
@@ -145,7 +147,6 @@ public class SearchRPDPlan {
 				}
 			}
 		}
-		mandibular.setEdentulousSpaces(curEdentulousSpaces);
 
 		List<RPDPlan> res = new ArrayList<RPDPlan>();
 		RPDPlan empty_plan = new RPDPlan(mouth, Position.Mandibular);
@@ -164,11 +165,14 @@ public class SearchRPDPlan {
 		//挑选完基牙将对合7位置设为不缺失
 		if (tooth37Changed) {
 			mandibular.getZone3().get(7).setMissing(false);
+			mandibular.setRightMostToothNum(6);
 		}
 		if (tooth47Changed) {
 			mandibular.getZone4().get(7).setMissing(false);
+			mandibular.setleftMostToothNum(6);
 		}
-
+		edentulousSpaceList = mandibular.getEdentulousSpaces(mandibular.getZone3(), mandibular.getZone4());
+		mandibular.setEdentulousSpaces(edentulousSpaceList);
 
 		List<RPDPlan> clasp_plans = new ArrayList<RPDPlan>();
 		clasp_plans.addAll(abutment_teeth_plans);
@@ -250,6 +254,8 @@ public class SearchRPDPlan {
 		if (tooth47Changed) {
 			mandibular.getZone4().get(7).setMissing(true);
 		}
+		edentulousSpaceList = mandibular.getEdentulousSpaces(mandibular.getZone3(), mandibular.getZone4());
+		mandibular.setEdentulousSpaces(edentulousSpaceList);
 
 		if (res.size()==0) {
 			res = null;
@@ -293,10 +299,12 @@ public class SearchRPDPlan {
 		Iterator<EdentulousSpace> iterator = curEdentulousSpaces.iterator();
 		while (iterator.hasNext()) {
 			EdentulousSpace edentulousSpace = iterator.next();
-			if (edentulousSpace.getLeftMost().getNum() == 7 && edentulousSpace.getRightMost().getNum() == 7) {
+			if (edentulousSpace.getLeftMost().getNum() == 7 || edentulousSpace.getRightMost().getNum() == 7) {
 				int edentulousZone = edentulousSpace.getLeftMost().getZone();
 				if (mouth.getMandibular().getTooth(5-edentulousZone, 7).isMissing()
-						&& !mouth.getMandibular().getTooth(5-edentulousZone, 6).isMissing()
+						&& mouth.getMandibular().getTooth(5-edentulousZone, 8).isMissing()
+//						&& (!mouth.getMandibular().getTooth(5-edentulousZone, 6).isMissing()
+//						|| !mouth.getMaxillary().getTooth(edentulousZone, 6).isMissing())
 						&& mouth.getMaxillary().getTooth(edentulousZone, 8).isMissing()) {
 					iterator.remove();
 					if (edentulousZone == 1) {
@@ -308,7 +316,6 @@ public class SearchRPDPlan {
 				}
 			}
 		}
-		maxillary.setEdentulousSpaces(curEdentulousSpaces);
 
 		List<RPDPlan> res = new ArrayList<RPDPlan>();
 		RPDPlan empty_plan = new RPDPlan(mouth, Position.Maxillary);
@@ -326,11 +333,14 @@ public class SearchRPDPlan {
 
 		if (tooth17Changed) {
 			maxillary.getZone1().get(7).setMissing(false);
+			maxillary.setleftMostToothNum(6);
 		}
 		if (tooth27Changed) {
 			maxillary.getZone2().get(7).setMissing(false);
+			maxillary.setRightMostToothNum(6);
 		}
-
+		edentulousSpaceList = maxillary.getEdentulousSpaces(maxillary.getZone1(), maxillary.getZone2());
+		maxillary.setEdentulousSpaces(edentulousSpaceList);
 
 		List<RPDPlan> clasp_plans = new ArrayList<RPDPlan>();
 		clasp_plans.addAll(abutment_teeth_plans);
@@ -411,6 +421,8 @@ public class SearchRPDPlan {
 		if (tooth27Changed) {
 			maxillary.getZone2().get(7).setMissing(true);
 		}
+		edentulousSpaceList = maxillary.getEdentulousSpaces(maxillary.getZone1(), maxillary.getZone2());
+		maxillary.setEdentulousSpaces(edentulousSpaceList);
 
 		if (res.size()==0) {
 			res = null;

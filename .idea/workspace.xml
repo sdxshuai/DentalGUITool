@@ -6,11 +6,14 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ee2f1d7f-9d4a-4891-8cec-d807570523e9" name="Default" comment="添加基牙选择规则，Kennedy IV时，不选择切牙和尖牙">
+    <list default="true" id="ee2f1d7f-9d4a-4891-8cec-d807570523e9" name="Default" comment="修改部分卡环生成规则">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/DentalGUITool/rpd/oral/EdentulousSpace.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/DentalGUITool/rpd/oral/EdentulousSpace.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/DentalGUITool/rpd/oral/Mandibular.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/DentalGUITool/rpd/oral/Mandibular.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/DentalGUITool/rpd/oral/Maxillary.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/DentalGUITool/rpd/oral/Maxillary.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/DentalGUITool/rpd/oral/Tooth.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/DentalGUITool/rpd/oral/Tooth.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/rpd/oral/EdentulousSpace.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/rpd/oral/EdentulousSpace.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/rpd/SearchRPDPlan.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/rpd/SearchRPDPlan.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/rpd/oral/Mandibular.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/rpd/oral/Mandibular.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/rpd/oral/Maxillary.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/rpd/oral/Maxillary.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/rpd/oral/Tooth.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/rpd/oral/Tooth.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/rpd/rules/ClaspRule.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/rpd/rules/ClaspRule.java" afterDir="false" />
     </list>
@@ -232,7 +235,8 @@
       <workItem from="1567492789719" duration="1186000" />
       <workItem from="1567495489085" duration="5109000" />
       <workItem from="1567501712711" duration="6159000" />
-      <workItem from="1567567901959" duration="22374000" />
+      <workItem from="1567567901959" duration="22405000" />
+      <workItem from="1567736856512" duration="12358000" />
     </task>
     <task id="LOCAL-00001" summary="fix bug about adding 舌支托">
       <created>1551334542146</created>
@@ -255,7 +259,14 @@
       <option name="project" value="LOCAL" />
       <updated>1567514197179</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="修改部分卡环生成规则">
+      <created>1567685713714</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1567685713714</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -278,7 +289,8 @@
     <MESSAGE value="fix bug about adding 舌支托" />
     <MESSAGE value="重构Kennedy类型判断逻辑，移入口腔类中。" />
     <MESSAGE value="添加基牙选择规则，Kennedy IV时，不选择切牙和尖牙" />
-    <option name="LAST_COMMIT_MESSAGE" value="添加基牙选择规则，Kennedy IV时，不选择切牙和尖牙" />
+    <MESSAGE value="修改部分卡环生成规则" />
+    <option name="LAST_COMMIT_MESSAGE" value="修改部分卡环生成规则" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -311,23 +323,21 @@
           <line>154</line>
           <option name="timeStamp" value="27" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/rpd/SearchRPDPlan.java</url>
+          <line>341</line>
+          <option name="timeStamp" value="45" />
+        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
     <watches-manager>
       <configuration name="Application">
         <watch expression="input_emr.getCanonicalPath()" language="JAVA" />
         <watch expression="mandibularRpdPlans.get(0).components" />
+        <watch expression="mouth.getTooth(4,8).isMissing()" language="JAVA" />
+        <watch expression="mandibular.getEdentulousSpaces()" language="JAVA" />
       </configuration>
     </watches-manager>
-  </component>
-  <component name="debuggerHistoryManager">
-    <expressions id="watch">
-      <expression>
-        <expression-string>input_emr.getCanonicalPath()</expression-string>
-        <language-id>JAVA</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-    </expressions>
   </component>
   <component name="masterDetails">
     <states>

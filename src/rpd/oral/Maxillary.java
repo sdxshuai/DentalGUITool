@@ -18,8 +18,21 @@ public class Maxillary {
 
 	private List<EdentulousSpace> edentulous_spaces = null;
 
+	private int leftMostToothNum = 7;
+	private int rightMostToothNum = 7;
+
 	public Maxillary(OntModel dental_ont) throws RuleException {
 		init(dental_ont);
+		this.leftMostToothNum = 7;
+		this.rightMostToothNum = 7;
+	}
+
+	public void setleftMostToothNum(int inputNum) {
+		this.leftMostToothNum = inputNum;
+	}
+
+	public void setRightMostToothNum(int inputNum) {
+		this.rightMostToothNum = inputNum;
 	}
 
 	public static boolean[] getTeethMissingFlags(List<Tooth> zone1, List<Tooth> zone2) {
@@ -36,7 +49,7 @@ public class Maxillary {
 		return teeth_missing_flags;
 	}
 
-	public static List<EdentulousSpace> getEdentulousSpaces(List<Tooth> zone1, List<Tooth> zone2) throws RuleException {
+	public List<EdentulousSpace> getEdentulousSpaces(List<Tooth> zone1, List<Tooth> zone2) throws RuleException {
 
 		List<EdentulousSpace> edentulous_spaces = new ArrayList<EdentulousSpace>();
 		boolean[] teeth_missing_flags = getTeethMissingFlags(zone1, zone2);
@@ -116,10 +129,13 @@ public class Maxillary {
 	}
 
 	public KennedyType getKennedyType() {
-		if (this.isLeftDislocate() && this.isRightDislocate()) {
+		boolean leftDislocateFlag = this.isLeftDislocate(this.leftMostToothNum);
+		boolean rightDislocateFlag = this.isRightDislocate(this.rightMostToothNum);
+
+		if (leftDislocateFlag && rightDislocateFlag) {
 			return KennedyType.KENNEDY_TYPE_I;
-		} else if ((this.isLeftDislocate() && !this.isRightDislocate())
-				|| (!this.isLeftDislocate() && this.isRightDislocate())) {
+		} else if ((leftDislocateFlag && !rightDislocateFlag)
+				|| (!leftDislocateFlag && rightDislocateFlag)) {
 			return KennedyType.KENNEDY_TYPE_II;
 		} else {
 			List<EdentulousSpace> edentulousSpaces = this.getEdentulousSpaces();
@@ -185,20 +201,20 @@ public class Maxillary {
 		return res;
 	}
 
-	public boolean isLeftDislocate() {
-		boolean flag = false;
-		if (this.getTooth(1, 7).isMissing() && this.getTooth(1, 8).isMissing()) {
-			flag = true;
+	public boolean isLeftDislocate(int leftMostToothNum) {
+		if (leftMostToothNum == 6) {
+			return this.getTooth(1, 6).isMissing();
+		} else {
+			return this.getTooth(1, 7).isMissing() && this.getTooth(1, 8).isMissing();
 		}
-		return flag;
 	}
 
-	public boolean isRightDislocate() {
-		boolean flag = false;
-		if (this.getTooth(2, 7).isMissing() && this.getTooth(2, 8).isMissing()) {
-			flag = true;
+	public boolean isRightDislocate(int rightMostToothNum) {
+		if (leftMostToothNum == 6) {
+			return this.getTooth(2, 6).isMissing();
+		} else {
+			return this.getTooth(2, 7).isMissing() && this.getTooth(2, 8).isMissing();
 		}
-		return flag;
 	}
 
 	private void init(OntModel dental_ont) throws RuleException {
