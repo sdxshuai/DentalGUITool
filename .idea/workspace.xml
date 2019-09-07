@@ -6,16 +6,8 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ee2f1d7f-9d4a-4891-8cec-d807570523e9" name="Default" comment="修改部分卡环生成规则">
+    <list default="true" id="ee2f1d7f-9d4a-4891-8cec-d807570523e9" name="Default" comment="完成卡环生成规则修改，增加78对合牙位不镶牙相关规则。">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/DentalGUITool/rpd/oral/Mandibular.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/DentalGUITool/rpd/oral/Mandibular.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/DentalGUITool/rpd/oral/Maxillary.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/DentalGUITool/rpd/oral/Maxillary.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/DentalGUITool/rpd/oral/Tooth.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/DentalGUITool/rpd/oral/Tooth.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/rpd/SearchRPDPlan.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/rpd/SearchRPDPlan.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/rpd/oral/Mandibular.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/rpd/oral/Mandibular.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/rpd/oral/Maxillary.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/rpd/oral/Maxillary.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/rpd/oral/Tooth.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/rpd/oral/Tooth.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/rpd/rules/ClaspRule.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/rpd/rules/ClaspRule.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -236,7 +228,8 @@
       <workItem from="1567495489085" duration="5109000" />
       <workItem from="1567501712711" duration="6159000" />
       <workItem from="1567567901959" duration="22405000" />
-      <workItem from="1567736856512" duration="12358000" />
+      <workItem from="1567736856512" duration="12490000" />
+      <workItem from="1567826506737" duration="883000" />
     </task>
     <task id="LOCAL-00001" summary="fix bug about adding 舌支托">
       <created>1551334542146</created>
@@ -266,7 +259,14 @@
       <option name="project" value="LOCAL" />
       <updated>1567685713714</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="完成卡环生成规则修改，增加78对合牙位不镶牙相关规则。">
+      <created>1567768196952</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1567768196952</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -290,7 +290,8 @@
     <MESSAGE value="重构Kennedy类型判断逻辑，移入口腔类中。" />
     <MESSAGE value="添加基牙选择规则，Kennedy IV时，不选择切牙和尖牙" />
     <MESSAGE value="修改部分卡环生成规则" />
-    <option name="LAST_COMMIT_MESSAGE" value="修改部分卡环生成规则" />
+    <MESSAGE value="完成卡环生成规则修改，增加78对合牙位不镶牙相关规则。" />
+    <option name="LAST_COMMIT_MESSAGE" value="完成卡环生成规则修改，增加78对合牙位不镶牙相关规则。" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
