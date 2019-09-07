@@ -185,25 +185,34 @@ public class SearchRPDPlan {
 			return null;
 		}
 
+//		List<RPDPlan> indirect_retainer_plans = new ArrayList<RPDPlan>();
+//		List<RPDPlan> indirect_retainer_plans_buffer = new ArrayList<RPDPlan>();
+//		indirect_retainer_plans.addAll(clasp_plans);
+//		for (EdentulousSpace edentulous_space : mandibular.getEdentulousSpaces()) {
+//			for (RPDPlan old_plan : indirect_retainer_plans) {
+//				RPDPlan cur_plan = null;
+//				for (IndirectRetainerRule rule : IndirectRetainerRule.indirect_retainer_rules) {
+//					cur_plan = rule.apply(edentulous_space, old_plan);
+//					if (cur_plan != null) {
+//						old_plan = cur_plan;
+//					}
+//				}
+//				indirect_retainer_plans_buffer.add(old_plan);
+//			}
+//			indirect_retainer_plans.clear();
+//			indirect_retainer_plans.addAll(indirect_retainer_plans_buffer);
+//			indirect_retainer_plans_buffer.clear();
+//		}
+
 		List<RPDPlan> indirect_retainer_plans = new ArrayList<RPDPlan>();
-		List<RPDPlan> indirect_retainer_plans_buffer = new ArrayList<RPDPlan>();
 		indirect_retainer_plans.addAll(clasp_plans);
-		for (EdentulousSpace edentulous_space : mandibular.getEdentulousSpaces()) {
-			for (RPDPlan old_plan : indirect_retainer_plans) {
-				boolean plan_changed = false;
-				for (IndirectRetainerRule rule : IndirectRetainerRule.indirect_retainer_rules) {
-					RPDPlan plan = rule.apply(edentulous_space, old_plan);
-					if (plan != null) {
-						indirect_retainer_plans_buffer.add(plan);
-						plan_changed = true;
-					}
-				}
-				if (!plan_changed)
-					indirect_retainer_plans_buffer.add(old_plan);
-			}
-			indirect_retainer_plans.clear();
-			indirect_retainer_plans.addAll(indirect_retainer_plans_buffer);
-			indirect_retainer_plans_buffer.clear();
+		for (IndirectRetainerRule rule : IndirectRetainerRule.indirect_retainer_rules) {
+			List<RPDPlan> plans = rule.apply(indirect_retainer_plans, mandibular.getEdentulousSpaces());
+			clasp_plans.clear();
+			clasp_plans.addAll(plans);
+		}
+		if (clasp_plans.size() == 0) {
+			return null;
 		}
 
 		List<RPDPlan> score_plans = new ArrayList<RPDPlan>();
@@ -353,25 +362,36 @@ public class SearchRPDPlan {
 			return null;
 		}
 
+//		List<RPDPlan> indirect_retainer_plans = new ArrayList<RPDPlan>();
+//		List<RPDPlan> indirect_retainer_plans_buffer = new ArrayList<RPDPlan>();
+//		indirect_retainer_plans.addAll(clasp_plans);
+//		for (EdentulousSpace edentulous_space : maxillary.getEdentulousSpaces()) {
+//			for (RPDPlan old_plan : indirect_retainer_plans) {
+//				boolean plan_changed = false;
+//				for (IndirectRetainerRule rule : IndirectRetainerRule.indirect_retainer_rules) {
+//					RPDPlan plan = rule.apply(edentulous_space, old_plan);
+//					if (plan != null) {
+//						indirect_retainer_plans_buffer.add(plan);
+//						plan_changed = true;
+//					}
+//				}
+//				if (!plan_changed)
+//					indirect_retainer_plans_buffer.add(old_plan);
+//			}
+//			indirect_retainer_plans.clear();
+//			indirect_retainer_plans.addAll(indirect_retainer_plans_buffer);
+//			indirect_retainer_plans_buffer.clear();
+//		}
+
 		List<RPDPlan> indirect_retainer_plans = new ArrayList<RPDPlan>();
-		List<RPDPlan> indirect_retainer_plans_buffer = new ArrayList<RPDPlan>();
 		indirect_retainer_plans.addAll(clasp_plans);
-		for (EdentulousSpace edentulous_space : maxillary.getEdentulousSpaces()) {
-			for (RPDPlan old_plan : indirect_retainer_plans) {
-				boolean plan_changed = false;
-				for (IndirectRetainerRule rule : IndirectRetainerRule.indirect_retainer_rules) {
-					RPDPlan plan = rule.apply(edentulous_space, old_plan);
-					if (plan != null) {
-						indirect_retainer_plans_buffer.add(plan);
-						plan_changed = true;
-					}
-				}
-				if (!plan_changed)
-					indirect_retainer_plans_buffer.add(old_plan);
-			}
-			indirect_retainer_plans.clear();
-			indirect_retainer_plans.addAll(indirect_retainer_plans_buffer);
-			indirect_retainer_plans_buffer.clear();
+		for (IndirectRetainerRule rule : IndirectRetainerRule.indirect_retainer_rules) {
+			List<RPDPlan> plans = rule.apply(indirect_retainer_plans, maxillary.getEdentulousSpaces());
+			clasp_plans.clear();
+			clasp_plans.addAll(plans);
+		}
+		if (clasp_plans.size() == 0) {
+			return null;
 		}
 
 		List<RPDPlan> score_plans = new ArrayList<RPDPlan>();

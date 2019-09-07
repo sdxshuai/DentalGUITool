@@ -44,6 +44,9 @@ public class ScoreRule {
 
             public double getDistanceOppoToothTri(Tooth tooth, Tooth mesialTooth, Tooth distalTooth) {
                 int targetNum = (mesialTooth.getNum() + distalTooth.getNum())/2;
+                if (targetNum == 3) {
+                    targetNum = 4;
+                }
                 return 0.1 + 0.1 * abs(tooth.getNum() - targetNum);
             }
 
@@ -69,11 +72,23 @@ public class ScoreRule {
                 return flag;
             }
 
+            public EdentulousSpace getDisociateEdentulous(List<EdentulousSpace> edentulousSpaceList) {
+                EdentulousSpace default_res = null;
+                for (EdentulousSpace edentulousSpace : edentulousSpaceList) {
+                    if (edentulousSpace.getEdentulousType() == EdentulousType.PosteriorExtension) {
+                        return edentulousSpace;
+                    }
+                }
+                return default_res;
+            }
+
             public double scorePlan(RPDPlan plan) throws RuleException {
                 double score = 0.0;
                 double canine_weight = 0.0;
-                double premolar_weight = 0.0;
-                double distomolar_weight = 0.0;
+                double premolar_4_weight = 0.0;
+                double premolar_5_weight = 0.0;
+                double distomolar_6_weight = 0.0;
+                double distomolar_7_weight = 0.0;
                 double distance = 0.0;
 
                 Set<Tooth> abutment_teeth = plan.getAbutmentTeeth();
@@ -119,74 +134,241 @@ public class ScoreRule {
                     }
                 }
 
-                boolean recPenaltyFlag = false;
+                int num_no_missing_zone_abutment = 0;
+                boolean rec_opposite_flag = false;
+                boolean tri_opposite_flag = false;
+                boolean opposite_combined_clasp_compensate_flag = false;
+                boolean KIV_commbied_clasp_penalty_flag = false;
                 for (Tooth tooth : abutment_teeth_without_rest) {
                     if (plan.getPosition() == Position.Mandibular) {
                         if (mouth.getMandibular().isZoneNoMissing(tooth.getZone())) {
+                            num_no_missing_zone_abutment += 1;
                             canine_weight = 2.2;
-                            premolar_weight = 0.02;
-                            distomolar_weight = 0.01;
-                            if (isDisociate(mouth.getMandibular().getEdentulousSpaces())) {
-                                //如果当前未惩罚对侧四边形布局，则惩罚
-                                recPenaltyFlag = !recPenaltyFlag;
+                            premolar_4_weight = 0.02;
+                            premolar_5_weight = 0.02;
+                            distomolar_6_weight = 0.01;
+                            distomolar_7_weight = 0.01;
+                            EdentulousSpace disociateEdentulous = getDisociateEdentulous(
+                                    mouth.getMandibular().getEdentulousSpaces());
+
+                            // 缺失侧游离
+                            if (disociateEdentulous != null) {
+                                int num_disociate_missing_teeth = disociateEdentulous.getNumMissingTeeth();
+                                // 缺失侧游离，且游离缺失牙数目大于等于2：三角形规则，在对侧中间位置设置联合卡环
+                                // 其他情况，四边形规则，在缺牙的起始位置的对侧设置两基牙
                                 if (tooth.getZone() == 3) {
-                                    distance = getDistanceOppoToothRec(
-                                            tooth, sorted_zone4.get(0), sorted_zone4.get(sorted_zone4.size()-1));
+                                    if (num_disociate_missing_teeth >= 2) {
+                                        tri_opposite_flag = true;
+                                        opposite_combined_clasp_compensate_flag = true;
+                                        distance = getDistanceOppoToothTri(
+                                                tooth, sorted_zone4.get(0), sorted_zone4.get(sorted_zone4.size()-1));
+                                    } else {
+                                        //如果当前未惩罚对侧布局，则惩罚
+                                        rec_opposite_flag = true;
+                                        distance = getDistanceOppoToothRec(
+                                                tooth, sorted_zone4.get(0), sorted_zone4.get(sorted_zone4.size() - 1));
+                                    }
                                 }
                                 else {
-                                    distance = getDistanceOppoToothRec(
-                                            tooth, sorted_zone3.get(0), sorted_zone3.get(sorted_zone3.size()-1));
+                                    if (num_disociate_missing_teeth >= 2) {
+                                        tri_opposite_flag = true;
+                                        opposite_combined_clasp_compensate_flag = true;
+                                        distance = getDistanceOppoToothTri(
+                                                tooth, sorted_zone3.get(0), sorted_zone3.get(sorted_zone3.size()-1));
+                                    } else {
+                                        rec_opposite_flag = true;
+                                        distance = getDistanceOppoToothRec(
+                                                tooth, sorted_zone3.get(0), sorted_zone3.get(sorted_zone3.size() - 1));
+                                    }
                                 }
                             }
+                            // 缺失侧不游离
                             else {
+                                // 缺失侧非游离，且缺牙数目小于等于3，三角形规则，在对侧中间位置设置Aker卡环
+                                // 缺失侧非游离，且缺牙数目大于3，三角形规则，在对侧中间位置设置联合卡环
+                                int num_missing_teeth = mouth.getMandibular().getMissingTeeth().size();
                                 if (tooth.getZone() == 3) {
-                                    distance = getDistanceOppoToothTri(
-                                            tooth, sorted_zone4.get(0), sorted_zone4.get(sorted_zone4.size()-1));
+                                    if (num_missing_teeth <= 3) {
+                                        tri_opposite_flag = true;
+                                        distance = getDistanceOppoToothTri(
+                                                tooth, sorted_zone4.get(0), sorted_zone4.get(sorted_zone4.size()-1));
+                                    } else {
+                                        tri_opposite_flag = true;
+                                        opposite_combined_clasp_compensate_flag = true;
+                                        distance = getDistanceOppoToothTri(
+                                                tooth, sorted_zone4.get(0), sorted_zone4.get(sorted_zone4.size()-1));
+                                    }
                                 }
                                 else {
-                                    distance = getDistanceOppoToothTri(
-                                            tooth, sorted_zone3.get(0), sorted_zone3.get(sorted_zone3.size()-1));
+                                    if (num_missing_teeth <= 3) {
+                                        tri_opposite_flag = true;
+                                        distance = getDistanceOppoToothTri(
+                                                tooth, sorted_zone3.get(0), sorted_zone3.get(sorted_zone3.size()-1));
+                                    } else {
+                                        tri_opposite_flag = true;
+                                        opposite_combined_clasp_compensate_flag = true;
+                                        distance = getDistanceOppoToothTri(
+                                                tooth, sorted_zone3.get(0), sorted_zone3.get(sorted_zone3.size()-1));
+                                    }
                                 }
                             }
 
+                        } else if (mouth.getMandibular().getKennedyType() == KennedyType.KENNEDY_TYPE_IV) {
+                            canine_weight = 0.3;
+                            premolar_4_weight = 0.202;
+                            premolar_5_weight = 0.201;
+                            distomolar_6_weight = 0.102;
+                            distomolar_7_weight = 0.101;
+
+                            KIV_commbied_clasp_penalty_flag = true;
+                            EdentulousSpace edentulous_space = mouth.getMandibular().getEdentulousSpaces().get(0);
+                            Tooth left_most = edentulous_space.getLeftMost();
+                            Tooth right_most = edentulous_space.getRightMost();
+                            int left_diatal_target;
+                            int right_distal_target;
+                            if (left_most.getNum() >= 3) {
+                                left_diatal_target = 7;
+                            } else {
+                                left_diatal_target = 5;
+                            }
+                            if (right_most.getNum() >= 3) {
+                                right_distal_target = 7;
+                            } else {
+                                right_distal_target = 5;
+                            }
+
+                            int mesial_distance = 0;
+                            int distal_distance = 0;
+                            Map<String, Object> info = plan.getNearestEdentulous(tooth);
+                            mesial_distance = (Integer) info.get("distance");
+                            if (tooth.getZone() == 4) {
+                                distal_distance = abs(tooth.getNum() - left_diatal_target);
+                            } else {
+                                distal_distance = abs(tooth.getNum() - right_distal_target);
+                            }
+                            distance = Math.min(mesial_distance, distal_distance);
+
                         } else {
                             canine_weight = 0.3;
-                            premolar_weight = 0.2;
-                            distomolar_weight = 0.1;
+                            premolar_4_weight = 0.202;
+                            premolar_5_weight = 0.201;
+                            distomolar_6_weight = 0.102;
+                            distomolar_7_weight = 0.101;
                             Map<String, Object> info = plan.getNearestEdentulous(tooth);
                             distance = (Integer) info.get("distance");
                         }
                     } else {
                         if (mouth.getMaxillary().isZoneNoMissing(tooth.getZone())) {
+                            num_no_missing_zone_abutment += 1;
                             canine_weight = 2.2;
-                            premolar_weight = 0.02;
-                            distomolar_weight = 0.01;
+                            premolar_4_weight = 0.02;
+                            premolar_5_weight = 0.02;
+                            distomolar_6_weight = 0.01;
+                            distomolar_7_weight = 0.01;
+                            EdentulousSpace disociateEdentulous = getDisociateEdentulous(
+                                    mouth.getMaxillary().getEdentulousSpaces());
 
-                            if (isDisociate(mouth.getMaxillary().getEdentulousSpaces())) {
-                                recPenaltyFlag = !recPenaltyFlag;
+                            // 缺失侧游离
+                            if (disociateEdentulous != null) {
+                                int num_disociate_missing_teeth = disociateEdentulous.getNumMissingTeeth();
+                                // 缺失侧游离，且游离缺失牙数目大于等于2：三角形规则，在对侧中间位置设置联合卡环
+                                // 其他情况，四边形规则，在缺牙的起始位置的对侧设置两基牙
                                 if (tooth.getZone() == 1) {
-                                    distance = getDistanceOppoToothRec(
-                                            tooth, sorted_zone2.get(0), sorted_zone2.get(sorted_zone2.size()-1));
+                                    if (num_disociate_missing_teeth >= 2) {
+                                        tri_opposite_flag = true;
+                                        opposite_combined_clasp_compensate_flag = true;
+                                        distance = getDistanceOppoToothTri(
+                                                tooth, sorted_zone2.get(0), sorted_zone2.get(sorted_zone2.size()-1));
+                                    } else {
+                                        //如果当前未惩罚对侧布局，则惩罚
+                                        rec_opposite_flag = true;
+                                        distance = getDistanceOppoToothRec(
+                                                tooth, sorted_zone2.get(0), sorted_zone2.get(sorted_zone2.size() - 1));
+                                    }
                                 }
                                 else {
-                                    distance = getDistanceOppoToothRec(
-                                            tooth, sorted_zone1.get(0), sorted_zone1.get(sorted_zone1.size()-1));
+                                    if (num_disociate_missing_teeth >= 2) {
+                                        tri_opposite_flag = true;
+                                        opposite_combined_clasp_compensate_flag = true;
+                                        distance = getDistanceOppoToothTri(
+                                                tooth, sorted_zone1.get(0), sorted_zone1.get(sorted_zone1.size()-1));
+                                    } else {
+                                        rec_opposite_flag = true;
+                                        distance = getDistanceOppoToothRec(
+                                                tooth, sorted_zone1.get(0), sorted_zone1.get(sorted_zone1.size() - 1));
+                                    }
                                 }
                             }
                             else {
+                                // 缺失侧非游离，且缺牙数目小于等于3，三角形规则，在对侧中间位置设置Aker卡环
+                                // 缺失侧非游离，且缺牙数目大于3，三角形规则，在对侧中间位置设置联合卡环
+                                int num_missing_teeth = mouth.getMaxillary().getMissingTeeth().size();
                                 if (tooth.getZone() == 1) {
-                                    distance = getDistanceOppoToothTri(
-                                            tooth, sorted_zone2.get(0), sorted_zone2.get(sorted_zone2.size()-1));
+                                    if (num_missing_teeth <= 3) {
+                                        tri_opposite_flag = true;
+                                        distance = getDistanceOppoToothTri(
+                                                tooth, sorted_zone2.get(0), sorted_zone2.get(sorted_zone2.size()-1));
+                                    } else {
+                                        tri_opposite_flag = true;
+                                        opposite_combined_clasp_compensate_flag = true;
+                                        distance = getDistanceOppoToothTri(
+                                                tooth, sorted_zone2.get(0), sorted_zone2.get(sorted_zone2.size()-1));
+                                    }
                                 }
                                 else {
-                                    distance = getDistanceOppoToothTri(
-                                            tooth, sorted_zone1.get(0), sorted_zone1.get(sorted_zone1.size()-1));
+                                    if (num_missing_teeth <= 3) {
+                                        tri_opposite_flag = true;
+                                        distance = getDistanceOppoToothTri(
+                                                tooth, sorted_zone1.get(0), sorted_zone1.get(sorted_zone1.size()-1));
+                                    } else {
+                                        tri_opposite_flag = true;
+                                        opposite_combined_clasp_compensate_flag = true;
+                                        distance = getDistanceOppoToothTri(
+                                                tooth, sorted_zone1.get(0), sorted_zone1.get(sorted_zone1.size()-1));
+                                    }
                                 }
                             }
+                        } else if (mouth.getMaxillary().getKennedyType() == KennedyType.KENNEDY_TYPE_IV) {
+                            canine_weight = 0.3;
+                            premolar_4_weight = 0.202;
+                            premolar_5_weight = 0.201;
+                            distomolar_6_weight = 0.102;
+                            distomolar_7_weight = 0.101;
+
+                            KIV_commbied_clasp_penalty_flag = true;
+                            EdentulousSpace edentulous_space = mouth.getMaxillary().getEdentulousSpaces().get(0);
+                            Tooth left_most = edentulous_space.getLeftMost();
+                            Tooth right_most = edentulous_space.getRightMost();
+                            int left_diatal_target;
+                            int right_distal_target;
+                            if (left_most.getNum() >= 3) {
+                                left_diatal_target = 7;
+                            } else {
+                                left_diatal_target = 5;
+                            }
+                            if (right_most.getNum() >= 3) {
+                                right_distal_target = 7;
+                            } else {
+                                right_distal_target = 5;
+                            }
+
+                            int mesial_distance = 0;
+                            int distal_distance = 0;
+                            Map<String, Object> info = plan.getNearestEdentulous(tooth);
+                            mesial_distance = (Integer) info.get("distance");
+                            if (tooth.getZone() == 1) {
+                                distal_distance = abs(tooth.getNum() - left_diatal_target);
+                            } else {
+                                distal_distance = abs(tooth.getNum() - right_distal_target);
+                            }
+                            distance = Math.min(mesial_distance, distal_distance);
+
                         } else {
                             canine_weight = 0.3;
-                            premolar_weight = 0.2;
-                            distomolar_weight = 0.1;
+                            premolar_4_weight = 0.202;
+                            premolar_5_weight = 0.201;
+                            distomolar_6_weight = 0.102;
+                            distomolar_7_weight = 0.101;
                             Map<String, Object> info = plan.getNearestEdentulous(tooth);
                             distance = (Integer) info.get("distance");
                         }
@@ -197,49 +379,52 @@ public class ScoreRule {
 
                     if (tooth.getToothType() == ToothType.Canine) {
                         score += distance + canine_weight;
-                    } else if (tooth.getToothType() == ToothType.Premolar) {
-                        score += distance + premolar_weight;
+                    } else if (tooth.getNum() == 4) {
+                        score += distance + premolar_4_weight;
+                    } else if (tooth.getNum() == 5) {
+                        score += distance + premolar_5_weight;
+                    } else if (tooth.getNum() == 6) {
+                        score += distance + distomolar_6_weight;
                     } else {
-                        score += distance + distomolar_weight;
+                        score += distance + distomolar_7_weight;
                     }
                 }
-                if (recPenaltyFlag) {
+
+                // 惩罚对侧布局，提高对侧布局正确优先级
+                if (rec_opposite_flag) {
                     score += 10;
                 }
+                if (tri_opposite_flag) {
+                    score += 10;
+                }
+                // 惩罚单侧缺失对侧布局基牙过多方案
+                if (num_no_missing_zone_abutment > 2) {
+                    score += 100;
+                }
                 for (Component component : plan.getComponents()) {
-                    if (plan.getPosition() == Position.Mandibular) {
-                        Tooth cur_tooth = component.getToothPos().get(0);
-                        if (mouth.getMandibular().isZoneNoMissing(cur_tooth.getZone())
-                                && isDisociate(mouth.getMandibular().getEdentulousSpaces())) {
-                            continue;
-                        }
-                    }
-                    else {
-                        Tooth cur_tooth = component.getToothPos().get(0);
-                        if (mouth.getMaxillary().isZoneNoMissing(cur_tooth.getZone())
-                                && isDisociate(mouth.getMaxillary().getEdentulousSpaces())) {
-                            continue;
-                        }
-                    }
-
                     if (component.getClass() == CombinedClasp.class || component.getClass() == EmbrasureClasp.class) {
                         if (plan.getPosition() == Position.Mandibular) {
                             if (mouth.getMandibular().isZoneNoMissing(component.getToothPos().get(0).getZone())) {
-                                score -= 0.1;
-                            }
-                            else {
+                                if (opposite_combined_clasp_compensate_flag) {
+                                    score -= 0.1;
+                                }
+                            } else if (KIV_commbied_clasp_penalty_flag) {
+                                score += 10;
+                            } else {
                                 score -= 10;
                             }
                         }
                         else {
                             if (mouth.getMaxillary().isZoneNoMissing(component.getToothPos().get(0).getZone())) {
-                                score -= 0.1;
-                            }
-                            else {
+                                if (opposite_combined_clasp_compensate_flag) {
+                                    score -= 0.1;
+                                }
+                            } else if (KIV_commbied_clasp_penalty_flag) {
+                                score += 10;
+                            } else {
                                 score -= 10;
                             }
                         }
-//						score -= 10;
                     }
                 }
                 return score;

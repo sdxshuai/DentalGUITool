@@ -30,6 +30,8 @@ public abstract class Clasp implements Component {
 		return null;
 	}
 
+	public void setTipDirection(Position tip_direction) {}
+
 	public ClaspMaterial getMaterial() {
 		return null;
 	}

@@ -64,6 +64,16 @@ public class WroughtWireClasp extends Clasp {
 		}
 	}
 
+	public void setTipDirection(Position tip_direction) {
+		this.buccal_arm = new ClaspArm(this.getToothPos().get(0), tip_direction, Position.Buccal, ClaspMaterial.Cast);
+		this.lingual_arm = new ClaspArm(this.getToothPos().get(0), tip_direction, Position.Lingual, ClaspMaterial.Cast);
+		if (tip_direction.equals(Position.Distal)) {
+			this.occlusal_rest = new OcclusalRest(this.getToothPos().get(0), Position.Mesial);
+		} else if (tip_direction.equals(Position.Mesial)) {
+			this.occlusal_rest = new OcclusalRest(this.getToothPos().get(0), Position.Distal);
+		}
+	}
+
 	public ClaspMaterial getMaterial() {
 		return ClaspMaterial.WW;
 	}

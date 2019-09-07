@@ -271,25 +271,7 @@ public class RPDPlan {
 
 		StringBuilder s = new StringBuilder();
 		for (String plan_text : plan_texts_str)
-			s.append(plan_text + "\n");
+			s.append(plan_text).append("\n");
 		return s.toString();
 	}
-
-	/*public String toString() {
-		
-		StringBuilder s = new StringBuilder();
-		for(Map.Entry<Tooth, List<Component>> ent : this.tooth_components.entrySet()) {
-			for(Component component : ent.getValue())
-				s.append(component.toString() + "\n");
-		}
-		return s.toString();
-	}*/
-	
-	/*public String toString() {
-		
-		StringBuilder s = new StringBuilder();
-		for(Component component : components)
-			s.append(component.toString() + "\n");
-		return s.toString();
-	}*/
 }

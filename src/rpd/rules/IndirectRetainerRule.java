@@ -6,6 +6,7 @@ import exceptions.rpd.RuleException;
 import exceptions.rpd.ToothPosException;
 import rpd.RPDPlan;
 import rpd.components.Component;
+import rpd.components.LingualRest;
 import rpd.components.RotationAxis;
 import rpd.conceptions.EdentulousType;
 import rpd.conceptions.Position;
@@ -106,9 +107,92 @@ public class IndirectRetainerRule {
 		indirect_retainer_rules = new ArrayList<IndirectRetainerRule>();
 
 		indirect_retainer_rules.add(new IndirectRetainerRule() {
-
 			public int getRuleNum() throws RuleException {
 				return 1;
+			}
+
+			public String toString() {
+				return this.getExplaination();
+			}
+
+			public String getExplaination() {
+				return "前牙缺失，缺隙邻牙为前牙，则缺隙邻牙添加舌支托";
+			}
+
+			public List<RPDPlan> apply(List<RPDPlan> rpd_plans, List<EdentulousSpace> edentulous_spaces)
+					throws EdentulousTypeException, ToothPosException {
+				if (rpd_plans == null || rpd_plans.size() == 0) {
+					return null;
+				}
+
+				List<RPDPlan> res = new ArrayList<>();
+				for (RPDPlan plan : rpd_plans) {
+					if (plan.getPosition() == Position.Mandibular) {
+						for (int t_zone = 3; t_zone <= 4; t_zone++) {
+							for (int t_num = 1; t_num <= 3; t_num++) {
+								if (t_num == 1) {
+									if (!mouth.getMandibular().getTooth(t_zone, t_num).isMissing()
+											&& (mouth.getMandibular().getTooth(t_zone, 2).isMissing()
+											|| mouth.getMandibular().getTooth(7 - t_zone, 1).isMissing())) {
+										if (!plan.getAbutmentTeeth().contains(mouth.getTooth(t_zone, 1))) {
+											plan.addComponent(new LingualRest(mouth.getTooth(t_zone, 1)));
+											plan.addAbutmentTeeth(mouth.getTooth(t_zone, 1));
+										}
+									}
+								} else {
+									if (!mouth.getMandibular().getTooth(t_zone, t_num).isMissing()
+											&& (mouth.getMandibular().getTooth(t_zone, t_num + 1).isMissing()
+											|| mouth.getMandibular().getTooth(t_zone, t_num - 1).isMissing())) {
+										if (!plan.getAbutmentTeeth().contains(mouth.getTooth(t_zone, t_num))) {
+											plan.addComponent(new LingualRest(mouth.getTooth(t_zone, t_num)));
+											plan.addAbutmentTeeth(mouth.getTooth(t_zone, t_num));
+										}
+									}
+								}
+							}
+						}
+					} else {
+						for (int t_zone = 1; t_zone <= 2; t_zone++) {
+							for (int t_num = 1; t_num <= 3; t_num++) {
+								if (t_num == 1) {
+									if (!mouth.getMaxillary().getTooth(t_zone, t_num).isMissing()
+											&& (mouth.getMaxillary().getTooth(t_zone, 2).isMissing()
+											|| mouth.getMaxillary().getTooth(3 - t_zone, 1).isMissing())) {
+										if (!plan.getAbutmentTeeth().contains(mouth.getTooth(t_zone, 1))) {
+											plan.addComponent(new LingualRest(mouth.getTooth(t_zone, 1)));
+											plan.addAbutmentTeeth(mouth.getTooth(t_zone, 1));
+										}
+									}
+								} else if (t_num == 2){
+									if (!mouth.getMaxillary().getTooth(t_zone, t_num).isMissing()
+											&& (mouth.getMaxillary().getTooth(t_zone, t_num + 1).isMissing()
+											|| mouth.getMaxillary().getTooth(t_zone, t_num - 1).isMissing())) {
+										if (!plan.getAbutmentTeeth().contains(mouth.getTooth(t_zone, t_num))) {
+											plan.addComponent(new LingualRest(mouth.getTooth(t_zone, t_num)));
+											plan.addAbutmentTeeth(mouth.getTooth(t_zone, t_num));
+										}
+									}
+								} else {
+									if (!mouth.getMaxillary().getTooth(t_zone, t_num).isMissing()
+											&& mouth.getMaxillary().getTooth(t_zone, t_num - 1).isMissing()) {
+										if (!plan.getAbutmentTeeth().contains(mouth.getTooth(t_zone, t_num))) {
+											plan.addComponent(new LingualRest(mouth.getTooth(t_zone, t_num)));
+											plan.addAbutmentTeeth(mouth.getTooth(t_zone, t_num));
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+				res.addAll(rpd_plans);
+				return res;
+			}
+		});
+		indirect_retainer_rules.add(new IndirectRetainerRule() {
+
+			public int getRuleNum() throws RuleException {
+				return 2;
 			}
 
 			public String toString() {
@@ -119,41 +203,47 @@ public class IndirectRetainerRule {
 				return "游离缺失，若转动轴前侧无间接固位体，则增设间接固位体";
 			}
 
-			public RPDPlan apply(EdentulousSpace edentulous_space, RPDPlan rpd_plan) throws EdentulousTypeException, ToothPosException {
+			public List<RPDPlan> apply(List<RPDPlan> rpd_plans, List<EdentulousSpace> edentulous_spaces)
+					throws EdentulousTypeException, ToothPosException {
 
-				EdentulousType edentulous_type = edentulous_space.getEdentulousType();
-				if (!edentulous_type.equals(EdentulousType.PosteriorExtension))
+				if (rpd_plans == null || rpd_plans.size() == 0) {
 					return null;
-				else {
-
-					RotationAxis rotation_axis = findRotationAxis(edentulous_space, rpd_plan);
-					if (rotation_axis == null)
-						return null;
-
-					if (rotation_axis.needIndirectRetainer(rpd_plan, edentulous_space, mouth)) {
-
-						RPDPlan new_plan = new RPDPlan(rpd_plan);
-						Component indirect_retainer = rotation_axis.properIndirectRetainet(mouth, rpd_plan);
-						if (indirect_retainer != null) {
-							new_plan.addComponent(indirect_retainer);
-							new_plan.addAbutmentTeeth(indirect_retainer.getToothPos());
-							StringBuilder explanation = new StringBuilder();
-							for (Tooth tooth : indirect_retainer.getToothPos()) {
-								explanation.append(tooth.toString());
-							}
-							explanation.append("：");
-							explanation.append("游离缺失，缺失侧转动轴前侧无间接固位体，增设间接固位体\n");
-							new_plan.appendPlanExplanation(explanation.toString());
-						}
-						return new_plan;
-					} else
-						return null;
 				}
+
+				List<RPDPlan> res = new ArrayList<>();
+				for (RPDPlan plan : rpd_plans) {
+					for (EdentulousSpace edentulous_space : edentulous_spaces) {
+						EdentulousType edentulous_type = edentulous_space.getEdentulousType();
+						if (edentulous_type.equals(EdentulousType.PosteriorExtension)) {
+							RotationAxis rotation_axis = findRotationAxis(edentulous_space, plan);
+							if (rotation_axis == null)
+								continue;
+
+							if (rotation_axis.needIndirectRetainer(plan, edentulous_space, mouth)) {
+								Component indirect_retainer = rotation_axis.properIndirectRetainet(mouth, plan);
+								if (indirect_retainer != null) {
+									plan.addComponent(indirect_retainer);
+									plan.addAbutmentTeeth(indirect_retainer.getToothPos());
+									StringBuilder explanation = new StringBuilder();
+									for (Tooth tooth : indirect_retainer.getToothPos()) {
+										explanation.append(tooth.toString());
+									}
+									explanation.append("：");
+									explanation.append("游离缺失，缺失侧转动轴前侧无间接固位体，增设间接固位体\n");
+									plan.appendPlanExplanation(explanation.toString());
+								}
+							}
+						}
+					}
+				}
+				res.addAll(rpd_plans);
+				return res;
 			}
 		});
 	}
 
-	public RPDPlan apply(EdentulousSpace edentulous_space, RPDPlan rpd_plan) throws RuleException, ToothPosException, ClaspAssemblyException, EdentulousTypeException {
+	public List<RPDPlan> apply(List<RPDPlan> rpd_plans, List<EdentulousSpace> edentulous_spaces)
+			throws RuleException, ToothPosException, ClaspAssemblyException, EdentulousTypeException {
 		throw new RuleException("call from abstract class");
 	}
 

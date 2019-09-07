@@ -92,7 +92,7 @@ public abstract class EdentulousTypeRule {
 		edentulous_type_rules.add(new EdentulousTypeRule() {
 
 			public String getExplaination() {
-				return "缺隙未过中线，远端无天然牙，近端尖牙后侧有天然牙：后端游离";
+				return "缺隙未过中线，远端无天然牙：后端游离";
 			}
 
 			public String toString() {
@@ -110,14 +110,14 @@ public abstract class EdentulousTypeRule {
 				if (left_neighbor == null && right_neighbor != null) {
 					int right_neignbor_zone = right_neighbor.getZone();
 					int right_neignbor_num = right_neighbor.getNum();
-					if ((right_neignbor_zone == 4 || right_neignbor_zone == 1) && right_neignbor_num >= 3)
+					if ((right_neignbor_zone == 4 || right_neignbor_zone == 1))
 						return EdentulousType.PosteriorExtension;
 					else
 						return null;
 				} else if (left_neighbor != null && right_neighbor == null) {
 					int left_neighbor_zone = left_neighbor.getZone();
 					int left_neighbor_num = left_neighbor.getNum();
-					if ((left_neighbor_zone == 2 || left_neighbor_zone == 3) && left_neighbor_num >= 3)
+					if ((left_neighbor_zone == 2 || left_neighbor_zone == 3))
 						return EdentulousType.PosteriorExtension;
 					else
 						return null;

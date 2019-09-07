@@ -6,6 +6,7 @@ import exceptions.rpd.ToothPosException;
 import rpd.RPDPlan;
 import rpd.components.*;
 import rpd.conceptions.*;
+import rpd.oral.EdentulousSpace;
 import rpd.oral.Mouth;
 import rpd.oral.Tooth;
 
@@ -423,6 +424,72 @@ public class ClaspRule {
 						with_multi_list.add(succ_tooth_list.get(0));
 						with_multi_list.add(succ_tooth_list.get(succ_tooth_list.size() - 1));
 						getPlans(with_multi_list, plan, res);
+					}
+				}
+
+				// Aker卡环在Kennedy IV时，如果是距离缺隙最近的卡环，卡环臂尖朝向近中
+				KennedyType kennedy_type = null;
+				if (res.get(0).getPosition() == Position.Mandibular) {
+					kennedy_type = mouth.getMandibular().getKennedyType();
+				} else {
+					kennedy_type = mouth.getMaxillary().getKennedyType();
+				}
+
+				if (kennedy_type == KennedyType.KENNEDY_TYPE_IV) {
+					EdentulousSpace edentulous_space;
+					if (res.get(0).getPosition() == Position.Mandibular) {
+						edentulous_space = mouth.getMandibular().getEdentulousSpaces().get(0);
+					} else {
+						edentulous_space = mouth.getMaxillary().getEdentulousSpaces().get(0);
+					}
+
+					int num_left_most = edentulous_space.getLeftMost().getNum();
+					int num_right_most = edentulous_space.getRightMost().getNum();
+					int zone_left_most = edentulous_space.getLeftMost().getZone();
+					int zone_right_most = edentulous_space.getRightMost().getZone();
+					for (RPDPlan plan : res) {
+						Component left_nearest_clasp_component = null;
+						Component right_nearest_clasp_component = null;
+						int cur_left_dist = 100;
+						int cur_right_dist = 100;
+						for (Component component : plan.getComponents()) {
+							if (component.getToothPos().get(0).getZone() == zone_left_most
+									&& component.getToothPos().get(0).getNum() - num_left_most < cur_left_dist
+									&& component.isClasp()) {
+								cur_left_dist = component.getToothPos().get(0).getNum() - num_left_most;
+								left_nearest_clasp_component = component;
+							}
+
+							if (component.getToothPos().get(0).getZone() == zone_right_most
+									&& component.getToothPos().get(0).getNum() - num_right_most < cur_right_dist
+									&& component.isClasp()) {
+								cur_right_dist = component.getToothPos().get(0).getNum() - num_right_most;
+								right_nearest_clasp_component = component;
+							}
+						}
+						if (left_nearest_clasp_component instanceof AkerClasp
+								|| left_nearest_clasp_component instanceof WroughtWireClasp) {
+							Position cur_tip_direction = ((Clasp) left_nearest_clasp_component).getTipDirection();
+							Position new_tip_direction;
+							if (cur_tip_direction == Position.Mesial) {
+								new_tip_direction = Position.Distal;
+							} else {
+								new_tip_direction = Position.Mesial;
+							}
+							((Clasp) left_nearest_clasp_component).setTipDirection(new_tip_direction);
+						}
+
+						if (right_nearest_clasp_component instanceof AkerClasp
+								|| right_nearest_clasp_component instanceof WroughtWireClasp) {
+							Position cur_tip_direction = ((Clasp) right_nearest_clasp_component).getTipDirection();
+							Position new_tip_direction;
+							if (cur_tip_direction == Position.Mesial) {
+								new_tip_direction = Position.Distal;
+							} else {
+								new_tip_direction = Position.Mesial;
+							}
+							((Clasp) right_nearest_clasp_component).setTipDirection(new_tip_direction);
+						}
 					}
 				}
 				return res;
