@@ -1,0 +1,1 @@
+javah -cp D:\lib\apache-jena-3.2.0\lib\jena-core-3.2.0.jar;E:\opencv\build\java\opencv-320.jar;out\production\DentalGUITool -d . GUI.LabelTool

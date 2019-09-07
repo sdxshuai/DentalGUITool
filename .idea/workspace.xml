@@ -7,7 +7,23 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ee2f1d7f-9d4a-4891-8cec-d807570523e9" name="Default" comment="完成卡环生成规则修改，增加78对合牙位不镶牙相关规则。">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/GUI_LabelTool.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generate_header.bat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/res/CDSSinRPD_ontology_170312.owl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/res/CDSSinRPD_ontology_170406.owl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/res/base.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/res/base_print.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/res/base_template.owl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/res/general_regex_with_value.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/res/icon.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/res/icon1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/res/icon2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/res/icon3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/res/ontology_definition_1209.xlsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/res/ontology_definition_new.xlsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/res/rules_all_with_value_20170116.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/res/txt2img.png" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -229,7 +245,7 @@
       <workItem from="1567501712711" duration="6159000" />
       <workItem from="1567567901959" duration="22405000" />
       <workItem from="1567736856512" duration="12490000" />
-      <workItem from="1567826506737" duration="883000" />
+      <workItem from="1567826506737" duration="1155000" />
     </task>
     <task id="LOCAL-00001" summary="fix bug about adding 舌支托">
       <created>1551334542146</created>
@@ -266,7 +282,14 @@
       <option name="project" value="LOCAL" />
       <updated>1567768196952</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="完成卡环生成规则修改，增加78对合牙位不镶牙相关规则。">
+      <created>1567827458526</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1567827458526</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
