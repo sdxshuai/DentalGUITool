@@ -1,5 +1,8 @@
 package misc;
 
+import exceptions.PropertyValueException;
+
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileInputStream;
@@ -55,7 +58,7 @@ public class PrintImageList {
         }
     }
 
-    public void mergeImage(String[] files, int type, String targetFile) {
+    public void mergeImage(String[] files, int type, String targetFile, String addedTxt) {
         int len = files.length;
         if (len < 1) {
             throw new RuntimeException("图片数量小于1");
@@ -66,7 +69,11 @@ public class PrintImageList {
         for (int i = 0; i < len; i++) {
             try {
                 src[i] = new File(files[i]);
-                images[i] = ImageIO.read(src[i]);
+                if (i == 0) {
+                    images[i] = addTextToImage(ImageIO.read(src[i]), addedTxt);
+                } else {
+                    images[i] = ImageIO.read(src[i]);
+                }
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }
@@ -115,26 +122,43 @@ public class PrintImageList {
         }
     }
 
+    public BufferedImage addTextToImage(BufferedImage image, String text) {
 
-    public static void main(String[] args) {
-        String picture_dir = "out//picture//";
-        String base_image_name = "res//base_print.png";
+        Graphics g = image.getGraphics();
+        g.setFont(new Font("微软雅黑", Font.PLAIN, 30));
+        g.setColor(Color.BLACK);
+        g.drawString("病历："+text, 30, 50);
+        g.dispose();
+//		ImageIO.write(image, "png", new File("test.png"));
 
-        File picture_dir_file = new File(picture_dir);
+        return image;
+    }
+
+    public static void main(String[] args) throws PropertyValueException, IOException {
+        String input_picture_dir = "F:\\forRPDTest\\picture";
+        String output_picture_dir = "F:\\forRPDTest\\concat_picture";
+        String base_image_name = "res\\base.png";
+
+        File picture_dir_file = new File(input_picture_dir);
         File[] pictures_file_list = picture_dir_file.listFiles();
         Map<String, ArrayList<String>> case_pictures_map = new HashMap<>();
 
         for (File picture_file : pictures_file_list) {
-            String picture_file_name = picture_dir + picture_file.getName();
-            if (picture_file_name.indexOf("print") == -1) {
+            String picture_file_name = picture_file.getAbsolutePath();
+            if (picture_file_name.indexOf("png") == -1) {
                 continue;
             }
-            int key_end_index = picture_file_name.indexOf("_RPD");
+
+            String inputEmrCanonicalPath = picture_file.getCanonicalPath();
+            int dotIndex = inputEmrCanonicalPath.lastIndexOf(".");
+            int gangIndex = inputEmrCanonicalPath.lastIndexOf("\\");
+            String inputEmrFileName = inputEmrCanonicalPath.substring(gangIndex + 1, dotIndex);
+            int key_end_index = inputEmrFileName.indexOf("_RPD");
             if (key_end_index == -1) {
                 continue;
             }
 
-            String key_str = picture_file_name.substring(0, key_end_index);
+            String key_str = inputEmrFileName.substring(0, key_end_index);
             if (case_pictures_map.containsKey(key_str)) {
                 case_pictures_map.get(key_str).add(picture_file_name);
             } else {
@@ -151,8 +175,8 @@ public class PrintImageList {
             input_picture_names.add(0, base_image_name);
             String[] array = new String[input_picture_names.size()];
             String[] input_picture_names_array = input_picture_names.toArray(array);
-            String targetFile = entry.getKey() + ".png";
-            test.mergeImage(input_picture_names_array, 1, targetFile);
+            String targetFile = output_picture_dir + "\\" + entry.getKey() + ".png";
+            test.mergeImage(input_picture_names_array, 1, targetFile, entry.getKey());
 //            test.drawImage(new String[]{targetFile}, 1);
         }
     }

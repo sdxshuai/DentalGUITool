@@ -277,6 +277,9 @@ public class ClaspRule {
 						return new HalfHalfClasp(tooth, material);
 					}
 				} else {
+                    if (tooth.toString().equals("tooth24")) {
+                        int a = 0;
+                    }
 					Map<String, Object> info = plan.getNearestEdentulous(tooth);
 					Position tip_direction = (Position) info.get("direction");
 					explanation.append("基牙无其他特殊状况，选择Aker卡环\n");

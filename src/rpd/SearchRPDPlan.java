@@ -171,6 +171,9 @@ public class SearchRPDPlan {
 			mandibular.getZone4().get(7).setMissing(false);
 			mandibular.setleftMostToothNum(6);
 		}
+        if (noMissing(mandibular)) {
+            return null;
+        }
 		edentulousSpaceList = mandibular.getEdentulousSpaces(mandibular.getZone3(), mandibular.getZone4());
 		mandibular.setEdentulousSpaces(edentulousSpaceList);
 
@@ -348,6 +351,9 @@ public class SearchRPDPlan {
 			maxillary.getZone2().get(7).setMissing(false);
 			maxillary.setRightMostToothNum(6);
 		}
+        if (noMissing(maxillary)) {
+            return null;
+        }
 		edentulousSpaceList = maxillary.getEdentulousSpaces(maxillary.getZone1(), maxillary.getZone2());
 		maxillary.setEdentulousSpaces(edentulousSpaceList);
 

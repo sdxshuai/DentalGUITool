@@ -21,13 +21,12 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.*;
+import GUI.LabelTool;
 
 import static org.opencv.imgcodecs.Imgcodecs.imwrite;
 import static rpd.conceptions.Position.Mesial;
 
-import GUI.LabelTool;
-
-public class LabelTool_forPresent {
+public class LabelTool_for_test {
     static {
         System.loadLibrary("RpdDesignLib");
         System.loadLibrary("opencv_java330");
@@ -43,7 +42,7 @@ public class LabelTool_forPresent {
      * @throws PropertyValueException
      * @throws IOException
      */
-    public LabelTool_forPresent(File inputOwlFile, File inputModifierFile, String inputPictureOutputDir)
+    public LabelTool_for_test(File inputOwlFile, File inputModifierFile, String inputPictureOutputDir)
             throws PropertyValueException, IOException {
         owlFile = inputOwlFile;
         modifierFile = inputModifierFile;
@@ -61,7 +60,7 @@ public class LabelTool_forPresent {
             javax.xml.transform.TransformerException,
             org.xml.sax.SAXException,
             exceptions.ToothMapException,
-            exceptions.PropertyValueException,
+            PropertyValueException,
             exceptions.ToothModifierException,
             exceptions.rpd.RuleException,
             exceptions.rpd.ToothPosException,
@@ -70,43 +69,50 @@ public class LabelTool_forPresent {
         // get instanced xml file
         File inputOwlFile = new File("res\\base_template.owl");
         File inputModifierFile = new File("res\\label_modifier_description.txt");
-        String inputPictureOutputDir = "F:\\forPresent\\picture";
-        LabelTool_forPresent labelTool = new LabelTool_forPresent(inputOwlFile, inputModifierFile, inputPictureOutputDir);
-        File inputEmr = new File("data//54.txt");
+        String inputPictureOutputDir = "F:\\forRPDTest\\picture";
+        LabelTool_for_test labelTool = new LabelTool_for_test(inputOwlFile, inputModifierFile, inputPictureOutputDir);
+        File inputEmrDir = new File("F:\\forRPDTest\\data");
+        File[] inputEmrList = inputEmrDir.listFiles();
 
-        String inputEmrCanonicalPath = inputEmr.getCanonicalPath();
-        int dotIndex = inputEmrCanonicalPath.lastIndexOf(".");
-        int gangIndex = inputEmrCanonicalPath.lastIndexOf("\\");
-        String inputEmrFileName = inputEmrCanonicalPath.substring(gangIndex+1, dotIndex);
-        File xmlFile = labelTool.getXml(inputEmr, inputEmrFileName);
+        if (inputEmrList != null) {
+            for (File inputEmr : inputEmrList) {
+                if (!inputEmr.getName().endsWith("txt")){
+                    continue;
+                }
+                System.out.println(inputEmr.getName());
+                String inputEmrCanonicalPath = inputEmr.getCanonicalPath();
+                int dotIndex = inputEmrCanonicalPath.lastIndexOf(".");
+                int gangIndex = inputEmrCanonicalPath.lastIndexOf("\\");
+                String inputEmrFileName = inputEmrCanonicalPath.substring(gangIndex + 1, dotIndex);
+                File xmlFile = labelTool.getXml(inputEmr, inputEmrFileName);
 
-        // get rpd plans
-        OntModel mouth_ont = ModelFactory.createOntologyModel(OntModelSpec.OWL_DL_MEM);
-        mouth_ont.read("file:" + labelTool.owlFile.getCanonicalPath());
-        Instantialize.convertXmlToOnt(mouth_ont, xmlFile);
-        Mouth mouth = new Mouth(mouth_ont);
-        List<RPDPlan> mandibularRpdPlans = labelTool.getMandibularRpdPlans(mouth);
-        List<RPDPlan> maxillaryRpdPlans = labelTool.getMaxillaryRpdPlans(mouth);
+                // get rpd plans
+                OntModel mouth_ont = ModelFactory.createOntologyModel(OntModelSpec.OWL_DL_MEM);
+                mouth_ont.read("file:" + labelTool.owlFile.getCanonicalPath());
+                Instantialize.convertXmlToOnt(mouth_ont, xmlFile);
+                Mouth mouth = new Mouth(mouth_ont);
+                List<RPDPlan> mandibularRpdPlans = labelTool.getMandibularRpdPlans(mouth);
+                List<RPDPlan> maxillaryRpdPlans = labelTool.getMaxillaryRpdPlans(mouth);
 
-        // get descriptions
-        if (!(mandibularRpdPlans == null || mandibularRpdPlans.size() == 0)) {
-            labelTool.getDescription(mandibularRpdPlans, inputEmrFileName + "_Mandibular");
+                // get descriptions
+                if (!(mandibularRpdPlans == null || mandibularRpdPlans.size() == 0)) {
+                    labelTool.getDescription(mandibularRpdPlans, inputEmrFileName + "_Mandibular");
+                }
+                if (!(maxillaryRpdPlans == null || maxillaryRpdPlans.size() == 0)) {
+                    labelTool.getDescription(maxillaryRpdPlans, inputEmrFileName + "_Maxillary");
+                }
+
+                // get pictures
+                if (!(mandibularRpdPlans == null || mandibularRpdPlans.size() == 0)) {
+                    labelTool.generateAndSaveRPDPlanPicture(
+                            mandibularRpdPlans, inputEmrFileName, labelTool.pictureOutputDir);
+                }
+                if (!(maxillaryRpdPlans == null || maxillaryRpdPlans.size() == 0)) {
+                    labelTool.generateAndSaveRPDPlanPicture(
+                            maxillaryRpdPlans, inputEmrFileName, labelTool.pictureOutputDir);
+                }
+            }
         }
-        if (!(maxillaryRpdPlans == null || maxillaryRpdPlans.size() == 0)) {
-            labelTool.getDescription(maxillaryRpdPlans, inputEmrFileName + "_Maxillary");
-        }
-
-        // get pictures
-        if (!(mandibularRpdPlans == null || mandibularRpdPlans.size() == 0)) {
-            labelTool.generateAndSaveRPDPlanPicture(
-                    mandibularRpdPlans, inputEmrFileName, labelTool.pictureOutputDir);
-        }
-        if (!(maxillaryRpdPlans == null || maxillaryRpdPlans.size() == 0)) {
-            labelTool.generateAndSaveRPDPlanPicture(
-                    maxillaryRpdPlans, inputEmrFileName, labelTool.pictureOutputDir);
-        }
-        int a = 0;
-
     }
 
     public File getXml(File inputEmr, String inputEmrFileName)
@@ -117,7 +123,7 @@ public class LabelTool_forPresent {
         File ruleFile = new File(resDir.getCanonicalPath() + "\\rules_all_with_value_20170116.txt");
         File generalRegexFile = new File(resDir.getCanonicalPath() + "\\general_regex_with_value.txt");
         ruleParserWithStats p = new ruleParserWithStats(ruleFile, generalRegexFile, owlFile, modifierFile, excelFile);
-        String xml_file_path = "F:\\forPresent\\xml\\" + inputEmrFileName + ".xml";
+        String xml_file_path = "F:\\forRPDTest\\xml\\" + inputEmrFileName + ".xml";
         File xmlFile = new File(xml_file_path);
         p.parseFile(inputEmr, xmlFile);
         return xmlFile;
@@ -138,10 +144,10 @@ public class LabelTool_forPresent {
             exceptions.rpd.EdentulousTypeException{
         return SearchRPDPlan.searchMaxillary(mouth);
     }
-    
-    public void getDescription(List<RPDPlan> plans, String filePrefix) throws java.io.IOException {
+
+    public void getDescription(List<RPDPlan> plans, String filePrefix) throws IOException {
         int plan_count = 0;
-        String descFilePath = "F:\\forPresent\\description\\" + filePrefix + "_description.txt";
+        String descFilePath = "F:\\forRPDTest\\description\\" + filePrefix + "_description.txt";
         checkAndCreateFile(descFilePath);
         File descFile = new File(descFilePath);
         FileOutputStream fileWritter = new FileOutputStream(descFile);
@@ -151,7 +157,7 @@ public class LabelTool_forPresent {
             plan_count++;
             string2write = "Plan " + String.valueOf(plan_count) + "\n";
             fileWritter.write(string2write.getBytes());
-            Map<ArrayList<Tooth>, Set<rpd.components.Component>> tooth_components = plan.getToothComponents();
+            Map<ArrayList<Tooth>, Set<Component>> tooth_components = plan.getToothComponents();
             ArrayList<ArrayList<Tooth>> plan_teeth = new ArrayList<>(tooth_components.keySet());
             Collections.sort(plan_teeth, new Comparator<ArrayList<Tooth>>() {
                 public int compare(ArrayList<Tooth> left, ArrayList<Tooth> right) {
@@ -159,8 +165,8 @@ public class LabelTool_forPresent {
                 }
             });
             for (ArrayList<Tooth> tooth : plan_teeth) {
-                Set<rpd.components.Component> components = tooth_components.get(tooth);
-                for (rpd.components.Component component : components) {
+                Set<Component> components = tooth_components.get(tooth);
+                for (Component component : components) {
                     String componentDesc = component.toString();
                     string2write = componentDesc + "\n";
                     fileWritter.write(string2write.getBytes());
@@ -172,7 +178,7 @@ public class LabelTool_forPresent {
     }
 
     public void generateAndSaveRPDPlanPicture(List<RPDPlan> plans, String txtFileName, String outputDir)
-            throws java.io.IOException, exceptions.rpd.RuleException {
+            throws IOException, exceptions.rpd.RuleException {
         if (plans == null || plans.size() == 0) {
             return;
         }
@@ -197,7 +203,7 @@ public class LabelTool_forPresent {
         }
     }
 
-    private void checkAndCreateFile(String filepath) throws java.io.IOException{
+    private void checkAndCreateFile(String filepath) throws IOException{
         File file = new File(filepath);
         File file_dir = new File(file.getParent());
 
@@ -219,7 +225,7 @@ public class LabelTool_forPresent {
 
         Map<ArrayList<Tooth>, Set<Component>> tooth_components = plan.getToothComponents();
         for (ArrayList<Tooth> tooth_pos : tooth_components.keySet())
-            for (rpd.components.Component component : tooth_components.get(tooth_pos)) {
+            for (Component component : tooth_components.get(tooth_pos)) {
                 indCount++;
                 String className = component.getClass().getName();
                 switch (className) {
@@ -318,14 +324,14 @@ public class LabelTool_forPresent {
         }
     }
 
-    private void addDentureBase(rpd.components.Component base, OntModel model, String NS, int indCount) {
+    private void addDentureBase(Component base, OntModel model, String NS, int indCount) {
         DentureBase dentureBase = (DentureBase) base;
         OntClass dentureBaseClass = model.getOntClass(NS + "denture_base");
         Individual indDentureBase = model.createIndividual(NS + indCount, dentureBaseClass);
         setComponentToothPos(model, indDentureBase, dentureBase.getToothPos(), NS);
     }
 
-    private void addAkerClaspToOwl(rpd.components.Component clasp, OntModel model, String NS, int indCount) {
+    private void addAkerClaspToOwl(Component clasp, OntModel model, String NS, int indCount) {
         AkerClasp akerClasp = (AkerClasp) clasp;
         OntClass akerClaspClass = model.getOntClass(NS + "aker_clasp");
         Individual indAkerClasp = model.createIndividual(NS + indCount, akerClaspClass);
@@ -334,7 +340,7 @@ public class LabelTool_forPresent {
         setComponentToothPos(model, indAkerClasp, akerClasp.getToothPos(), NS);
     }
 
-    private void addWroughtWireClaspToOwl(rpd.components.Component clasp, OntModel model, String NS, int indCount) {
+    private void addWroughtWireClaspToOwl(Component clasp, OntModel model, String NS, int indCount) {
         WroughtWireClasp wroughtWireClasp = (WroughtWireClasp) clasp;
         OntClass wroughtWireClaspClass = model.getOntClass(NS + "wrought_wire_clasp");
         Individual indWroughtWireClasp = model.createIndividual(NS + indCount, wroughtWireClaspClass);
@@ -343,7 +349,7 @@ public class LabelTool_forPresent {
         setComponentToothPos(model, indWroughtWireClasp, wroughtWireClasp.getToothPos(), NS);
     }
 
-    private void addCombinationClaspToOwl(rpd.components.Component clasp, OntModel model, String NS, int indCount) {
+    private void addCombinationClaspToOwl(Component clasp, OntModel model, String NS, int indCount) {
         CombinationClasp combinationClasp = (CombinationClasp) clasp;
         OntClass combinationClaspClass = model.getOntClass(NS + "combination_clasp");
         Individual indCombinationClasp = model.createIndividual(NS + indCount, combinationClaspClass);
@@ -351,7 +357,7 @@ public class LabelTool_forPresent {
         setComponentToothPos(model, indCombinationClasp, combinationClasp.getToothPos(), NS);
     }
 
-    private void addCanineClaspToOwl(rpd.components.Component clasp, OntModel model, String NS, int indCount) {
+    private void addCanineClaspToOwl(Component clasp, OntModel model, String NS, int indCount) {
         CanineClasp canineClasp = (CanineClasp) clasp;
         OntClass canineClaspClass = model.getOntClass(NS + "canine_clasp");
         Individual indCanineClasp = model.createIndividual(NS + indCount, canineClaspClass);
@@ -359,7 +365,7 @@ public class LabelTool_forPresent {
         setClaspMaterial(model, indCanineClasp, canineClasp.getMaterial(), NS);
     }
 
-    private void addCanineAkerClaspToOwl(rpd.components.Component clasp, OntModel model, String NS, int indCount) {
+    private void addCanineAkerClaspToOwl(Component clasp, OntModel model, String NS, int indCount) {
         CanineAkerClasp canineAkerClasp = (CanineAkerClasp) clasp;
         OntClass canineAkerClaspClass = model.getOntClass(NS + "canine_aker_clasp");
         Individual indCanineAkerClasp = model.createIndividual(NS + indCount, canineAkerClaspClass);
@@ -368,7 +374,7 @@ public class LabelTool_forPresent {
         setComponentToothPos(model, indCanineAkerClasp, canineAkerClasp.getToothPos(), NS);
     }
 
-    private void addHalfHalfClaspToOwl(rpd.components.Component clasp, OntModel model, String NS, int indCount) {
+    private void addHalfHalfClaspToOwl(Component clasp, OntModel model, String NS, int indCount) {
         HalfHalfClasp halfHalfClasp = (HalfHalfClasp) clasp;
         OntClass halfHalfClaspClass = model.getOntClass(NS + "half_and_half_clasp");
         Individual indHalfHalfClasp = model.createIndividual(NS + indCount, halfHalfClaspClass);
@@ -376,7 +382,7 @@ public class LabelTool_forPresent {
         setComponentToothPos(model, indHalfHalfClasp, halfHalfClasp.getToothPos(), NS);
     }
 
-    private void addBackActionClaspToOwl(rpd.components.Component clasp, OntModel model, String NS, int indCount) {
+    private void addBackActionClaspToOwl(Component clasp, OntModel model, String NS, int indCount) {
         BackActionClasp backActionClasp = (BackActionClasp) clasp;
         OntClass backActionClaspClass = model.getOntClass(NS + "back_action_clasp");
         Individual indBackActionClasp = model.createIndividual(NS + indCount, backActionClaspClass);
@@ -386,7 +392,7 @@ public class LabelTool_forPresent {
     }
 
     private void addReverseBackActionClaspToOwl(
-            rpd.components.Component clasp, OntModel model, String NS, int indCount) {
+            Component clasp, OntModel model, String NS, int indCount) {
         ReverseBackActionClasp reverseBackActionClasp = (ReverseBackActionClasp) clasp;
         OntClass reverseBackActionClaspClass = model.getOntClass(NS + "reverse_back_action_clasp");
         Individual indReverseBackActionClasp = model.createIndividual(NS + indCount, reverseBackActionClaspClass);
@@ -395,7 +401,7 @@ public class LabelTool_forPresent {
         setComponentToothPos(model, indReverseBackActionClasp, reverseBackActionClasp.getToothPos(), NS);
     }
 
-    private void addRingClaspToOwl(rpd.components.Component clasp, OntModel model, String NS, int indCount) {
+    private void addRingClaspToOwl(Component clasp, OntModel model, String NS, int indCount) {
         RingClasp ringClasp = (RingClasp) clasp;
         OntClass ringClaspClass = model.getOntClass(NS + "ring_clasp");
         Individual indRingClasp = model.createIndividual(NS + indCount, ringClaspClass);
@@ -404,7 +410,7 @@ public class LabelTool_forPresent {
         setComponentToothPos(model, indRingClasp, ringClasp.getToothPos(), NS);
     }
 
-    private void addCombinedClaspToOwl(rpd.components.Component clasp, OntModel model, String NS, int indCount) {
+    private void addCombinedClaspToOwl(Component clasp, OntModel model, String NS, int indCount) {
         CombinedClasp combinedClasp = (CombinedClasp) clasp;
         OntClass combinedClaspClass = model.getOntClass(NS + "combined_clasp");
         Individual indCombinedClasp = model.createIndividual(NS + indCount, combinedClaspClass);
@@ -412,7 +418,7 @@ public class LabelTool_forPresent {
         setComponentToothPos(model, indCombinedClasp, combinedClasp.getToothPos(), NS);
     }
 
-    private void addEmbrasureClaspToOwl(rpd.components.Component clasp, OntModel model, String NS, int indCount) {
+    private void addEmbrasureClaspToOwl(Component clasp, OntModel model, String NS, int indCount) {
         EmbrasureClasp embrasureClasp = (EmbrasureClasp) clasp;
         OntClass embrasureClaspClass = model.getOntClass(NS + "embrasure_clasp");
         Individual indEmbrasureClasp = model.createIndividual(NS + indCount, embrasureClaspClass);
@@ -420,7 +426,7 @@ public class LabelTool_forPresent {
         setComponentToothPos(model, indEmbrasureClasp, embrasureClasp.getToothPos(), NS);
     }
 
-    private void addContinuousClaspToOwl(rpd.components.Component clasp, OntModel model, String NS, int indCount) {
+    private void addContinuousClaspToOwl(Component clasp, OntModel model, String NS, int indCount) {
         ContinuousClasp continuousClasp = (ContinuousClasp) clasp;
         OntClass continuousClaspClass = model.getOntClass(NS + "continuous_clasp");
         Individual indContinuousClasp = model.createIndividual(NS + indCount, continuousClaspClass);
@@ -428,7 +434,7 @@ public class LabelTool_forPresent {
         setComponentToothPos(model, indContinuousClasp, continuousClasp.getToothPos(), NS);
     }
 
-    private void addRPAClaspToOwl(rpd.components.Component clasp, OntModel model, String NS, int indCount) {
+    private void addRPAClaspToOwl(Component clasp, OntModel model, String NS, int indCount) {
         RPAClasp RPAClasp = (RPAClasp) clasp;
         OntClass RPAClaspClass = model.getOntClass(NS + "RPA_clasps");
         Individual indRPAClasp = model.createIndividual(NS + indCount, RPAClaspClass);
@@ -437,7 +443,7 @@ public class LabelTool_forPresent {
         setComponentToothPos(model, indRPAClasp, RPAClasp.getToothPos(), NS);
     }
 
-    private void addOcclusalRestToOwl(rpd.components.Component rest, OntModel model, String NS, int indCount) {
+    private void addOcclusalRestToOwl(Component rest, OntModel model, String NS, int indCount) {
         OcclusalRest occlusalRest = (OcclusalRest) rest;
         OntClass occlusalRestClass = model.getOntClass(NS + "occlusal_rest");
         Individual indOcclusalRest = model.createIndividual(NS + indCount, occlusalRestClass);
@@ -445,7 +451,7 @@ public class LabelTool_forPresent {
         setComponentToothPos(model, indOcclusalRest, occlusalRest.getToothPos(), NS);
     }
 
-    private void addLingualRestToOwl(rpd.components.Component rest, OntModel model, String NS, int indCount) {
+    private void addLingualRestToOwl(Component rest, OntModel model, String NS, int indCount) {
         LingualRest lingualRest = (LingualRest) rest;
         OntClass lingualRestClass = model.getOntClass(NS + "lingual_rest");
         Individual indLingualRest = model.createIndividual(NS + indCount, lingualRestClass);
@@ -453,7 +459,7 @@ public class LabelTool_forPresent {
     }
 
     private void addSinglePalatalStrapConnectorToOwl(
-            rpd.components.Component connector, OntModel model, String NS, int indCount) {
+            Component connector, OntModel model, String NS, int indCount) {
         SinglePalatalStrapConnector singlePalatalStrapConnector = (SinglePalatalStrapConnector) connector;
         OntClass singlePalatalStrapConnectorClass = model.getOntClass(NS + "single_palatal_strap");
         Individual indSinglePalatalStrapConnector
@@ -462,7 +468,7 @@ public class LabelTool_forPresent {
     }
 
     private void addCombinationAnteriorPosteriorPalatalStrapConnectorToOwl(
-            rpd.components.Component connector, OntModel model, String NS, int indCount) {
+            Component connector, OntModel model, String NS, int indCount) {
         CombinationAnteriorPosteriorPalatalStrapConnector CAPPSConnector
                 = (CombinationAnteriorPosteriorPalatalStrapConnector) connector;
         OntClass CAPPSConnectorClass = model.getOntClass(NS + "combination_anterior_posterior_palatal_strap");
@@ -471,7 +477,7 @@ public class LabelTool_forPresent {
     }
 
     private void addPalatalPlateConnectorToOwl(
-            rpd.components.Component connector, OntModel model, String NS, int indCount) {
+            Component connector, OntModel model, String NS, int indCount) {
         PalatalPlateConnector palatalPlateConnector = (PalatalPlateConnector) connector;
         OntClass palatalPlateConnectorClass = model.getOntClass(NS + "palatal_plate");
         Individual indPalatalPlateConnector = model.createIndividual(NS + indCount, palatalPlateConnectorClass);
@@ -481,7 +487,7 @@ public class LabelTool_forPresent {
     }
 
     private void addFullPalatalPlateConnectorToOwl(
-            rpd.components.Component cnnector, OntModel model, String NS, int indCount) {
+            Component cnnector, OntModel model, String NS, int indCount) {
         FullPalatalPlateConnector fullPalatalPlateConnector = (FullPalatalPlateConnector) cnnector;
         OntClass fullPalatalPlateConnectorClass = model.getOntClass(NS + "full_palatal_plate");
         Individual indFullPalatalPlateConnector
@@ -492,7 +498,7 @@ public class LabelTool_forPresent {
     }
 
     private void addModifiedPalatalPlateConnectorToOwl(
-            rpd.components.Component connector, OntModel model, String NS, int indCount) {
+            Component connector, OntModel model, String NS, int indCount) {
         ModifiedPalatalPlateConnector modifiedPalatalPlateConnector = (ModifiedPalatalPlateConnector) connector;
         OntClass modifiedPalatalPlateConnectorClass = model.getOntClass(NS + "modified_palatal_plate");
         Individual indModifiedPalatalPlateConnector
@@ -503,7 +509,7 @@ public class LabelTool_forPresent {
     }
 
     private void addLingualBarConnectorToOwl(
-            rpd.components.Component connector, OntModel model, String NS, int indCount) {
+            Component connector, OntModel model, String NS, int indCount) {
         LingualBarConnector lingualBarConnector = (LingualBarConnector) connector;
         OntClass lingualBarConnectorClass = model.getOntClass(NS + "lingual_bar");
         Individual indLingualBarConnector = model.createIndividual(NS + indCount, lingualBarConnectorClass);
@@ -511,7 +517,7 @@ public class LabelTool_forPresent {
     }
 
     private void addLingualPlateConnectorToOwl(
-            rpd.components.Component connector, OntModel model, String NS, int indCount) {
+            Component connector, OntModel model, String NS, int indCount) {
         LingualPlateConnector lingualPlateConnector = (LingualPlateConnector) connector;
         OntClass lingualPlateConnectorClass = model.getOntClass(NS + "lingual_plate");
         Individual indLingualPlateConnector = model.createIndividual(NS + indCount, lingualPlateConnectorClass);

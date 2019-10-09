@@ -6,27 +6,14 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ee2f1d7f-9d4a-4891-8cec-d807570523e9" name="Default" comment="更新文件选择">
+    <list default="true" id="ee2f1d7f-9d4a-4891-8cec-d807570523e9" name="Default" comment="更新间接固位体规则；更新Kennedy IV情况下距离缺隙最近的卡环臂尖朝向相关规则。">
+      <change afterPath="$PROJECT_DIR$/src/GUI/LabelTool_for_test.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/DentalGUITool/rpd/RPDPlan.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/DentalGUITool/rpd/RPDPlan.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/DentalGUITool/rpd/components/AkerClasp.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/DentalGUITool/rpd/components/AkerClasp.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/DentalGUITool/rpd/components/Clasp.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/DentalGUITool/rpd/components/Clasp.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/DentalGUITool/rpd/components/RotationAxis.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/DentalGUITool/rpd/components/RotationAxis.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/DentalGUITool/rpd/rules/EdentulousTypeRule$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/DentalGUITool/rpd/rules/EdentulousTypeRule$3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/DentalGUITool/rpd/rules/IndirectRetainerRule$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/DentalGUITool/rpd/rules/IndirectRetainerRule$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/DentalGUITool/rpd/rules/IndirectRetainerRule.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/DentalGUITool/rpd/rules/IndirectRetainerRule.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/res/base_print.png" beforeDir="false" afterPath="$PROJECT_DIR$/res/base_print.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/rpd/RPDPlan.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/rpd/RPDPlan.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GUI/LabelTool_forPresent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/LabelTool_forPresent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/misc/PrintImageList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/misc/PrintImageList.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/rpd/SearchRPDPlan.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/rpd/SearchRPDPlan.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/rpd/components/AkerClasp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/rpd/components/AkerClasp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/rpd/components/Clasp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/rpd/components/Clasp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/rpd/components/PalatalPlateConnector.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/rpd/components/PalatalPlateConnector.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/rpd/components/RotationAxis.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/rpd/components/RotationAxis.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/rpd/components/WroughtWireClasp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/rpd/components/WroughtWireClasp.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/rpd/rules/ClaspRule.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/rpd/rules/ClaspRule.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/rpd/rules/EdentulousTypeRule.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/rpd/rules/EdentulousTypeRule.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/rpd/rules/IndirectRetainerRule.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/rpd/rules/IndirectRetainerRule.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/rpd/rules/ScoreRule.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/rpd/rules/ScoreRule.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -82,6 +69,11 @@
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="settings.github" />
   </component>
+  <component name="RecentsManager">
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="GUI" />
+    </key>
+  </component>
   <component name="RunDashboard">
     <option name="ruleStates">
       <list>
@@ -94,7 +86,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.LabelTool">
+  <component name="RunManager" selected="Application.PrintImageList">
     <configuration name="LabelTool" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="GUI.LabelTool" />
       <module name="DentalGUITool" />
@@ -114,6 +106,20 @@
       <option name="MAIN_CLASS_NAME" value="GUI.LabelTool_forPresent" />
       <module name="DentalGUITool" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="LabelTool_for_test" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="GUI.LabelTool_for_test" />
+      <module name="DentalGUITool" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="GUI.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -173,13 +179,15 @@
       <item itemvalue="Application.LabelTool_forPresent" />
       <item itemvalue="Application.ServerForPresent" />
       <item itemvalue="Application.PrintImageList" />
+      <item itemvalue="Application.LabelTool_for_test" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.LabelTool" />
         <item itemvalue="Application.PrintImageList" />
-        <item itemvalue="Application.ServerForPresent" />
+        <item itemvalue="Application.LabelTool_for_test" />
+        <item itemvalue="Application.LabelTool" />
         <item itemvalue="Application.LabelTool_forPresent" />
+        <item itemvalue="Application.ServerForPresent" />
       </list>
     </recent_temporary>
   </component>
@@ -248,7 +256,9 @@
       <workItem from="1567501712711" duration="6159000" />
       <workItem from="1567567901959" duration="22405000" />
       <workItem from="1567736856512" duration="12490000" />
-      <workItem from="1567826506737" duration="27435000" />
+      <workItem from="1567826506737" duration="29318000" />
+      <workItem from="1568430981833" duration="279000" />
+      <workItem from="1570605077466" duration="7193000" />
     </task>
     <task id="LOCAL-00001" summary="fix bug about adding 舌支托">
       <created>1551334542146</created>
@@ -299,7 +309,14 @@
       <option name="project" value="LOCAL" />
       <updated>1567827746774</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="更新间接固位体规则；更新Kennedy IV情况下距离缺隙最近的卡环臂尖朝向相关规则。">
+      <created>1567863361348</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1567863361348</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -325,7 +342,8 @@
     <MESSAGE value="修改部分卡环生成规则" />
     <MESSAGE value="完成卡环生成规则修改，增加78对合牙位不镶牙相关规则。" />
     <MESSAGE value="更新文件选择" />
-    <option name="LAST_COMMIT_MESSAGE" value="更新文件选择" />
+    <MESSAGE value="更新间接固位体规则；更新Kennedy IV情况下距离缺隙最近的卡环臂尖朝向相关规则。" />
+    <option name="LAST_COMMIT_MESSAGE" value="更新间接固位体规则；更新Kennedy IV情况下距离缺隙最近的卡环臂尖朝向相关规则。" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -339,24 +357,14 @@
           <option name="timeStamp" value="3" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/GUI/LabelTool.java</url>
-          <line>715</line>
-          <option name="timeStamp" value="4" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/GUI/LabelTool_forPresent.java</url>
-          <line>105</line>
+          <line>107</line>
           <option name="timeStamp" value="16" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/misc/PrintImageList.java</url>
-          <line>155</line>
+          <line>179</line>
           <option name="timeStamp" value="23" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/misc/PrintImageList.java</url>
-          <line>154</line>
-          <option name="timeStamp" value="27" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/rpd/rules/ScoreRule.java</url>
@@ -365,7 +373,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/rpd/SearchRPDPlan.java</url>
-          <line>190</line>
+          <line>193</line>
           <option name="timeStamp" value="54" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
@@ -380,17 +388,19 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/rpd/rules/ClaspRule.java</url>
-          <line>469</line>
+          <line>472</line>
           <option name="timeStamp" value="58" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/rpd/rules/ClaspRule.java</url>
+          <line>280</line>
+          <option name="timeStamp" value="78" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
     <watches-manager>
       <configuration name="Application">
-        <watch expression="input_emr.getCanonicalPath()" language="JAVA" />
-        <watch expression="mandibularRpdPlans.get(0).components" />
-        <watch expression="mouth.getTooth(4,8).isMissing()" language="JAVA" />
-        <watch expression="mandibular.getEdentulousSpaces()" language="JAVA" />
+        <watch expression="this.getEdentulousSpaces()" language="JAVA" />
       </configuration>
     </watches-manager>
   </component>
